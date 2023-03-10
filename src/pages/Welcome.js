@@ -1,5 +1,10 @@
+
 const Welcome = () => {
-  return <div></div>;
+  return (
+    <div>
+
+    </div>
+  );
 };
 
 export default Welcome;
