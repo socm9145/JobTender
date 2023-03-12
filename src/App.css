@@ -1,0 +1,26 @@
+body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.circlebox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 1440px;
+}
+
+.circle {
+  background-color: black;
+  border-radius: 50%;
+  height: 500px;
+  width: 500px;
+  border: 2px solid yellow;
+}
