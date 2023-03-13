@@ -3,7 +3,7 @@ const Navbar = () => {
   return (
     <Box
       display={"flex"}
-      position={"sticky"}
+      position={"absolute"}
       top={"0%"}
       justifyContent={"space-between"}
       flexDirection={"row"}
@@ -11,9 +11,10 @@ const Navbar = () => {
       width={"100%"}
       height={"48px"}
       px={"28px"}
+      color={"white"}
     >
-      <Box border={"solid 1px black"}>logo</Box>
-      <Box border={"solid 1px black"}>mypage</Box>
+      <Box border={"solid 1px white"}>logo</Box>
+      <Box border={"solid 1px white"}>mypage</Box>
     </Box>
   );
 };

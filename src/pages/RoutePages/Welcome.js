@@ -13,15 +13,23 @@ gsap.registerPlugin(ScrollTrigger);
 const Welcome = () => {
   const [nextView, setNextView] = useState(false);
 
+  document.addEventListener(
+    "scroll",
+    function (event) {
+      event.preventDefault();
+    },
+    { passive: false }
+  );
+  const a = document.querySelector(".background");
   return (
-    <div>
+    <Box>
       <div className="background"></div>
       {nextView ? (
         <Describes />
       ) : (
         <WelcomeMessage setNextView={setNextView} nextView={nextView} />
       )}
-    </div>
+    </Box>
   );
 };
 
