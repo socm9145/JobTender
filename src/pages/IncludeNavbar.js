@@ -11,7 +11,7 @@ import NotFound from "./RoutePages/NotFound";
 
 const IncludeNavbar = () => {
   return (
-    <div>
+    <div width="100%">
       <Routes>
         <Route path="/" element={<Welcome />}></Route>
         <Route path="/login" element={<Login />}></Route>

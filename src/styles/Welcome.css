@@ -1,29 +1,28 @@
-.background-video {
+/* .background-video {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* overflow: hidden; */
+  overflow: hidden;
 
-  /* object-fit: fill; */
+  object-fit: fill;
 
-  /* transform: rotate(90deg); */
-  /* object-fit: cover; */
-}
+  transform: rotate(90deg);
+  object-fit: cover;
+} */
 
 video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   object-fit: fill;
   transform: rotate(90deg);
   /* aspect-ratio: 16 / 9;  */
   /* 비디오의 가로세로 비율*/
 }
 
-source {
+/* source {
   width: 1001000px;
   height: 10000000px;
-}
+} */
 
 .background-video video::-webkit-media-controls {
   display: none !important;
