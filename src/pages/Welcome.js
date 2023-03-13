@@ -1,100 +1,218 @@
 import { useRef, useEffect } from "react";
+
+import Navbar from "../components/Navbar";
+
+import { Box, Image } from "@chakra-ui/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 const Welcome = () => {
-  const circleRef = useRef(null);
-
   useEffect(() => {
-    gsap.fromTo(
-      "#thirdCircle1",
-      { autoAlpha: 0, x: -1000 },
-      {
-        autoAlpha: 1,
-        x: -400,
-        duration: 2,
-        scrollTrigger: {
-          trigger: "#thirdCircle1",
-          markers: true,
-          start: "top 80%",
-        },
-      }
-    );
-    gsap.fromTo(
-      "#thirdCircle2",
-      { autoAlpha: 0, x: 1000 },
-      {
-        autoAlpha: 1,
-        x: 400,
-        duration: 2,
-        scrollTrigger: {
-          trigger: "#thirdCircle2",
-          markers: true,
-          start: "top 80%",
-        },
-      }
-    );
-    gsap.fromTo(
-      "#thirdCircle3",
-      { autoAlpha: 0, x: -1000 },
-      {
-        autoAlpha: 1,
-        x: -400,
-        duration: 2,
-        scrollTrigger: {
-          trigger: "#thirdCircle3",
-          markers: true,
-          start: "top 80%",
-        },
-      }
-    );
-    gsap.fromTo(
-      "#thirdCircle4",
-      { autoAlpha: 0, x: 1000 },
-      {
-        autoAlpha: 1,
-        x: 400,
-        duration: 2,
-        scrollTrigger: {
-          trigger: "#thirdCircle4",
-          markers: true,
-          start: "top 80%",
-        },
-      }
-    );
-    gsap.fromTo(
-      "#thirdCircle5",
-      { autoAlpha: 0, x: -1000 },
-      {
-        autoAlpha: 1,
-        x: -400,
-        duration: 2,
-        scrollTrigger: {
-          trigger: "#thirdCircle5",
-          markers: true,
-          start: "top 80%",
-        },
-      }
-    );
+    const describeFromLeft = ["1", "3", "5"];
+    const describeFromRight = ["2", "4", "6"];
+
+    describeFromLeft.forEach((element) => {
+      const selectedId = "#describe" + element;
+      gsap.fromTo(
+        selectedId,
+        { autoAlpha: 0, x: -1000 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 1.7,
+          scrollTrigger: {
+            trigger: selectedId,
+            start: "top 80%",
+          },
+        }
+      );
+    });
+    describeFromRight.forEach((element) => {
+      const selectedId = "#describe" + element;
+      gsap.fromTo(
+        selectedId,
+        { autoAlpha: 0, x: 1000 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 1.7,
+          scrollTrigger: {
+            trigger: selectedId,
+            start: "top 80%",
+          },
+        }
+      );
+    });
   }, []);
 
   return (
     <div>
-      <box className="circlebox">
-        <div className="circle" ref={circleRef} id="thirdCircle1"></div>
-      </box>
-      <box className="circlebox">
-        <div className="circle" ref={circleRef} id="thirdCircle2"></div>
-      </box>
-      <box className="circlebox">
-        <div className="circle" ref={circleRef} id="thirdCircle3"></div>
-      </box>
-      <box className="circlebox">
-        <div className="circle" ref={circleRef} id="thirdCircle4"></div>
-      </box>
-      <box className="circlebox">
-        <div className="circle" ref={circleRef} id="thirdCircle5"></div>
-      </box>
+      <Navbar />
+      <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+        <Box
+          id="describe1"
+          display={"flex"}
+          width={"60%"}
+          height="100vh"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            height={"fit-content"}
+          >
+            <Box>
+              <Box fontSize={"4xl"} fontWeight={"bold"}>
+                Title
+              </Box>
+              <Box width={"30vw"}>
+                ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent
+              </Box>
+            </Box>
+          </Box>
+          <Box display={"flex"} alignItems={"center"} height={"fit-content"}>
+            <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+          </Box>
+        </Box>
+        <Box
+          id="describe2"
+          display={"flex"}
+          width={"60%"}
+          height="100vh"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box display={"flex"} alignItems={"center"} height={"fit-content"}>
+            <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+          </Box>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            height={"fit-content"}
+          >
+            <Box>
+              <Box fontSize={"4xl"} fontWeight={"bold"} textAlign={"end"}>
+                Title
+              </Box>
+              <Box width={"30vw"} textAlign={"end"}>
+                ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          id="describe3"
+          display={"flex"}
+          width={"60%"}
+          height="100vh"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            height={"fit-content"}
+          >
+            <Box>
+              <Box fontSize={"4xl"} fontWeight={"bold"}>
+                Title
+              </Box>
+              <Box width={"30vw"}>
+                ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent
+              </Box>
+            </Box>
+          </Box>
+          <Box display={"flex"} alignItems={"center"} height={"fit-content"}>
+            <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+          </Box>
+        </Box>
+        <Box
+          id="describe4"
+          display={"flex"}
+          width={"60%"}
+          height="100vh"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box display={"flex"} alignItems={"center"} height={"fit-content"}>
+            <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+          </Box>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            height={"fit-content"}
+          >
+            <Box>
+              <Box fontSize={"4xl"} fontWeight={"bold"} textAlign={"end"}>
+                Title
+              </Box>
+              <Box width={"30vw"} textAlign={"end"}>
+                ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          id="describe5"
+          display={"flex"}
+          width={"60%"}
+          height="100vh"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            height={"fit-content"}
+          >
+            <Box>
+              <Box fontSize={"4xl"} fontWeight={"bold"}>
+                Title
+              </Box>
+              <Box width={"30vw"}>
+                ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent
+              </Box>
+            </Box>
+          </Box>
+          <Box display={"flex"} alignItems={"center"} height={"fit-content"}>
+            <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+          </Box>
+        </Box>
+        <Box
+          id="describe6"
+          display={"flex"}
+          width={"60%"}
+          height="100vh"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box display={"flex"} alignItems={"center"} height={"fit-content"}>
+            <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+          </Box>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            height={"fit-content"}
+          >
+            <Box>
+              <Box fontSize={"4xl"} fontWeight={"bold"} textAlign={"end"}>
+                Title
+              </Box>
+              <Box width={"30vw"} textAlign={"end"}>
+                ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </div>
   );
 };
