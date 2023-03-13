@@ -1,16 +1,12 @@
 .background {
-  z-index: -1;
-  position: absolute;
+  position: fixed;
+  top: 0%;
   width: 100%;
-  height: 5814px;
-  overflow: hidden;
+  height: 100vh;
+  /* overflow: hidden; */
   /* object-fit: cover; */
   background-image: url("../../public/images/water.gif");
   /* background-size: cover; */
   background-size: 100% 100%;
   /* background-position: center; */
-}
-
-.overflow {
-  overflow: hidden;
 }

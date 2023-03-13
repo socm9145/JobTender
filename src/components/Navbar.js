@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 const Navbar = () => {
   return (
     <Box
+      zIndex={1}
       display={"flex"}
       position={"absolute"}
       top={"0%"}

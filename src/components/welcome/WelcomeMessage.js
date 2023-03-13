@@ -1,14 +1,6 @@
 import { Box, Text, Button } from "@chakra-ui/react";
 
-const WelcomeMessage = ({ setNextView, nextView }) => {
-  document.addEventListener(
-    "scroll",
-    function (event) {
-      event.preventDefault();
-    },
-    { passive: false }
-  );
-
+const WelcomeMessage = () => {
   return (
     <Box
       width={"100%"}
@@ -27,23 +19,6 @@ const WelcomeMessage = ({ setNextView, nextView }) => {
       >
         당신의 가치관과 맞는 회사 찾아보세요
       </Text>
-      <Box
-        position={"absolute"}
-        right={"100px"}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"end"}
-        color={"white"}
-      >
-        <Button
-          size={"lg"}
-          onClick={() => {
-            setNextView(!nextView);
-          }}
-        >
-          다음
-        </Button>
-      </Box>
     </Box>
   );
 };
