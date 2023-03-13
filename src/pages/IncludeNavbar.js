@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 // 페이지 import
+import Navbar from "../components/Navbar";
 import Welcome from "./RoutePages/Welcome";
 import Login from "./RoutePages/Login";
 import Home from "./RoutePages/Home";
@@ -11,7 +12,8 @@ import NotFound from "./RoutePages/NotFound";
 
 const IncludeNavbar = () => {
   return (
-    <div width="100%">
+    <div>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Welcome />}></Route>
         <Route path="/login" element={<Login />}></Route>
