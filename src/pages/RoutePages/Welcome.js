@@ -13,17 +13,18 @@ gsap.registerPlugin(ScrollTrigger);
 const Welcome = () => {
   const [nextView, setNextView] = useState(false);
 
-  document.addEventListener(
-    "scroll",
-    function (event) {
-      event.preventDefault();
-    },
-    { passive: false }
-  );
-  const a = document.querySelector(".background");
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (!nextView) {
+      body.classList.add("overflow");
+    } else {
+      body.classList.remove("overflow");
+    }
+  }, [nextView]);
+
   return (
     <Box>
-      <div className="background"></div>
+      <Box className="background"></Box>
       {nextView ? (
         <Describes />
       ) : (
