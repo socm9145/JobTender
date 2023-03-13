@@ -49,16 +49,14 @@ const Welcome = () => {
 
   return (
     <div>
-      <div className="background-video ">
-        <video muted autoPlay loop>
-          <source
-            src={process.env.PUBLIC_URL + "/videos/Smoke.mp4"}
-            type="video/mp4"
-          />
-        </video>
-      </div>
+      <div className="background"></div>
       <Navbar />
-      <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        color={"white"}
+      >
         <Box
           id="describe1"
           display={"flex"}
