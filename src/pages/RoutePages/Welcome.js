@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 
 import { Box, Image } from "@chakra-ui/react";
 import { gsap } from "gsap";
