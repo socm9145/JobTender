@@ -1,11 +1,11 @@
-const KakaoButton = () => {
+const KakaoButton = ({ buttonWidth }) => {
   return (
-    <div>
+    <div style={{ opacity: "1" }}>
       <li>
         <a id="custom-login-btn">
           <img
-            src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-            width="242"
+            src={process.env.PUBLIC_URL + "/images/kakaoButton.jpg"}
+            width={buttonWidth}
           />
         </a>
       </li>
