@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
 // 페이지 import
 import Navbar from "../components/Navbar";
 import Home from "./router/Home";
@@ -7,6 +6,8 @@ import Keyword from "./router/Keyword";
 import Survey from "./router/Survey";
 import Mypage from "./router/Mypage";
 import LandingPage from "./router/LandingPage";
+
+import { Box } from "@chakra-ui/react";
 
 const IncludeNavbar = () => {
   return (

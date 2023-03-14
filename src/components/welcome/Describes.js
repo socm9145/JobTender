@@ -1,8 +1,11 @@
-import "../../styles/Welcome.css";
-import { useState, useRef, useEffect } from "react";
+import { useEffect } from "react";
+
 import { Box, Image } from "@chakra-ui/react";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import "../../styles/Welcome.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
