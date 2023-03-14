@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import { Box } from "@chakra-ui/react";
 // 페이지 import
 import Navbar from "../components/Navbar";
 import Home from "./router/Home";
@@ -12,14 +12,16 @@ const IncludeNavbar = () => {
   return (
     <div>
       <Navbar />
-      <Routes>
-        <Route path="/Home" element={<Home />}></Route>
-        <Route path="/Keyword" element={<Keyword />}></Route>
-        <Route path="/Survey" element={<Survey />}></Route>
-        <Route path="/my-page" element={<Mypage />}></Route>
+      <Box>
+        <Routes>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/keyword" element={<Keyword />}></Route>
+          <Route path="/survey" element={<Survey />}></Route>
+          <Route path="/mypage" element={<Mypage />}></Route>
 
-        <Route path="/*" element={<LandingPage />}></Route>
-      </Routes>
+          <Route path="/*" element={<LandingPage />}></Route>
+        </Routes>
+      </Box>
     </div>
   );
 };

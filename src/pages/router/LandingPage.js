@@ -6,10 +6,14 @@ import Login from "./landing/Login";
 import NotFound from "./NotFound";
 
 import { Box } from "@chakra-ui/react";
+
+import "../../styles/Welcome.css";
+
 const LandingPage = () => {
   return (
     <div>
-      <Box zIndex={-2} className="background"></Box>
+      <Box zIndex={-1} className="background"></Box>
+      <Box zIndex={-2} className="landing-background"></Box>
       <Navbar />
 
       <Routes>
