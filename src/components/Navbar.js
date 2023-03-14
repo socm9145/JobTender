@@ -13,7 +13,7 @@ const Navbar = () => {
       px={"28px"}
       color={"white"}
     >
-      <Box border={"solid 1px white"}>logo</Box>
+      <Box border={"solid 1px white"}>JTD</Box>
       <Box border={"solid 1px white"}>mypage</Box>
     </Box>
   );

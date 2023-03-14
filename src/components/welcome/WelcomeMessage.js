@@ -1,14 +1,6 @@
 import { Box, Text, Button } from "@chakra-ui/react";
 
 const WelcomeMessage = ({ setNextView, nextView }) => {
-  document.addEventListener(
-    "scroll",
-    function (event) {
-      event.preventDefault();
-    },
-    { passive: false }
-  );
-
   return (
     <Box
       width={"100%"}
@@ -36,6 +28,7 @@ const WelcomeMessage = ({ setNextView, nextView }) => {
         color={"white"}
       >
         <Button
+          background={"none"}
           size={"lg"}
           onClick={() => {
             setNextView(!nextView);
