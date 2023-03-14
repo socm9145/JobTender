@@ -1,14 +1,15 @@
+import { Box } from "@chakra-ui/react";
 const KakaoButton = ({ buttonWidth }) => {
   return (
-    <div style={{ opacity: "1" }}>
-      <li>
-        <a id="custom-login-btn">
+    <div>
+      <a>
+        <Box display={"flex"} justifyContent={"center"}>
           <img
             src={process.env.PUBLIC_URL + "/images/kakaoButton.jpg"}
             width={buttonWidth}
           />
-        </a>
-      </li>
+        </Box>
+      </a>
     </div>
   );
 };
