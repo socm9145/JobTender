@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { Box, Text, Image, Button } from "@chakra-ui/react";
 
 import { gsap } from "gsap";
