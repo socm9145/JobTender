@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
-import { Box, Text, Image } from "@chakra-ui/react";
-import "../../styles/Welcome.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Box, Text, Image, Button } from "@chakra-ui/react";
+import "../../../styles/Welcome.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Welcome = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     const describeFromLeft = ["1", "3", "5"];
     const describeFromRight = ["2", "4", "6"];
@@ -52,7 +54,14 @@ const Welcome = () => {
   }, []);
   return (
     <Box>
-      <Box zIndex={-2} className="background"></Box>
+      <Button
+        zIndex={4}
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        로그인페이지로
+      </Button>
       <Box
         width={"100%"}
         height={"100vh"}
