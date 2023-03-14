@@ -2,11 +2,11 @@ import { Routes, Route } from "react-router-dom";
 
 // 페이지 import
 import Navbar from "../components/Navbar";
-import Home from "./RoutePages/Home";
-import Keyword from "./RoutePages/Keyword";
-import Survey from "./RoutePages/Survey";
-import Mypage from "./RoutePages/Mypage";
-import LandingPage from "./RoutePages/LandingPage";
+import Home from "./router/Home";
+import Keyword from "./router/Keyword";
+import Survey from "./router/Survey";
+import Mypage from "./router/Mypage";
+import LandingPage from "./router/LandingPage";
 
 const IncludeNavbar = () => {
   return (
