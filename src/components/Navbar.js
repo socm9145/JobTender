@@ -16,7 +16,8 @@ const Navbar = () => {
       color={"white"}
     >
       <Box border={"solid 1px white"}>JTD</Box>
-      <Box border={"solid 1px white"}>mypage</Box>
+      {/* 로그인 상태관리를 통해서 mypage버튼 활성화 비활성화 */}
+      {/* <Box border={"solid 1px white"}>mypage</Box> */}
     </Box>
   );
 };
