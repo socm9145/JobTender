@@ -12,6 +12,7 @@ const IncludeNavbar = () => {
   return (
     <div>
       <Navbar />
+
       <Box>
         <Routes>
           <Route path="/home" element={<Home />}></Route>
