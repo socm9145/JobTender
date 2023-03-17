@@ -12,9 +12,10 @@ public class MainScore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long mainScoreId;
     @Column(nullable = false)
-    private long keywordId;
-    @Column(nullable = false)
-    private long mainKeywordId;
-    @Column(nullable = false)
     private long mainScore;
+    //mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MainKeyword mainKeyword;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Keyword keyword;
 }

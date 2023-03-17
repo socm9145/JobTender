@@ -30,10 +30,13 @@ public class Company {
     // mapping
     @OneToOne(fetch = FetchType.LAZY)
     private CompanyRating companyRating;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompanyScore> companyScores = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MainKeyword> mainKeywords = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubKeyword> subKeywords = new ArrayList<>();
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SimilarCompany> similarCompanies = new ArrayList<>();
+
 }

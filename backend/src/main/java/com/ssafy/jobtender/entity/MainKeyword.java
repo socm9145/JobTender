@@ -16,6 +16,9 @@ public class MainKeyword {
     @Column(nullable = false)
     private String mainKeyword;
     private String tfIdfScore;
-    @ManyToOne()
-    private List<Company> companies = new ArrayList<>();
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Company company;
+    @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MainScore> mainScores = new ArrayList<>();
 }

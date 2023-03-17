@@ -17,4 +17,9 @@ public class SubScore {
     private long subKeywordId;
     @Column(nullable = false)
     private long subScore;
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SubKeyword subKeyword;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Keyword keyword;
 }

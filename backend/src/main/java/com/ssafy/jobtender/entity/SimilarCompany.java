@@ -16,4 +16,7 @@ public class SimilarCompany {
     @Column(nullable = false)
     private long comparableCompanyId;
     private String comparableScore;
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Company company;
 }
