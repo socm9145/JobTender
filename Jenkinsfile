@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build Frontend') {
             steps {
-                sh 'ls'
+                sh 'docker-compose up --build -d frontend'
             }
         }
     }
