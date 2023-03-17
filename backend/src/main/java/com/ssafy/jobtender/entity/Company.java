@@ -29,6 +29,7 @@ public class Company {
     private long yearFounded;
     // mapping
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "company_rating_id")
     private CompanyRating companyRating;
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompanyScore> companyScores = new ArrayList<>();
