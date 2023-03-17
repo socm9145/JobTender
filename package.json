@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@fontsource/gowun-dodum": "^4.5.10",
+    "@fontsource/noto-serif-kr": "^4.5.13"
+  }
+}
