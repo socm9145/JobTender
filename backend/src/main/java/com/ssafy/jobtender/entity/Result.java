@@ -14,13 +14,12 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long resultId;
-    @Column(nullable = false)
-    private String userId;
     @Embedded
     AccessInfo accessInfo;
 
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Input> inputs = new ArrayList<>();

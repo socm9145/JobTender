@@ -10,13 +10,12 @@ import javax.persistence.*;
 public class Input {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long resultId;
-    @Column(nullable = false)
-    private long userId;
+    private long InputId;
     @Column(nullable = false)
     private String keyword;
 
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "result_id")
     private Result result;
 }

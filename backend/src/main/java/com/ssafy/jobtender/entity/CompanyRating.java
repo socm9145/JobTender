@@ -25,5 +25,6 @@ public class CompanyRating {
     private String managementRating;
     // mapping
     @OneToOne(mappedBy = "companyRating", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
     private Company company;
 }

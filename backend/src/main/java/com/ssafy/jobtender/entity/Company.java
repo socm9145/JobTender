@@ -28,7 +28,7 @@ public class Company {
     @Column(nullable = false)
     private long yearFounded;
     // mapping
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private CompanyRating companyRating;
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompanyScore> companyScores = new ArrayList<>();
@@ -38,5 +38,6 @@ public class Company {
     private List<SubKeyword> subKeywords = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimilarCompany> similarCompanies = new ArrayList<>();
-
+    @OneToMany(mappedBy = "comparable_company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SimilarCompany> comparable_similarCompanies = new ArrayList<>();
 }

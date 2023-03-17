@@ -14,12 +14,11 @@ public class SubKeyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subKeywordId;
     @Column(nullable = false)
-    private long companyId;
-    @Column(nullable = false)
     private String keyword;
     private String tfIdfScore;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
     private Company company;
     @OneToMany(mappedBy = "subKeyword", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubScore> subScores = new ArrayList<>();

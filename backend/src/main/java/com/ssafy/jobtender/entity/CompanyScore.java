@@ -15,7 +15,9 @@ public class CompanyScore {
     private String score;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
     private Company company;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "result_id")
     private Result result;
 }

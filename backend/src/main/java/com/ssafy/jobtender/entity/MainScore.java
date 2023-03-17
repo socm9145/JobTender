@@ -15,7 +15,9 @@ public class MainScore {
     private long mainScore;
     //mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "main_keyword_id")
     private MainKeyword mainKeyword;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "keyword_id")
     private Keyword keyword;
 }

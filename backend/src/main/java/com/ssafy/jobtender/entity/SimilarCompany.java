@@ -11,12 +11,12 @@ public class SimilarCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long similarCompanyId;
-    @Column(nullable = false)
-    private long companyId;
-    @Column(nullable = false)
-    private long comparableCompanyId;
     private String comparableScore;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
     private Company company;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comparable_company_id")
+    private Company comparable_company;
 }
