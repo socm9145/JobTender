@@ -12,9 +12,10 @@ public class CompanyScore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long companyResultId;
     @Column(nullable = false)
-    private long resultId;
-    @Column(nullable = false)
-    private long companyId;
-    @Column(nullable = false)
     private String score;
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Company company;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Result result;
 }

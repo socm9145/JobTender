@@ -15,4 +15,8 @@ public class Input {
     private long userId;
     @Column(nullable = false)
     private String keyword;
+
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Result result;
 }

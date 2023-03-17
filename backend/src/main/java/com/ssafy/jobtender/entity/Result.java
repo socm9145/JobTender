@@ -4,6 +4,8 @@ import com.ssafy.jobtender.entity.common.AccessInfo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,4 +18,12 @@ public class Result {
     private String userId;
     @Embedded
     AccessInfo accessInfo;
+
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Input> inputs = new ArrayList<>();
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CompanyScore> companyScores = new ArrayList<>();
 }

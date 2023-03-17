@@ -3,6 +3,8 @@ package com.ssafy.jobtender.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,4 +27,13 @@ public class Company {
     private String address;
     @Column(nullable = false)
     private long yearFounded;
+    // mapping
+    @OneToOne(fetch = FetchType.LAZY)
+    private CompanyRating companyRating;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<CompanyScore> companyScores = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<MainKeyword> mainKeywords = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<SubKeyword> subKeywords = new ArrayList<>();
 }

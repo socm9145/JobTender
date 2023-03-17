@@ -12,8 +12,6 @@ public class CompanyRating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long companyRatingId;
     @Column(nullable = false)
-    private long companyId;
-    @Column(nullable = false)
     private String averageRating;
     @Column(nullable = false)
     private String growthRating;
@@ -25,4 +23,7 @@ public class CompanyRating {
     private String cultureRating;
     @Column(nullable = false)
     private String managementRating;
+    // mapping
+    @OneToOne(mappedBy = "companyRating", orphanRemoval = true, cascade = CascadeType.ALL)
+    private Company company;
 }
