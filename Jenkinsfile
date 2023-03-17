@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build Frontend') {
             steps {
-                sh 'docker-compose up --build -d frontend'
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
     }
