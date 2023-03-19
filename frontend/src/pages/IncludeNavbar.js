@@ -8,7 +8,7 @@ import Home from "./router/Home";
 import Keyword from "./router/Keyword";
 import Survey from "./router/Survey";
 import Mypage from "./router/Mypage";
-import LandingPage from "./router/LandingPage";
+// import LandingPage from "./router/LandingPage";
 import Kakao from "./router/Kakao";
 
 const IncludeNavbar = () => {
@@ -26,7 +26,7 @@ const IncludeNavbar = () => {
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/kakao" element={<Kakao />}></Route>
 
-          <Route path="/*" element={<LandingPage />}></Route>
+          {/* <Route path="/*" element={<LandingPage />}></Route> */}
         </Routes>
       </Box>
     </div>

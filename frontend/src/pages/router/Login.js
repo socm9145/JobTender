@@ -5,14 +5,14 @@ import Kakao from "../../components/KaKao";
 
 const Login = () => {
   return (
-    <div>
+    <Box
+      backgroundColor={"#f1efe9"}
+      color={"#191919"}
+      width={"100%"}
+      height="100vh"
+    >
       <Box display={"flex"} justifyContent={"center"} width={"50vw"}>
-        <Box
-          display={"flex"}
-          color={"white"}
-          height={"100vh"}
-          alignItems={"center"}
-        >
+        <Box display={"flex"} height={"100vh"} alignItems={"center"}>
           <Box>
             <Box
               display={"flex"}
@@ -25,7 +25,7 @@ const Login = () => {
               <Text
                 fontWeight={"semibold"}
                 width={"90%"}
-                borderBottom={"solid 2px white"}
+                borderBottom={"solid 2px #191919"}
               >
                 Login to JobTender
               </Text>
@@ -37,7 +37,7 @@ const Login = () => {
           </Box>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

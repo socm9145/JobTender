@@ -36,7 +36,7 @@ const Welcome = () => {
         // 스크롤설렸을때 할거
         scrollTrigger: {
           //화면에서 확인용
-          markers: true,
+          // markers: true,
           // 스크롤 트리거의 기준이 되는 놈.
           trigger: selectedId,
 
@@ -110,7 +110,7 @@ const Welcome = () => {
       </Box>
       <Box display={"flex"} flexDirection={"column"}>
         {/* 첫 box */}
-        <Box width={"100%"} height={"100vh"} backgroundColor={"#f7f6f1"}>
+        <Box width={"100%"} height={"150vh"} backgroundColor={"#f7f6f1"}>
           <Box
             position={"absolute"}
             top={"0%"}
@@ -144,6 +144,7 @@ const Welcome = () => {
               bottom={"15%"}
               width={"85%"}
               left={"15%"}
+              fontFamily={"dodum"}
             >
               <Box
                 id="welcomeMessage1-container"
@@ -156,7 +157,6 @@ const Welcome = () => {
                   id={"welcomeMessage1"}
                   color={"#191919"}
                   fontSize={"4vw"}
-                  fontFamily={"dodum"}
                 >
                   가치관 :
                 </Text>
