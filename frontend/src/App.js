@@ -10,8 +10,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import { extendTheme } from "@chakra-ui/react";
 
+// font
 import "@fontsource/gowun-dodum";
 
+// 전역으로 font 사용할 수 있도록 함
 const theme = extendTheme({
   fonts: {
     dodum: `'gowun Dodum', sans-serif`,

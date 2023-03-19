@@ -10,9 +10,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { EasePack } from "gsap/EasePack";
 
-// font
-import "@fontsource/gowun-dodum";
-
 // 플러그인 받고 장착도 해줘야함
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(EasePack);
