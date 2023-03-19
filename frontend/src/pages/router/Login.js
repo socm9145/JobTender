@@ -1,7 +1,7 @@
-import KakaoButton from "../../../components/login/KakaoButton";
+import KakaoButton from "../../components/login/KakaoButton";
 
 import { Box, Text } from "@chakra-ui/react";
-import Kakao from "../../../components/KaKao";
+import Kakao from "../../components/KaKao";
 
 const Login = () => {
   return (

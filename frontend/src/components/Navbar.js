@@ -5,7 +5,7 @@ const Navbar = () => {
     <Box
       zIndex={1}
       display={"flex"}
-      position={"absolute"}
+      position={"fixed"}
       top={"0%"}
       justifyContent={"space-between"}
       flexDirection={"row"}
@@ -13,11 +13,11 @@ const Navbar = () => {
       width={"100%"}
       height={"48px"}
       px={"28px"}
-      // color={"white"}
+      color={"#191919"}
     >
-      <Box border={"solid 1px white"}>JTD</Box>
+      <Box border={"solid 1px #191919"}>JTD</Box>
       {/* 로그인 상태관리를 통해서 mypage버튼 활성화 비활성화 */}
-      <Box border={"solid 1px white"}>mypage</Box>
+      <Box border={"solid 1px #191919"}>mypage</Box>
     </Box>
   );
 };
