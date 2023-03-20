@@ -1,7 +1,6 @@
 import KakaoButton from "../../components/login/KakaoButton";
 
 import { Box, Text } from "@chakra-ui/react";
-import Kakao from "../../components/KaKao";
 
 const Login = () => {
   return (
@@ -32,7 +31,6 @@ const Login = () => {
             </Box>
             <Box>
               <KakaoButton buttonWidth={"80%"} />
-              <Kakao />
             </Box>
           </Box>
         </Box>

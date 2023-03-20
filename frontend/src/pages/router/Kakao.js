@@ -1,53 +1,42 @@
 import { useEffect } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import qs from "qs";
 
+import KakaoButton from "../../components/login/KakaoButton";
+
+import { Box, Text } from "@chakra-ui/react";
+
 const Kakao = () => {
-  // const location = useLocation();
-  // const key = location.key;
-  // // console.log(key);
-
-  // const params = new URLSearchParams(window.location.search);
-  // console.log(params);
-
-  // const currentUrl = window.location;
-  // const currentUrl = window.location.href;
-  // console.log(currentUrl);
-
+  // 주소창의 인가코드 가져오는 코드
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const myParam = params.get("code");
-  // console.log(location);
-  // console.log(params);
-  console.log(myParam);
+  // myParam 이 인가코드
+  const myCode = params.get("code");
+
   const data = {
     grant_type: "authorization_code",
     client_id: "1d00d14f1ffe2865a5b8a876c3de14da", //REST API
-    // client_id: "16e141611c0dc15d1e07641489d44c46",  // JS
     redirect_uri: "http://localhost:3000/kakao",
-    code: myParam,
+    code: myCode,
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log(data);
+    // 인가 코드로 액세스 토큰 받기.
     axios
       .post("https://kauth.kakao.com/oauth/token", qs.stringify(data), {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
       })
 
       .then(function (response) {
         console.log(response.data);
         const accessToken = response.data["access_token"];
-        return accessToken;
-      })
-      .catch(function (error) {
-        console.log(error);
-        console.log("에러");
-      })
-      .then(function (accessToken) {
-        console.log(accessToken);
+
+        // !! 여긴 나중에 백엔드 에서 수행
+        // 액세스 토큰으로 유저 정보 받기.
         const headers = {
           Authorization: `Bearer ${accessToken}`,
         };
@@ -56,10 +45,51 @@ const Kakao = () => {
           .then(function (response) {
             console.log(response);
           });
+        // //////////////////////////////////////////
+
+        navigate("/home");
+      })
+      .catch(function (error) {
+        // console.log(error);
+        console.log("로그인 에러");
+        navigate(-1);
       });
   }, []);
 
-  return <div>카카오 로그인 진행 페이지</div>;
+  return (
+    <Box
+      backgroundColor={"#f1efe9"}
+      color={"#191919"}
+      width={"100%"}
+      height="100vh"
+    >
+      <Box display={"flex"} justifyContent={"center"} width={"50vw"}>
+        <Box display={"flex"} height={"100vh"} alignItems={"center"}>
+          <Box>
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              textAlign={"center"}
+              fontSize={"4xl"}
+              paddingX={"1rem"}
+              paddingBottom={"1rem"}
+            >
+              <Text
+                fontWeight={"semibold"}
+                width={"90%"}
+                borderBottom={"solid 2px #191919"}
+              >
+                Login to JobTender
+              </Text>
+            </Box>
+            <Box>
+              <KakaoButton buttonWidth={"80%"} />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
 };
 
 export default Kakao;
