@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserOutDTO updateUsersByUserId(long userId, UpdateUserDTO updateUserDTO) {
-        return null;
+        return userDAO.updateUsersByUserId(userId, updateUserDTO);
     }
 
     @Override
-    public UserOutDTO deleteUserByUserId(long userId) {
-        return null;
+    public Boolean deleteUserByUserId(long userId) {
+        return userDAO.deleteUserByUserId(userId);
     }
 }

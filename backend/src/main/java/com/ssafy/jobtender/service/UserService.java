@@ -12,5 +12,5 @@ import javax.transaction.Transactional;
 public interface UserService {
     UserOutDTO readUsersByUserId(long userId);
     UserOutDTO updateUsersByUserId(long userId, UpdateUserDTO updateUserDTO);
-    UserOutDTO deleteUserByUserId(long userId);
+    Boolean deleteUserByUserId(long userId);
 }
