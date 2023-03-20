@@ -63,6 +63,7 @@ const Kakao = () => {
   }, []);
 
   return (
+    // 로그인 하는동안 이질감이 없도록 Login 페이지와 같은 화면 으로 구현
     <Box
       backgroundColor={"#f1efe9"}
       color={"#191919"}
