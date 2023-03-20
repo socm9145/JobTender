@@ -1,9 +1,27 @@
 package com.ssafy.jobtender.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ssafy.jobtender.dto.output.UserOutDTO;
+import com.ssafy.jobtender.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+    @GetMapping("/info")
+    public ResponseEntity<UserOutDTO> readUsersByUserId(@RequestParam("userId") String userId) {
+        System.out.println("asdfasdf");
+        UserOutDTO userOutDTO = this.userService.readUsersByUserId(Long.parseLong(userId));
+        return ResponseEntity.status(HttpStatus.OK).body(userOutDTO);
+    }
 }
