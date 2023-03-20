@@ -43,7 +43,6 @@ const Describe = ({ id, title, content }) => {
       );
     }
     ScrollTrigger.create({
-      markers: true,
       trigger: "#" + containerId,
       start: "top 5%",
       end: "bottom 77%",
