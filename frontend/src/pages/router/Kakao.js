@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, router } from "react-router-dom";
 
 import axios from "axios";
 import qs from "qs";
@@ -11,9 +11,15 @@ import { Box, Text } from "@chakra-ui/react";
 const Kakao = () => {
   // 주소창의 인가코드 가져오는 코드
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
+  // const params = new URLSearchParams(location.search);
   // myParam 이 인가코드
-  const myCode = params.get("code");
+  // const myCode = params.get("code");
+
+  // 위의 URLSeacrchParams 사용해서 코드 가져오는거속도느리고 비효율적인것 같아 아래로 교체.
+  const myCode = location.search.slice(6);
+
+  // 주소창 파라미터 지우는 코드인데 반응이 느려서 쓸모 있나 싶음.
+  window.history.replaceState({}, null, location.pathname);
 
   const data = {
     grant_type: "authorization_code",
