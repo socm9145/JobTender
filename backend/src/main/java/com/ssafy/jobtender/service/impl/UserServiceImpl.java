@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserOutDTO updateUsersByUserId(long userId, UpdateUserDTO updateUserDTO) {
-        return userDAO.updateUsersByUserId(userId, updateUserDTO);
+    public UserOutDTO updateUsersByUserId(UpdateUserDTO updateUserDTO) {
+        return userDAO.updateUsersByUserId(updateUserDTO);
     }
 
     @Override

@@ -10,6 +10,6 @@ import java.util.Optional;
 @Component
 public interface UserDAO {
     UserOutDTO readUsersByUserId(long userId);
-    UserOutDTO updateUsersByUserId(long userId,UpdateUserDTO updateUserDTO);
+    UserOutDTO updateUsersByUserId(UpdateUserDTO updateUserDTO);
     Boolean deleteUserByUserId(long userId);
 }

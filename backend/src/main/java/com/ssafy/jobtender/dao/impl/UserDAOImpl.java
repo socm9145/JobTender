@@ -41,8 +41,8 @@ public class UserDAOImpl implements UserDAO {
         return userOutDTO;
     }
     @Override
-    public UserOutDTO updateUsersByUserId(long userId, UpdateUserDTO updateUserDTO) {
-        Optional<User> isUser = this.userRepo.findByUserId(userId);
+    public UserOutDTO updateUsersByUserId(UpdateUserDTO updateUserDTO) {
+        Optional<User> isUser = this.userRepo.findByUserId(updateUserDTO.getUserId());
 
         // if user is null
         if (isUser.isEmpty())
