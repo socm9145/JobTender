@@ -26,7 +26,7 @@ public class User {
     @Column(nullable = false)
     private String provider;
     @Embedded
-    AccessInfo accessInfo;
+    private AccessInfo accessInfo;
     private String accessToken;
     private String refreshToken;
     // mapping
