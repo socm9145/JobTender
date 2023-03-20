@@ -14,7 +14,7 @@ public class SubKeyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subKeywordId;
     @Column(nullable = false)
-    private String keyword;
+    private String subKeyword;
     private String tfIdfScore;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)

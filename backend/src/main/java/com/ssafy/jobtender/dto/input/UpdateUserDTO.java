@@ -1,5 +1,8 @@
 package com.ssafy.jobtender.dto.input;
 
-public class UpdateUserDTO {
+import lombok.Data;
 
+@Data
+public class UpdateUserDTO {
+    long userId;
 }

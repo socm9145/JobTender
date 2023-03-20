@@ -6,7 +6,9 @@ import com.ssafy.jobtender.dto.output.UserOutDTO;
 import com.ssafy.jobtender.entity.User;
 import com.ssafy.jobtender.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
     @Autowired
@@ -19,12 +21,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserOutDTO updateUsersByUserId(long userId, UpdateUserDTO updateUserDTO) {
-        return null;
+    public UserOutDTO updateUsersByUserId(UpdateUserDTO updateUserDTO) {
+        return userDAO.updateUsersByUserId(updateUserDTO);
     }
 
     @Override
-    public UserOutDTO deleteUserByUserId(long userId) {
-        return null;
+    public Boolean deleteUserByUserId(long userId) {
+        return userDAO.deleteUserByUserId(userId);
     }
 }
