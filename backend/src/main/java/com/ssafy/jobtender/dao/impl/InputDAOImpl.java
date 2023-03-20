@@ -1,5 +1,6 @@
 package com.ssafy.jobtender.dao.impl;
 
+import com.ssafy.jobtender.entity.Input;
 import com.ssafy.jobtender.repo.InputRepo;
 import com.ssafy.jobtender.dao.InputDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,10 @@ public class InputDAOImpl implements InputDAO{
     }
 
     @Override
-    public List<String> createInputsKeyword() {
+    public List<String> createInputsKeyword(List<String> userKeyWord) {
+        System.out.println("inputDao : " + userKeyWord.toString());
+//        Input input = new Input();
+//        this.inputRepo.save(input);
         return null;
     }
 }

@@ -15,7 +15,9 @@ public class InputServiceImpl implements InputService{
         this.inputDAO = inputDAO;
     }
     @Override
-    public List<String> createInputsKeyword() {
-        return null;
+    public String createInputsKeyword(List<String> userKeyWord) {
+        System.out.println("inputService : " + userKeyWord.toString());
+        inputDAO.createInputsKeyword(userKeyWord);
+        return "good";
     }
 }
