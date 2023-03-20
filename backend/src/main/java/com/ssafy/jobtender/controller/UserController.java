@@ -1,7 +1,15 @@
 package com.ssafy.jobtender.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ssafy.jobtender.dto.input.KeywordInputDTO;
+import com.ssafy.jobtender.dto.output.UserOutDTO;
+import com.ssafy.jobtender.service.InputService;
+import com.ssafy.jobtender.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -10,12 +18,8 @@ public class UserController {
     private final InputService inputService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, InputService inputService) {
         this.userService = userService;
-    }
-
-    @Autowired
-    public UserController(InputService inputService) {
         this.inputService = inputService;
     }
     
