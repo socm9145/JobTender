@@ -2,9 +2,7 @@ package com.ssafy.jobtender.controller;
 
 import com.ssafy.jobtender.dto.output.ComparableCompanyNameOutputDTO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
-import com.ssafy.jobtender.service.InputService;
 import com.ssafy.jobtender.service.ResultService;
-import com.ssafy.jobtender.service.UserService;
 import com.ssafy.jobtender.service.SimilarCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,9 +37,5 @@ public class ResultController {
         return ResponseEntity.status(HttpStatus.OK).body(comparableCompanyNameOutputDTOList);
     }
 
-    @GetMapping("/company/hosung")
-    public ResponseEntity<List<ReadResultOutDTO>> readResultsByUserId(){
-        List<ReadResultOutDTO> readResultOutDTO = this.resultService.readResultsByUserId();
-        return ResponseEntity.status(HttpStatus.OK).body(readResultOutDTO);
-    }
+
 }
