@@ -5,6 +5,7 @@ import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
 import com.ssafy.jobtender.service.InputService;
 import com.ssafy.jobtender.service.ResultService;
 import com.ssafy.jobtender.service.UserService;
+import com.ssafy.jobtender.service.SimilarCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,12 @@ import java.util.List;
 @RequestMapping("/result")
 public class ResultController {
     private final ResultService resultService;
+    private final SimilarCompanyService similarCompanyService;
 
     @Autowired
-    public ResultController(ResultService resultService) {
+    public ResultController(ResultService resultService, SimilarCompanyService similarCompanyService){
         this.resultService = resultService;
+        this.similarCompanyService = similarCompanyService;
     }
     /**
      * [모달 관련 API]
@@ -31,9 +34,9 @@ public class ResultController {
      * @return ComparableCompanyNameOutputDTO
      * */
     @GetMapping("/company/similar")
-    public ResponseEntity<ComparableCompanyNameOutputDTO> readComparableCompanies(@RequestParam long selected_company_id){
-        //
-        return null;
+    public ResponseEntity<List<ComparableCompanyNameOutputDTO>> readComparableCompanies(@RequestParam long selected_company_id){
+        List<ComparableCompanyNameOutputDTO> comparableCompanyNameOutputDTOList = similarCompanyService.readComparableCompanies(selected_company_id);
+        return ResponseEntity.status(HttpStatus.OK).body(comparableCompanyNameOutputDTOList);
     }
 
     @GetMapping("/company/hosung")
