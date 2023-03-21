@@ -4,6 +4,7 @@ import com.ssafy.jobtender.dto.input.KeywordInputDTO;
 import com.ssafy.jobtender.dto.input.UpdateUserDTO;
 import com.ssafy.jobtender.dto.output.UserOutDTO;
 import com.ssafy.jobtender.service.InputService;
+import com.ssafy.jobtender.service.ResultService;
 import com.ssafy.jobtender.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,18 +18,26 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final InputService inputService;
+    private final ResultService resultService;
 
     // 생성자 주입 방식
     @Autowired
-    public UserController(UserService userService, InputService inputService) {
+    public UserController(UserService userService, InputService inputService, ResultService resultService) {
         this.userService = userService;
         this.inputService = inputService;
+        this.resultService = resultService;
     }
 
     // API - 키워드 선택
     @PostMapping("/keyword")
-    public void createInputsKeyword(@RequestBody KeywordInputDTO keywordInputDTO){
+    public ResponseEntity<Void> createInputsKeyword(@RequestBody KeywordInputDTO keywordInputDTO){
         List<String> userKeyWord = keywordInputDTO.getKeyWords();
+        if(!userKeyWord.isEmpty()){
+            resultService.createResult();
+            inputService.createInputsKeyword(userKeyWord);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     }
 
     // API - 회원정보 확인
