@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CompanyRepo extends JpaRepository<Company, Long> {
-    Optional<Company> findByCompanyId(long company_id);
+    Optional<Company> findByCompanyId(long companyId);
 }

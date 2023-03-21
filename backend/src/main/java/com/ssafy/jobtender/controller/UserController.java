@@ -38,7 +38,6 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    }
 
     // API - 회원정보 확인
     @GetMapping("/info")

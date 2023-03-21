@@ -26,12 +26,12 @@ public class SimilarCompanyDAOImpl implements SimilarCompanyDAO{
 
     /**
      * 유사한 기업 이름 반환 : 선택된 기업과 유사한 기업의 이름을 반환한다.
-     * @param selected_company_id : 선택된 기업 아이디;
+     * @param selectedCompanyId : 선택된 기업 아이디;
      * @return List<ComparableCompanyNameOutputDTO> : 기업 이름 리스트
      * */
     @Override
-    public List<ComparableCompanyNameOutputDTO> readComparableCompanies(long selected_company_id) {
-        Optional<List<SimilarCompany>> isSimilarCompany = this.similarCompanyRepo.findAllByCompanyId(selected_company_id);
+    public List<ComparableCompanyNameOutputDTO> readComparableCompanies(long selectedCompanyId) {
+        Optional<List<SimilarCompany>> isSimilarCompany = this.similarCompanyRepo.findAllByCompanyId(selectedCompanyId);
         if(isSimilarCompany.isEmpty()) {
             return null;
         }
