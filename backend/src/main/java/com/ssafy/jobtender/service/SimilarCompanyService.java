@@ -5,5 +5,5 @@ import com.ssafy.jobtender.dto.output.ComparableCompanyNameOutputDTO;
 import java.util.List;
 
 public interface SimilarCompanyService {
-    List<ComparableCompanyNameOutputDTO> readComparableCompanies(long selected_company_id);
+    List<ComparableCompanyNameOutputDTO> readComparableCompanies(long selectedCompanyId);
 }

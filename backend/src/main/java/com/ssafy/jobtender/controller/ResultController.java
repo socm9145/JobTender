@@ -30,12 +30,12 @@ public class ResultController {
     /**
      * [모달 관련 API]
      * 유사한 기업 확인 : 유사한 기업 이름을 3개 반환한다.
-     * @params selected_company_id : 선택된 기업 아이디
+     * @params selectedCompanyId : 선택된 기업 아이디
      * @return ComparableCompanyNameOutputDTO
      * */
     @GetMapping("/company/similar")
-    public ResponseEntity<List<ComparableCompanyNameOutputDTO>> readComparableCompanies(@RequestParam long selected_company_id){
-        List<ComparableCompanyNameOutputDTO> comparableCompanyNameOutputDTOList = similarCompanyService.readComparableCompanies(selected_company_id);
+    public ResponseEntity<List<ComparableCompanyNameOutputDTO>> readComparableCompanies(@RequestParam long selectedCompanyId){
+        List<ComparableCompanyNameOutputDTO> comparableCompanyNameOutputDTOList = similarCompanyService.readComparableCompanies(selectedCompanyId);
         return ResponseEntity.status(HttpStatus.OK).body(comparableCompanyNameOutputDTOList);
     }
 

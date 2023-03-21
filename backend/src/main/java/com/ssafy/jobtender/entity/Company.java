@@ -39,6 +39,6 @@ public class Company {
     private List<SubKeyword> subKeywords = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimilarCompany> similarCompanies = new ArrayList<>();
-    @OneToMany(mappedBy = "comparable_company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "comparableCompany", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimilarCompany> comparable_similarCompanies = new ArrayList<>();
 }

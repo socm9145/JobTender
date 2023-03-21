@@ -18,5 +18,5 @@ public class SimilarCompany {
     private Company company;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comparable_company_id")
-    private Company comparable_company;
+    private Company comparableCompany;
 }
