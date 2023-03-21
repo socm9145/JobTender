@@ -12,9 +12,13 @@ public class KeywordMeasure {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long companyMeasureId;
     @Column(nullable = false)
-    long keywordId;
-    @Column(nullable = false)
-    long extractedKeywordId;
-    @Column(nullable = false)
     String score;
+    // mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "extracted_keyword_id")
+    ExtractedKeyword extractedKeyword;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "keyword_id")
+    Keyword keyword;
+
 }

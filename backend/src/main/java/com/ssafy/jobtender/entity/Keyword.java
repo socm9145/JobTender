@@ -16,8 +16,6 @@ public class Keyword {
     @Column(nullable = false)
     private String keyword;
     // mapping
-    @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MainScore> mainScores = new ArrayList<>();
-    @OneToMany(mappedBy = "keyword", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubScore> subScores = new ArrayList<>();
+    @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
+    List<KeywordMeasure> keywordMeasures = new ArrayList<>();
 }
