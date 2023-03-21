@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+
 import KakaoButton from "../../components/login/KakaoButton";
+import LoginAnima from "../../components/login/LoginAnima";
 
 import { Box, Text, Image } from "@chakra-ui/react";
 
@@ -138,9 +140,10 @@ const Login = () => {
           padding={"10%"}
         >
           {/* 여기 이미지에 재밌는 애니메이션을 넣고 싶음 */}
-          <Image
+          {/* <Image
             src={process.env.PUBLIC_URL + "/images/login_temp.gif"}
-          ></Image>
+          ></Image> */}
+          <LoginAnima />
         </Box>
       </Box>
       <Box
