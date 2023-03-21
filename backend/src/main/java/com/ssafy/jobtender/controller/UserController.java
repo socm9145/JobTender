@@ -18,29 +18,34 @@ public class UserController {
     private final UserService userService;
     private final InputService inputService;
 
+    // 생성자 주입 방식
     @Autowired
     public UserController(UserService userService, InputService inputService) {
         this.userService = userService;
         this.inputService = inputService;
     }
-    
+
+    // API - 키워드 선택
     @PostMapping("/keyword")
     public void createInputsKeyword(@RequestBody KeywordInputDTO keywordInputDTO){
         List<String> userKeyWord = keywordInputDTO.getKeyWords();
     }
 
+    // API - 회원정보 확인
     @GetMapping("/info")
     public ResponseEntity<UserOutDTO> readUsersByUserId(@RequestParam("userId") String userId) {
         UserOutDTO userOutDTO = this.userService.readUsersByUserId(Long.parseLong(userId));
         return ResponseEntity.status(HttpStatus.OK).body(userOutDTO);
     }
-
+    
+    // API - 회원정보 수정
     @PutMapping("/info")
     public ResponseEntity<UserOutDTO> updateUserByUserId(@RequestBody UpdateUserDTO updateUserDTO){
         UserOutDTO userOutDTO = this.userService.updateUsersByUserId(updateUserDTO);
         return ResponseEntity.status(HttpStatus.OK).body(userOutDTO);
     }
-
+    
+    // API - 회원정보 삭제
     @DeleteMapping("/info")
     public ResponseEntity<Boolean> deleteUserByUserId(@RequestParam("userId") String userId){
         return ResponseEntity.status(HttpStatus.OK).body(this.userService.deleteUserByUserId(Long.parseLong(userId)));
