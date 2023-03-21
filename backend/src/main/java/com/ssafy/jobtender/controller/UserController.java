@@ -30,14 +30,13 @@ public class UserController {
 
     // API - 키워드 선택
     @PostMapping("/keyword")
-    public ResponseEntity<Void> createInputsKeyword(@RequestBody KeywordInputDTO keywordInputDTO){
+    public ResponseEntity<Void> createInputsKeyword(@RequestBody KeywordInputDTO keywordInputDTO) {
         List<String> userKeyWord = keywordInputDTO.getKeyWords();
-        if(!userKeyWord.isEmpty()){
+        if (!userKeyWord.isEmpty()) {
             resultService.createResult();
             inputService.createInputsKeyword(userKeyWord);
         }
         return new ResponseEntity<>(HttpStatus.OK);
-    }
     }
 
     // API - 회원정보 확인
