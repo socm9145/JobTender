@@ -1,255 +1,329 @@
 import "../../styles/LoginAnima.css";
 
-import { gsap } from "gsap";
-import { EasePack } from "gsap/EasePack";
-gsap.registerPlugin(EasePack);
-
+import { useEffect, useState } from "react";
+import { Box } from "@chakra-ui/react";
 const LoginAnima = () => {
-  const xmlns = "http://www.w3.org/2000/svg";
-  const xlinkns = "http://www.w3.org/1999/xlink";
-  const select = (s) => {
-    return document.querySelector(s);
-  };
-  const selectAll = (s) => {
-    return document.querySelectorAll(s);
-  };
+  const [canvasWidth, setCanvasWidth] = useState("0");
+  const [canvasHeight, setCanvasHeight] = useState("0");
+  useEffect(() => {
+    setCanvasWidth(document.getElementById("canvas-container").clientWidth);
+    setCanvasHeight(document.getElementById("canvas-container").clientHeight);
+    /* ---------------- FISH "CLASS" START -------------- */
+    var FOLLOW_DISTANCE = 100;
 
-  const mainSVG = select(".mainSVG");
-  const bubble = select(".bubble");
-  console.log(bubble);
+    var Fish = function (id) {
+      this.id = id;
+      this.entourage = [];
+      // dx/yx is current speed, ox/oy is the previous one
+      this.ox = this.dx = Math.random() - 0.5;
+      this.oy = this.dy = Math.random() - 0.5;
 
-  var maintimeline = new gsap.timeline({
-    paused: true,
-  });
+      this.x = canvas.width * Math.random();
+      this.y = canvas.height * Math.random();
 
-  var particleColorArray = [
-    "#69D2E7",
-    "#A7DBD8",
-    "#E0E4CC",
-    "#F38630",
-    "#FA6900",
-  ];
+      // A couple of helper functions, the names should describe their purpose
+      Fish.prototype.angleToClosestFish = function (otherFish) {
+        otherFish = otherFish == null ? this.following : otherFish;
+        if (otherFish) {
+          return Math.atan2(otherFish.y - this.y, otherFish.x - this.x);
+        } else {
+          return Number.MAX_VALUE;
+        }
+      };
 
-  var numBubbles = 100;
+      Fish.prototype.angleFromFishDirectionToClosestFish = function (
+        otherFish
+      ) {
+        otherFish = otherFish == null ? this.following : otherFish;
+        if (otherFish) {
+          return Math.abs(
+            deltaAngle(this.angle, this.angleToClosestFish(otherFish))
+          );
+        } else {
+          return Number.MAX_VALUE;
+        }
+      };
 
-  //behind
-  for (var i = 0; i < numBubbles / 2; i++) {
-    var colorId = Math.floor(Math.random() * particleColorArray.length);
+      Fish.prototype.angleDirectionDifference = function (otherFish) {
+        otherFish = otherFish == null ? this.following : otherFish;
 
-    var p = bubble.cloneNode(true);
-    mainSVG.insertBefore(p, mainSVG.firstChild);
-    var startRadius = randomIntFromInterval(2, 32);
-    gsap.TweenMax.set(p, {
-      attr: {
-        cx: randomIntFromInterval(200, 300),
-        cy: randomIntFromInterval(400, 400),
-        r: 0,
-      },
-      fill: particleColorArray[colorId],
-    });
+        if (otherFish) {
+          Math.abs(deltaAngle(this.angle, otherFish.angle));
+        } else {
+          return Number.MAX_VALUE;
+        }
+      };
 
-    p.startRadius = startRadius;
+      // Update the fish "physics"
+      Fish.prototype.calc = function () {
+        this.ox = this.dx;
+        this.oy = this.dy;
+        var MAX_SPEED = 1.1;
+        var maxSpeed = MAX_SPEED;
 
-    var dur = randomIntFromInterval(8, 10);
-    var angle = randomIntFromInterval(0, 90);
-    var tl = new gsap.timeline({
-      repeat: 3,
-    });
+        //Do I need to find another fish buddy?
+        if (
+          this.following == null ||
+          py(this.x - this.following.x, this.y - this.following.y) >
+            FOLLOW_DISTANCE
+        ) {
+          if (this.following != null) {
+            if (keyDown) affinityLine(this.following, this, "white");
+            this.following.entourage.splice(
+              this.following.entourage.indexOf(this)
+            );
+          }
 
-    tl.to(p, dur / 2, {
-      attr: {
-        r: startRadius,
-      },
-    })
-      .to(
-        p,
-        dur,
-        {
-          transformOrigin: "30% 50%",
-          rotation: -180,
-          alpha: 1,
-          attr: {
-            cy: 700,
-          },
-          physics2D: {
-            velocity: -0,
-            angle: angle,
-            acceleration: 0,
-            gravity: -2,
-            accelerationAngle: 0,
-          },
-        },
-        "-=" + dur / 2
-      )
-      .to(
-        p,
-        dur / 2,
-        {
-          attr: {
-            r: 0,
-          },
-        },
-        "-=" + dur / 2
-      );
+          this.following = null;
 
-    maintimeline.add(tl, i / 2);
-  }
+          //attract closer to other fish - find closest
+          var closestDistance = Number.MAX_VALUE;
+          var closestFish = null;
 
-  //in front
-  for (var i = 0; i < numBubbles; i++) {
-    var colorId = Math.floor(Math.random() * particleColorArray.length);
+          for (var i = 0; i < fishes.length; i++) {
+            var fish = fishes[i];
+            if (fish != this) {
+              var distance = py(this.x - fish.x, this.y - fish.y);
+              // Is it closer, within the max distance and within the sector that the fish can see?
+              if (
+                distance < closestDistance &&
+                fish.following != this &&
+                distance < FOLLOW_DISTANCE &&
+                this.angleFromFishDirectionToClosestFish(fish) < Math.PI * 0.25
+              ) {
+                closestDistance = distance;
+                closestFish = fish;
+              }
+            }
+          }
+          if (closestFish != null) {
+            this.following = closestFish;
+            closestFish.entourage.push(this);
+          }
+        }
 
-    var p = bubble.cloneNode(true);
-    mainSVG.appendChild(p);
-    var startRadius = randomIntFromInterval(1, 20);
-    gsap.TweenMax.set(p, {
-      attr: {
-        cx: randomIntFromInterval(250, 350),
-        cy: randomIntFromInterval(350, 500),
-        r: 0,
-      },
-      fill: particleColorArray[colorId],
-    });
+        // Fish is following another
+        if (this.following != null) {
+          // Go closer to other fish
+          this.followingDistance = py(
+            this.x - this.following.x,
+            this.y - this.following.y
+          );
+          this.distanceFactor = 1 - this.followingDistance / FOLLOW_DISTANCE;
 
-    var dur = randomIntFromInterval(10, 12);
-    var angle = randomIntFromInterval(0, -90);
-    var tl = new gsap.timeline({
-      repeat: 3,
-    });
-    tl.to(p, dur / 2, {
-      attr: {
-        r: startRadius,
-      },
-    })
-      .to(
-        p,
-        dur,
-        {
-          //transformOrigin:'30% 50%',
-          rotation: 280,
-          //repeat:-1,
-          alpha: 1,
-          attr: {
-            //r:p.startRadius,
-            cy: 650,
-          },
-          physics2D: {
-            velocity: -20,
-            angle: angle,
-            acceleration: -2,
-            gravity: -10,
-            accelerationAngle: 0,
-          },
-        },
-        "-=" + dur / 2
-      )
-      .to(
-        p,
-        dur / 2,
-        {
-          attr: {
-            r: 0,
-          },
-        },
-        "-=" + dur / 2
-      );
+          // If going head on, just break a little before following
+          if (
+            this.angleDirectionDifference() > Math.PI * 0.9 && // On colliding angle?
+            this.angleFromFishDirectionToClosestFish() < Math.PI * 0.2
+          ) {
+            // In colliding sector?
+            this.dx += this.following.x * 0.1;
+            this.dy += this.following.y * 0.1;
+            if (keyDown) affinityLine(this.following, this, "yellow");
+          } else if (this.followingDistance > FOLLOW_DISTANCE * 0.3) {
+            // Dont go closer if close
+            this.dx +=
+              Math.cos(this.angleToClosestFish()) *
+              (0.05 * this.distanceFactor);
+            this.dy +=
+              Math.sin(this.angleToClosestFish()) *
+              (0.05 * this.distanceFactor);
+          }
+          if (keyDown) affinityLine(this.following, this, "red");
+        }
 
-    maintimeline.add(tl, i / 8);
-  }
+        // Go closer to center, crashing into the canvas walls is just silly!
+        if (
+          this.x < canvas.width * 0 ||
+          this.x > canvas.width * 1 ||
+          this.y < canvas.height * 0 ||
+          this.y > canvas.height * 1
+        ) {
+          this.dx += (canvas.width / 2 - this.x) / 5000;
+          this.dy += (canvas.height / 2 - this.y) / 5000;
+        }
 
-  //top of head
-  for (var i = 0; i < numBubbles; i++) {
-    var colorId =
-      Math.floor(Math.random() * (particleColorArray.length - 1)) + 1;
+        // Poor little fishies are scared of your cursor
+        if (py(this.x - cursor.x, this.y - cursor.y) < FOLLOW_DISTANCE * 1.75) {
+          this.dx -= (cursor.x - this.x) / 500;
+          this.dy -= (cursor.y - this.y) / 500;
+          maxSpeed = 4;
+          if (keyDown) affinityLine(cursor, this, "green");
+        }
 
-    var p = bubble.cloneNode(true);
-    mainSVG.insertBefore(p, mainSVG.firstChild);
-    var startRadius = randomIntFromInterval(2, 10);
-    gsap.TweenMax.set(p, {
-      attr: {
-        cx: randomIntFromInterval(250, 350),
-        cy: randomIntFromInterval(190, 210),
-        r: startRadius,
-      },
-      //filter:'url(#colorMeHueRotate)',
-      fill: particleColorArray[colorId],
-    });
+        // If following fish, try avoid going close to your siblings
+        if (this.following != null) {
+          for (var i = 0; i < this.following.entourage.length; i++) {
+            var siblingFish = this.following.entourage[i];
+            if (siblingFish !== this) {
+              if (
+                py(this.x - siblingFish.x, this.y - siblingFish.y) <
+                FOLLOW_DISTANCE * 0.2
+              ) {
+                if (keyDown) affinityLine(siblingFish, this, "yellow");
+                this.dx -= (siblingFish.x - this.x) / 1000;
+                this.dy -= (siblingFish.y - this.y) / 1000;
+              }
+            }
+          }
+        }
 
-    //p.startRadius = startRadius;
+        // Calculate heading from new speed
+        this.angle = Math.atan2(this.dy, this.dx);
 
-    var dur = randomIntFromInterval(6, 10);
-    var angle = randomIntFromInterval(0, 90);
+        // Grab the speed from the vectors, and normalize it
+        var speed = Math.max(0.1, Math.min(maxSpeed, py(this.dx, this.dy)));
 
-    var t = gsap.TweenMax.fromTo(
-      p,
-      dur,
-      {
-        alpha: 1,
-        attr: {
-          r: startRadius,
-        },
-      },
-      {
-        transformOrigin: "30% 650%",
-        rotation: -0,
-        repeat: 3,
-        alpha: 1,
-        attr: {
-          r: 0,
-          cx: "+=30",
-        },
-        physics2D: {
-          velocity: 0,
-          angle: angle,
-          acceleration: 0,
-          gravity: -20,
-          accelerationAngle: 90,
-        },
+        // Recreate speed vector from recombining angle of direction with normalized speed
+        this.dx = Math.cos(this.angle) * (speed + speedBoost);
+        this.dy = Math.sin(this.angle) * (speed + speedBoost);
+
+        // Fish like to move it, move it!
+        this.x += this.dx;
+        this.y += this.dy;
+      };
+    };
+
+    /* ---------------------- FISH "CLASS" END -------------- */
+
+    /* ---------------------- MAIN START -------------------- */
+    var canvas = document.getElementById("fishtank");
+    var context = canvas.getContext("2d");
+
+    var fishes = [];
+
+    var speedBoostCountdown = 200,
+      speedBoost = 0,
+      SPEED_BOOST = 2;
+    var fishBitmap = new Image();
+    fishBitmap.onload = function () {
+      update();
+    };
+    fishBitmap.src =
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZEMjNEMUIyQjI1MTExRTM5QzhDQjczMjRDQUI3RkMwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZEMjNEMUIzQjI1MTExRTM5QzhDQjczMjRDQUI3RkMwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NkQyM0QxQjBCMjUxMTFFMzlDOENCNzMyNENBQjdGQzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NkQyM0QxQjFCMjUxMTFFMzlDOENCNzMyNENBQjdGQzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5h3qMOAAAAkUlEQVR42pyQsQrCQBBEPYkiQgSjRCvTpPf/f0OwtLIXlGAICZ5vyAhXWWTgcXCwj50NszEBCthCDitY+l8ZoIMWGniZIcY4CkLY8JQaKKH28BXOiehfZHqaHazhosEMDlDBx9tNyY1t75IdLVtMkLxdXec6Ufvxqzb32kVywyyp1pvWksZVO90QkTx7Ob4CDADGaiOnQPuXSgAAAABJRU5ErkJggg==";
+
+    //Draw Circle
+    function draw(f) {
+      var r = f.angle + Math.PI;
+
+      context.translate(f.x, f.y);
+      context.rotate(r);
+
+      var w = 50;
+      var acc = py(f.dx - f.ox, f.dy - f.oy) / 0.05;
+
+      // If a fish does a "flip", make it less wide
+      if (acc > 1) {
+        w = 50 + 10 / acc;
       }
-    );
 
-    maintimeline.add(t, i / 6);
-  }
+      context.drawImage(fishBitmap, 0, 0, w, 20);
+      context.rotate(-r);
+      context.translate(-f.x, -f.y);
+    }
 
-  function randomIntFromInterval(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+    // Pythagoras shortcut
+    function py(a, b) {
+      return Math.sqrt(a * a + b * b);
+    }
 
-  var allTl = new gsap.timeline({
-    repeat: 1,
-    yoyo: true,
-    paused: false,
-  });
-  allTl.timeScale(1.41);
-  allTl.to(maintimeline, 20, {
-    time: maintimeline.duration(),
-    ease: "power2.out",
-  });
+    //------------ USER INPUT START -------------
+    var cursor = {
+      x: 0,
+      y: 0,
+    };
+    var cursorDown = false,
+      keyDown = false;
 
-  gsap.TweenMax.globalTimeScale(0.5);
+    document.onmousemove = function (e) {
+      cursor.x = e.pageX - (window.innerWidth - canvas.width);
+      cursor.y = e.pageY - (window.innerHeight / 2 - canvas.height / 2);
+    };
+
+    document.onmouseout = function (e) {
+      //Out of screen is not a valid pos
+      cursor.y = cursor.x = Number.MAX_VALUE;
+    };
+
+    document.onmousedown = function () {
+      activateSpeedBoost();
+      cursorDown = true;
+    };
+    document.onmouseup = function () {
+      cursorDown = false;
+    };
+
+    document.onkeydown = function () {
+      keyDown = true;
+    };
+
+    document.onkeyup = function () {
+      keyDown = false;
+    };
+    //------------ USER INPUT STOP -------------
+
+    function deltaAngle(f, o) {
+      //Find the shortest angle between two
+      var r = f - o;
+      return Math.atan2(Math.sin(r), Math.cos(r));
+    }
+
+    function affinityLine(f, o, c) {
+      //Draw a line with pretty gradient
+      var grad = context.createLinearGradient(f.x, f.y, o.x, o.y);
+      grad.addColorStop(0, c);
+      grad.addColorStop(1, "black");
+
+      context.strokeStyle = grad;
+      context.beginPath();
+      context.moveTo(f.x, f.y);
+      context.lineTo(o.x, o.y);
+      context.stroke();
+    }
+
+    function activateSpeedBoost() {
+      speedBoostCountdown = 400 + Math.round(400 * Math.random());
+      speedBoost = SPEED_BOOST;
+    }
+
+    //Update and draw all of them
+    function update() {
+      if (fishes.length < 50) {
+        fishes.push(new Fish(fishes.length));
+      }
+
+      if (!cursorDown) {
+        //clear the canvas
+        canvas.width = canvas.width; //Try commenting this line :-)
+
+        //Update and draw fish
+        for (var i = 0; i < fishes.length; i++) {
+          var fish = fishes[i];
+          fish.calc();
+          draw(fish);
+        }
+      }
+
+      speedBoostCountdown--;
+      if (speedBoostCountdown < 0) {
+        activateSpeedBoost();
+      }
+
+      if (speedBoost > 0) {
+        speedBoost -= SPEED_BOOST / 80; //Reduce speed bost fast!
+      } else {
+        speedBoost = 0;
+      }
+
+      requestAnimationFrame(update);
+    }
+    /* ---------------------- MAIN END ----------------------- */
+  }, []);
+
   return (
-    <div>
-      <svg
-        class="mainSVG"
-        preserveAspectRatio="xMidYMin meet"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 600 600"
-      >
-        <defs>
-          <circle class="bubble" cx="0" cy="0" r="0" />
-        </defs>
-
-        <path
-          id="face"
-          fill="#FDF7EE"
-          d="M250.1,477.1c0,0,17.9-37.5,28.3-47.5c8.3-8,10.9-12.4,40.4,0c29.5,12.4,38.1,8.5,45.1,3.1
-	c7-5.4,8.2-19.8,6.9-23.8c-1.3-4.1,3.4-9.3,6.3-9c2.9,0.3,7.7-3.1,8-6.6s0.4-3.2-0.9-8.6c2.8-1,16.2-3.4,9.3-15
-	c-6.8-11.7,3.8-15.1,3.8-15.1s19.2-0.2,19.4-11.7c0.2-11.5-17.1-33.2-17.9-40.6c-0.8-7.4,3.5-18.1,3.5-18.1s15.1-38.8-3.5-75.7
-	c-18.6-36.9-69.1-52-88.2-53.6c-40-3.3-86.6,12.4-103.7,65.3s-4.2,92.3-4.7,108.8c-1.6,56-45.6,91.3-45.6,91.3L250.1,477.1z"
-        />
-      </svg>
-    </div>
+    <Box id={"canvas-container"} width="100%" height="100%" overflow={"hidden"}>
+      <canvas width={canvasWidth} height={canvasHeight} id="fishtank" />
+    </Box>
   );
 };
 

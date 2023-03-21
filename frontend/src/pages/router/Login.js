@@ -93,7 +93,7 @@ const Login = () => {
         paddingY={"1.5rem"}
         height={"80vh"}
         width={"100vw"}
-        overflow={"hidden"}
+        overflowY={"hidden"}
       >
         <Box
           display={"flex"}
@@ -137,7 +137,7 @@ const Login = () => {
           justifyContent={"center"}
           width={"100%"}
           height={"100%"}
-          padding={"10%"}
+          // padding={"10%"}
         >
           {/* 여기 이미지에 재밌는 애니메이션을 넣고 싶음 */}
           {/* <Image
