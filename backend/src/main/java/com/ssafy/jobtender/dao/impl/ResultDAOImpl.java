@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.jobtender.dao.ResultDAO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
+import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.repo.ResultRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,28 +41,6 @@ public class ResultDAOImpl implements ResultDAO {
         QInput input = QInput.input;
         QCompanyRating companyRating = QCompanyRating.companyRating;
 
-        /*
-        select R.result_id, R.user_id,
-        I.keyword,
-        CS.score,
-        C.name, C.type, C.scale, C.salary, C.employees_number, C.address, C.year_founded,
-        CR.average_rating, CR.growth_rating, CR.balance_rating, CR.salary_welfare_rating, CR.culture_rating, CR.management_rating
-        from results R
-        join inputs I
-        on R.result_id = I.result_id
-
-        join company_scores CS
-        on R.result_id = CS.result_id
-
-        join companies C
-        on CS.company_id = C.company_id
-
-        join company_ratings CR
-        on C.company_id = CR.company_id
-
-        where R.result_id = 1;
-        */
-
         List<ReadResultOutDTO> readResultOutDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(ReadResultOutDTO.class,
                         result.resultId, result.user.userId,
@@ -81,5 +60,10 @@ public class ResultDAOImpl implements ResultDAO {
                 .fetch();
 
         return readResultOutDTOs;
+    }
+
+    @Override
+    public List<ResultCompanyOutDTO> readResultsCompanies() {
+        return null;
     }
 }

@@ -35,8 +35,11 @@ public class Company {
     private List<CompanyScore> companyScores = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompanyMeasure> companyMeasures = new ArrayList<>();
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<CompanyKeyword> companyKeywords = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimilarCompany> similarCompanies = new ArrayList<>();
     @OneToMany(mappedBy = "comparableCompany", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimilarCompany> comparable_similarCompanies = new ArrayList<>();
+
 }

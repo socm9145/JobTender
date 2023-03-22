@@ -1,7 +1,10 @@
 package com.ssafy.jobtender.controller;
 
+import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
 import com.ssafy.jobtender.dto.output.ComparableCompanyNameOutputDTO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
+import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
+import com.ssafy.jobtender.service.CompanyService;
 import com.ssafy.jobtender.service.ResultService;
 import com.ssafy.jobtender.service.SimilarCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,13 @@ import java.util.List;
 public class ResultController {
     private final ResultService resultService;
     private final SimilarCompanyService similarCompanyService;
+    private final CompanyService companyService;
 
     @Autowired
-    public ResultController(ResultService resultService, SimilarCompanyService similarCompanyService){
+    public ResultController(ResultService resultService, SimilarCompanyService similarCompanyService, CompanyService companyService){
         this.resultService = resultService;
         this.similarCompanyService = similarCompanyService;
+        this.companyService = companyService;
     }
     /**
      * [모달 관련 API]
@@ -37,5 +42,17 @@ public class ResultController {
         return ResponseEntity.status(HttpStatus.OK).body(comparableCompanyNameOutputDTOList);
     }
 
+    @GetMapping("/company/rank")
+    public ResponseEntity<List<ResultCompanyOutDTO>> readResultsCompanies(@RequestParam("resultId") String resultId){
+        List<ResultCompanyOutDTO> resultCompanyOutDTOList = this.resultService.readResultsCompanies();
 
+        return ResponseEntity.status(HttpStatus.OK).body(resultCompanyOutDTOList);
+    }
+
+    @GetMapping("/company/info")
+    public ResponseEntity<CompanyRatingOutDTO> readCompanies(@RequestParam("companyId") String companyId){
+        CompanyRatingOutDTO companyRatingOutDTO = this.companyService.readCompanies(Long.parseLong(companyId));
+
+        return ResponseEntity.status(HttpStatus.OK).body(companyRatingOutDTO);
+    }
 }
