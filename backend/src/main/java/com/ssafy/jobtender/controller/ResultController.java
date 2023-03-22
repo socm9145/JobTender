@@ -1,9 +1,6 @@
 package com.ssafy.jobtender.controller;
 
-import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
-import com.ssafy.jobtender.dto.output.ComparableCompanyNameOutputDTO;
-import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
-import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.service.CompanyService;
 import com.ssafy.jobtender.service.ResultService;
 import com.ssafy.jobtender.service.SimilarCompanyService;
@@ -40,6 +37,18 @@ public class ResultController {
     public ResponseEntity<List<ComparableCompanyNameOutputDTO>> readComparableCompanies(@RequestParam long selectedCompanyId){
         List<ComparableCompanyNameOutputDTO> comparableCompanyNameOutputDTOList = similarCompanyService.readComparableCompanies(selectedCompanyId);
         return ResponseEntity.status(HttpStatus.OK).body(comparableCompanyNameOutputDTOList);
+    }
+
+    /**
+     * [결과페이지 관련 API]
+     * 키워드별 기업 확인 : 키워드 당 랜덤으로 n개의 기업을 반환한다.
+     * @param resultId long : 분석 결과 아아디
+     * @return List<KeywordRandomCompanyOutDto>
+     * */
+    @GetMapping("/keyword/company")
+    public ResponseEntity<List<KeywordRandomCompanyOutDto>> readCompaniesByKeyword(@RequestParam long resultId){
+
+        return null;
     }
 
     @GetMapping("/company/rank")
