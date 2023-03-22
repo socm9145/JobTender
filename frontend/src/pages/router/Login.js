@@ -137,12 +137,7 @@ const Login = () => {
           justifyContent={"center"}
           width={"100%"}
           height={"100%"}
-          // padding={"10%"}
         >
-          {/* 여기 이미지에 재밌는 애니메이션을 넣고 싶음 */}
-          {/* <Image
-            src={process.env.PUBLIC_URL + "/images/login_temp.gif"}
-          ></Image> */}
           <LoginAnima />
         </Box>
       </Box>
