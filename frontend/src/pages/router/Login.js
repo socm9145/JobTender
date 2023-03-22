@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+
 import KakaoButton from "../../components/login/KakaoButton";
+import LoginAnima from "../../components/login/LoginAnima";
 
 import { Box, Text, Image } from "@chakra-ui/react";
 
@@ -91,7 +93,7 @@ const Login = () => {
         paddingY={"1.5rem"}
         height={"80vh"}
         width={"100vw"}
-        overflow={"hidden"}
+        overflowY={"hidden"}
       >
         <Box
           display={"flex"}
@@ -135,12 +137,8 @@ const Login = () => {
           justifyContent={"center"}
           width={"100%"}
           height={"100%"}
-          padding={"10%"}
         >
-          {/* 여기 이미지에 재밌는 애니메이션을 넣고 싶음 */}
-          <Image
-            src={process.env.PUBLIC_URL + "/images/login_temp.gif"}
-          ></Image>
+          <LoginAnima />
         </Box>
       </Box>
       <Box
