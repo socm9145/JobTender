@@ -65,5 +65,18 @@ public class UserController {
         List<ReadResultOutDTO> readResultOutDTO = this.resultService.readResultsByUserId();
         return ResponseEntity.status(HttpStatus.OK).body(readResultOutDTO);
     }
+
+    // API - 성별 키워드 확인
+    @GetMapping("/keyword/gender")
+    public ResponseEntity<List<UserOutDTO>> keywordRankingByGender(@RequestParam("gender") String gender){
+        List<UserOutDTO> userOutDTOs = this.userService.keywordRankingByGender(gender);
+        return ResponseEntity.status(HttpStatus.OK).body(userOutDTOs);
+    }
+
+    @GetMapping("/keyword/age")
+    public ResponseEntity<List<UserOutDTO>> keywordRankingByAge(@RequestParam("age") String age){
+        List<UserOutDTO> userOutDTOs = this.userService.keywordRankingByAge(Integer.parseInt(age));
+        return ResponseEntity.status(HttpStatus.OK).body(userOutDTOs);
+    }
 }
 

@@ -8,6 +8,8 @@ import com.ssafy.jobtender.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -80,5 +82,60 @@ public class UserDAOImpl implements UserDAO {
         this.userRepo.delete(user);
 
         return true;
+    }
+
+    @Override
+    public List<UserOutDTO> keywordRankingByGender(String gender) {
+        Optional<List<User>> AreUsers = this.userRepo.findAllByGender(gender);
+        if (AreUsers.isEmpty())
+            return null;
+
+        List<UserOutDTO> userOutDTOs = new ArrayList<>();
+        List<User> users = AreUsers.get();
+
+        for (User user: users){
+            UserOutDTO userOutDTO = UserOutDTO.createBuilder()
+                    .userId(user.getUserId())
+                    .name(user.getName())
+                    .age(user.getAge())
+                    .gender(user.getGender())
+                    .email(user.getEmail())
+                    .provider(user.getProvider())
+                    .accessToken(user.getAccessToken())
+                    .refreshToken(user.getRefreshToken())
+                    .accessInfo(user.getAccessInfo())
+                    .build();
+
+            userOutDTOs.add(userOutDTO);
+        }
+        return userOutDTOs;
+    }
+
+    @Override
+    public List<UserOutDTO> keywordRankingByAge(int age) {
+        Optional<List<User>> AreUsers = this.userRepo.findAllByAge(age);
+
+        if (AreUsers.isEmpty())
+            return null;
+
+        List<UserOutDTO> userOutDTOs = new ArrayList<>();
+        List<User> users = AreUsers.get();
+
+        for (User user: users){
+            UserOutDTO userOutDTO = UserOutDTO.createBuilder()
+                    .userId(user.getUserId())
+                    .name(user.getName())
+                    .age(user.getAge())
+                    .gender(user.getGender())
+                    .email(user.getEmail())
+                    .provider(user.getProvider())
+                    .accessToken(user.getAccessToken())
+                    .refreshToken(user.getRefreshToken())
+                    .accessInfo(user.getAccessInfo())
+                    .build();
+
+            userOutDTOs.add(userOutDTO);
+        }
+        return userOutDTOs;
     }
 }
