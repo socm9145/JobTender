@@ -8,6 +8,22 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 
+def find_company(name):
+    sql_find_company = '''
+    SELECT COUNT(*) FROM Companies WHERE name = %s
+    '''
+    result = -1
+    try:
+        result = cur.execute(sql_find_company, name)
+        conn.commit()
+    except Exception as e1:
+        print(traceback.format_exc())
+    if result == 0:
+        return True
+    else:
+        return False
+
+
 def set_time():
     return random.randint(40, 60)
 
@@ -63,10 +79,10 @@ if __name__ == "__main__":
     db = 'jobtender'
 
     # get company names
-    f = open('blindCompanyName.txt', 'r', encoding='utf-8')
-    lines = f.readlines()
+    # f = open('blindCompanyName.txt', 'r', encoding='utf-8')
+    # lines = f.readlines()
 
-    # lines = ['삼성전자']
+    lines = ['삼성전자']
     conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset='utf8')
     a = 0
     for name in lines:
@@ -76,7 +92,13 @@ if __name__ == "__main__":
         name = name.replace("\n", "")
         try:
             info = get_company_info(name)  # 기업 정보를 json 형태로 return
-            print(info)
+
+            if find_company(name):
+            #     insert 실행
+                pass
+            else:
+            #     update 실행
+                pass
 
             cur = conn.cursor()
             basic = {'name': info['name'], 'type': info['basic']['type'], 'scale': '대기업',
