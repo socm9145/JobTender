@@ -17,8 +17,8 @@ public class ResultServiceImpl implements ResultService {
         this.resultDAO = resultDAO;
     }
     @Override
-    public void createResult() {
-
+    public void createResult(Long userId) {
+        resultDAO.createResult(userId);
     }
 
     @Override

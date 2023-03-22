@@ -2,6 +2,7 @@ package com.ssafy.jobtender.entity;
 
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
+@ToString
 @Table(name = "Results")
 public class Result {
     @Id

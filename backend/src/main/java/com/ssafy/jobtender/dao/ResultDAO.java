@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ResultDAO {
-    void createResult();
+    void createResult(Long userId);
     List<ReadResultOutDTO> readResultsByUserId();
 }

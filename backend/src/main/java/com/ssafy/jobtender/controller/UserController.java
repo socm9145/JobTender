@@ -31,11 +31,11 @@ public class UserController {
 
     // API - 키워드 선택
     @PostMapping("/keyword")
-    public ResponseEntity<Void> createInputsKeyword(@RequestBody KeywordInputDTO keywordInputDTO) {
+    public ResponseEntity<Void> createInputsKeyword(@RequestParam("userId") Long userId, @RequestBody KeywordInputDTO keywordInputDTO) {
         List<String> userKeyWord = keywordInputDTO.getKeyWords();
         if (!userKeyWord.isEmpty()) {
-            resultService.createResult();
-            inputService.createInputsKeyword(userKeyWord);
+            resultService.createResult(userId);
+            inputService.createInputsKeyword(userId, userKeyWord);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

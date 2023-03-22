@@ -15,9 +15,12 @@ public class InputServiceImpl implements InputService{
         this.inputDAO = inputDAO;
     }
     @Override
-    public String createInputsKeyword(List<String> userKeyWord) {
-        System.out.println("inputService : " + userKeyWord.toString());
-        inputDAO.createInputsKeyword(userKeyWord);
-        return "good";
+    public void createInputsKeyword(Long userId, List<String> userKeyWord) {
+        StringBuilder keyWord = new StringBuilder();
+        for(String s : userKeyWord){
+            keyWord.append(s).append(",");
+        }
+        keyWord.delete(keyWord.length()-1, keyWord.length());
+        inputDAO.createInputsKeyword(userId, keyWord.toString());
     }
 }
