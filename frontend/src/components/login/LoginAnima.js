@@ -200,7 +200,6 @@ const LoginAnima = () => {
       update();
     };
     fishBitmap.src = `${process.env.PUBLIC_URL}` + "/images/fish.png";
-    // "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3175363/fish-clipart-md.png";
 
     //Draw Circle
     function draw(f) {
