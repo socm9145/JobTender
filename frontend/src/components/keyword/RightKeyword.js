@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setSelectedKeyword } from "../../redux/keyword/keywordSlice";
@@ -18,9 +18,17 @@ const RightKeyword = ({ keyword, id }) => {
   );
 
   const dispatchSelectedKeywordId = () => {
-    dispatch(setSelectedKeyword(id));
+    if (selectedKeyword === id) {
+      gsap.to([text.current, line.current], {
+        duration: 0.5,
+        x: "0",
+        ease: "sine.out",
+      });
+      dispatch(setSelectedKeyword(null));
+    } else {
+      dispatch(setSelectedKeyword(id));
+    }
   };
-
   const ctx = gsap.context(() => {});
 
   useLayoutEffect(() => {
@@ -29,12 +37,7 @@ const RightKeyword = ({ keyword, id }) => {
 
   useLayoutEffect(() => {
     ctx.add(() => {
-      gsap.to(text.current, {
-        duration: 0.5,
-        x: selectedKeyword === id ? "-10rem" : "0px",
-        ease: "sine.out",
-      });
-      gsap.to(line.current, {
+      gsap.to([text.current, line.current], {
         duration: 0.5,
         x: selectedKeyword === id ? "-10rem" : "0px",
         ease: "sine.out",

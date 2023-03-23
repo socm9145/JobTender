@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setSelectedKeyword } from "../../redux/keyword/keywordSlice";
