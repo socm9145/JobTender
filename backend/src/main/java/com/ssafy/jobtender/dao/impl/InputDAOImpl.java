@@ -42,13 +42,13 @@ public class InputDAOImpl implements InputDAO{
     }
 
     @Override
-    public Input readInputsByResultId(long resultId) {
-        Optional<Input> isInput = inputRepo.findByResult(resultId);
+    public List<Input> readInputsByResultId(long resultId) {
+        Optional<List<Input>> isInput = inputRepo.findAllByResult(resultId);
         if(isInput.isEmpty()){
             return null;
         }else{
-            Input input = isInput.get();
-            return input;
+            List<Input> inputs = isInput.get();
+            return inputs;
         }
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/result")
@@ -41,14 +42,14 @@ public class ResultController {
 
     /**
      * [결과페이지 관련 API]
-     * 키워드별 기업 확인 : 키워드 당 랜덤으로 n개의 기업을 반환한다.
+     * 키워드별 기업 확인 : 키워드 별로 해당하는 기업리스트를 반환한다.
      * @param resultId long : 분석 결과 아아디
-     * @return List<KeywordRandomCompanyOutDto>
+     * @return Map<String, List<KeywordRandomCompanyOutDto>> : {키워드 이름 : [회사 리스트]}
      * */
     @GetMapping("/keyword/company")
-    public ResponseEntity<List<KeywordRandomCompanyOutDto>> readCompaniesByKeyword(@RequestParam long resultId){
-
-        return null;
+    public ResponseEntity<Map<String, List<KeywordRandomCompanyOutDto>>> readCompaniesByKeywords(@RequestParam long resultId){
+        Map<String, List<KeywordRandomCompanyOutDto>> keywordRandomCompanyOutDtoListMap = companyService.readCompaniesByKeywords(resultId);
+        return ResponseEntity.status(HttpStatus.OK).body(keywordRandomCompanyOutDtoListMap);
     }
 
     @GetMapping("/company/rank")

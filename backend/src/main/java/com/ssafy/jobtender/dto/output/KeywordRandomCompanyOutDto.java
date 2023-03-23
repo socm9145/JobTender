@@ -8,7 +8,13 @@ import lombok.Data;
 public class KeywordRandomCompanyOutDto {
     private long companyId;
     private long keywordId;
-    private String name;
-    private String keyword;
+    private String companyName;
+    private String keywordName;
 
+    public KeywordRandomCompanyOutDto(long companyId, long keywordId, String companyName, String keywordName){
+        this.companyId = companyId;
+        this.keywordId = keywordId;
+        this.companyName = companyName;
+        this.keywordName = keywordName;
+    }
 }

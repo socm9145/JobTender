@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface InputRepo extends JpaRepository<Input, Long> {
-    Optional<Input> findByResult(long resultId);
+    Optional<List<Input>> findAllByResult(long resultId);
 }
