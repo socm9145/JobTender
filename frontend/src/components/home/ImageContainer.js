@@ -10,7 +10,6 @@ const ImageContainer = () => {
   const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
   const buttonAble = useAppSelector((state) => state.home.buttonAble);
   const dispatch = useAppDispatch();
-  console.log(selectedMethod);
 
   const handleMouseDown = (event) => {
     const carousel = carouselRef.current;

@@ -48,7 +48,7 @@ const TextContainer = () => {
         "#describe",
         {
           duration: 1,
-          opacity: 0,
+          y: "100%",
           ease: "sine.out",
         },
         0.6
@@ -59,8 +59,26 @@ const TextContainer = () => {
   }, []);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.from;
+    gsap.from("#selected-method", {
+      duration: 1,
+      y: "100%",
+      ease: "sine.out",
+    });
+    gsap.from("#expected-time", {
+      duration: 1,
+      y: "100%",
+      ease: "sine.out",
+    });
+    gsap.from("#describe", {
+      duration: 1,
+      y: "100%",
+      ease: "sine.out",
+    });
+    gsap.from("#page-num", {
+      duration: 1,
+      y: "100%",
+      ease: "sine.out",
+    });
   }, [selectedMethod]);
   return (
     <Box
@@ -103,7 +121,12 @@ const TextContainer = () => {
               {selectedMethod ? <Text>1분</Text> : <Text>5분</Text>}
             </Box>
           </Box>
-          <Box display={"flex"} flexDirection={"column"} marginTop={"0.75em"}>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            marginTop={"0.75em"}
+            overflow={"hidden"}
+          >
             <Box id={"describe-title"} fontSize={"0.9rem"} color={"#969696"}>
               설명
             </Box>
@@ -157,6 +180,7 @@ const TextContainer = () => {
             display={"flex"}
             justifyContent={"center"}
             color={"#969696"}
+            overflow={"hidden"}
           >
             <Text id={"page-num"}>{selectedMethod ? "01" : "02"}</Text>
             <Text>/02</Text>
