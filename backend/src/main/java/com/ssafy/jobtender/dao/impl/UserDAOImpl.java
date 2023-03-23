@@ -87,6 +87,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<UserOutDTO> keywordRankingByGender(String gender) {
         Optional<List<User>> AreUsers = this.userRepo.findAllByGender(gender);
+
         if (AreUsers.isEmpty())
             return null;
 

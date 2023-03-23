@@ -27,4 +27,5 @@ public interface ResultRepo extends JpaRepository<Result, Long> {   // <main, pk
 //    User findByUserId(long userId);
     @Query("select r from Result r where r.user.userId = :userId order by r.accessInfo.createDate DESC")
     Optional<List<Result>> findByUserId(@Param("userId") Long userId);  // 리스트로 반환 index 0
+
 }

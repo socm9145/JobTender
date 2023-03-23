@@ -51,4 +51,9 @@ public class InputDAOImpl implements InputDAO{
             return inputs;
         }
     }
+
+    @Override
+    public List<Input> readKeywordAll() {
+        return this.inputRepo.findAll();
+    }
 }

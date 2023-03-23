@@ -12,12 +12,12 @@ import java.util.Date;
 @Embeddable
 public class AccessInfo {
     @Column(nullable = false)
-    private String createId;
+    private long createId;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date createDate;
     @Column(nullable = false)
-    private String updateId;
+    private long updateId;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date updateDate;
