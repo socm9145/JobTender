@@ -1,8 +1,19 @@
-import { background, Box, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 
-const TextContainer = ({ selectedTest, setSelectedTest }) => {
-  console.log("text");
-  console.log(selectedTest);
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
+
+import { Box, Text } from "@chakra-ui/react";
+
+import { gsap } from "gsap";
+import { EasePack } from "gsap/EasePack";
+gsap.registerPlugin(EasePack);
+
+const TextContainer = () => {
+  const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
+  const buttonAble = useAppSelector((state) => state.home.buttonAble);
+  const dispatch = useAppDispatch();
+
   const onHandleMouseOver = (e) => {
     e.target.style.backgroundColor = "#191919";
     e.target.style.color = "#f7f6f1";
@@ -12,6 +23,45 @@ const TextContainer = ({ selectedTest, setSelectedTest }) => {
     e.target.style.color = "#191919";
   };
 
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 1 });
+    tl.from("#selected-method", {
+      duration: 1,
+      y: "100%",
+      ease: "sine.out",
+    })
+      .from("#selected-method-title", {
+        duration: 1,
+        opacity: 0,
+      })
+      .from(
+        "#expected-time",
+        {
+          duration: 1,
+          y: "100%",
+          ease: "sine.out",
+        },
+        0.2
+      )
+      .from("#expected-time-title", { duration: 1, opacity: 0 }, 1.2)
+      .from(
+        "#describe",
+        {
+          duration: 1,
+          opacity: 0,
+          ease: "sine.out",
+        },
+        0.6
+      )
+      .from("#describe-title", { duration: 1, opacity: 0 }, 1.4)
+      .from("#next-button", { duration: 1, opacity: 0 }, 1.6)
+      .from("#page-num-container", { duration: 1.3, opacity: 0 }, 1.6);
+  }, []);
+
+  useEffect(() => {
+    const tl = gsap.timeline();
+    tl.from;
+  }, [selectedMethod]);
   return (
     <Box
       display={"flex"}
@@ -19,18 +69,19 @@ const TextContainer = ({ selectedTest, setSelectedTest }) => {
       height={"100%"}
       padding={"40px 40px 40px 0"}
     >
-      <Box display={"flex"} flexDirection={"column"}>
-        <Box fontSize={"0.9rem"} color={"#969696"}>
+      <Box display={"flex"} flexDirection={"column"} overflow={"hidden"}>
+        <Box id={"selected-method-title"} fontSize={"0.9rem"} color={"#969696"}>
           <Text>조사방법</Text>
         </Box>
         <Box
+          id={"selected-method"}
           fontSize={"2rem"}
           fontFamily={"dodum"}
           lineHeight={"1"}
           marginTop={"0.2em"}
           letterSpacing={"0.15em"}
         >
-          {selectedTest ? <Text>키워드</Text> : <Text>설문조사</Text>}
+          {selectedMethod ? <Text>키워드</Text> : <Text>설문조사</Text>}
         </Box>
       </Box>
       <Box
@@ -40,20 +91,24 @@ const TextContainer = ({ selectedTest, setSelectedTest }) => {
         justifyContent={"space-between"}
       >
         <Box display={"flex"} flexDirection={"column"} marginTop={"1.6em"}>
-          <Box display={"flex"} flexDirection={"column"}>
-            <Box fontSize={"0.9rem"} color={"#969696"}>
+          <Box display={"flex"} flexDirection={"column"} overflow={"hidden"}>
+            <Box
+              id={"expected-time-title"}
+              fontSize={"0.9rem"}
+              color={"#969696"}
+            >
               소요시간
             </Box>
-            <Box fontSize={"1rem"}>
-              {selectedTest ? <Text>1분</Text> : <Text>5분</Text>}
+            <Box id={"expected-time"} fontSize={"1rem"}>
+              {selectedMethod ? <Text>1분</Text> : <Text>5분</Text>}
             </Box>
           </Box>
           <Box display={"flex"} flexDirection={"column"} marginTop={"0.75em"}>
-            <Box fontSize={"0.9rem"} color={"#969696"}>
+            <Box id={"describe-title"} fontSize={"0.9rem"} color={"#969696"}>
               설명
             </Box>
-            <Box fontSize={"1rem"}>
-              {selectedTest ? (
+            <Box id={"describe"} fontSize={"1rem"}>
+              {selectedMethod ? (
                 <Text>
                   핵심 키워드를 선택하는 방법으로 보다 빠르게 결과를 확인할 수
                   있습니다.
@@ -67,10 +122,15 @@ const TextContainer = ({ selectedTest, setSelectedTest }) => {
             </Box>
           </Box>
         </Box>
-        <Box width={"100%"} display={"flex"} justifyContent={"space-between"}>
+        <Box
+          width={"100%"}
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"end"}
+        >
           <Box
+            id={"next-button"}
             width={"50%"}
-            // display={"flex"}
             lineHeight={"2em"}
             border={"solid 1px #191919"}
             borderLeftRadius={"20px"}
@@ -84,12 +144,23 @@ const TextContainer = ({ selectedTest, setSelectedTest }) => {
               onHandleMouseOut(e);
             }}
             onClick={() => {
-              setSelectedTest(!selectedTest);
+              if (buttonAble) {
+                dispatch(setButtonAble(false));
+                dispatch(setselectedMethod());
+              }
             }}
           >
             다음
           </Box>
-          <Box>01/02</Box>
+          <Box
+            id={"page-num-container"}
+            display={"flex"}
+            justifyContent={"center"}
+            color={"#969696"}
+          >
+            <Text id={"page-num"}>{selectedMethod ? "01" : "02"}</Text>
+            <Text>/02</Text>
+          </Box>
         </Box>
       </Box>
     </Box>

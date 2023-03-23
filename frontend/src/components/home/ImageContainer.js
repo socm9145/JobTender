@@ -1,12 +1,16 @@
 import "../../styles/ImageContainer.css";
 
 import React, { useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { Box } from "@chakra-ui/react";
-const ImageContainer = ({ selectedTest, setSelectedTest }) => {
-  console.log("image");
-  console.log(selectedTest);
+import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
+const ImageContainer = () => {
   const carouselRef = useRef(null);
+  const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
+  const buttonAble = useAppSelector((state) => state.home.buttonAble);
+  const dispatch = useAppDispatch();
+  console.log(selectedMethod);
 
   const handleMouseDown = (event) => {
     const carousel = carouselRef.current;
@@ -20,17 +24,16 @@ const ImageContainer = ({ selectedTest, setSelectedTest }) => {
 
     const handleMouseUp = (event) => {
       const dragEnd = event.pageX;
+
       const dragPos = dragEnd - dragStart;
 
-      if (dragPos < 150) {
+      if (dragPos < -150) {
         shiftSlide(-1);
-        setSelectedTest(!selectedTest);
-      }
-      // else if (dragPos > -150) {
-      //   shiftSlide(1);
-      //   setSelectedTest(!selectedTest);
-      // }
-      else {
+        // 여기
+        // isSelected = !isSelected;
+        // setselectedMethod(isSelected);
+        dispatch(setselectedMethod());
+      } else {
         shiftSlide(0);
       }
 
@@ -57,6 +60,7 @@ const ImageContainer = ({ selectedTest, setSelectedTest }) => {
       }
       carousel.classList.remove("transition");
       carousel.style.transform = "translateX(0px)";
+      dispatch(setButtonAble(true));
     }, 700);
   };
 
@@ -69,12 +73,8 @@ const ImageContainer = ({ selectedTest, setSelectedTest }) => {
   }, []);
 
   useEffect(() => {
-    if (selectedTest) {
-      shiftSlide(-1);
-    } else {
-      shiftSlide(-1);
-    }
-  }, [selectedTest]);
+    shiftSlide(-1);
+  }, [selectedMethod]);
   return (
     <Box
       height={"100%"}
