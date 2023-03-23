@@ -8,13 +8,14 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { Box } from "@chakra-ui/react";
 import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
+
 const ImageContainer = () => {
   const navigate = useNavigate();
   const carouselRef = useRef(null);
   const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
   const dispatch = useAppDispatch();
-
   const handleMouseDown = (event) => {
+    console.log(selectedMethod);
     const carousel = carouselRef.current;
     if (carousel.classList.contains("transition")) return;
     const dragStart = event.pageX;
@@ -34,9 +35,9 @@ const ImageContainer = () => {
         dispatch(setselectedMethod());
       } else if (dragPos === 0) {
         if (selectedMethod) {
-          navigate("/survey");
-        } else {
           navigate("/keyword");
+        } else {
+          navigate("/survey");
         }
       } else {
         shiftSlide(0);
@@ -52,9 +53,10 @@ const ImageContainer = () => {
 
   const shiftSlide = (direction) => {
     const carousel = carouselRef.current;
+    const cardWidth = document.querySelector(".slide").offsetWidth + 30;
     if (carousel.classList.contains("transition")) return;
     carousel.classList.add("transition");
-    carousel.style.transform = "translateX(" + direction * 830 + "px)";
+    carousel.style.transform = "translateX(" + direction * cardWidth + "px)";
 
     setTimeout(() => {
       const slides = carousel.querySelectorAll(".slide");

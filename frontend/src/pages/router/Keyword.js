@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
 
-import LeftKeyword from "../../components/keyword/LeftKeyword";
-import RightKeyword from "../../components/keyword/RightKeyword";
+import LeftKeywordsContainer from "../../components/keyword/LeftKeywordsContainer";
+import RightKeywordsContainer from "../../components/keyword/RightKeywordsContainer";
 import Describe from "../../components/keyword/Describe";
 
 const Keyword = () => {
+  const wordList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "j"];
   return (
     <Box
       height={"100vh"}
@@ -26,13 +27,13 @@ const Keyword = () => {
           height={"80%"}
         >
           <Box width={"25vw"}>
-            <LeftKeyword />
+            <LeftKeywordsContainer keywords={wordList.slice(0, 5)} />
           </Box>
           <Box flexGrow={"1"} display={"flex"} justifyContent={"center"}>
             <Describe />
           </Box>
           <Box width={"25vw"}>
-            <RightKeyword />
+            <RightKeywordsContainer keywords={wordList.slice(5, 10)} />
           </Box>
         </Box>
         <Box
