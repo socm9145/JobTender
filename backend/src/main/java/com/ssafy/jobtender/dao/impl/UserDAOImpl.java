@@ -4,11 +4,13 @@ import com.ssafy.jobtender.dao.UserDAO;
 import com.ssafy.jobtender.dto.input.UpdateUserDTO;
 import com.ssafy.jobtender.dto.output.UserOutDTO;
 import com.ssafy.jobtender.entity.User;
+import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +54,11 @@ public class UserDAOImpl implements UserDAO {
 
         // update
         User user = isUser.get();
+        AccessInfo accessInfo = new AccessInfo(user.getAccessInfo().getCreateId(),
+                user.getAccessInfo().getCreateDate(),
+                user.getAccessInfo().getUpdateId(),
+                new Date());
+
         this.userRepo.save(user);
 
         // return
@@ -64,7 +71,7 @@ public class UserDAOImpl implements UserDAO {
                 .provider(user.getProvider())
                 .accessToken(user.getAccessToken())
                 .refreshToken(user.getRefreshToken())
-                .accessInfo(user.getAccessInfo())
+                .accessInfo(accessInfo)
                 .build();
 
         return userOutDTO;

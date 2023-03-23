@@ -20,7 +20,8 @@ public class CompanyServiceImpl implements CompanyService {
     private final KeywordMeasureDAO keywordMeasureDAO;
     private final CompanyMeasureDAO companyMeasureDAO;
 
-    public CompanyServiceImpl(CompanyDAO companyDAO, InputDAO inputDAO, KeywordMeasureDAO keywordMeasureDAO, CompanyMeasureDAO companyMeasureDAO){
+    public CompanyServiceImpl(CompanyDAO companyDAO, InputDAO inputDAO, KeywordMeasureDAO keywordMeasureDAO,
+                              CompanyMeasureDAO companyMeasureDAO){
         this.companyDAO = companyDAO;
         this.inputDAO = inputDAO;
         this.keywordMeasureDAO = keywordMeasureDAO;

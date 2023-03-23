@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface KeywordMeasureRepo extends JpaRepository<KeywordMeasure, Long> {
 
-    Optional<List<KeywordMeasure>> findAllByKeywordId(long keywordId);
+    Optional<List<KeywordMeasure>> findAllByKeyword(long keywordId);
 }
