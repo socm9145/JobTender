@@ -1,0 +1,48 @@
+/* $carousel-width: 600px;
+$carousel-height: 300px; */
+
+/* body {
+  background: #333;
+  color: #fff;
+  font-size: 22pt;
+  text-align: center;
+  font-family: 'Teko';
+  letter-spacing: 0.15em;
+}
+
+body * { -webkit-user-select: none } */
+
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.window {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+#carousel {
+  height: 100%;
+  width: 10000px;
+  position: relative;
+  top: 0;
+  /* left: -450px; */
+}
+
+.slide {
+  height: 100%;
+  width: 800px;
+  cursor: pointer;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.transition {
+  transition: 0.7s;
+}
