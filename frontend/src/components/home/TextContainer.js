@@ -60,22 +60,22 @@ const TextContainer = () => {
 
   useEffect(() => {
     gsap.from("#selected-method", {
-      duration: 1,
+      duration: 0.7,
       y: "100%",
       ease: "sine.out",
     });
     gsap.from("#expected-time", {
-      duration: 1,
+      duration: 0.7,
       y: "100%",
       ease: "sine.out",
     });
     gsap.from("#describe", {
-      duration: 1,
+      duration: 0.7,
       y: "100%",
       ease: "sine.out",
     });
     gsap.from("#page-num", {
-      duration: 1,
+      duration: 0.7,
       y: "100%",
       ease: "sine.out",
     });

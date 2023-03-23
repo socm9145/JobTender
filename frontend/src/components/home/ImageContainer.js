@@ -1,14 +1,17 @@
 import "../../styles/ImageContainer.css";
 
 import React, { useEffect, useRef } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { Box } from "@chakra-ui/react";
 import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
 const ImageContainer = () => {
+  const navigate = useNavigate();
   const carouselRef = useRef(null);
   const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
-  const buttonAble = useAppSelector((state) => state.home.buttonAble);
   const dispatch = useAppDispatch();
 
   const handleMouseDown = (event) => {
@@ -28,10 +31,13 @@ const ImageContainer = () => {
 
       if (dragPos < -150) {
         shiftSlide(-1);
-        // 여기
-        // isSelected = !isSelected;
-        // setselectedMethod(isSelected);
         dispatch(setselectedMethod());
+      } else if (dragPos === 0) {
+        if (selectedMethod) {
+          navigate("/survey");
+        } else {
+          navigate("/keyword");
+        }
       } else {
         shiftSlide(0);
       }
