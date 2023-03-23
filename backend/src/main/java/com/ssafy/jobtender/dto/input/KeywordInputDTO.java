@@ -10,5 +10,5 @@ import java.util.List;
 @Setter
 @ToString
 public class KeywordInputDTO {
-    List<String> keyWords;
+    List<Long> keyWords;
 }

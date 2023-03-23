@@ -18,4 +18,7 @@ public class Keyword {
     // mapping
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
     List<KeywordMeasure> keywordMeasures = new ArrayList<>();
+
+    @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
+    List<Input> inputs = new ArrayList<>();
 }

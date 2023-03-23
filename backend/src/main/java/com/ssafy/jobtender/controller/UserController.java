@@ -32,7 +32,7 @@ public class UserController {
     // API - 키워드 선택
     @PostMapping("/keyword")
     public ResponseEntity<Void> createInputsKeyword(@RequestParam("userId") Long userId, @RequestBody KeywordInputDTO keywordInputDTO) {
-        List<String> userKeyWord = keywordInputDTO.getKeyWords();
+        List<Long> userKeyWord = keywordInputDTO.getKeyWords();
         if (!userKeyWord.isEmpty()) {
             resultService.createResult(userId);
             inputService.createInputsKeyword(userId, userKeyWord);

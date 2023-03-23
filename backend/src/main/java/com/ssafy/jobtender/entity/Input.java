@@ -11,8 +11,9 @@ public class Input {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long InputId;
-    @Column(nullable = false)
-    private String keyword;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "keyword_id")
+    private Keyword keyword;
 
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)

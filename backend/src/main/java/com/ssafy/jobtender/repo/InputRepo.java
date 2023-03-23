@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface InputRepo extends JpaRepository<Input, Long> {
-    Optional<List<KeywordRandomCompanyOutDto>> findAllByResult(long resultId);
+    Optional<Input> findByResult(long resultId);
 }
