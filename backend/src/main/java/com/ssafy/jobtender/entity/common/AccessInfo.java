@@ -1,6 +1,6 @@
 package com.ssafy.jobtender.entity.common;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -8,7 +8,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class AccessInfo {
     @Column(nullable = false)

@@ -3,10 +3,12 @@ package com.ssafy.jobtender.dao.impl;
 import com.ssafy.jobtender.dao.CompanyMeasureDAO;
 import com.ssafy.jobtender.entity.CompanyMeasure;
 import com.ssafy.jobtender.repo.CompanyMeasureRepo;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class CompanyMeasureDAOImpl implements CompanyMeasureDAO {
 
     private final CompanyMeasureRepo companyMeasureRepo;
