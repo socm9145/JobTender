@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.jobtender.dao.ResultDAO;
+import com.ssafy.jobtender.dto.output.KeywordOutDTO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
 import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
 import com.ssafy.jobtender.entity.*;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,8 +42,8 @@ public class ResultDAOImpl implements ResultDAO {
         AccessInfo accessInfo = new AccessInfo();
         accessInfo.setCreateDate(new Date());
         accessInfo.setUpdateDate(new Date());
-        accessInfo.setCreateId(String.valueOf(userId));
-        accessInfo.setUpdateId(String.valueOf(userId));
+        accessInfo.setCreateId(userId);
+        accessInfo.setUpdateId(userId);
 
         result.setAccessInfo(accessInfo);
         result.setUser(resultUser);
@@ -49,7 +51,7 @@ public class ResultDAOImpl implements ResultDAO {
     }
 
     @Override
-    public List<ReadResultOutDTO> readResultsByUserId() {
+    public List<ReadResultOutDTO> readResultsByUserId(Long userId) {
 
         QResult result = QResult.result;
         QCompanyScore companyScore = QCompanyScore.companyScore;
@@ -75,11 +77,23 @@ public class ResultDAOImpl implements ResultDAO {
                 .on(companyRating.company.companyId.eq(company.companyId))
                 .fetch();
 
-        return readResultOutDTOs;
+        List<ReadResultOutDTO> rReadResultOutDTOs = new ArrayList<>();
+        for (ReadResultOutDTO readResultOutDTO : readResultOutDTOs)
+            if (readResultOutDTO.getUserId() == userId)
+                rReadResultOutDTOs.add(readResultOutDTO);
+
+        return rReadResultOutDTOs;
     }
 
     @Override
     public List<ResultCompanyOutDTO> readResultsCompanies() {
         return null;
+    }
+
+    @Override
+    public List<Result> keywordRanking() {
+        List<Result> results = this.resultRepo.findAll();
+
+        return results;
     }
 }

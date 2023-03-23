@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "extract_keywords")
+@Table(name = "extracted_keywords")
 public class ExtractedKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

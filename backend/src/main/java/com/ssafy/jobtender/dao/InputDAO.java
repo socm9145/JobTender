@@ -6,4 +6,5 @@ import java.util.List;
 public interface InputDAO {
     void createInputsKeyword(Long userId, long userKeyWord);
     Input readInputsByResultId(long resultId);
+    List<Input> readKeywordAll();
 }
