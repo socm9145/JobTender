@@ -4,7 +4,9 @@ import com.ssafy.jobtender.dto.input.KeywordInputDTO;
 import com.ssafy.jobtender.dto.input.UpdateUserDTO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
 import com.ssafy.jobtender.dto.output.UserOutDTO;
+import com.ssafy.jobtender.entity.Keyword;
 import com.ssafy.jobtender.service.InputService;
+import com.ssafy.jobtender.service.KeywordService;
 import com.ssafy.jobtender.service.ResultService;
 import com.ssafy.jobtender.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Key;
 import java.util.List;
 
 @RestController
@@ -21,13 +24,16 @@ public class UserController {
     private final UserService userService;
     private final InputService inputService;
     private final ResultService resultService;
+    private final KeywordService keywordService;
 
     // 생성자 주입 방식
     @Autowired
-    public UserController(UserService userService, InputService inputService, ResultService resultService) {
+    public UserController(UserService userService, InputService inputService,
+                          ResultService resultService, KeywordService keywordService) {
         this.userService = userService;
         this.inputService = inputService;
         this.resultService = resultService;
+        this.keywordService = keywordService;
     }
 
     // API - 키워드 선택
@@ -42,6 +48,16 @@ public class UserController {
             inputService.createInputsKeyword(userId, userKeyWord);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    // API - 전체 키워드 확인
+    @ApiOperation(
+            value = "전체 키워드 확인 API"
+            , notes = "전체 키워드를 반환한다."
+            )
+    @GetMapping("/keyword/all")
+    public ResponseEntity<List<Keyword>> readAllKeywords(){
+        List<Keyword> keywords = keywordService.readAllKeywords();
+        return ResponseEntity.status(HttpStatus.OK).body(keywords);
     }
 
     // API - 회원정보 확인
@@ -80,26 +96,6 @@ public class UserController {
     public ResponseEntity<List<ReadResultOutDTO>> readResultsByUserId(@RequestParam("userId") Long userId){
         List<ReadResultOutDTO> readResultOutDTO = this.resultService.readResultsByUserId(userId);
         return ResponseEntity.status(HttpStatus.OK).body(readResultOutDTO);
-    }
-
-    // API - 성별 키워드 확인
-    @ApiOperation(
-            value = "성별 키워드 확인 API"
-            , notes = "성별을 기준으로 유저의 데이터를 불러온다. M/F를 기준으로 가져온다.")
-    @GetMapping("/keyword/gender")
-    public ResponseEntity<List<UserOutDTO>> keywordRankingByGender(@RequestParam("gender") String gender){
-        List<UserOutDTO> userOutDTOs = this.userService.keywordRankingByGender(gender);
-        return ResponseEntity.status(HttpStatus.OK).body(userOutDTOs);
-    }
-
-    // API - 나이 키워드 확인
-    @ApiOperation(
-            value = "나이 키워드 확인 API"
-            , notes = "나이를 기준으로 유저의 데이터를 불러온다. 20대는 20, 30대는 30으로 불러온다.")
-    @GetMapping("/keyword/age")
-    public ResponseEntity<List<UserOutDTO>> keywordRankingByAge(@RequestParam("age") int age){
-        List<UserOutDTO> userOutDTOs = this.userService.keywordRankingByAge(age);
-        return ResponseEntity.status(HttpStatus.OK).body(userOutDTOs);
     }
 }
 

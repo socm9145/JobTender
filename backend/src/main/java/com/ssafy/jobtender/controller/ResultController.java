@@ -2,10 +2,7 @@ package com.ssafy.jobtender.controller;
 
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Input;
-import com.ssafy.jobtender.service.CompanyService;
-import com.ssafy.jobtender.service.InputService;
-import com.ssafy.jobtender.service.ResultService;
-import com.ssafy.jobtender.service.SimilarCompanyService;
+import com.ssafy.jobtender.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +22,16 @@ public class ResultController {
     private final SimilarCompanyService similarCompanyService;
     private final CompanyService companyService;
     private final InputService inputService;
+    private final UserService userService;
 
     @Autowired
     public ResultController(ResultService resultService, SimilarCompanyService similarCompanyService,
-                            CompanyService companyService, InputService inputService){
+                            CompanyService companyService, InputService inputService, UserService userService){
         this.resultService = resultService;
         this.similarCompanyService = similarCompanyService;
         this.companyService = companyService;
         this.inputService = inputService;
+        this.userService = userService;
     }
     /**
      * [모달 관련 API]
@@ -91,5 +90,25 @@ public class ResultController {
         List<KeywordOutDTO> keywordOutDTOs = this.inputService.keywordRanking();
 
         return ResponseEntity.status(HttpStatus.OK).body(keywordOutDTOs);
+    }
+
+    // API - 성별 키워드 확인
+    @ApiOperation(
+            value = "성별 키워드 확인 API"
+            , notes = "성별을 기준으로 유저의 데이터를 불러온다. M/F를 기준으로 가져온다.")
+    @GetMapping("/keyword/gender")
+    public ResponseEntity<List<UserOutDTO>> keywordRankingByGender(@RequestParam("gender") String gender){
+        List<UserOutDTO> userOutDTOs = this.userService.keywordRankingByGender(gender);
+        return ResponseEntity.status(HttpStatus.OK).body(userOutDTOs);
+    }
+
+    // API - 나이 키워드 확인
+    @ApiOperation(
+            value = "나이 키워드 확인 API"
+            , notes = "나이를 기준으로 유저의 데이터를 불러온다. 20대는 20, 30대는 30으로 불러온다.")
+    @GetMapping("/keyword/age")
+    public ResponseEntity<List<UserOutDTO>> keywordRankingByAge(@RequestParam("age") int age){
+        List<UserOutDTO> userOutDTOs = this.userService.keywordRankingByAge(age);
+        return ResponseEntity.status(HttpStatus.OK).body(userOutDTOs);
     }
 }
