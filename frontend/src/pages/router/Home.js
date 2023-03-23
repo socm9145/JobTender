@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import TextContainer from "../../components/home/TextContainer";
 import ImageContainer from "../../components/home/ImageContainer";
 
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+  const [selectedTest, setSelectedTest] = useState(true);
   return (
     <Box
       display={"flex"}
@@ -33,7 +34,10 @@ const Home = () => {
           height={"100%"}
         >
           <Box width={"25%"}>
-            <TextContainer />
+            <TextContainer
+              selectedTest={selectedTest}
+              setSelectedTest={setSelectedTest}
+            />
           </Box>
           <Box
             id={"vertical-line-1"}
@@ -42,7 +46,10 @@ const Home = () => {
             borderLeft={"solid 1px black"}
           ></Box>
           <Box width={"75%"}>
-            <ImageContainer />
+            <ImageContainer
+              selectedTest={selectedTest}
+              setSelectedTest={setSelectedTest}
+            />
           </Box>
         </Box>
       </Box>

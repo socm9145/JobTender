@@ -2,8 +2,10 @@ import "../../styles/ImageContainer.css";
 
 import React, { useEffect, useRef } from "react";
 
-import { Box, Image } from "@chakra-ui/react";
-const ImageContainer = () => {
+import { Box } from "@chakra-ui/react";
+const ImageContainer = ({ selectedTest, setSelectedTest }) => {
+  console.log("image");
+  console.log(selectedTest);
   const carouselRef = useRef(null);
 
   const handleMouseDown = (event) => {
@@ -20,11 +22,15 @@ const ImageContainer = () => {
       const dragEnd = event.pageX;
       const dragPos = dragEnd - dragStart;
 
-      if (dragPos > 150) {
-        shiftSlide(1);
-      } else if (dragPos < -150) {
+      if (dragPos < 150) {
         shiftSlide(-1);
-      } else {
+        setSelectedTest(!selectedTest);
+      }
+      // else if (dragPos > -150) {
+      //   shiftSlide(1);
+      //   setSelectedTest(!selectedTest);
+      // }
+      else {
         shiftSlide(0);
       }
 
@@ -61,6 +67,14 @@ const ImageContainer = () => {
       carousel.removeEventListener("mousedown", handleMouseDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedTest) {
+      shiftSlide(-1);
+    } else {
+      shiftSlide(-1);
+    }
+  }, [selectedTest]);
   return (
     <Box
       height={"100%"}
@@ -79,12 +93,6 @@ const ImageContainer = () => {
             <Box id="carousel" ref={carouselRef} display={"inline-block"}>
               <Box
                 className="slide"
-                id="b1"
-                marginRight={"30px"}
-                backgroundImage="url('/images/keywords-image.jpg')"
-              ></Box>
-              <Box
-                className="slide"
                 id="b2"
                 marginRight={"30px"}
                 backgroundImage="url('/images/survey-image.jpg')"
@@ -100,6 +108,12 @@ const ImageContainer = () => {
                 id="b2"
                 marginRight={"30px"}
                 backgroundImage="url('/images/survey-image.jpg')"
+              ></Box>
+              <Box
+                className="slide"
+                id="b1"
+                marginRight={"30px"}
+                backgroundImage="url('/images/keywords-image.jpg')"
               ></Box>
             </Box>
           </Box>
