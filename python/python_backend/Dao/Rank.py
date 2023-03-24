@@ -88,5 +88,13 @@ class RankDao:
                 result.append(float(data[0]))
         return result
 
+    def insert_score(self, data):
+        sql = '''
+        INSERT INTO `company_scores` (result_id, company_id, score, company_score_rank) VALUES (%s, %s, %s, %s);
+        '''
+        cur = self.conn.cursor()
+        cur.execute(sql, data)
+        self.conn.commit()
+
     def end(self):
         self.conn.close()
