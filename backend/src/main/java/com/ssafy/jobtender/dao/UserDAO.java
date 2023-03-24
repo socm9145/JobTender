@@ -16,4 +16,5 @@ public interface UserDAO {
     List<UserOutDTO> keywordRankingByGender(String gender);
 
     List<UserOutDTO> keywordRankingByAge(int age);
+    
 }
