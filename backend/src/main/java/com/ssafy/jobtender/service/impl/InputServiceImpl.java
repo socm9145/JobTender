@@ -27,11 +27,21 @@ public class InputServiceImpl implements InputService{
     }
 
     @Override
+    public List<KeywordOutDTO> keywordRankingByGender(String gender) {
+        return inputDAO.keywordRankingByGender(gender);
+    }
+
+    @Override
+    public List<KeywordOutDTO> keywordRankingByAge(int age) {
+        return inputDAO.keywordRankingByAge(age);
+    }
+
+    @Override
     public List<KeywordOutDTO> keywordRanking() {
         List<Input> inputs = this.inputDAO.readKeywordAll();
         List<KeywordOutDTO> keywordOutDTOs = new ArrayList<>();
         Map<Long, Integer> map = new HashMap<>();
-        PriorityQueue<KeywordOutDTO> pq = new PriorityQueue<>((x, y)-> Math.toIntExact((x.getCount() - y.getCount())));
+        PriorityQueue<KeywordOutDTO> pq = new PriorityQueue<>((x, y)-> Math.toIntExact((y.getCount() - x.getCount())));
 
         for (Input input : inputs){
             long keywordId = input.getKeyword().getKeywordId();

@@ -13,6 +13,8 @@ public class CompanyScore {
     private long companyResultId;
     @Column(nullable = false)
     private String score;
+    @Column(nullable = false)
+    private String CompanyScoreRank;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
