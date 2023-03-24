@@ -3,6 +3,7 @@ import { Box } from "@chakra-ui/react";
 import LeftKeywordsContainer from "../../components/keyword/LeftKeywordsContainer";
 import RightKeywordsContainer from "../../components/keyword/RightKeywordsContainer";
 import Describe from "../../components/keyword/Describe";
+import KeywordRank from "../../components/keyword/KeywordRank";
 
 const Keyword = () => {
   const wordList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "j"];
@@ -43,7 +44,9 @@ const Keyword = () => {
           width={"100vw"}
           height={"20%"}
         >
-          <Box>순위</Box>
+          <Box width={"60%"}>
+            <KeywordRank />
+          </Box>
           <Box position={"absolute"} right={"10%"}>
             제출하기
           </Box>

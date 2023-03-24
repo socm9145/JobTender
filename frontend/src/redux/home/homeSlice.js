@@ -10,7 +10,9 @@ export const homeSlice = createSlice({
   initialState,
   reducers: {
     setselectedMethod: (state) => {
+      console.log(state.selectedMethod);
       state.selectedMethod = !state.selectedMethod;
+      console.log(state.selectedMethod);
     },
     setButtonAble: (state, action) => {
       state.buttonAble = action.payload;

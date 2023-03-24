@@ -15,7 +15,6 @@ const ImageContainer = () => {
   const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
   const dispatch = useAppDispatch();
   const handleMouseDown = (event) => {
-    console.log(selectedMethod);
     const carousel = carouselRef.current;
     if (carousel.classList.contains("transition")) return;
     const dragStart = event.pageX;
@@ -34,9 +33,11 @@ const ImageContainer = () => {
         shiftSlide(-1);
         dispatch(setselectedMethod());
       } else if (dragPos === 0) {
+        console.log(selectedMethod);
         if (selectedMethod) {
           navigate("/keyword");
         } else {
+          dispatch(setselectedMethod());
           navigate("/survey");
         }
       } else {
@@ -74,14 +75,12 @@ const ImageContainer = () => {
   useEffect(() => {
     const carousel = carouselRef.current;
     carousel.addEventListener("mousedown", handleMouseDown);
+    shiftSlide(-1);
     return () => {
       carousel.removeEventListener("mousedown", handleMouseDown);
     };
-  }, []);
-
-  useEffect(() => {
-    shiftSlide(-1);
   }, [selectedMethod]);
+
   return (
     <Box
       height={"100%"}
