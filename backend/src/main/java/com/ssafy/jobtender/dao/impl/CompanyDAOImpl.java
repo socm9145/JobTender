@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.ssafy.jobtender.dao.CompanyDAO;
 import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
+import com.ssafy.jobtender.entity.Company;
 import com.ssafy.jobtender.entity.QCompany;
 import com.ssafy.jobtender.entity.QCompanyRating;
 import com.ssafy.jobtender.repo.CompanyRepo;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CompanyDAOImpl implements CompanyDAO {
@@ -43,6 +45,18 @@ public class CompanyDAOImpl implements CompanyDAO {
             if (companyRatingOutDTO.getCompanyId() == companyId)
                 return companyRatingOutDTO;
 
+        return null;
+    }
+
+    @Override
+    public List<Company> readCompaniesByInputId(long inputId) {
+//        Optional<List<Company>> isCompany = companyRepo.findAllByInputId(inputId);
+//        if(isCompany.isEmpty()){
+//            return null;
+//        }else{
+//            List<Company> companies = isCompany.get();
+//            return companies;
+//        }
         return null;
     }
 }

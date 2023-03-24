@@ -17,15 +17,10 @@ public class CompanyServiceImpl implements CompanyService {
     private final int EXTRACTED_KEYWORD_MAXIMUM_COUNT = 3;
     private final CompanyDAO companyDAO;
     private final InputDAO inputDAO;
-    private final KeywordMeasureDAO keywordMeasureDAO;
-    private final CompanyMeasureDAO companyMeasureDAO;
 
-    public CompanyServiceImpl(CompanyDAO companyDAO, InputDAO inputDAO, KeywordMeasureDAO keywordMeasureDAO,
-                              CompanyMeasureDAO companyMeasureDAO){
+    public CompanyServiceImpl(CompanyDAO companyDAO, InputDAO inputDAO){
         this.companyDAO = companyDAO;
         this.inputDAO = inputDAO;
-        this.keywordMeasureDAO = keywordMeasureDAO;
-        this.companyMeasureDAO = companyMeasureDAO;
     }
     @Override
     public CompanyRatingOutDTO readCompanies(long companyId) {
@@ -39,41 +34,21 @@ public class CompanyServiceImpl implements CompanyService {
      * */
     @Override
     public Map<String, List<KeywordRandomCompanyOutDto>> readCompaniesByKeywords(long resultId) {
-        Map<String, List<KeywordRandomCompanyOutDto>> keywordRandomCompanyOutDtoListMap = new HashMap<>();
-        List<Input> inputs = inputDAO.readInputsByResultId(resultId);
-        for(Input input : inputs){
-            Keyword keyword = input.getKeyword();
-            long keywordId = keyword.getKeywordId();
-            String keywordName = keyword.getKeyword();
-            Set<Long> companyIdSet = new HashSet<>();
-            List<KeywordMeasure> keywordMeasures = keywordMeasureDAO.readExtractedKeywordsByKeywordId(input.getKeyword().getKeywordId());
-            int keywordMeasuresLimitedSize = 0;
-            if(keywordMeasures.size() < EXTRACTED_KEYWORD_MAXIMUM_COUNT){
-                keywordMeasuresLimitedSize = keywordMeasures.size();
-            }else{
-                keywordMeasures.sort((o1, o2)->{
-                    int r = Integer.parseInt(o2.getScore().split("\\.")[0]) - Integer.parseInt(o1.getScore().split("\\.")[0]);
-                    if(r == 0) r = Integer.parseInt(o2.getScore().split("\\.")[1]) - Integer.parseInt(o1.getScore().split("\\.")[1]);
-                    return r;
-                });
-                keywordMeasuresLimitedSize = EXTRACTED_KEYWORD_MAXIMUM_COUNT;
-            }
-            List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new LinkedList<>();
-            for(int i=0;i<keywordMeasuresLimitedSize;i++){
-                List<CompanyMeasure> companyMeasures = companyMeasureDAO.readCompanyMeasuresByExtractedKeywordId(keywordMeasures.get(i).getExtractedKeyword().getExtractKeywordId());
-                for(CompanyMeasure companyMeasure : companyMeasures){
-                    Company company = companyMeasure.getCompany();
-                    long companyId = company.getCompanyId();
-                    String companyName = company.getName();
-                    if(!companyIdSet.contains(companyId)){
-                        companyIdSet.add(companyId);
-                        KeywordRandomCompanyOutDto keywordRandomCompanyOutDto = new KeywordRandomCompanyOutDto(companyId, keywordId, companyName, keywordName);
-                        keywordRandomCompanyOutDtoList.add(keywordRandomCompanyOutDto);
-                    }
-                }
-            }
-            keywordRandomCompanyOutDtoListMap.put(keywordName, keywordRandomCompanyOutDtoList);
-        }
-        return keywordRandomCompanyOutDtoListMap;
+//        Map<String, List<KeywordRandomCompanyOutDto>> keywordRandomCompanyOutDtoListMap = new HashMap<>();
+//        List<Input> inputs = inputDAO.readInputsByResultId(resultId);
+//        if(inputs == null){
+//            return null;
+//        }
+//        for(Input input : inputs){
+//            List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new ArrayList<>();
+//            String keywordName = input.getKeyword().getKeyword();
+//            List<Company> companies = companyDAO.readCompaniesByInputId(input.getInputId());
+//            for(Company company : companies){
+//                keywordRandomCompanyOutDtoList.add(new KeywordRandomCompanyOutDto(company.getCompanyId(), input.getKeyword().getKeywordId(), company.getName(), keywordName));
+//            }
+//            keywordRandomCompanyOutDtoListMap.put(keywordName, keywordRandomCompanyOutDtoList);
+//        }
+//        return keywordRandomCompanyOutDtoListMap;
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.ssafy.jobtender.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.oauth.Role;
 import lombok.Data;
@@ -35,6 +36,7 @@ public class User {
     private Role role;
     // mapping
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"user"})
     private List<Result> results = new ArrayList<>();
     // method
     public User update(String gender, int age){

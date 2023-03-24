@@ -10,4 +10,5 @@ import java.util.Map;
 public interface CompanyService {
     CompanyRatingOutDTO readCompanies(long companyId);
     Map<String, List<KeywordRandomCompanyOutDto>> readCompaniesByKeywords(long resultId);
+
 }

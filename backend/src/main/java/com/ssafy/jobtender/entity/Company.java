@@ -1,5 +1,6 @@
 package com.ssafy.jobtender.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,12 +33,16 @@ public class Company {
     @JoinColumn(name = "company_id")
     private CompanyRating companyRating;
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"company"})
     private List<CompanyScore> companyScores = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"company"})
     private List<CompanyMeasure> companyMeasures = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"company"})
     private List<SimilarCompany> similarCompanies = new ArrayList<>();
     @OneToMany(mappedBy = "comparableCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"comparableCompany"})
     private List<SimilarCompany> comparable_similarCompanies = new ArrayList<>();
 
 }

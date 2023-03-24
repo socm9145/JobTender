@@ -54,7 +54,7 @@ public class UserController {
             value = "전체 키워드 확인 API"
             , notes = "전체 키워드를 반환한다."
             )
-    @GetMapping("/keyword/all")
+    @GetMapping("/keyword")
     public ResponseEntity<List<Keyword>> readAllKeywords(){
         List<Keyword> keywords = keywordService.readAllKeywords();
         return ResponseEntity.status(HttpStatus.OK).body(keywords);

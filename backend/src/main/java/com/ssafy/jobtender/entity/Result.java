@@ -1,5 +1,6 @@
 package com.ssafy.jobtender.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import lombok.Data;
 import lombok.ToString;
@@ -24,7 +25,9 @@ public class Result {
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"result"})
     private List<Input> inputs = new ArrayList<>();
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"result"})
     private List<CompanyScore> companyScores = new ArrayList<>();
 }

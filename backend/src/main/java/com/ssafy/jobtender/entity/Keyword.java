@@ -1,5 +1,7 @@
 package com.ssafy.jobtender.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,8 +19,10 @@ public class Keyword {
     private String keyword;
     // mapping
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
     List<KeywordMeasure> keywordMeasures = new ArrayList<>();
 
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
     List<Input> inputs = new ArrayList<>();
 }
