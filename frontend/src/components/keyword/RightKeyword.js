@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setSelectedKeyword } from "../../redux/keyword/keywordSlice";
+import { setClickedKeyword } from "../../redux/keyword/keywordSlice";
 
 import { Box, Text } from "@chakra-ui/react";
 
@@ -13,20 +13,20 @@ const RightKeyword = ({ keyword, id }) => {
   const text = useRef();
   const line = useRef();
   const dispatch = useAppDispatch();
-  const selectedKeyword = useAppSelector(
-    (state) => state.keyword.selectedKeyword
+  const clickedKeyword = useAppSelector(
+    (state) => state.keyword.clickedKeyword
   );
 
-  const dispatchSelectedKeywordId = () => {
-    if (selectedKeyword === id) {
+  const dispatchClickedKeywordId = () => {
+    if (clickedKeyword === id) {
       gsap.to([text.current, line.current], {
         duration: 0.5,
         x: "0",
         ease: "sine.out",
       });
-      dispatch(setSelectedKeyword(null));
+      dispatch(setClickedKeyword(null));
     } else {
-      dispatch(setSelectedKeyword(id));
+      dispatch(setClickedKeyword(id));
     }
   };
   const ctx = gsap.context(() => {});
@@ -39,11 +39,11 @@ const RightKeyword = ({ keyword, id }) => {
     ctx.add(() => {
       gsap.to([text.current, line.current], {
         duration: 0.5,
-        x: selectedKeyword === id ? "-10rem" : "0px",
+        x: clickedKeyword === id ? "-10rem" : "0px",
         ease: "sine.out",
       });
     });
-  }, [selectedKeyword]);
+  }, [clickedKeyword]);
 
   return (
     <Box display={"flex"} flexDirection={"column"}>
@@ -53,7 +53,7 @@ const RightKeyword = ({ keyword, id }) => {
           fontSize={"2rem"}
           cursor={"pointer"}
           onClick={() => {
-            dispatchSelectedKeywordId();
+            dispatchClickedKeywordId();
           }}
         >
           {keyword}

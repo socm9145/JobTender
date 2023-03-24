@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import LeftKeywordsContainer from "../../components/keyword/LeftKeywordsContainer";
 import RightKeywordsContainer from "../../components/keyword/RightKeywordsContainer";
 import Describe from "../../components/keyword/Describe";
-import KeywordRank from "../../components/keyword/KeywordRank";
+import KeywordRankContainer from "../../components/keyword/KeywordRankContainer";
 
 const Keyword = () => {
   const wordList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "j"];
@@ -25,7 +25,7 @@ const Keyword = () => {
           display={"flex"}
           justifyContent={"space-between"}
           width={"100vw"}
-          height={"80%"}
+          height={"70%"}
         >
           <Box width={"25vw"}>
             <LeftKeywordsContainer keywords={wordList.slice(0, 5)} />
@@ -42,10 +42,15 @@ const Keyword = () => {
           justifyContent={"center"}
           alignItems={"center"}
           width={"100vw"}
-          height={"20%"}
+          height={"30%"}
         >
-          <Box width={"60%"}>
-            <KeywordRank />
+          <Box
+            width={"50%"}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"space-between"}
+          >
+            <KeywordRankContainer />
           </Box>
           <Box position={"absolute"} right={"10%"}>
             제출하기
