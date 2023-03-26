@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
+  setClickedRank,
   setClickedKeyword,
   setSelectedKeyword,
 } from "../../redux/keyword/keywordSlice";
@@ -17,10 +18,10 @@ const LeftKeyword = ({ keyword, id }) => {
   const line = useRef();
 
   const dispatch = useAppDispatch();
+  const clickedRank = useAppSelector((state) => state.keyword.clickedRank);
   const clickedKeyword = useAppSelector(
     (state) => state.keyword.clickedKeyword
   );
-  const clickedRank = useAppSelector((state) => state.keyword.clickedRank);
   const selectedKeyword = useAppSelector(
     (state) => state.keyword.selectedKeyword
   );
@@ -40,9 +41,12 @@ const LeftKeyword = ({ keyword, id }) => {
 
   const dispatchSelectedKeyword = () => {
     dispatch(setSelectedKeyword([clickedRank, id]));
+    dispatch(setClickedKeyword(null));
+    dispatch(setClickedRank(null));
   };
 
   const ctx = gsap.context(() => {});
+
   useLayoutEffect(() => {
     return () => ctx.revert();
   }, []);
@@ -51,11 +55,14 @@ const LeftKeyword = ({ keyword, id }) => {
     ctx.add(() => {
       gsap.to([text.current, line.current], {
         duration: 0.5,
-        x: clickedKeyword === id ? "10rem" : "0px",
+        x:
+          clickedKeyword === id || selectedKeyword.includes(id)
+            ? "10rem"
+            : "0px",
         ease: "sine.out",
       });
     });
-  }, [clickedKeyword]);
+  }, [clickedKeyword, selectedKeyword, clickedRank]);
 
   return (
     <Box display={"flex"} flexDirection={"column"}>
@@ -65,7 +72,11 @@ const LeftKeyword = ({ keyword, id }) => {
           fontSize={"2rem"}
           cursor={"pointer"}
           onClick={() => {
-            if (clickedRank === null) {
+            if (
+              clickedRank === null &&
+              !selectedKeyword.includes(id) &&
+              selectedKeyword.includes(null)
+            ) {
               dispatchClickedKeywordId();
             } else {
               dispatchSelectedKeyword();

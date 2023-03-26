@@ -1,7 +1,11 @@
 import { useLayoutEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setClickedKeyword } from "../../redux/keyword/keywordSlice";
+import {
+  setClickedRank,
+  setClickedKeyword,
+  setSelectedKeyword,
+} from "../../redux/keyword/keywordSlice";
 
 import { Box, Text } from "@chakra-ui/react";
 
@@ -12,9 +16,14 @@ gsap.registerPlugin(EasePack);
 const RightKeyword = ({ keyword, id }) => {
   const text = useRef();
   const line = useRef();
+
   const dispatch = useAppDispatch();
+  const clickedRank = useAppSelector((state) => state.keyword.clickedRank);
   const clickedKeyword = useAppSelector(
     (state) => state.keyword.clickedKeyword
+  );
+  const selectedKeyword = useAppSelector(
+    (state) => state.keyword.selectedKeyword
   );
 
   const dispatchClickedKeywordId = () => {
@@ -29,6 +38,13 @@ const RightKeyword = ({ keyword, id }) => {
       dispatch(setClickedKeyword(id));
     }
   };
+
+  const dispatchSelectedKeyword = () => {
+    dispatch(setSelectedKeyword([clickedRank, id]));
+    dispatch(setClickedKeyword(null));
+    dispatch(setClickedRank(null));
+  };
+
   const ctx = gsap.context(() => {});
 
   useLayoutEffect(() => {
@@ -39,11 +55,14 @@ const RightKeyword = ({ keyword, id }) => {
     ctx.add(() => {
       gsap.to([text.current, line.current], {
         duration: 0.5,
-        x: clickedKeyword === id ? "-10rem" : "0px",
+        x:
+          clickedKeyword === id || selectedKeyword.includes(id)
+            ? "-10rem"
+            : "0px",
         ease: "sine.out",
       });
     });
-  }, [clickedKeyword]);
+  }, [clickedKeyword, selectedKeyword, clickedRank]);
 
   return (
     <Box display={"flex"} flexDirection={"column"}>
@@ -53,7 +72,15 @@ const RightKeyword = ({ keyword, id }) => {
           fontSize={"2rem"}
           cursor={"pointer"}
           onClick={() => {
-            dispatchClickedKeywordId();
+            if (
+              clickedRank === null &&
+              !selectedKeyword.includes(id) &&
+              selectedKeyword.includes(null)
+            ) {
+              dispatchClickedKeywordId();
+            } else {
+              dispatchSelectedKeyword();
+            }
           }}
         >
           {keyword}

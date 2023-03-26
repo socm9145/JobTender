@@ -4,6 +4,18 @@ const initialState = {
   clickedKeyword: null,
   clickedRank: null,
   selectedKeyword: [null, null, null],
+  wordList: [
+    "안정",
+    "질서",
+    "관습",
+    "공헌",
+    "박애",
+    "자율",
+    "도전",
+    "재미",
+    "성취",
+    "권력",
+  ],
 };
 
 export const keywordSlice = createSlice({
@@ -22,8 +34,14 @@ export const keywordSlice = createSlice({
 
     setSelectedKeyword: (state, action) => {
       const rank = action.payload[0];
-      const keyword = action.payload[1];
-      state.selectedKeyword[rank] = keyword;
+      const keyword = () => {
+        if (action.payload[1] === null) {
+          return null;
+        } else {
+          return action.payload[1];
+        }
+      };
+      state.selectedKeyword[rank] = keyword();
     },
   },
 });

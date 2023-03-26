@@ -5,8 +5,9 @@ import RightKeywordsContainer from "../../components/keyword/RightKeywordsContai
 import Describe from "../../components/keyword/Describe";
 import KeywordRankContainer from "../../components/keyword/KeywordRankContainer";
 
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 const Keyword = () => {
-  const wordList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "j"];
+  const wordList = useAppSelector((state) => state.keyword.wordList);
   return (
     <Box
       height={"100vh"}

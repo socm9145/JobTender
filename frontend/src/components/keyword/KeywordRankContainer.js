@@ -17,9 +17,9 @@ const KeywordRankContainer = () => {
       alignItems={"center"}
       width={"100%"}
     >
+      <KeywordRank rank={0} />
       <KeywordRank rank={1} />
       <KeywordRank rank={2} />
-      <KeywordRank rank={3} />
     </Box>
   );
 };

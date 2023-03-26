@@ -5,6 +5,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
   setClickedRank,
+  setClickedKeyword,
   setSelectedKeyword,
 } from "../../redux/keyword/keywordSlice";
 
@@ -17,13 +18,14 @@ const KeywordRank = ({ rank }) => {
   const addButton = useRef(null);
 
   const dispatch = useAppDispatch();
+  const wordList = useAppSelector((state) => state.keyword.wordList);
   const clickedRank = useAppSelector((state) => state.keyword.clickedRank);
   const selectedKeyword = useAppSelector(
     (state) => state.keyword.selectedKeyword
   );
 
   const dispatchClickedRank = () => {
-    if (clickedRank === rank) {
+    if (clickedRank === rank || selectedKeyword[rank] !== null) {
       gsap.to(line.current, {
         duration: 0.5,
         x: "0",
@@ -39,6 +41,9 @@ const KeywordRank = ({ rank }) => {
       dispatch(setClickedRank(rank));
     }
   };
+  const dispatchSelectedKeyword = () => {
+    dispatch(setSelectedKeyword([rank, null]));
+  };
 
   const ctx = gsap.context(() => {});
   useLayoutEffect(() => {
@@ -50,14 +55,15 @@ const KeywordRank = ({ rank }) => {
       gsap.to(line.current, {
         duration: 0.5,
         x:
-          (clickedRank === rank) | (selectedKeyword[rank] !== null)
+          clickedRank === rank || selectedKeyword[rank] !== null
             ? "130px"
             : "0px",
         ease: "sine.out",
       });
       gsap.to(addButton.current, {
         duration: 0.5,
-        rotate: clickedRank === rank ? 135 : 0,
+        rotate:
+          clickedRank === rank || selectedKeyword[rank] !== null ? 135 : 0,
         ease: "sine.out",
       });
     });
@@ -74,7 +80,7 @@ const KeywordRank = ({ rank }) => {
       <Box display={"flex"} alignItems={"end"}>
         <Box>
           <Text fontSize={"3rem"} lineHeight={"1"}>
-            {rank}.
+            {rank + 1}.
           </Text>
         </Box>
         <Box
@@ -83,7 +89,7 @@ const KeywordRank = ({ rank }) => {
           textAlign={"center"}
           fontSize={"2rem"}
         >
-          {selectedKeyword[rank]}
+          {wordList[selectedKeyword[rank]]}
         </Box>
       </Box>
       <Box
@@ -98,7 +104,13 @@ const KeywordRank = ({ rank }) => {
         <Box
           ref={addButton}
           onClick={() => {
-            dispatchClickedRank();
+            if (selectedKeyword[rank] === null) {
+              dispatch(setClickedKeyword(null));
+              dispatchClickedRank();
+            } else {
+              dispatchClickedRank();
+              dispatchSelectedKeyword();
+            }
           }}
           width={"2rem"}
         >
