@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 
-import LeftKeyword from "./LeftKeyword";
+import Keyword from "./Keyword";
 
 const LeftKeywordsContainer = ({ keywords }) => {
   return (
@@ -17,8 +17,10 @@ const LeftKeywordsContainer = ({ keywords }) => {
         justifyContent={"space-between"}
       >
         {keywords.map((word, index) => (
-          <Box width={"70%"} key={index} id={`left-word-${index}`}>
-            <LeftKeyword keyword={word} id={index} />
+          <Box display={"flex"} key={index} justifyContent={"start"}>
+            <Box width={"70%"} id={`left-word-${index}`}>
+              <Keyword keyword={word} id={index} LR={"left"} />
+            </Box>
           </Box>
         ))}
       </Box>

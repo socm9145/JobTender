@@ -13,7 +13,7 @@ import { gsap } from "gsap";
 import { EasePack } from "gsap/EasePack";
 gsap.registerPlugin(EasePack);
 
-const RightKeyword = ({ keyword, id }) => {
+const Keyword = ({ keyword, id, LR }) => {
   const text = useRef();
   const line = useRef();
 
@@ -57,7 +57,9 @@ const RightKeyword = ({ keyword, id }) => {
         duration: 0.5,
         x:
           clickedKeyword === id || selectedKeyword.includes(id)
-            ? "-10rem"
+            ? LR === "left"
+              ? "10rem"
+              : "-10rem"
             : "0px",
         ease: "sine.out",
       });
@@ -66,7 +68,7 @@ const RightKeyword = ({ keyword, id }) => {
 
   return (
     <Box display={"flex"} flexDirection={"column"}>
-      <Box display={"flex"} justifyContent={"start"}>
+      <Box display={"flex"} justifyContent={LR === "left" ? "end" : "start"}>
         <Text
           ref={text}
           fontSize={"2rem"}
@@ -91,4 +93,4 @@ const RightKeyword = ({ keyword, id }) => {
   );
 };
 
-export default RightKeyword;
+export default Keyword;
