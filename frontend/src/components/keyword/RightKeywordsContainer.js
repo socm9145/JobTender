@@ -11,10 +11,10 @@ const RightKeywordsContainer = ({ keywords }) => {
       justifyContent={"center"}
     >
       <Box
-        height={"100%"}
+        height={"80%"}
         display={"flex"}
         flexDirection={"column"}
-        justifyContent={"space-evenly"}
+        justifyContent={"space-between"}
       >
         {keywords.map((word, index) => (
           <Box display={"flex"} key={index} justifyContent={"end"}>

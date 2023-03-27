@@ -11,13 +11,18 @@ const LeftKeywordsContainer = ({ keywords }) => {
       justifyContent={"center"}
     >
       <Box
-        height={"100%"}
+        height={"80%"}
         display={"flex"}
         flexDirection={"column"}
-        justifyContent={"space-evenly"}
+        justifyContent={"space-between"}
       >
         {keywords.map((word, index) => (
-          <Box display={"flex"} key={index} justifyContent={"start"}>
+          <Box
+            display={"flex"}
+            key={index}
+            justifyContent={"start"}
+            className={"left-words-container"}
+          >
             <Box width={"70%"} id={`left-word-${index}`}>
               <Keywords keyword={word} id={index} LR={"left"} />
             </Box>

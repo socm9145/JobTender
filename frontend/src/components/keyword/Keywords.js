@@ -54,14 +54,18 @@ const Keyword = ({ keyword, id, LR }) => {
   }, []);
 
   useLayoutEffect(() => {
+    const animaDistance =
+      parseInt(document.querySelector(".left-words-container").offsetWidth) -
+      parseInt(document.querySelector(".text-container").offsetWidth);
+
     ctx.add(() => {
       gsap.to([text.current, line.current], {
         duration: 0.5,
         x:
           clickedKeyword === id || selectedKeyword.includes(id)
             ? LR === "left"
-              ? "10rem"
-              : "-10rem"
+              ? animaDistance
+              : -animaDistance
             : "0px",
         ease: "sine.out",
       });
@@ -69,7 +73,7 @@ const Keyword = ({ keyword, id, LR }) => {
   }, [clickedKeyword, selectedKeyword, clickedRank]);
 
   return (
-    <Box display={"flex"} flexDirection={"column"}>
+    <Box className={"text-container"} display={"flex"} flexDirection={"column"}>
       <Box display={"flex"} justifyContent={LR === "left" ? "end" : "start"}>
         <Text
           ref={text}

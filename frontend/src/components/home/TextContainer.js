@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
@@ -10,17 +10,24 @@ import { EasePack } from "gsap/EasePack";
 gsap.registerPlugin(EasePack);
 
 const TextContainer = () => {
+  const nextButton = useRef(null);
   const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
   const buttonAble = useAppSelector((state) => state.home.buttonAble);
   const dispatch = useAppDispatch();
 
-  const onHandleMouseOver = (e) => {
-    e.target.style.backgroundColor = "#191919";
-    e.target.style.color = "#f7f6f1";
+  const onHandleMouseOver = () => {
+    gsap.to(nextButton.current, {
+      duration: 0.2,
+      backgroundColor: "#191919",
+      color: "#f7f6f1",
+    });
   };
-  const onHandleMouseOut = (e) => {
-    e.target.style.backgroundColor = "#f7f6f1";
-    e.target.style.color = "#191919";
+  const onHandleMouseOut = () => {
+    gsap.to(nextButton.current, {
+      duration: 0.2,
+      backgroundColor: "#f7f6f1",
+      color: "#191919",
+    });
   };
 
   useEffect(() => {
@@ -54,7 +61,7 @@ const TextContainer = () => {
         0.6
       )
       .from("#describe-title", { duration: 1, opacity: 0 }, 1.4)
-      .from("#next-button", { duration: 1, opacity: 0 }, 1.6)
+      .from(nextButton.current, { duration: 1, opacity: 0 }, 1.6)
       .from("#page-num-container", { duration: 1.3, opacity: 0 }, 1.6);
   }, []);
 
@@ -152,7 +159,7 @@ const TextContainer = () => {
           alignItems={"end"}
         >
           <Box
-            id={"next-button"}
+            ref={nextButton}
             width={"50%"}
             lineHeight={"2em"}
             border={"solid 1px #191919"}

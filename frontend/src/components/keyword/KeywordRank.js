@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { Box, Text } from "@chakra-ui/react";
-
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
   setClickedRank,
@@ -16,6 +15,8 @@ gsap.registerPlugin(EasePack);
 const KeywordRank = ({ rank }) => {
   const line = useRef(null);
   const addButton = useRef(null);
+  const rankContainer = useRef(null);
+  const lineContainer = useRef(null);
 
   const dispatch = useAppDispatch();
   const wordList = useAppSelector((state) => state.keyword.wordList);
@@ -51,12 +52,15 @@ const KeywordRank = ({ rank }) => {
   }, []);
 
   useLayoutEffect(() => {
+    const lineDistance =
+      lineContainer.current.offsetWidth -
+      rankContainer.current.offsetWidth * 0.4;
     ctx.add(() => {
       gsap.to(line.current, {
         duration: 0.5,
         x:
           clickedRank === rank || selectedKeyword[rank] !== null
-            ? "130px"
+            ? lineDistance
             : "0px",
         ease: "sine.out",
       });
@@ -70,6 +74,7 @@ const KeywordRank = ({ rank }) => {
   }, [clickedRank]);
   return (
     <Box
+      ref={rankContainer}
       width={"30%"}
       position={"relative"}
       display={"flex"}
@@ -77,17 +82,23 @@ const KeywordRank = ({ rank }) => {
       justifyContent={"end"}
       overflow={"hidden"}
     >
-      <Box display={"flex"} alignItems={"end"}>
+      <Box
+        ref={lineContainer}
+        width={"100%"}
+        display={"flex"}
+        alignItems={"end"}
+      >
         <Box>
           <Text fontSize={"3rem"} lineHeight={"1"}>
             {rank + 1}.
           </Text>
         </Box>
         <Box
+          width={"100%"}
           flexGrow={"1"}
-          marginRight={"2rem"}
           textAlign={"center"}
           fontSize={"2rem"}
+          paddingRight={"2rem"}
         >
           {wordList[selectedKeyword[rank]]}
         </Box>
@@ -96,7 +107,7 @@ const KeywordRank = ({ rank }) => {
         ref={line}
         position={"absolute"}
         right={"60%"}
-        width={"200%"}
+        width={"100%"}
         display={"flex"}
         flexDirection={"column"}
         alignItems={"end"}
@@ -114,7 +125,12 @@ const KeywordRank = ({ rank }) => {
           }}
           width={"2rem"}
         >
-          <Text fontSize={"3rem"} lineHeight={"1"} verticalAlign={"top"}>
+          <Text
+            fontSize={"3rem"}
+            lineHeight={"1"}
+            verticalAlign={"top"}
+            cursor={"pointer"}
+          >
             +
           </Text>
         </Box>
