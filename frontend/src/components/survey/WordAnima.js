@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import "../../styles/WordAnima.css";
+import "../../styles/survey/WordAnima.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

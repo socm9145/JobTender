@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import "../../styles/WordAnima.css";
+import "../../styles/survey/WordAnima.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -47,7 +47,8 @@ const WordAnima = () => {
           }
         },
         // end: "+=5750", // ScrollTrigger가 감시하는 요소의 끝을 설정 // 요놈이 스크롤 하나당 넘어가는거 결정함.
-        end: () => (wordList.length - 1) * spacing * 1000,
+        // end: () => (wordList.length - 1) * spacing * 1000,
+        end: () => wordList.length * spacing * 1200,
         pin: ".gallery", //ScrollTrigger가 고정시킬 요소 선택자
       });
 
@@ -73,28 +74,28 @@ const WordAnima = () => {
     //   trigger.scroll(trigger.end - 1);
     // }
 
-    function scrubTo(totalTime) {
-      // moves the scroll position to the place that corresponds to the totalTime value of the seamlessLoop, and wraps if necessary.
-      let progress =
-        (totalTime - seamlessLoop.duration() * iteration) /
-        seamlessLoop.duration();
-      if (progress > 1) {
-        // wrapForward(trigger);
-      } else if (progress < 0) {
-        // wrapBackward(trigger);
-      } else {
-        // 스크롤 위치 구하는 공식이라는데 지금 무슨기능 하는지 모르겠음. 주석처리한다음에 새로고침해도 스크롤 위치는 기억하고 있음
-        // trigger.scroll(
-        //   trigger.start + progress * (trigger.end - trigger.start)
-        // );
-      }
-    }
+    // function scrubTo(totalTime) {
+    //   // moves the scroll position to the place that corresponds to the totalTime value of the seamlessLoop, and wraps if necessary.
+    //   let progress =
+    //     (totalTime - seamlessLoop.duration() * iteration) /
+    //     seamlessLoop.duration();
+    //   if (progress > 1) {
+    //     // wrapForward(trigger);
+    //   } else if (progress < 0) {
+    //     // wrapBackward(trigger);
+    //   } else {
+    //     // 스크롤 위치 구하는 공식이라는데 지금 무슨기능 하는지 모르겠음. 주석처리한다음에 새로고침해도 스크롤 위치는 기억하고 있음
+    //     // trigger.scroll(
+    //     //   trigger.start + progress * (trigger.end - trigger.start)
+    //     // );
+    //   }
+    // }
 
     // 무한 스크롤 기능.
     function buildSeamlessLoop(items, spacing) {
       let overlap = Math.ceil(1 / spacing), // 무한스크롤을 위한 EXTRA 애니메이션 개수를 계산.
         startTime = items.length * spacing + 0.5, // seamless loop를 시작할 rawSequence 상의 시작 시간을 계산.
-        loopTime = (items.length + overlap) * spacing + 1, // seamless loop 가 끝나면 시작 지점으로 돌아갈 시간을 계산합니다.
+        loopTime = (items.length + overlap) * spacing + 0.59, // seamless loop 가 끝나면 시작 지점으로 돌아갈 시간을 계산합니다.
         rawSequence = gsap.timeline({ paused: true }), // 실제 애니메이션을 담을 타임라인.
         seamlessLoop = gsap.timeline({
           // rawSequence의 playhead를 조정하여 seamless loop처럼 보이게 할 타임라인.
@@ -106,12 +107,15 @@ const WordAnima = () => {
           },
         }),
         // items 배열의 길이와 overlap 값에 따라 계산되는 변수
-        l = items.length + overlap * 2,
+        // l = items.length + overlap * 1 + 2,
+        l = items.length * 2,
         time = 0,
         i,
         index,
         item;
 
+      console.log(items.length);
+      console.log(overlap);
       // set initial state of items
       gsap.set(items, { xPercent: 400, opacity: 0, scale: 0 });
 
@@ -180,49 +184,49 @@ const WordAnima = () => {
     "fig",
     "grape",
     "kiwi",
-    "lemon",
-    "mango",
-    "nectarine",
-    "orange",
-    "papaya",
-    "quince",
-    "raspberry",
-    "strawberry",
-    "tangerine",
-    "watermelon",
-    "blueberry",
-    "coconut",
-    "durian",
-    "elderberry",
-    "guava",
-    "honeydew",
-    "jackfruit",
-    "kumquat",
-    "lime",
-    "mulberry",
-    "olive",
-    "pear",
-    "plum",
-    "currant",
-    "blackberry",
-    "peach",
-    "pineapple",
-    "apricot",
-    "avocado",
-    "cantaloupe",
-    "grapefruit",
-    "lychee",
-    "passionfruit",
-    "persimmon",
-    "pomegranate",
-    "salmonberry",
-    "soursop",
-    "tomato",
-    "ugli fruit",
-    "vanilla",
-    "walnut",
-    "xigua",
-    "yew",
+    // "lemon",
+    // "mango",
+    // "nectarine",
+    // "orange",
+    // "papaya",
+    // "quince",
+    // "raspberry",
+    // "strawberry",
+    // "tangerine",
+    // "watermelon",
+    // "blueberry",
+    // "coconut",
+    // "durian",
+    // "elderberry",
+    // "guava",
+    // "honeydew",
+    // "jackfruit",
+    // "kumquat",
+    // "lime",
+    // "mulberry",
+    // "olive",
+    // "pear",
+    // "plum",
+    // "currant",
+    // "blackberry",
+    // "peach",
+    // "pineapple",
+    // "apricot",
+    // "avocado",
+    // "cantaloupe",
+    // "grapefruit",
+    // "lychee",
+    // "passionfruit",
+    // "persimmon",
+    // "pomegranate",
+    // "salmonberry",
+    // "soursop",
+    // "tomato",
+    // "ugli fruit",
+    // "vanilla",
+    // "walnut",
+    // "xigua",
+    // "yew",
     "zucchini",
     "acai",
     "boysenberry",
@@ -234,37 +238,6 @@ const WordAnima = () => {
     <div>
       <div className="gallery">
         <ul className="cards">
-          {/* <li>0</li>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-          <li>10</li>
-          <li>11</li>
-          <li>12</li>
-          <li>13</li>
-          <li>14</li>
-          <li>15</li>
-          <li>16</li>
-          <li>17</li>
-          <li>18</li>
-          <li>19</li>
-          <li>20</li>
-          <li>21</li>
-          <li>22</li>
-          <li>23</li>
-          <li>24</li>
-          <li>25</li>
-          <li>26</li>
-          <li>27</li>
-          <li>28</li>
-          <li>29</li>
-          <li>30</li> */}
           {wordList.map((word, index) => (
             <li key={index}>{word}</li>
           ))}

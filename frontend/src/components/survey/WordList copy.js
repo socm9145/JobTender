@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import "../../styles/WordList.css";
+import "../../styles/survey/WordList.css";
 
 const words = [
   "apple",

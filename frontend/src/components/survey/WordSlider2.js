@@ -1,71 +1,85 @@
-import React, { useEffect, useRef } from "react";
-// import $ from "jquery";
-import { gsap } from "gsap";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
+import $ from "jquery";
+import { gsap, Cubic } from "gsap";
+import { EasePack } from "gsap/EasePack";
 import "../../styles/survey/WordSlider.css";
 
+gsap.registerPlugin(EasePack);
 const WordSlider = () => {
   const cardSliderRef = useRef(null);
 
-  useEffect(() => {
-    const cards = Array.from(
-      cardSliderRef.current.querySelectorAll(".slider-item")
-    );
+  const ctx = gsap.context(() => {});
+
+  useLayoutEffect(() => {
+    var cards = $("#card-slider .slider-item").toArray();
+
     startAnim(cards);
 
     function startAnim(array) {
       if (array.length >= 4) {
-        gsap.fromTo(
-          array[0],
-          0.5,
-          { x: 0, y: 0, opacity: 0.75 },
-          {
-            x: 0,
-            y: -120,
-            opacity: 0,
-            zIndex: 0,
-            delay: 0.03,
-            ease: "power2.inOut",
-            onComplete: () => sortArray(array),
-          }
-        );
+        ctx.add(() => {
+          gsap.fromTo(
+            array[0],
 
-        gsap.fromTo(
-          array[1],
-          0.5,
-          { x: 79, y: 125, opacity: 1, zIndex: 1 },
-          {
-            x: 0,
-            y: 0,
-            opacity: 0.75,
-            zIndex: 0,
+            { x: 0, y: 0, opacity: 0.75 },
+            {
+              duration: 0.5,
+              x: 0,
+              y: -120,
+              opacity: 0,
+              zIndex: 0,
+              delay: 0.03,
+              ease: Cubic.easeInOut,
+              onComplete: sortArray(array),
+            }
+          );
+
+          gsap.fromTo(
+            array[1],
+
+            { x: 79, y: 125, opacity: 1, zIndex: 1 },
+            {
+              duration: 0.5,
+              x: 0,
+              y: 0,
+              opacity: 0.75,
+              zIndex: 0,
+              boxShadow: "-5px 8px 8px 0 rgba(82,89,129,0.05)",
+              ease: Cubic.easeInOut,
+            }
+          );
+
+          gsap.to(array[2], {
+            bezier: [
+              { x: 0, y: 250 },
+              { x: 65, y: 200 },
+              { x: 79, y: 125 },
+            ],
+            duration: 0.5,
             boxShadow: "-5px 8px 8px 0 rgba(82,89,129,0.05)",
-            ease: "power2.inOut",
-          }
-        );
+            zIndex: 1,
+            opacity: 1,
+            ease: Cubic.easeInOut,
+          });
 
-        gsap.to(array[2], 0.5, {
-          bezier: [
-            { x: 0, y: 250 },
-            { x: 65, y: 200 },
-            { x: 79, y: 125 },
-          ],
-          boxShadow: "-5px 8px 8px 0 rgba(82,89,129,0.05)",
-          zIndex: 1,
-          opacity: 1,
-          ease: "power2.inOut",
+          gsap.fromTo(
+            array[3],
+
+            { x: 0, y: 400, opacity: 0, zIndex: 0 },
+            {
+              duration: 0.5,
+              x: 0,
+              y: 250,
+              opacity: 0.75,
+              zIndex: 0,
+              ease: Cubic.easeInOut,
+            }
+          );
         });
-
-        gsap.fromTo(
-          array[3],
-          0.5,
-          { x: 0, y: 400, opacity: 0, zIndex: 0 },
-          { x: 0, y: 250, opacity: 0.75, zIndex: 0, ease: "power2.inOut" }
-        );
       } else {
-        const errorMessage = document.createElement("p");
-        errorMessage.textContent =
-          "Sorry, carousel should contain more than 3 slides";
-        cardSliderRef.current.appendChild(errorMessage);
+        $("#card-slider").append(
+          "<p>Sorry, carousel should contain more than 3 slides</p>"
+        );
       }
     }
 
