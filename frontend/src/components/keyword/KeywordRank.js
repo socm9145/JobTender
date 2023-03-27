@@ -17,6 +17,7 @@ const KeywordRank = ({ rank }) => {
   const addButton = useRef(null);
   const rankContainer = useRef(null);
   const lineContainer = useRef(null);
+  const inKeyword = useRef(null);
 
   const dispatch = useAppDispatch();
   const wordList = useAppSelector((state) => state.keyword.wordList);
@@ -72,6 +73,14 @@ const KeywordRank = ({ rank }) => {
       });
     });
   }, [clickedRank]);
+
+  useLayoutEffect(() => {
+    gsap.from(inKeyword.current, {
+      duration: 0.5,
+      opacity: 0,
+      ease: "sine.out",
+    });
+  }, [selectedKeyword[rank]]);
   return (
     <Box
       ref={rankContainer}
@@ -98,9 +107,10 @@ const KeywordRank = ({ rank }) => {
           flexGrow={"1"}
           textAlign={"center"}
           fontSize={"2rem"}
+          fontFamily={"dodum"}
           paddingRight={"2rem"}
         >
-          {wordList[selectedKeyword[rank]]}
+          <Text ref={inKeyword}>{wordList[selectedKeyword[rank]]}</Text>
         </Box>
       </Box>
       <Box
