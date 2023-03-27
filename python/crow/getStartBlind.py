@@ -80,7 +80,7 @@ class BlindData:
 
     def insert_companies(self, data):
         sql = '''
-              INSERT INTO `Companies` (name, type, scale, employees_number, address, year_founded, salary)
+              INSERT INTO `companies` (name, type, scale, employees_number, address, year_founded, salary)
               VALUES (%(name)s, %(type)s, %(scale)s, %(employees)s, %(addr)s, %(year)s, %(salary)s);
               '''
         try:
@@ -91,7 +91,7 @@ class BlindData:
 
     def insert_rank(self, data):
         sql = '''
-              INSERT INTO `Company_Ratings` (company_id, average_rating, growth_rating, balance_rating, 
+              INSERT INTO `company_ratings` (company_id, average_rating, growth_rating, balance_rating, 
               salary_welfare_rating, culture_rating, management_rating)
               VALUES (%(company_id)s, %(total)s, %(growth)s, %(balance)s, %(salary_welfare)s, %(culture)s, %(management)s);
               '''
