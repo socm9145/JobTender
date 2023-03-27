@@ -63,7 +63,8 @@ import "../../styles/Mypage.css"
                                 marginTop={"0"}
                                 marginBottom={"0"}
                                 fontWeight={"400"}
-                                className={"info myfont2"}
+                                className={"info"}
+                                fontFamily={"dodum"}
                             >회원정보</Text>
 
                         </Box>
@@ -82,7 +83,7 @@ import "../../styles/Mypage.css"
                                 marginBottom={"0"}
                                 fontWeight={"400"}
                                 color={"#969696"}
-                                className={"myfont2"}
+                                fontFamily={"dodum"}
                             >/</Text>
                         </Box>
                         <Box
@@ -99,7 +100,8 @@ import "../../styles/Mypage.css"
                                 marginTop={"0"}
                                 marginBottom={"0"}
                                 fontWeight={"400"}
-                                className={"update myfont2"}
+                                className={"update"}
+                                fontFamily={"dodum"}
                             >수정</Text>
                         </Box>
                     </Box>
@@ -121,10 +123,11 @@ import "../../styles/Mypage.css"
                     display={"flex"}
                     // width={"41.875em"}
                     width={"75%"}
-                    height={"100%"}
+                    // height={"100%"}
                     paddingRight={"1.25em"}
                     flexDirection={"column"}
-                    // justifyContent={"space-between"}
+                    height={"40em"}
+                    overflowY={"auto"}
                 >
                     <Box
                         display={"flex"}
@@ -140,7 +143,8 @@ import "../../styles/Mypage.css"
                             marginTop={"0"}
                             marginBottom={"0"}
                             fontWeight={"400"}
-                            className={"history myfont2"}
+                            className={"history"}
+                            fontFamily={"dodum"}
                         >이력</Text>
 
                     </Box>
@@ -151,10 +155,8 @@ import "../../styles/Mypage.css"
                         display={"flex"}
                         flexDirection={"row"}
                         flexWrap={"wrap"}
-                        height={"36em"}
-                        overflowY={"auto"}
+                        
                         justifyContent={"flex-start"}
-                        // boxSizing={"content-box"}
                     >
                         <MyHistory></MyHistory>
                         <MyHistory></MyHistory>

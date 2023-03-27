@@ -19,9 +19,10 @@ const History = () => {
             marginRight={"3em"}
             marginBottom={"2em"}
             borderRadius={"20px"}
+            fontFamily={"dodum"}
         >
             <CardHeader>
-                <Heading size={"md"}>2023.03.27</Heading>
+                <Heading size={"md"} fontFamily={"dodum"}>2023.03.27</Heading>
             </CardHeader>
             <CardBody>
                 <Box>
