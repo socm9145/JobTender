@@ -13,10 +13,12 @@ import {
 const History = () => {
     return(
         <Card 
-            backgroundColor={"rgba(255, 255, 255, 0.75);"}
+            backgroundColor={"rgba(0, 0, 0, 0.05);"}
             width={"273px"}
             height={"273px"}
-            // marginRight={"10em"}
+            marginRight={"3em"}
+            marginBottom={"2em"}
+            borderRadius={"20px"}
         >
             <CardHeader>
                 <Heading size={"md"}>2023.03.27</Heading>

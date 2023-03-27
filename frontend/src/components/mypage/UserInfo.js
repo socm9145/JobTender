@@ -9,7 +9,7 @@ import { Box, Text, Divider } from "@chakra-ui/react";
         flexDirection={"column"}
         justifyContent={"flex-start"}
       >
-        <Divider borderColor={"black"} />
+        <Divider borderColor={"black"} borderRadius={"100px"} />
         <Box
             display={"flex"}
             minHeight={"7.5em"}
@@ -17,12 +17,13 @@ import { Box, Text, Divider } from "@chakra-ui/react";
             paddingBottom={"1.875em"}
             justifyContent={"flex-end"}
             alignItems={"flex-start"}
+            flexDirection={"column"}
         >
             <Box
                 display={"flex"}
                 overflow={"hidden"}
-                width={"19.375em"}
-                paddingRight={"2em"}
+                width={"6.375em"}
+                paddingLeft={"0.5em"}
                 justifyContent={"flex-start"}
             >
                 <Box
@@ -40,9 +41,12 @@ import { Box, Text, Divider } from "@chakra-ui/react";
             <Box
                 display={"flex"}
                 overflow={"hidden"}
-                paddingRight={"2em"}
+                paddingTop={"2em"}
+                paddingRight={"1em"}
                 alignItems={"flex-start"}
                 flex={"1"}
+                width={"100%"}
+                flexDirection={"row-reverse"}
             >
                 <Box
                     opacity={"1"}
@@ -62,4 +66,3 @@ import { Box, Text, Divider } from "@chakra-ui/react";
   };
   
   export default UserInfo;
-  
