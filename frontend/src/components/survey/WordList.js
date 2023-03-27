@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "../../styles/WordList.css";
+import WordAnima from "./WordAnima";
 
 const words = [
   "apple",
@@ -66,7 +67,6 @@ const words = [
 const WordList = () => {
   const [wordScores, setWordScores] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [animated, setAnimated] = useState(true);
 
   const handleScoreChange = (word, score) => {
     setWordScores({ ...wordScores, [word]: score });
@@ -115,40 +115,31 @@ const WordList = () => {
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
-  }, [currentIndex]);
+  }, [currentIndex, wordScores]);
 
   const currentWord = words[currentIndex];
 
   return (
     <div className="survey-wrapper">
       <div className="slot-container">
-        <div
-          className={`slot-word previous-word ${
-            currentIndex > 0 ? "animated" : ""
-          }`}
-        >
+        <div className={`slot-word previous-word`}>
           {words[currentIndex - 1]}
         </div>
-        <div className={`slot-word current-word ${animated ? "animated" : ""}`}>
-          {currentWord}
-          <div className="score-container">
-            {[1, 2, 3, 4, 5, 6, 7].map((score) => (
-              <button
-                key={score}
-                className="score-button"
-                onClick={() => handleScoreChange(currentWord, score)}
-              >
-                {score}
-              </button>
-            ))}
-          </div>
+        <div>
+          <WordAnima />
         </div>
-        <div
-          className={`slot-word next-word ${
-            currentIndex < words.length - 1 ? "animated" : ""
-          }`}
-        >
-          {words[currentIndex + 1]}
+        <div className={`slot-word current-word`}>{currentWord}</div>
+        <div className={`slot-word next-word`}>{words[currentIndex + 1]}</div>
+        <div className="score-container">
+          {[1, 2, 3, 4, 5, 6, 7].map((score) => (
+            <button
+              key={score}
+              className="score-button"
+              onClick={() => handleScoreChange(currentWord, score)}
+            >
+              {score}
+            </button>
+          ))}
         </div>
       </div>
       <div className="navigation-buttons">

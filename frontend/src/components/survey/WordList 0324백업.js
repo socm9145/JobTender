@@ -68,6 +68,15 @@ const WordList = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animated, setAnimated] = useState(true);
 
+  const [animationKey, setAnimationKey] = useState(0);
+  const [movingPrev, setMovingPrev] = useState(false);
+  const [movingNext, setMovingNext] = useState(false);
+  useEffect(() => {
+    setAnimationKey((prevKey) => prevKey + 1);
+  }, [currentIndex]);
+
+  const [prevWordAnimated, setPrevWordAnimated] = useState(false);
+
   const handleScoreChange = (word, score) => {
     setWordScores({ ...wordScores, [word]: score });
     setTimeout(() => {
@@ -78,16 +87,35 @@ const WordList = () => {
   const handleNextWord = () => {
     const nextIndex = currentIndex + 1;
     if (nextIndex < words.length) {
-      setCurrentIndex(nextIndex);
+      setMovingNext(true);
+      setTimeout(() => {
+        setCurrentIndex(nextIndex);
+        setMovingNext(false);
+      }, 500);
     }
   };
 
+  // const handlePrevWord = () => {
+  //   const prevIndex = currentIndex - 1;
+  //   if (prevIndex >= 0) {
+  //     const prevWordScore = wordScores[words[prevIndex]];
+  //     if (prevWordScore !== undefined) {
+  //       setCurrentIndex(prevIndex);
+  //     }
+  //   }
+  // };
   const handlePrevWord = () => {
     const prevIndex = currentIndex - 1;
     if (prevIndex >= 0) {
       const prevWordScore = wordScores[words[prevIndex]];
       if (prevWordScore !== undefined) {
-        setCurrentIndex(prevIndex);
+        setMovingPrev(true);
+        setPrevWordAnimated(true);
+        setTimeout(() => {
+          setCurrentIndex(prevIndex);
+          setMovingPrev(false);
+          setPrevWordAnimated(false);
+        }, 500);
       }
     }
   };
@@ -115,7 +143,7 @@ const WordList = () => {
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
-  }, [currentIndex]);
+  }, [currentIndex, wordScores]);
 
   const currentWord = words[currentIndex];
 
@@ -125,30 +153,29 @@ const WordList = () => {
         <div
           className={`slot-word previous-word ${
             currentIndex > 0 ? "animated" : ""
-          }`}
+          } ${prevWordAnimated ? "moving" : ""}`}
         >
           {words[currentIndex - 1]}
         </div>
-        <div className={`slot-word current-word ${animated ? "animated" : ""}`}>
-          {currentWord}
-          <div className="score-container">
-            {[1, 2, 3, 4, 5, 6, 7].map((score) => (
-              <button
-                key={score}
-                className="score-button"
-                onClick={() => handleScoreChange(currentWord, score)}
-              >
-                {score}
-              </button>
-            ))}
-          </div>
-        </div>
         <div
-          className={`slot-word next-word ${
-            currentIndex < words.length - 1 ? "animated" : ""
-          }`}
+          className={`slot-word current-word ${
+            movingNext || movingPrev ? "moving" : ""
+          } ${movingPrev ? "moving-prev" : ""}`}
         >
-          {words[currentIndex + 1]}
+          {currentWord}
+          {/* ... */}
+        </div>
+        <div className={`slot-word next-word`}>{words[currentIndex + 1]}</div>
+        <div className="score-container">
+          {[1, 2, 3, 4, 5, 6, 7].map((score) => (
+            <button
+              key={score}
+              className="score-button"
+              onClick={() => handleScoreChange(currentWord, score)}
+            >
+              {score}
+            </button>
+          ))}
         </div>
       </div>
       <div className="navigation-buttons">

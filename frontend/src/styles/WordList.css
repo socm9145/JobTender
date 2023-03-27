@@ -7,8 +7,8 @@
 
 .slot-container {
   position: relative;
-  width: 100vw; /* 200px에서 600px로 변경 */
-  height: 80vh; /* 100px에서 300px로 변경 */
+  width: 100vw;
+  height: 80vh;
   border: 1px solid #000;
   overflow: hidden;
   display: flex;
@@ -18,21 +18,37 @@
 
 .slot-word {
   position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
-  transition: transform 0.5s ease-out;
 }
 
-.animated {
-  transform: translateY(-100%);
+.previous-word {
+  top: 15%;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
 }
 
-.word-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+.current-word {
+  top: 28%;
+  z-index: 2;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.next-word {
+  top: 45%;
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+}
+
+.previous-word,
+.next-word {
+  z-index: 1;
+  opacity: 0.5;
+  font-size: 1.5rem;
+  color: #777;
 }
 
 .score-container {
@@ -41,40 +57,6 @@
   justify-content: space-around;
   margin-top: 10px;
   width: 100%;
-}
-
-.previous-word {
-  transform: translateY(-100%);
-  z-index: 1;
-}
-
-.next-word {
-  transform: translateY(100%);
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  transform: translateY(100%);
-  text-align: center;
-}
-
-.current-word {
-  position: relative;
-  width: 100%;
-  z-index: 2;
-}
-
-.animated {
-  animation: move-down 0.5s ease-out forwards;
-}
-
-@keyframes move-down {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 .navigation-buttons {
@@ -100,86 +82,10 @@
 }
 
 .score-container {
-  margin-top: 10px;
-}
-
-.animated.previous-word {
-  transform: translate(0, 0);
-}
-
-.animated.next-word {
-  transform: translate(0, 0);
-}
-
-.animated.current-word {
-  transform: translate(0, 0);
-  opacity: 1;
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-}
-
-.animated.current-word select {
-  pointer-events: all;
-}
-
-.navigation-buttons {
-  display: flex;
-  margin-top: 10px;
-}
-
-.navigation-buttons button {
-  font-size: 3rem;
-  font-weight: bold;
-  margin: 0 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #333;
-  color: #fff;
-  cursor: pointer;
-}
-
-.navigation-buttons button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.previous-word,
-.next-word {
-  opacity: 1;
-  font-size: 3rem; /* 글자 크기를 키움 */
-  color: #777;
-}
-
-.current-word {
-  position: relative;
-  width: 100%;
-  z-index: 2;
-  font-size: 3rem; /* 글자 크기를 키움 */
-}
-
-@keyframes move-down {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes move-up {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.score-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 10px;
+  margin-top: 50%;
   width: 100%;
 }
 
@@ -189,7 +95,7 @@
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
-  font-size: 2rem; /* 글자 크기를 키움 */
+  font-size: 2rem;
   margin: 5px;
   padding: 10px 20px;
   width: calc(25% - 10px);
