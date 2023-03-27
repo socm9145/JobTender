@@ -12,8 +12,6 @@ public class ReadResultOutDTO {
     // result
     long resultId;
     long userId;
-    // input
-    String keyword;
     // company scores
     String score;
     // companies

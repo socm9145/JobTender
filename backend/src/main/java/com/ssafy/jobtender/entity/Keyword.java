@@ -16,7 +16,7 @@ public class Keyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long keywordId;
     @Column(nullable = false)
-    private String keyword;
+    private String keywordName;
     // mapping
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"keyword"})

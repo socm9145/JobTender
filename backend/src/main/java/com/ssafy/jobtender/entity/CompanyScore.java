@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class CompanyScore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long companyResultId;
+    private long companyScoreId;
     @Column(nullable = false)
     private String score;
     @Column(nullable = false)
