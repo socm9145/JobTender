@@ -42,7 +42,7 @@ const Describe = () => {
   return (
     <Box height={"100%"} paddingX={"10%"}>
       <Box paddingBottom={"1.5rem"} height={"fit-content"} overflow={"hidden"}>
-        <Text ref={title} fontSize={"2rem"}>
+        <Text ref={title} fontSize={"3rem"} fontFamily={"dodum"}>
           {wordList[clickedKeyword]}
         </Text>
       </Box>

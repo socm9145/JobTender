@@ -48,7 +48,6 @@ const Keyword = ({ keyword, id, LR }) => {
   };
 
   const ctx = gsap.context(() => {});
-
   useLayoutEffect(() => {
     return () => ctx.revert();
   }, []);
@@ -68,6 +67,8 @@ const Keyword = ({ keyword, id, LR }) => {
               : -animaDistance
             : "0px",
         ease: "sine.out",
+        backgroundColor: selectedKeyword.includes(id) ? "#191919" : null,
+        color: selectedKeyword.includes(id) ? "#f7f6f1" : null,
       });
     });
   }, [clickedKeyword, selectedKeyword, clickedRank]);
@@ -77,7 +78,9 @@ const Keyword = ({ keyword, id, LR }) => {
       <Box display={"flex"} justifyContent={LR === "left" ? "end" : "start"}>
         <Text
           ref={text}
+          paddingX={"0.5rem"}
           fontSize={"2rem"}
+          fontFamily={"dodum"}
           cursor={"pointer"}
           onClick={() => {
             if (
