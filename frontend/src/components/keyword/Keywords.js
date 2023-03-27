@@ -40,9 +40,11 @@ const Keyword = ({ keyword, id, LR }) => {
   };
 
   const dispatchSelectedKeyword = () => {
-    dispatch(setSelectedKeyword([clickedRank, id]));
-    dispatch(setClickedKeyword(null));
-    dispatch(setClickedRank(null));
+    if (!selectedKeyword.includes(id)) {
+      dispatch(setSelectedKeyword([clickedRank, id]));
+      dispatch(setClickedKeyword(null));
+      dispatch(setClickedRank(null));
+    }
   };
 
   const ctx = gsap.context(() => {});

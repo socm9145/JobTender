@@ -20,13 +20,14 @@ const Keyword = () => {
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"space-between"}
-        height={"80vh"}
+        height={"85vh"}
       >
+        <Box borderTop={"solid 1px black"}></Box>
         <Box
           display={"flex"}
           justifyContent={"space-between"}
           width={"100vw"}
-          height={"70%"}
+          height={"100%"}
         >
           <Box width={"25vw"}>
             <LeftKeywordsContainer keywords={wordList.slice(0, 5)} />
@@ -47,6 +48,7 @@ const Keyword = () => {
         >
           <Box
             width={"50%"}
+            height={"100%"}
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"space-between"}
