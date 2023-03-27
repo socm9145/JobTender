@@ -46,7 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
         keywordRandomCompanyOutDtoRangeMap.forEach((key, ranges) -> {
             int companyCount = ranges[1] - ranges[0] + 1;
             List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new ArrayList<>();
-            if(companyCount <= EXTRACTED_KEYWORD_MAXIMUM_COUNT){ // dto 수가 최대 개수보다 작거나 같을 경우
+            if(companyCount <= EXTRACTED_KEYWORD_MAXIMUM_COUNT){ // dto 수가 최대 개수보다 작거나 같을 경우 리스트 그대로 담기
                 for(int i=ranges[0];i<=ranges[1];i++){
                     keywordRandomCompanyOutDtoList.add(keywordCompanyOutDtoList.get(i));
                 }

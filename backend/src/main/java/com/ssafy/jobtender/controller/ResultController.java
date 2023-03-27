@@ -55,7 +55,7 @@ public class ResultController {
      * @return Map<String, List<KeywordRandomCompanyOutDto>> : {키워드 이름 : [회사 리스트]}
      * */
     @ApiOperation(
-            value = "키워드별 기업 확인 API"
+            value = "키워드별 기업 확인 API (v)"
             , notes = "키워드 당 랜덤으로 n개의 기업을 반환한다.")
     @GetMapping("/keyword/company")
     public ResponseEntity<Map<String, List<KeywordRandomCompanyOutDto>>> readCompaniesByKeywords(@RequestParam long resultId){
