@@ -13,7 +13,7 @@ const Navbar = () => {
       width={"100%"}
       height={"48px"}
       px={"28px"}
-      backgroundColor={"#f1efe9"}
+      // backgroundColor={"#f1efe9"}
       color={"#191919"}
     >
       <Box border={"solid 1px #191919"}>JTD</Box>
