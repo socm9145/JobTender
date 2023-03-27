@@ -1,90 +1,131 @@
 import { 
-  Box, Text, Divider, Stack, RadioGroup, Radio,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper, 
-} from "@chakra-ui/react";
-import MyHistory from "../../components/mypage/History";
+    Box, Text, Divider, Stack, RadioGroup, Radio,
+    NumberInput,
+    NumberInputField,
+    NumberInputStepper,
+    NumberIncrementStepper,
+    NumberDecrementStepper, 
+  } from "@chakra-ui/react";
+  import MyHistory from "../../components/mypage/History";
+  import UserInfo from "../../components/mypage/UserInfo"
+  
+  const Mypage = () => {
+      return (
+          // 마이페이지
+        <Box  width={"100vw"}>
+          <Box
+          id={"a"}
+          width={"100vw"}
+          paddingRight={"2.5em"}
+          paddingLeft={"2.5em"}
+          display={"flex"}
+          height={"100vh"}
+          backgroundColor={"#f1efe9"}
+          alignItems={"center"}
+          >
+        <Box
+            paddingTop={"2.5em"}
+            paddingBottom={"2.5em"}
+            >
+                {/* 마이페이지 콘텐츠 */}
+            <Box
+                position={"relative"}
+                display={"flex"}
+                justifyContent={"flex-start"}
+                alignItems={"stretch"}
+                flexDirection={"row"}
+            >
+                {/* 유저 상세정보 */}
+                <Box
+                    position={"sticky"}
+                    top={"4.1em"}
+                    display={"flex"}
+                    width={"41.875em"}
+                    height={"100%"}
+                    paddingRight={"1.25em"}
+                    flexDirection={"column"}
+                    justifyContent={"space-between"}
+                >
+                    {/* 이름 */}
+                    <Box
+                        display={"flex"}
+                        maxWidth={"36em"}
+                        marginBottom={"3.75em"}
+                        justifyContent={"flex-start"}
+                        flexWrap={"wrap"}
+                    >
+                        <Text
+                            lineHeight={"1"}
+                            fontSize={"2.125em"}
+                            textTransform={"uppercase"}
+                            marginTop={"0"}
+                            marginBottom={"0"}
+                            fontWeight={"400"}
+                        >회원정보</Text>
 
-const Mypage = () => {
-  return (
-    <Box
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent={"center"}
-      height={"100vh"}
-      backgroundColor={"#f1efe9"}
-      userSelect={"none"}
-    >
-      {/* 마이페이지 */}
-      <Box
-        paddingLeft={"20%"}
-        display={"flex"}
-        alignItems={"center"}
-        height={"60%"}
-        // border={"solid 1px black"}
-      >
-        {/* 회원정보 */}
-        <Stack spacing={5}>
-          <Stack spacing={0.1}>
-            <Text fontSize={"4xl"}>회원정보</Text>
-            <Divider width={"15vh"} borderColor={"black"} />
-          </Stack>
-          <Stack spacing={0.5}>
-            <Text>이름</Text>
-            {/* 데이터 통신 */}
-            <Text paddingLeft={"2vh"}>김싸피</Text>
-          </Stack>
-          <Stack spacing={0.5}>
-            <Text>이메일</Text>
-            {/* 데이터 통신 */}
-            <Text paddingLeft={"2vh"}>test@test.com</Text>
-          </Stack>
-          <Stack spacing={0.5}>
-            <Stack direction={"row"}>
-              <Text>성별</Text>
-              <Text paddingLeft={"140px"}>나이</Text>
-            </Stack>
-            <RadioGroup value={"1"} paddingLeft={"15px"} >
-              <Stack direction={"row"}>
-                <Radio size={"sm"} value="1" colorScheme={"green"}>남성</Radio>
-                <Radio size={"sm"} value="2" paddingLeft={"10px"} paddingRight={"50px"} isDisabled>여성</Radio>
-                <NumberInput width={"70px"} defaultValue={28} size={"xs"} isDisabled>
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </Stack>
-            </RadioGroup>
-          </Stack>
-        </Stack>
-      </Box>
-      <Box 
-        paddingLeft={"20%"}
-        display={"flex"}
-        // alignItems={"center"}
-        height={"40%"}
-      >
-        {/* 히스토리 */}
-        <Stack spacing={5}>
-          <Stack spacing={0.1}>
-            <Text fontSize={"4xl"}>일지</Text>
-            <Divider width={"7.5vh"} borderColor={"black"} />
-          </Stack>
-          <Stack spacing={20} direction={"row"}>
-            <MyHistory></MyHistory>
-            <MyHistory></MyHistory>
-            <MyHistory></MyHistory>
-            <MyHistory></MyHistory>
-          </Stack>
-        </Stack>
-      </Box>
-    </Box>
-  );
-};
+                    </Box>
+                    {/* 회원정보 */}
+                    <UserInfo title={"이름"} value={"김싸피"}></UserInfo>
+                    <UserInfo title={"이메일"} value={"test@test.com"}></UserInfo>
+                    <UserInfo title={"성별"} value={"M"}></UserInfo>
+                    <UserInfo title={"나이"} value={"20"}></UserInfo>
 
-export default Mypage;
+                </Box>
+                <Box>
+                    <Divider height={"100%"} orientation={"vertical"} borderColor={"black"} />
+                </Box>
+                {/* 히스토리 */}
+                <Box
+                    paddingLeft={"2.1875em"}
+                    position={"sticky"}
+                    top={"4.1em"}
+                    display={"flex"}
+                    width={"41.875em"}
+                    height={"100%"}
+                    paddingRight={"1.25em"}
+                    flexDirection={"column"}
+                    justifyContent={"space-between"}
+                >
+                    <Box
+                        display={"flex"}
+                        maxWidth={"36em"}
+                        marginBottom={"3.75em"}
+                        justifyContent={"flex-start"}
+                        flexWrap={"wrap"}
+                    >
+                        <Text
+                            lineHeight={"1"}
+                            fontSize={"2.125em"}
+                            textTransform={"uppercase"}
+                            marginTop={"0"}
+                            marginBottom={"0"}
+                            fontWeight={"400"}
+                        >이력</Text>
+
+                    </Box>
+                    {/* 이력 콘텐츠 */}
+                    <Box
+                        // position={"sticky"}
+                        // top={"4.1em"}
+                        display={"flex"}
+                        flexDirection={"row"}
+                        justifyContent={"space-around"}
+
+                    >
+                        <MyHistory></MyHistory>
+                        <MyHistory></MyHistory>
+                        {/* <MyHistory></MyHistory>
+                        <MyHistory></MyHistory>
+                        <MyHistory></MyHistory>
+                        <MyHistory></MyHistory> */}
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+      </Box>
+      </Box>
+    );
+  };
+  
+  export default Mypage;
+  

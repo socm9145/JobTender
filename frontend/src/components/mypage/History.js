@@ -16,6 +16,7 @@ const History = () => {
             backgroundColor={"rgba(255, 255, 255, 0.75);"}
             width={"273px"}
             height={"273px"}
+            // marginRight={"10em"}
         >
             <CardHeader>
                 <Heading size={"md"}>2023.03.27</Heading>
