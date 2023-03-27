@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ResultDAO {
-    void createResult(Long userId);
+    long createResult(Long userId);
     List<ReadResultOutDTO> readResultsByUserId(Long userId);
     List<ResultCompanyOutDTO> readResultsCompanies();
     List<Result> keywordRanking();

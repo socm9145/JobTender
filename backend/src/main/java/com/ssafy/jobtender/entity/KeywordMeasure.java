@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class KeywordMeasure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long companyMeasureId;
+    long keywordMeasureId;
     @Column(nullable = false)
     String score;
     // mapping

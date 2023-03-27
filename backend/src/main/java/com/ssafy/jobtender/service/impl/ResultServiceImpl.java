@@ -23,8 +23,8 @@ public class ResultServiceImpl implements ResultService {
         this.resultDAO = resultDAO;
     }
     @Override
-    public void createResult(Long userId) {
-        resultDAO.createResult(userId);
+    public long createResult(Long userId) {
+        return resultDAO.createResult(userId);
     }
 
     @Override

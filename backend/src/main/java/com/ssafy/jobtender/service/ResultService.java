@@ -7,7 +7,7 @@ import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
 import java.util.List;
 
 public interface ResultService {
-    void createResult(Long userId);
+    long createResult(Long userId);
     List<ReadResultOutDTO> readResultsByUserId(Long userId);
     List<ResultCompanyOutDTO> readResultsCompanies();
 }

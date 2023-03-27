@@ -34,7 +34,7 @@ public class ResultDAOImpl implements ResultDAO {
     }
 
     @Override
-    public void createResult(Long userId) {
+    public long createResult(Long userId) {
         User resultUser = userRepo.findByUserId(userId).get();
 
         Result result = new Result();
@@ -48,41 +48,35 @@ public class ResultDAOImpl implements ResultDAO {
         result.setAccessInfo(accessInfo);
         result.setUser(resultUser);
         resultRepo.save(result);
+
+        return result.getResultId();
     }
 
     @Override
     public List<ReadResultOutDTO> readResultsByUserId(Long userId) {
-
         QResult result = QResult.result;
         QCompanyScore companyScore = QCompanyScore.companyScore;
         QCompany company = QCompany.company;
-        QInput input = QInput.input;
         QCompanyRating companyRating = QCompanyRating.companyRating;
 
         List<ReadResultOutDTO> readResultOutDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(ReadResultOutDTO.class,
                         result.resultId, result.user.userId,
-                        input.keyword,
                         companyScore.score,
                         company.name, company.type, company.scale, company.salary, company.employeesNumber, company.address, company.yearFounded,
                         companyRating.averageRating, companyRating.growthRating, companyRating.balanceRating, companyRating.salaryWelfareRating, companyRating.cultureRating, companyRating.managementRating))
                 .from(result)
-                .join(result.inputs, input)
-                .on(result.resultId.eq(input.result.resultId))
                 .join(result.companyScores, companyScore)
                 .on(result.resultId.eq(companyScore.result.resultId))
                 .join(companyScore.company, company)
                 .on(companyScore.company.companyId.eq(company.companyId))
                 .join(company.companyRating, companyRating)
                 .on(companyRating.company.companyId.eq(company.companyId))
+                .where(result.user.userId.eq(userId))
+                .where(companyScore.CompanyScoreRank.eq("H"))
                 .fetch();
 
-        List<ReadResultOutDTO> rReadResultOutDTOs = new ArrayList<>();
-        for (ReadResultOutDTO readResultOutDTO : readResultOutDTOs)
-            if (readResultOutDTO.getUserId() == userId)
-                rReadResultOutDTOs.add(readResultOutDTO);
-
-        return rReadResultOutDTOs;
+        return readResultOutDTOs;
     }
 
     @Override

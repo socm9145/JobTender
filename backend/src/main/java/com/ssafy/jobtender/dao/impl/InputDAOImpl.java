@@ -2,8 +2,10 @@ package com.ssafy.jobtender.dao.impl;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
+import com.ssafy.jobtender.dto.input.CreateInputDTO;
 import com.ssafy.jobtender.dto.input.KeywordInputDTO;
 import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
+import com.ssafy.jobtender.dto.output.CreateOutputDTO;
 import com.ssafy.jobtender.dto.output.KeywordOutDTO;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.repo.InputRepo;
@@ -32,16 +34,24 @@ public class InputDAOImpl implements InputDAO{
         this.resultRepo = resultRepo;
         this.keywordRepo = keywordRepo;
     }
-
     @Override
-    public void createInputsKeyword(Long userId, long userKeyWord) {
-        List<Result> resultResult = resultRepo.findByUserId(userId).get();
-        Keyword keyword = keywordRepo.findById(userKeyWord).get();
-
+    public CreateOutputDTO createInputsKeyword(CreateInputDTO createInputDTO) {
+        // need builder
         Input input = new Input();
-        input.setResult(resultResult.get(0));
-        input.setKeyword(keyword);
-        inputRepo.save(input);
+        CreateOutputDTO createOutputDTO = new CreateOutputDTO();
+
+        input.setKeywordRank(createInputDTO.getKeywordRank());
+        input.setKeyword(this.keywordRepo.findById(createInputDTO.getKeywordId()).get());
+        input.setResult(this.resultRepo.findById(createInputDTO.getResultId()).get());
+
+        this.inputRepo.save(input);
+
+        createOutputDTO.setInputId(input.getInputId());
+        createOutputDTO.setResultId(input.getResult().getResultId());
+        createOutputDTO.setKeywordId(input.getKeyword().getKeywordId());
+        createOutputDTO.setKeywordRank(input.getKeywordRank());
+
+        return createOutputDTO;
     }
 
     @Override

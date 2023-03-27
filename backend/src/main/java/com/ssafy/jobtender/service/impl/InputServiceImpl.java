@@ -1,6 +1,8 @@
 package com.ssafy.jobtender.service.impl;
 
 import com.ssafy.jobtender.dao.InputDAO;
+import com.ssafy.jobtender.dto.input.CreateInputDTO;
+import com.ssafy.jobtender.dto.output.CreateOutputDTO;
 import com.ssafy.jobtender.dto.output.KeywordOutDTO;
 import com.ssafy.jobtender.entity.Input;
 import com.ssafy.jobtender.service.InputService;
@@ -16,14 +18,11 @@ public class InputServiceImpl implements InputService{
     public InputServiceImpl(InputDAO inputDAO) {
         this.inputDAO = inputDAO;
     }
+
+
     @Override
-    public void createInputsKeyword(Long userId, List<Long> userKeyWord) {
-//        StringBuilder keyWord = new StringBuilder();
-        for(long keyWord : userKeyWord){
-//            keyWord.append(s).append(",");
-            inputDAO.createInputsKeyword(userId, keyWord);
-        }
-//        keyWord.delete(keyWord.length()-1, keyWord.length());
+    public CreateOutputDTO createInputsKeyword(CreateInputDTO createInputDTO) {
+        return inputDAO.createInputsKeyword(createInputDTO);
     }
 
     @Override

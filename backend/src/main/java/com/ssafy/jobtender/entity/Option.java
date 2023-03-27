@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long OptionId;
+    private long optionId;
     @Column(nullable = false)
     private String talentWeight;
 }
