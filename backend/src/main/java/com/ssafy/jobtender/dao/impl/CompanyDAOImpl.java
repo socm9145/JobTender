@@ -74,9 +74,6 @@ public class CompanyDAOImpl implements CompanyDAO {
                 .orderBy(keyword.keywordId.asc())
                 .fetch();
 
-        System.out.println("321312");
-        System.out.println(keywordRandomCompanyOutDtoList.get(0).getKeywordName());
-
         return keywordRandomCompanyOutDtoList;
     }
 }
