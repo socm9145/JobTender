@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface InputDAO {
     CreateOutputDTO createInputsKeyword(CreateInputDTO createInputDTO);
-    List<Input> readInputsByResultId(long resultId);
     List<Input> readKeywordAll();
     List<KeywordOutDTO> keywordRankingByGender(String gender);
 

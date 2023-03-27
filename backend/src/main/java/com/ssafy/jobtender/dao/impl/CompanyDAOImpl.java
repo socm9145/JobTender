@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class CompanyDAOImpl implements CompanyDAO {
@@ -20,9 +19,10 @@ public class CompanyDAOImpl implements CompanyDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public CompanyDAOImpl(CompanyRepo companyRepo){
+    public CompanyDAOImpl(CompanyRepo companyRepo) {
         this.companyRepo = companyRepo;
     }
+
     @Override
     public CompanyRatingOutDTO readCompanies(long companyId) {
         QCompany company = QCompany.company;
@@ -40,7 +40,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 .on(company.companyId.eq(companyRating.company.companyId))
                 .fetch();
 
-        for (CompanyRatingOutDTO companyRatingOutDTO :companyRatingOutDTOs)
+        for (CompanyRatingOutDTO companyRatingOutDTO : companyRatingOutDTOs)
             if (companyRatingOutDTO.getCompanyId() == companyId)
                 return companyRatingOutDTO;
 
@@ -54,11 +54,11 @@ public class CompanyDAOImpl implements CompanyDAO {
         QKeywordMeasure keywordMeasure = QKeywordMeasure.keywordMeasure;
         QCompanyMeasure companyMeasure = QCompanyMeasure.companyMeasure;
         QCompany company = QCompany.company;
-        QKeyword keyword = QKeyword.keyword1;
+        QKeyword keyword = QKeyword.keyword;
 
         List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new JPAQuery<>(em)
                 .select(Projections.constructor(KeywordRandomCompanyOutDto.class,
-                        result.resultId, company.companyId, keyword.keywordId, company.name, keyword.keyword)).distinct()
+                        result.resultId, company.companyId, keyword.keywordId, company.name, keyword.keywordName)).distinct()
                 .from(result)
                 .join(input)
                 .on(result.resultId.eq(input.result.resultId))
@@ -73,6 +73,9 @@ public class CompanyDAOImpl implements CompanyDAO {
                 .where(result.resultId.eq(resultId))
                 .orderBy(keyword.keywordId.asc())
                 .fetch();
+
+        System.out.println("321312");
+        System.out.println(keywordRandomCompanyOutDtoList.get(0).getKeywordName());
 
         return keywordRandomCompanyOutDtoList;
     }
