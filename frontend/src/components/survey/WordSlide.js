@@ -37,7 +37,7 @@ const WordSlide = () => {
 
   const words = [
     "김",
-    "사랑",
+    "사랑 사랑 사랑",
     "친구",
     "가족",
     "행복",
@@ -87,7 +87,7 @@ const WordSlide = () => {
 
   const renderListItem = (item) => (
     <li>
-      <Box width={"100%"} className="word-wrapper">
+      <Box width={""} className="word-wrapper">
         <time>{item.no}</time>
 
         <Box width={""} className="word">
