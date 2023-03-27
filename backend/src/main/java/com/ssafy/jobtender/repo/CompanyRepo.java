@@ -12,14 +12,14 @@ import java.util.Optional;
 @Repository
 public interface CompanyRepo extends JpaRepository<Company, Long> {
     Optional<Company> findByCompanyId(long companyId);
-//    @Query("select distinct C\n" +
-//            "from Input as I\n" +
-//            "join KeywordMeasure as KM\n" +
-//            "on I.keyword.keywordId = KM.keyword.keywordId\n" +
-//            "join CompanyMeasure as CM\n" +
-//            "on KM.extractedKeyword.extractKeywordId = CM.extractedKeyword.extractKeywordId\n" +
-//            "join Company as C\n" +
-//            "on CM.company.companyId = C.companyId\n" +
-//            "where I.inputId = :inputId\n")
-//    List<Company>findAllByInputId(@Param("inputId") long inputId);
+    @Query("select distinct C " +
+            "from Input as I " +
+            "join KeywordMeasure as KM " +
+            "on I.keyword.keywordId = KM.keyword.keywordId " +
+            "join CompanyMeasure as CM " +
+            "on KM.extractedKeyword.extractKeywordId = CM.extractedKeyword.extractKeywordId " +
+            "join Company as C " +
+            "on CM.company.companyId = C.companyId " +
+            "where I.inputId = :inputId")
+    Optional<List<Company>>findAllByInputId(@Param("inputId") long inputId);
 }

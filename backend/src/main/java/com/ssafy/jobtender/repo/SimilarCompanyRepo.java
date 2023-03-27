@@ -13,6 +13,5 @@ import java.util.Optional;
 @Repository
 public interface SimilarCompanyRepo extends JpaRepository<SimilarCompany, Long> {
     @Query("SELECT s FROM SimilarCompany s WHERE s.company.companyId = :companyId")
-
     Optional<List<SimilarCompany>> findAllByCompanyId(@Param("companyId") long companyId);
 }

@@ -19,10 +19,10 @@ public class Keyword {
     private String keyword;
     // mapping
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<KeywordMeasure> keywordMeasures = new ArrayList<>();
+    @JsonIgnoreProperties({"keyword"})
+    private List<KeywordMeasure> keywordMeasures = new ArrayList<>();
 
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<Input> inputs = new ArrayList<>();
+    @JsonIgnoreProperties({"keyword"})
+    private List<Input> inputs = new ArrayList<>();
 }

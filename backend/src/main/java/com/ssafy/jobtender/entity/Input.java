@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Input {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long InputId;
+    private long inputId;
     @Column(nullable = false)
     private int keywordRank;
     // mapping

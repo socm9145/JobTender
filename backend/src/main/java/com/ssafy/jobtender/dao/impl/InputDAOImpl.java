@@ -20,12 +20,13 @@ import java.security.Key;
 import java.util.*;
 
 @Component
-public class InputDAOImpl implements InputDAO{
+public class InputDAOImpl implements InputDAO {
     @PersistenceContext
     private EntityManager em;
     private final InputRepo inputRepo;
     private final ResultRepo resultRepo;
     private final KeywordRepo keywordRepo;
+
     @Autowired
     public InputDAOImpl(InputRepo inputRepo, ResultRepo resultRepo, KeywordRepo keywordRepo) {
         this.inputRepo = inputRepo;
@@ -45,17 +46,6 @@ public class InputDAOImpl implements InputDAO{
     }
 
     @Override
-    public List<Input> readInputsByResultId(long resultId) {
-        Optional<List<Input>> isInput = inputRepo.findAllByResult(resultId);
-        if(isInput.isEmpty()){
-            return null;
-        }else{
-            List<Input> inputs = isInput.get();
-            return inputs;
-        }
-    }
-
-    @Override
     public List<Input> readKeywordAll() {
         return this.inputRepo.findAll();
     }
@@ -67,7 +57,7 @@ public class InputDAOImpl implements InputDAO{
         QInput input = QInput.input;
 
         Map<Long, Integer> map = new HashMap<>();
-        PriorityQueue<KeywordOutDTO> pq = new PriorityQueue<>((x, y)-> Math.toIntExact(y.getCount() - x.getCount()));
+        PriorityQueue<KeywordOutDTO> pq = new PriorityQueue<>((x, y) -> Math.toIntExact(y.getCount() - x.getCount()));
         List<KeywordOutDTO> keywordOutDTOs = new ArrayList<>();
 
         List<Long> keywords = new JPAQuery<>(em)
@@ -88,11 +78,11 @@ public class InputDAOImpl implements InputDAO{
                 map.put(keyword, 1);
         }
 
-        for (long key : map.keySet()){
+        for (long key : map.keySet()) {
             pq.offer(new KeywordOutDTO(key, map.get(key)));
         }
 
-        while(!pq.isEmpty())
+        while (!pq.isEmpty())
             keywordOutDTOs.add(pq.poll());
 
         System.out.println(keywordOutDTOs.size());
@@ -107,7 +97,7 @@ public class InputDAOImpl implements InputDAO{
         QInput input = QInput.input;
 
         Map<Long, Integer> map = new HashMap<>();
-        PriorityQueue<KeywordOutDTO> pq = new PriorityQueue<>((x, y)-> Math.toIntExact(y.getCount() - x.getCount()));
+        PriorityQueue<KeywordOutDTO> pq = new PriorityQueue<>((x, y) -> Math.toIntExact(y.getCount() - x.getCount()));
         List<KeywordOutDTO> keywordOutDTOs = new ArrayList<>();
 
         List<Long> keywords = new JPAQuery<>(em)
@@ -128,11 +118,11 @@ public class InputDAOImpl implements InputDAO{
                 map.put(keyword, 1);
         }
 
-        for (long key : map.keySet()){
+        for (long key : map.keySet()) {
             pq.offer(new KeywordOutDTO(key, map.get(key)));
         }
 
-        while(!pq.isEmpty())
+        while (!pq.isEmpty())
             keywordOutDTOs.add(pq.poll());
 
         return keywordOutDTOs;

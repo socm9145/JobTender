@@ -22,18 +22,18 @@ class CompanyDAOImplTest {
     @Test
     void readCompaniesByInput() {
         //given
-//        long inputId = 1;
-//        List<String> expect = new ArrayList<>();
-//        expect.add("삼성전자");
-//        expect.add("LG전자");
-//        expect.add("카카오");
-//
-//        //when
-//        List<Company> companies = companyRepo.findAllByInputId(inputId);
-//
-//        //then
-//        for(int i=0;i<companies.size();i++){
-//            assertEquals(expect.get(i), companies.get(i).getName());
-//        }
+        long inputId = 1;
+        List<String> expect = new ArrayList<>();
+        expect.add("삼성전자");
+        expect.add("LG전자");
+        expect.add("카카오");
+
+        //when
+        List<Company> companies = companyRepo.findAllByInputId(inputId).get();
+
+        //then
+        for(int i=0;i<companies.size();i++){
+            assertEquals(expect.get(i), companies.get(i).getName());
+        }
     }
 }

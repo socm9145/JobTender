@@ -41,8 +41,8 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"company"})
     private List<SimilarCompany> similarCompanies = new ArrayList<>();
-    @OneToMany(mappedBy = "comparableCompany", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"comparableCompany"})
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"company"})
     private List<SimilarCompany> comparable_similarCompanies = new ArrayList<>();
 
 }

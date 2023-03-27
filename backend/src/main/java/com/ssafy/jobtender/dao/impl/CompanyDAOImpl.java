@@ -4,9 +4,8 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.ssafy.jobtender.dao.CompanyDAO;
 import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
-import com.ssafy.jobtender.entity.Company;
-import com.ssafy.jobtender.entity.QCompany;
-import com.ssafy.jobtender.entity.QCompanyRating;
+import com.ssafy.jobtender.dto.output.KeywordRandomCompanyOutDto;
+import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.repo.CompanyRepo;
 import org.springframework.stereotype.Component;
 
@@ -49,15 +48,33 @@ public class CompanyDAOImpl implements CompanyDAO {
     }
 
     @Override
-    public List<Company> readCompaniesByInputId(long inputId) {
-//        Optional<List<Company>> isCompany = companyRepo.findAllByInputId(inputId);
-//        if(isCompany.isEmpty()){
-//            return null;
-//        }else{
-//            List<Company> companies = isCompany.get();
-//            return companies;
-//        }
-        return null;
+    public List<KeywordRandomCompanyOutDto> readKeywordCompaniesByResultId(long resultId) {
+        QResult result = QResult.result;
+        QInput input = QInput.input;
+        QKeywordMeasure keywordMeasure = QKeywordMeasure.keywordMeasure;
+        QCompanyMeasure companyMeasure = QCompanyMeasure.companyMeasure;
+        QCompany company = QCompany.company;
+        QKeyword keyword = QKeyword.keyword1;
+
+        List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new JPAQuery<>(em)
+                .select(Projections.constructor(KeywordRandomCompanyOutDto.class,
+                        result.resultId, company.companyId, keyword.keywordId, company.name, keyword.keyword)).distinct()
+                .from(result)
+                .join(input)
+                .on(result.resultId.eq(input.result.resultId))
+                .join(keyword)
+                .on(input.keyword.keywordId.eq(keyword.keywordId))
+                .join(keywordMeasure)
+                .on(keyword.keywordId.eq(keywordMeasure.keyword.keywordId))
+                .join(companyMeasure)
+                .on(keywordMeasure.extractedKeyword.extractKeywordId.eq(companyMeasure.extractedKeyword.extractKeywordId))
+                .join(company)
+                .on(companyMeasure.company.companyId.eq(company.companyId))
+                .where(result.resultId.eq(resultId))
+                .orderBy(keyword.keywordId.asc())
+                .fetch();
+
+        return keywordRandomCompanyOutDtoList;
     }
 }
 
