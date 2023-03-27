@@ -63,15 +63,15 @@ public class ResultController {
         return ResponseEntity.status(HttpStatus.OK).body(keywordRandomCompanyOutDtoListMap);
     }
 
-    @ApiOperation(
-            value = "분석 결과 기업 확인 API"
-            , notes = "키워드로 분석된 기업 3개를 반환한다.")
-    @GetMapping("/company/rank")
-    public ResponseEntity<List<ResultCompanyOutDTO>> readResultsCompanies(@RequestParam("resultId") String resultId){
-        List<ResultCompanyOutDTO> resultCompanyOutDTOList = this.resultService.readResultsCompanies();
-
-        return ResponseEntity.status(HttpStatus.OK).body(resultCompanyOutDTOList);
-    }
+//    @ApiOperation(
+//            value = "분석 결과 기업 확인 API"
+//            , notes = "키워드로 분석된 기업 3개를 반환한다.")
+//    @GetMapping("/company/rank")
+//    public ResponseEntity<List<ResultCompanyOutDTO>> readResultsCompanies(@RequestParam("resultId") String resultId){
+//        List<ResultCompanyOutDTO> resultCompanyOutDTOList = this.resultService.readResultsCompanies();
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(resultCompanyOutDTOList);
+//    }
 
     @ApiOperation(
             value = "기업 정보 및 평점 확인 API (v)"

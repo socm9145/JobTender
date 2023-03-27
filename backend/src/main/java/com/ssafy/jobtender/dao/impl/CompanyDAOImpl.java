@@ -54,7 +54,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         QKeywordMeasure keywordMeasure = QKeywordMeasure.keywordMeasure;
         QCompanyMeasure companyMeasure = QCompanyMeasure.companyMeasure;
         QCompany company = QCompany.company;
-        QKeyword keyword = QKeyword.keyword1;
+        QKeyword keyword = QKeyword.keyword;
 
         List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new JPAQuery<>(em)
                 .select(Projections.constructor(KeywordRandomCompanyOutDto.class,
