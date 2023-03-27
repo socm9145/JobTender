@@ -1,16 +1,19 @@
 import "../../styles/ImageContainer.css";
 
 import React, { useEffect, useRef } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { Box } from "@chakra-ui/react";
 import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
+
 const ImageContainer = () => {
+  const navigate = useNavigate();
   const carouselRef = useRef(null);
   const selectedMethod = useAppSelector((state) => state.home.selectedMethod);
-  const buttonAble = useAppSelector((state) => state.home.buttonAble);
   const dispatch = useAppDispatch();
-
   const handleMouseDown = (event) => {
     const carousel = carouselRef.current;
     if (carousel.classList.contains("transition")) return;
@@ -28,10 +31,15 @@ const ImageContainer = () => {
 
       if (dragPos < -150) {
         shiftSlide(-1);
-        // 여기
-        // isSelected = !isSelected;
-        // setselectedMethod(isSelected);
         dispatch(setselectedMethod());
+      } else if (dragPos === 0) {
+        console.log(selectedMethod);
+        if (selectedMethod) {
+          navigate("/keyword");
+        } else {
+          dispatch(setselectedMethod());
+          navigate("/survey");
+        }
       } else {
         shiftSlide(0);
       }
@@ -46,9 +54,10 @@ const ImageContainer = () => {
 
   const shiftSlide = (direction) => {
     const carousel = carouselRef.current;
+    const cardWidth = document.querySelector(".slide").offsetWidth + 30;
     if (carousel.classList.contains("transition")) return;
     carousel.classList.add("transition");
-    carousel.style.transform = "translateX(" + direction * 830 + "px)";
+    carousel.style.transform = "translateX(" + direction * cardWidth + "px)";
 
     setTimeout(() => {
       const slides = carousel.querySelectorAll(".slide");
@@ -66,14 +75,12 @@ const ImageContainer = () => {
   useEffect(() => {
     const carousel = carouselRef.current;
     carousel.addEventListener("mousedown", handleMouseDown);
+    shiftSlide(-1);
     return () => {
       carousel.removeEventListener("mousedown", handleMouseDown);
     };
-  }, []);
-
-  useEffect(() => {
-    shiftSlide(-1);
   }, [selectedMethod]);
+
   return (
     <Box
       height={"100%"}
