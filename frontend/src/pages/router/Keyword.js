@@ -41,14 +41,7 @@ const Keyword = () => {
         },
         0.5
       )
-      // .from(
-      //   leftKeywords.current,
-      //   {
-      //     duration: 1.8,
-      //     ease: "sine.out",
-      //   },
-      //   0.7
-      // )
+
       .from(
         verticalLine2.current,
         {
@@ -59,14 +52,7 @@ const Keyword = () => {
         },
         0.9
       )
-      // .from(
-      //   describe.current,
-      //   {
-      //     duration: 1.8,
-      //     ease: "sine.out",
-      //   },
-      //   1.1
-      // )
+
       .from(
         horizontalLine2.current,
         {
@@ -77,14 +63,7 @@ const Keyword = () => {
         },
         0.8
       )
-      // .from(
-      //   rightKeywords.current,
-      //   {
-      //     duration: 1.8,
-      //     ease: "sine.out",
-      //   },
-      //   1.5
-      // )
+
       .from(
         rankContainer.current,
         {
@@ -200,7 +179,7 @@ const Keyword = () => {
         >
           <Box
             ref={rankContainer}
-            width={"50%"}
+            width={"60%"}
             height={"100%"}
             display={"flex"}
             flexDirection={"column"}

@@ -83,8 +83,9 @@ const KeywordRank = ({ rank }) => {
   }, [selectedKeyword[rank]]);
   return (
     <Box
+      id={"rankContainer"}
       ref={rankContainer}
-      width={"30%"}
+      width={"25%"}
       position={"relative"}
       display={"flex"}
       flexDirection={"column"}
@@ -103,10 +104,11 @@ const KeywordRank = ({ rank }) => {
           </Text>
         </Box>
         <Box
+          lineHeight={"1.2"}
           width={"100%"}
           flexGrow={"1"}
           textAlign={"center"}
-          fontSize={"2rem"}
+          fontSize={"2.5rem"}
           fontFamily={"dodum"}
           paddingRight={"2rem"}
         >
