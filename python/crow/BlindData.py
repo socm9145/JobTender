@@ -8,22 +8,6 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-def find_company(name):
-    sql_find_company = '''
-    SELECT COUNT(*) FROM Companies WHERE name = %s
-    '''
-    result = -1
-    try:
-        result = cur.execute(sql_find_company, name)
-        conn.commit()
-    except Exception as e1:
-        print(traceback.format_exc())
-    if result == 0:
-        return True
-    else:
-        return False
-
-
 def set_time():
     return random.randint(40, 60)
 
@@ -96,7 +80,7 @@ class BlindData:
 
     def insert_companies(self, data):
         sql = '''
-              INSERT INTO `companies` (name, type, scale, employees_number, address, year_founded, salary)
+              INSERT INTO `Companies` (name, type, scale, employees_number, address, year_founded, salary)
               VALUES (%(name)s, %(type)s, %(scale)s, %(employees)s, %(addr)s, %(year)s, %(salary)s);
               '''
         try:
@@ -107,7 +91,7 @@ class BlindData:
 
     def insert_rank(self, data):
         sql = '''
-              INSERT INTO `company_ratings` (company_id, average_rating, growth_rating, balance_rating, 
+              INSERT INTO `Company_Ratings` (company_id, average_rating, growth_rating, balance_rating, 
               salary_welfare_rating, culture_rating, management_rating)
               VALUES (%(company_id)s, %(total)s, %(growth)s, %(balance)s, %(salary_welfare)s, %(culture)s, %(management)s);
               '''
