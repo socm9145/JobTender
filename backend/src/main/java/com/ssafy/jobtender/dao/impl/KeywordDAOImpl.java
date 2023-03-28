@@ -19,7 +19,7 @@ public class KeywordDAOImpl implements KeywordDAO {
 
     @Override
     public List<Keyword> readAllKeywords() {
-        List<Keyword> keywords = keywordRepo.findAllKeywords();
+        List<Keyword> keywords = keywordRepo.findAll();
         return keywords;
     }
 }
