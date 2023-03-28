@@ -30,7 +30,19 @@ const WordSlide = () => {
         }
       }
     }
+    //
+    function initialCheck() {
+      for (var i = 0; i < items.length; i++) {
+        if (isElementInViewport(items[i])) {
+          if (!items[i].classList.contains("in-view")) {
+            items[i].classList.add("in-view");
+          }
+        }
+      }
+    }
 
+    initialCheck();
+    //
     window.addEventListener("load", callbackFunc);
     window.addEventListener("scroll", callbackFunc);
   }, []);
@@ -102,6 +114,7 @@ const WordSlide = () => {
     </li>
   );
 
+  console.log(selectedScores);
   return (
     <div className="word-slide">
       <section className="timeline">
