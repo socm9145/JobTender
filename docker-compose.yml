@@ -43,5 +43,34 @@ services:
   frontend:
     build: ./frontend
     container_name: frontend
+    environment:
+      - TZ=Asia/Seoul
     volumes:
       - ./frontend/build:/frontend/build
+  
+  backend_spring:
+    container_name: backend_spring
+    environment:
+      - TZ=Asia/Seoul
+    build: ./backend
+    ports: 
+      - "8000:8000"
+    volumes:
+      - ./backend:/srv/docker-server
+    # working_dir: /backend
+    # command: ["./gradlew", "bootrun"]
+    depends_on:
+      - mysqldb
+    restart: unless-stopped
+
+  backend_flask:
+    container_name: backend_flask
+    environment:
+      - TZ=Asia/Seoul
+    build: ./python/python_backend
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mysqldb
+    restart: unless-stopped
+    

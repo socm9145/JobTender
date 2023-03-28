@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from requests import request
-from Logic import History, Rank, Age, Gender, Random, Top
 from Dao import Rank as rDao
 from Logic import Rank as rLogic
 
