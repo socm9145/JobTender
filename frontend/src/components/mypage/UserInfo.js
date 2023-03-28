@@ -31,7 +31,8 @@ import { Box, Text, Divider } from "@chakra-ui/react";
                 >
                     <Text
                         color={"#969696"}
-                        fontFamily={"Aktivgroteskcrop, sans-serif"}
+                        // fontFamily={"Aktivgroteskcrop, sans-serif"}
+                        fontFamily={"dodum"}
                         fontSize={".8125rem"}
                         lineHeight={"1.3846153846153846"}
                         textTransform={"uppercase"}
@@ -52,7 +53,8 @@ import { Box, Text, Divider } from "@chakra-ui/react";
                     opacity={"1"}
                 >
                     <Text
-                        fontFamily={"Recklessneue,sans-serif"}
+                        // fontFamily={"Recklessneue,sans-serif"}
+                        fontFamily={"dodum"}
                         fontSize={"1.25em"}
                         lineHeight={"1.2"}
                         fontWeight={"400"}
