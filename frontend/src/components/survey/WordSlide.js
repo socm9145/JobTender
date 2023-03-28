@@ -30,14 +30,26 @@ const WordSlide = () => {
         }
       }
     }
+    //
+    function initialCheck() {
+      for (var i = 0; i < items.length; i++) {
+        if (isElementInViewport(items[i])) {
+          if (!items[i].classList.contains("in-view")) {
+            items[i].classList.add("in-view");
+          }
+        }
+      }
+    }
 
+    initialCheck();
+    //
     window.addEventListener("load", callbackFunc);
     window.addEventListener("scroll", callbackFunc);
   }, []);
 
   const words = [
     "김",
-    "사랑",
+    "사랑 사랑 사랑",
     "친구",
     "가족",
     "행복",
@@ -87,7 +99,7 @@ const WordSlide = () => {
 
   const renderListItem = (item) => (
     <li>
-      <Box width={"100%"} className="word-wrapper">
+      <Box width={""} className="word-wrapper">
         <time>{item.no}</time>
 
         <Box width={""} className="word">
@@ -102,6 +114,7 @@ const WordSlide = () => {
     </li>
   );
 
+  console.log(selectedScores);
   return (
     <div className="word-slide">
       <section className="timeline">
