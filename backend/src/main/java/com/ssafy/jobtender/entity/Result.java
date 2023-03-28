@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @ToString
 @Table(name = "Results")
+@JsonIgnoreProperties({"companyScores", "inputs"})
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +26,7 @@ public class Result {
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"result"})
     private List<Input> inputs = new ArrayList<>();
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"result"})
     private List<CompanyScore> companyScores = new ArrayList<>();
 }
