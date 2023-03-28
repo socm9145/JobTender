@@ -10,4 +10,6 @@ public interface ResultService {
     long createResult(Long userId);
     List<ReadResultOutDTO> readResultsByUserId(Long userId);
     List<ResultCompanyOutDTO> readResultsCompanies();
+
+    List<ReadResultOutDTO> readSurveyResultsByUserId(Long userId);
 }
