@@ -80,16 +80,19 @@ const WordSlide = () => {
   const [selectedScores, setSelectedScores] = useState({});
 
   const handleStarClick = (itemId, score) => {
-    setSelectedScores({ ...selectedScores, [itemId]: score });
+    setSelectedScores({ ...selectedScores, [itemId]: score - 2 });
   };
 
   const renderButtons = (itemId) => {
-    const selectedScore = selectedScores[itemId] || 0;
+    //  || 뒤에는 초기값
+    const selectedScore = selectedScores[itemId] || -999;
 
-    return Array.from({ length: 7 }, (_, i) => (
+    return Array.from({ length: 9 }, (_, i) => (
       <button
         key={i}
-        className={`score-button ${i + 1 === selectedScore ? "selected" : ""}`}
+        className={`score-button ${
+          i + 1 === selectedScore + 2 ? "selected" : ""
+        }`}
         onClick={() => handleStarClick(itemId, i + 1)}
       >
         {i + 1}
