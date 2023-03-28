@@ -124,7 +124,12 @@ const TextContainer = () => {
             >
               소요시간
             </Box>
-            <Box id={"expected-time"} fontSize={"1rem"}>
+            <Box
+              id={"expected-time"}
+              fontSize={"1rem"}
+              fontFamily={"taebaek"}
+              fontWeight={"bold"}
+            >
               {selectedMethod ? <Text>1분</Text> : <Text>5분</Text>}
             </Box>
           </Box>
@@ -137,7 +142,12 @@ const TextContainer = () => {
             <Box id={"describe-title"} fontSize={"0.9rem"} color={"#969696"}>
               설명
             </Box>
-            <Box id={"describe"} fontSize={"1rem"}>
+            <Box
+              id={"describe"}
+              fontSize={"1rem"}
+              fontFamily={"taebaek"}
+              fontWeight={"bold"}
+            >
               {selectedMethod ? (
                 <Text>
                   핵심 키워드를 선택하는 방법으로 보다 빠르게 결과를 확인할 수

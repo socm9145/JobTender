@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Zanabazar+Square&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Zanabazar+Square&display=swap");
 
 body {
   overflow-x: hidden;
@@ -11,8 +11,8 @@ body {
   margin: 0px;
 }
 
-.homeFont{
-  font-family: 'Noto Sans Zanabazar Square', sans-serif;
+.homeFont {
+  font-family: "Noto Sans Zanabazar Square", sans-serif;
 }
 
 @font-face {
@@ -22,4 +22,35 @@ body {
 @font-face {
   font-family: "dalserM";
   src: url("../public/font/DalseoHealingMedium.ttf");
+}
+
+@font-face {
+  font-family: "hanu";
+  src: url("../public/font/Hoengseong\ Hanu.ttf");
+}
+@font-face {
+  font-family: "sunshineB";
+  src: url("../public/font/Gwangyang\ Sunshine\ Bold\(TTF용\).ttf");
+}
+@font-face {
+  font-family: "pak";
+  src: url("../public/font/Pak_Yong_jun.ttf");
+}
+@font-face {
+  font-family: "sunsin";
+  src: url("../public/font/sunsinB.ttf");
+}
+
+/* v */
+@font-face {
+  font-family: "jungnaL";
+  src: url("../public/font/중나좋체\ Light.ttf");
+}
+@font-face {
+  font-family: "jungnaM";
+  src: url("../public/font/중나좋체\ Medium.ttf");
+}
+@font-face {
+  font-family: "taebaek";
+  src: url("../public/font/TAEBAEK\ milkyway.ttf");
 }
