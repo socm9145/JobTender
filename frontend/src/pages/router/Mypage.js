@@ -4,6 +4,11 @@ import UserInfo from "../../components/mypage/UserInfo"
 import "../../styles/Mypage.css"
   
   const Mypage = () => {
+    const historyData = [["2023.03.27", ["성장", "혁신", "창의"], ["추천기업", "추천기업", "추천기업"]],
+    ["2023.03.21", ["성장", "창의", "도전"], ["추천기업", "추천기업", "추천기업"]],
+    ["2023.03.22", ["가자", "취업", "힘내"], ["추천기업", "추천기업", "추천기업"]],
+    ["2023.03.23", ["아자", "도전", "창의"], ["추천기업", "추천기업", "추천기업"]],
+    ["2023.03.24", ["혁신", "도전", "성장"], ["추천기업", "추천기업", "추천기업"]]]
       return (
           // 마이페이지
         // <Box  width={"100vw"}>
@@ -158,18 +163,11 @@ import "../../styles/Mypage.css"
                         
                         justifyContent={"flex-start"}
                     >
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
-                        <MyHistory></MyHistory>
+                        {
+                            historyData.map((history, index) => (
+                                <MyHistory date={history[0]} keyWords={history[1]} companies={history[2]}></MyHistory>
+                            ))
+                        }
                     </Box>
                 </Box>
             </Box>

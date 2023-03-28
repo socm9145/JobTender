@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Zanabazar+Square&display=swap');
+
 body {
   overflow-x: hidden;
   padding: 0px;
@@ -12,4 +13,13 @@ body {
 
 .homeFont{
   font-family: 'Noto Sans Zanabazar Square', sans-serif;
+}
+
+@font-face {
+  font-family: "dalserB";
+  src: url("../public/font/DalseoHealingBold.ttf");
+}
+@font-face {
+  font-family: "dalserM";
+  src: url("../public/font/DalseoHealingMedium.ttf");
 }
