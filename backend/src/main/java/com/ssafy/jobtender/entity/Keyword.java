@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Keywords")
+@JsonIgnoreProperties({"keywordMeasures", "inputs"})
 public class Keyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +20,8 @@ public class Keyword {
     private String keywordName;
     // mapping
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"keyword"})
     private List<KeywordMeasure> keywordMeasures = new ArrayList<>();
 
     @OneToMany(mappedBy = "keyword", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"keyword"})
     private List<Input> inputs = new ArrayList<>();
 }

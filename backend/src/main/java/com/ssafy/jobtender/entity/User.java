@@ -13,6 +13,7 @@ import java.util.*;
 @Data
 @Entity
 @Table(name = "Users")
+@JsonIgnoreProperties({"results"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,6 @@ public class User {
     private Role role;
     // mapping
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"user"})
     private List<Result> results = new ArrayList<>();
     // method
     public User update(String gender, int age){

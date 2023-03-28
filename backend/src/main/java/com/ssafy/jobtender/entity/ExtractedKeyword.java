@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "extracted_keywords")
+@JsonIgnoreProperties({"keywordMeasures", "companyMeasures"})
 public class ExtractedKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
