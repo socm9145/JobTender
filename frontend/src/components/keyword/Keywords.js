@@ -79,7 +79,7 @@ const Keyword = ({ keyword, id, LR }) => {
         <Text
           ref={text}
           paddingX={"0.5rem"}
-          fontSize={"2rem"}
+          fontSize={"3.1rem"}
           fontFamily={"dodum"}
           cursor={"pointer"}
           onClick={() => {
