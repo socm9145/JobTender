@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setButtonAble, setselectedMethod } from "../../redux/home/homeSlice";
 
 import { Box, Text } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 import { gsap } from "gsap";
 import { EasePack } from "gsap/EasePack";
@@ -164,18 +165,22 @@ const TextContainer = () => {
         </Box>
         <Box
           width={"100%"}
+          height={"5%"}
           display={"flex"}
           justifyContent={"space-between"}
           alignItems={"end"}
         >
           <Box
             ref={nextButton}
-            width={"50%"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            width={"45%"}
+            height={"100%"}
             lineHeight={"2em"}
             border={"solid 1px #191919"}
             borderLeftRadius={"20px"}
             borderRightRadius={"20px"}
-            textAlign={"center"}
             cursor={"pointer"}
             onMouseOver={(e) => {
               onHandleMouseOver(e);
@@ -190,7 +195,7 @@ const TextContainer = () => {
               }
             }}
           >
-            다음
+            <ArrowForwardIcon boxSize={6} />
           </Box>
           <Box
             id={"page-num-container"}

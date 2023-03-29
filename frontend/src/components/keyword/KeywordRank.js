@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { Box, Text } from "@chakra-ui/react";
+import { SmallAddIcon } from "@chakra-ui/icons";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
   setClickedRank,
@@ -143,7 +145,7 @@ const KeywordRank = ({ rank }) => {
             verticalAlign={"top"}
             cursor={"pointer"}
           >
-            +
+            <SmallAddIcon boxSize={"10"} />
           </Text>
         </Box>
         <Box width={"100%"} borderTop={"solid 1px black"}></Box>
