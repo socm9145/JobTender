@@ -1,5 +1,5 @@
 import React from "react";
-import Zoomable from "./chart/Zoomable";
+import Zoomable from "./chart/ZoomChart";
 import data from "./data.json";
 
 const CorpKeyword = () => {
