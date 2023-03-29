@@ -16,7 +16,7 @@ const Result = () => {
       paddingX={"15%"}
       marginTop={"48px"}
     >
-      {/* 이름 */}
+      {/*    이름 */}
       <Box>
         <Text>유정훈 님의 결과입니다.</Text>
       </Box>
