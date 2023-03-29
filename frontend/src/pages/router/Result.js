@@ -1,10 +1,10 @@
 import { Box, Text } from "@chakra-ui/react";
 
-import AgeValues from "../../components/result/AgeValues5";
-import CorpKeyword from "../../components/result/CorpKeyword2";
-import GraphValues from "../../components/result/GraphValues4";
-import IdealTalent from "../../components/result/IdealTalent3";
-import RecommendedCorp from "../../components/result/RecommendedCorp1";
+import RecommendedCorp from "../../components/result/1/RecommendedCorp";
+import CorpKeyword from "../../components/result/2/CorpKeyword";
+import IdealTalent from "../../components/result/3/IdealTalent";
+import GraphValues from "../../components/result/4/GraphValues";
+import AgeValues from "../../components/result/5/AgeValues";
 
 const Result = () => {
   return (

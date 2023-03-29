@@ -1,12 +1,11 @@
 import React from "react";
-import Zoomable from "./chart/ZoomChart";
-import data from "./data.json";
+import ZoomChart from "./ZoomChart";
 
 const CorpKeyword = () => {
   return (
     <div>
       기업키워드
-      <Zoomable data={data} />
+      <ZoomChart />
     </div>
   );
 };
