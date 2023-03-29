@@ -14,7 +14,7 @@ public interface UserDAO {
     UserOutDTO updateUsersByUserId(UpdateUserDTO updateUserDTO);
     Boolean deleteUserByUserId(long userId);
     List<UserOutDTO> keywordRankingByGender(String gender);
-
     List<UserOutDTO> keywordRankingByAge(int age);
-    
+    User insertUser(User user);
+    User readUserByOauthId(long oauthId);
 }

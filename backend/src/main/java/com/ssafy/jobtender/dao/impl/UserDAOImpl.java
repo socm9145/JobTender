@@ -2,6 +2,7 @@ package com.ssafy.jobtender.dao.impl;
 
 import com.ssafy.jobtender.dao.UserDAO;
 import com.ssafy.jobtender.dto.input.UpdateUserDTO;
+import com.ssafy.jobtender.dto.input.UserInputDTO;
 import com.ssafy.jobtender.dto.output.UserOutDTO;
 import com.ssafy.jobtender.entity.User;
 import com.ssafy.jobtender.entity.common.AccessInfo;
@@ -145,5 +146,20 @@ public class UserDAOImpl implements UserDAO {
             userOutDTOs.add(userOutDTO);
         }
         return userOutDTOs;
+    }
+
+    @Override
+    public User insertUser(User user) {
+        return userRepo.save(user);
+    }
+
+    @Override
+    public User readUserByOauthId(long oauthId) {
+        Optional<User> isUser = userRepo.findByOauthId(oauthId);
+        if(isUser.isEmpty()){
+            return null;
+        }else{
+            return isUser.get();
+        }
     }
 }

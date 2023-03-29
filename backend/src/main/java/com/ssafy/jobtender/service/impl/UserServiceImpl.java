@@ -41,4 +41,14 @@ public class UserServiceImpl implements UserService {
     public List<UserOutDTO> keywordRankingByAge(int age) {
         return userDAO.keywordRankingByAge(age);
     }
+
+    @Override
+    public User insertUser(User user) {
+        return userDAO.insertUser(user);
+    }
+
+    @Override
+    public User readUserByOauthId(long oauthId) {
+        return userDAO.readUserByOauthId(oauthId);
+    }
 }
