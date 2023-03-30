@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import KakaoButton from "../../components/login/KakaoButton";
-import LoginAnima from "../../components/login/LoginAnima";
 
 import { Box, Text, Image } from "@chakra-ui/react";
 
