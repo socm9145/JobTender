@@ -1,9 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Zanabazar+Square&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Zanabazar+Square&display=swap");
 
 body {
   overflow-x: hidden;
   padding: 0px;
   margin: 0px;
+  /* cursor: none; */
+}
+
+a {
+  /* cursor: none; */
 }
 
 .App {
@@ -11,8 +16,8 @@ body {
   margin: 0px;
 }
 
-.homeFont{
-  font-family: 'Noto Sans Zanabazar Square', sans-serif;
+.homeFont {
+  font-family: "Noto Sans Zanabazar Square", sans-serif;
 }
 
 @font-face {
@@ -22,4 +27,79 @@ body {
 @font-face {
   font-family: "dalserM";
   src: url("../public/font/DalseoHealingMedium.ttf");
+}
+
+@font-face {
+  font-family: "hanu";
+  src: url("../public/font/Hoengseong\ Hanu.ttf");
+}
+@font-face {
+  font-family: "sunshineB";
+  src: url("../public/font/Gwangyang\ Sunshine\ Bold\(TTF용\).ttf");
+}
+@font-face {
+  font-family: "pak";
+  src: url("../public/font/Pak_Yong_jun.ttf");
+}
+@font-face {
+  font-family: "sunsin";
+  src: url("../public/font/sunsinB.ttf");
+}
+
+/* v */
+@font-face {
+  font-family: "jungnaL";
+  src: url("../public/font/중나좋체\ Light.ttf");
+}
+@font-face {
+  font-family: "jungnaM";
+  src: url("../public/font/중나좋체\ Medium.ttf");
+}
+@font-face {
+  font-family: "taebaek";
+  src: url("../public/font/TAEBAEK\ milkyway.ttf");
+}
+
+.draggunable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* body {
+  height: 100vh;
+  background: #010101;
+  cursor: none;
+  margin: 0;
+  display: flex;
+  font-family: monospace;
+}
+
+body h1,
+body p,
+body a {
+  color: #fff;
+}
+
+body a {
+  border-bottom: 2px solid #fff;
+  padding: 10px 0;
+  margin-top: 25px;
+} */
+
+.cursor {
+  pointer-events: none;
+}
+
+.cursor__ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  mix-blend-mode: difference;
+  z-index: 1000;
+}
+
+.cursor__ball circle {
+  fill: #f7f8fa;
 }

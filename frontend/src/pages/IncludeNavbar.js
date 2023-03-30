@@ -8,6 +8,7 @@ import Home from "./router/Home";
 import Keyword from "./router/Keyword";
 import Survey from "./router/Survey";
 import Mypage from "./router/Mypage";
+import Result from "./router/Result";
 // import LandingPage from "./router/LandingPage";
 import Kakao from "./router/Kakao";
 
@@ -23,6 +24,7 @@ const IncludeNavbar = () => {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/keyword" element={<Keyword />}></Route>
           <Route path="/survey" element={<Survey />}></Route>
+          <Route path="/result" element={<Result />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/kakao" element={<Kakao />}></Route>
 

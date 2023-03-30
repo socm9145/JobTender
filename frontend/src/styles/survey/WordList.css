@@ -73,7 +73,7 @@
   border-radius: 5px;
   background-color: #333;
   color: #fff;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .navigation-buttons button:disabled {
@@ -94,8 +94,10 @@
   border: none;
   border-radius: 5px;
   color: #fff;
-  cursor: pointer;
-  /* padding: 10px 20px; */
+  /* cursor: pointer; */
+  font-size: 2rem;
+  margin: 5px;
+  padding: 10px 20px;
   width: calc(25% - 10px);
 }
 

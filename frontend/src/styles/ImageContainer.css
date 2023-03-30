@@ -37,7 +37,7 @@ body * { -webkit-user-select: none } */
 .slide {
   height: 100%;
   width: 50vw;
-  cursor: pointer;
+  /* cursor: pointer; */
   float: left;
   display: flex;
   flex-direction: column;

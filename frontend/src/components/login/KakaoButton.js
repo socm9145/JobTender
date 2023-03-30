@@ -10,8 +10,9 @@ const KakaoButton = ({ buttonWidth }) => {
       <a>
         <Box display={"flex"} justifyContent={"center"}>
           <Image
+            className="hoverable"
             borderRadius={"0"}
-            cursor={"pointer"}
+            shadow={"1px 1px 2px black"}
             onClick={() => {
               window.location.href = kakaoLogin;
             }}

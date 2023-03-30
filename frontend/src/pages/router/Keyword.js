@@ -214,6 +214,7 @@ const Keyword = () => {
               </Tooltip>
             ) : (
               <Box
+                className="hoverable"
                 ref={submitButton}
                 width={"200%"}
                 lineHeight={"2em"}
@@ -221,7 +222,7 @@ const Keyword = () => {
                 borderLeftRadius={"20px"}
                 borderRightRadius={"20px"}
                 textAlign={"center"}
-                cursor={"pointer"}
+                // cursor={"pointer"}
                 fontSize={"1.3rem"}
                 onMouseOver={(e) => {
                   onHandleMouseOver(e);

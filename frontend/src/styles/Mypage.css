@@ -1,52 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-::-webkit-scrollbar{
-    width: 6px;
-}
-  
-::-webkit-scrollbar-thumb{
-    height: 20%;
-    border-radius: 10px;
-    background-color: bisque;
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-::-webkit-scrollbar-track{
-    border-radius: 10px;
-    background-color: rgba(33, 133, 133, 0.33);
+::-webkit-scrollbar-thumb {
+  height: 20%;
+  border-radius: 10px;
+  background-color: bisque;
 }
 
-.myfont1{
-    font-family: "Nanum Pen Script", cursive;
-}
-.myfont2{
-    font-family: "Hohmley", serif;
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgba(33, 133, 133, 0.33);
 }
 
-.info{
-    color: #969696;
-    transition: color 1s;
-    cursor: pointer;
-/* 
+.myfont1 {
+  font-family: "Nanum Pen Script", cursive;
+}
+.myfont2 {
+  font-family: "Hohmley", serif;
+}
+
+.info {
+  color: black;
+  transition: color 1s;
+  /* cursor: pointer; */
+  /* 
     transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d; */
 }
-.info:hover{
-    color: black;
+.info:hover {
+  color: #969696;
 }
-.update{
-    color: #969696;
-    transition: color 1s;
-    cursor: pointer;
+.update {
+  color: black;
+  transition: color 1s;
+  /* cursor: pointer; */
 }
-.update:hover{
-    color: black;
+.update:hover {
+  color: #969696;
 }
-.history{
-    transition: color 1s;
-    cursor: pointer;
-    color: #969696;
+.history {
+  color: black;
+  transition: color 1s;
+  /* cursor: pointer; */
 }
-.history:hover{
-    color: black;
+.history:hover {
+  color: #969696;
 }

@@ -1,0 +1,42 @@
+[
+  {
+    "letter": "안녕",
+    "frequency": 0.1
+  },
+  {
+    "letter": "내",
+    "frequency": 0.05
+  },
+  {
+    "letter": "사랑",
+    "frequency": 0.1
+  },
+  {
+    "letter": "잘가요",
+    "frequency": 0.2
+  },
+  {
+    "letter": "배고파",
+    "frequency": 0.05
+  },
+  {
+    "letter": "파스타",
+    "frequency": 0.05
+  },
+  {
+    "letter": "내놔",
+    "frequency": 0.05
+  },
+  {
+    "letter": "집가고",
+    "frequency": 0.05
+  },
+  {
+    "letter": "싶다",
+    "frequency": 0.1
+  },
+  {
+    "letter": "리마거리ㅏㅁ덕리ㅏ먿리ㅏㅓ",
+    "frequency": 0.25
+  }
+]
