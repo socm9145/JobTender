@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
 
 import * as d3 from "d3";
-import data from "./zoomData.json";
 
 import { Box } from "@chakra-ui/react";
 
-const ZoomChart = () => {
+const ZoomChart = ({ data }) => {
   const ref = useRef();
   useEffect(() => {
     const width = 932;
@@ -162,7 +161,7 @@ const ZoomChart = () => {
       return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
     }
 
-    return svg.node();
+    // return svg.node();
   }, []);
 
   return (

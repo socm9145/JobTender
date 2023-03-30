@@ -47,7 +47,7 @@ const AgeValues = () => {
     <div>
       <div>
         <h1>Grouped Bar Chart - Population by Age</h1>
-        <GroupedBarChart {...chartProps} />
+        {/* <GroupedBarChart {...chartProps} /> */}
       </div>
     </div>
   );
