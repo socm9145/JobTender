@@ -5,7 +5,6 @@ import data from "./zoomData.json";
 const CorpKeyword = () => {
   return (
     <div>
-      기업키워드
       <ZoomChart data={data} />
     </div>
   );

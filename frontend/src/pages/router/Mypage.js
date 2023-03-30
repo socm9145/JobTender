@@ -1,9 +1,29 @@
-import { Box, Text, Divider } from "@chakra-ui/react";
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
+import { userinfo } from '../../api/mypageAxios';
+
 import MyHistory from "../../components/mypage/History";
 import UserInfo from "../../components/mypage/UserInfo";
+
 import "../../styles/Mypage.css";
+import { Box, Text, Divider } from "@chakra-ui/react";
 
 const Mypage = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(()=>{
+    async function getUserInfo(){
+      await userinfo(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+    getUserInfo();
+  },[])
   const historyData = [
     [
       "2023.03.27",
