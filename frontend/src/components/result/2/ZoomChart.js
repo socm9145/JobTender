@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from "react";
-import * as d3 from "d3";
-import data from "./data.json";
-import { Box, Text } from "@chakra-ui/react";
-// console.log(data);
 
-const ZoomChart = () => {
+import * as d3 from "d3";
+
+import { Box } from "@chakra-ui/react";
+
+const ZoomChart = ({ data }) => {
   const ref = useRef();
   useEffect(() => {
-    console.log(data);
     const width = 932;
+
+    // const height = 700; // 원하는 높이로 변경하세요
+
     const radius = width / 6;
 
     const arc = d3
@@ -39,12 +41,15 @@ const ZoomChart = () => {
 
     const svg = d3
       .select(ref.current)
-      .attr("viewBox", [0, 0, width, width])
+      // .attr("width", width) // 이 라인을 추가하세요
+      // .attr("height", height) // 이 라인을 추가하세요
+      .attr("viewBox", [0, 0, 1000, 1000])
       .style("font", "10px sans-serif");
 
     const g = svg
       .append("g")
       .attr("transform", `translate(${width / 2},${width / 2})`);
+    // .attr("transform", `translate(${width / 2},${height / 2})`); // height 변수를 사용하도록 변경
 
     const path = g
       .append("g")
@@ -65,6 +70,8 @@ const ZoomChart = () => {
     path
       .filter((d) => d.children)
       .style("cursor", "pointer")
+      .style(".class", "hoverable")
+
       .on("click", clicked);
 
     path.append("title").text(
@@ -155,6 +162,8 @@ const ZoomChart = () => {
       const y = ((d.y0 + d.y1) / 2) * radius;
       return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
     }
+
+    // return svg.node();
   }, []);
 
   return (

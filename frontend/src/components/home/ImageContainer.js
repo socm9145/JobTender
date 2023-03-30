@@ -96,9 +96,14 @@ const ImageContainer = () => {
       >
         <Box className="wrap">
           <Box className="window">
-            <Box id="carousel" ref={carouselRef} display={"inline-block"}>
+            <Box
+              className="hoverable"
+              id="carousel"
+              ref={carouselRef}
+              display={"inline-block"}
+            >
               <Box
-                className="slide"
+                className="slide hoverable"
                 id="b2"
                 marginRight={"30px"}
                 backgroundImage={"https://picsum.photos/id/301/1600/800"}
@@ -107,7 +112,7 @@ const ImageContainer = () => {
                 backgroundRepeat={"no-repeat"}
               ></Box>
               <Box
-                className="slide"
+                className="slide hoverable"
                 id="b1"
                 marginRight={"30px"}
                 backgroundImage={"https://picsum.photos/seed/picsum/1600/800"}
@@ -116,7 +121,7 @@ const ImageContainer = () => {
                 backgroundRepeat={"no-repeat"}
               ></Box>
               <Box
-                className="slide"
+                className="slide hoverable"
                 id="b2"
                 marginRight={"30px"}
                 backgroundImage={"https://picsum.photos/id/301/1600/800"}
@@ -125,7 +130,7 @@ const ImageContainer = () => {
                 backgroundRepeat={"no-repeat"}
               ></Box>
               <Box
-                className="slide"
+                className="slide hoverable"
                 id="b1"
                 marginRight={"30px"}
                 backgroundImage={"https://picsum.photos/seed/picsum/1600/800"}

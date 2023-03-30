@@ -26,7 +26,7 @@
 .info {
   color: black;
   transition: color 1s;
-  cursor: pointer;
+  /* cursor: pointer; */
   /* 
     transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d; */
@@ -37,7 +37,7 @@
 .update {
   color: black;
   transition: color 1s;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .update:hover {
   color: #969696;
@@ -45,7 +45,7 @@
 .history {
   color: black;
   transition: color 1s;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .history:hover {
   color: #969696;
