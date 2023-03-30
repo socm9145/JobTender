@@ -140,10 +140,11 @@ const KeywordRank = ({ rank }) => {
           width={"2rem"}
         >
           <Text
+            className="hoverable"
             fontSize={"3rem"}
             lineHeight={"1"}
             verticalAlign={"top"}
-            cursor={"pointer"}
+            // cursor={"pointer"}
           >
             <SmallAddIcon boxSize={"10"} />
           </Text>
