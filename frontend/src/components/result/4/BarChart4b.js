@@ -26,7 +26,13 @@ const BarChart4b = ({ data }) => {
     const height = max * barStep + margin.top + margin.bottom;
 
     const x = d3.scaleLinear().range([margin.left, width - margin.right]);
-    const color = d3.scaleOrdinal([true, false], ["steelblue", "#aaa"]);
+
+    const color2 = d3.scaleOrdinal(
+      d3.quantize(d3.interpolateRainbow, data.children.length + 5)
+    );
+
+    const color = d3.scaleOrdinal([true, false], [color2]);
+    // const color = d3.scaleOrdinal([true, false], ["steelblue", "#aaa"]);
 
     const xAxis = (g) =>
       g
@@ -171,7 +177,7 @@ const BarChart4b = ({ data }) => {
         .attr("fill", color(true))
         .attr("fill-opacity", 1)
         .transition(transition2)
-        .attr("fill", (d) => color(!!d.children))
+        // .attr("fill", (d) => color(!!d.children))
         .attr("width", (d) => x(d.value) - x(0));
     }
     function up(svg, d) {
@@ -229,7 +235,8 @@ const BarChart4b = ({ data }) => {
       // When the entering parent rect is done, make it visible!
       enter
         .selectAll("rect")
-        .attr("fill", (d) => color(!!d.children))
+
+        .attr("fill", color(true))
         .attr("fill-opacity", (p) => (p === d ? 0 : null))
         .transition(transition2)
         .attr("width", (d) => x(d.value) - x(0))

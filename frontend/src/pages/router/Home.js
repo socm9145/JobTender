@@ -20,7 +20,7 @@ const Home = () => {
     gsap.from(wiseSayingRef.current[0], {
       delay: 3,
       duration: 2,
-      text: "what you rist reaveals",
+      text: "what you risk reaveals",
       ease: "none",
     });
     gsap.from(wiseSayingRef.current[1], {
@@ -95,6 +95,7 @@ const Home = () => {
       backgroundSize={"cover"}
       backgroundPosition={"center"}
       backgroundRepeat={"no-repeat"}
+      overflow={"hidden"}
     >
       <Box
         height={"100%"}
@@ -124,7 +125,6 @@ const Home = () => {
             width={"100%"}
             height={"100%"}
             backgroundColor={"black"}
-            // opacity={"0.9"}
           ></Box>
 
           <Box height={"80vh"} paddingX={"40px"}>

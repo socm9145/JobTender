@@ -25,44 +25,45 @@ const Keyword = () => {
 
   useLayoutEffect(() => {
     const tl = gsap.timeline();
-    tl.from(horizontalLine1.current, {
-      duration: 1.8,
-      opacity: 0,
-      x: "-80vw",
-      ease: "sine.out",
-    })
-      .from(
-        verticalLine1.current,
-        {
-          duration: 1.8,
-          opacity: 0,
-          y: "-60%",
-          ease: "sine.out",
-        },
-        0.5
-      )
+    tl
+      // .from(horizontalLine1.current, {
+      //   duration: 1.8,
+      //   opacity: 0,
+      //   x: "-80vw",
+      //   ease: "sine.out",
+      // })
+      // .from(
+      //   verticalLine1.current,
+      //   {
+      //     duration: 1.8,
+      //     opacity: 0,
+      //     y: "-60%",
+      //     ease: "sine.out",
+      //   },
+      //   0.5
+      // )
 
-      .from(
-        verticalLine2.current,
-        {
-          duration: 1.8,
-          opacity: 0,
-          y: "-60%",
-          ease: "sine.out",
-        },
-        0.9
-      )
+      // .from(
+      //   verticalLine2.current,
+      //   {
+      //     duration: 1.8,
+      //     opacity: 0,
+      //     y: "-60%",
+      //     ease: "sine.out",
+      //   },
+      //   0.9
+      // )
 
-      .from(
-        horizontalLine2.current,
-        {
-          duration: 1.8,
-          opacity: 0,
-          x: "-80vw",
-          ease: "sine.out",
-        },
-        0.8
-      )
+      // .from(
+      //   horizontalLine2.current,
+      //   {
+      //     duration: 1.8,
+      //     opacity: 0,
+      //     x: "-80vw",
+      //     ease: "sine.out",
+      //   },
+      //   0.8
+      // )
 
       .from(
         rankContainer.current,
@@ -109,11 +110,15 @@ const Keyword = () => {
   return (
     <Box
       height={"100vh"}
-      backgroundColor={"#f1efe9"}
+      // backgroundColor={"#f1efe9"}
       display={"flex"}
       flexDirection={"column"}
       justifyContent={"end"}
       paddingBottom={"3vh"}
+      backgroundImage={"https://picsum.photos/1600/800"}
+      backgroundSize={"cover"}
+      backgroundPosition={"center"}
+      backgroundRepeat={"no-repeat"}
     >
       <Box
         display={"flex"}
@@ -121,12 +126,12 @@ const Keyword = () => {
         justifyContent={"space-between"}
         height={"88vh"}
       >
-        <Box
+        {/* <Box
           ref={horizontalLine1}
           width={"100%"}
           height={"0"}
           borderTop={"solid 1px black"}
-        ></Box>
+        ></Box> */}
         <Box width={"100vw"} height={"100%"} paddingY={"1rem"}>
           <Box
             display={"flex"}
@@ -138,12 +143,12 @@ const Keyword = () => {
             <Box ref={leftKeywords} width={"25vw"}>
               <LeftKeywordsContainer keywords={wordList.slice(0, 5)} />
             </Box>
-            <Box
+            {/* <Box
               ref={verticalLine1}
               width={"0"}
               height={"100%"}
               borderRight={"solid 1px black"}
-            ></Box>
+            ></Box> */}
             <Box
               ref={describe}
               width={"40vw"}
@@ -153,23 +158,23 @@ const Keyword = () => {
             >
               <DescribeContainer />
             </Box>
-            <Box
+            {/* <Box
               ref={verticalLine2}
               width={"0"}
               height={"100%"}
               borderRight={"solid 1px black"}
-            ></Box>
+            ></Box> */}
             <Box ref={rightKeywords} width={"25vw"}>
               <RightKeywordsContainer keywords={wordList.slice(5, 10)} />
             </Box>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           ref={horizontalLine2}
           width={"100%"}
           height={"0"}
           borderTop={"solid 1px black"}
-        ></Box>
+        ></Box> */}
         <Box
           display={"flex"}
           justifyContent={"center"}

@@ -3,8 +3,6 @@ import { gsap } from "gsap";
 
 const MousePointer = () => {
   useEffect(() => {
-    console.log("aliwdjawoidj");
-
     const bigBall = document.querySelector(".cursor__ball--big");
     const smallBall = document.querySelector(".cursor__ball--small");
 
@@ -26,17 +24,16 @@ const MousePointer = () => {
 
     function onMouseMove(e) {
       gsap.to(bigBall, 0.4, {
-        x: e.pageX - 15,
-        y: e.pageY - 15,
+        x: e.clientX - 15,
+        y: e.clientY - 15,
       });
       gsap.to(smallBall, 0.1, {
-        x: e.pageX - 5,
-        y: e.pageY - 7,
+        x: e.clientX - 7.5,
+        y: e.clientY - 7.5,
       });
     }
 
     function onMouseHover() {
-      console.log("aliwdjawoidj");
       gsap.to(bigBall, 0.3, {
         scale: 4,
       });
@@ -49,10 +46,10 @@ const MousePointer = () => {
     }
 
     return () => {
-      console.log("aliwdjawoidj");
-      document.body.removeEventListener("mousemove", onMouseMove());
-      document.body.removeEventListener("mouseover", onMouseHover());
-      document.body.removeEventListener("mouseout", onMouseHoverOut());
+      console.log("return");
+      document.body.removeEventListener("mousemove", onMouseMove);
+      document.body.removeEventListener("mouseover", onMouseHover);
+      document.body.removeEventListener("mouseout", onMouseHoverOut);
     };
   }, []);
 
