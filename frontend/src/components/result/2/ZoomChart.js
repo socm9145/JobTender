@@ -70,6 +70,8 @@ const ZoomChart = ({ data }) => {
     path
       .filter((d) => d.children)
       .style("cursor", "pointer")
+      .style(".class", "hoverable")
+
       .on("click", clicked);
 
     path.append("title").text(

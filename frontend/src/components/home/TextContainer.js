@@ -171,6 +171,7 @@ const TextContainer = () => {
           alignItems={"end"}
         >
           <Box
+            className="hoverable"
             ref={nextButton}
             display={"flex"}
             justifyContent={"center"}
@@ -181,7 +182,7 @@ const TextContainer = () => {
             border={"solid 1px #191919"}
             borderLeftRadius={"20px"}
             borderRightRadius={"20px"}
-            cursor={"pointer"}
+            // cursor={"pointer"}
             onMouseOver={(e) => {
               onHandleMouseOver(e);
             }}
@@ -195,7 +196,10 @@ const TextContainer = () => {
               }
             }}
           >
-            <ArrowForwardIcon boxSize={6} />
+            <Box className="hoverable">
+              {/* <Text className="hoverable"> -> </Text> */}
+              <ArrowForwardIcon zIndex={-2} className="hoverable" boxSize={6} />
+            </Box>
           </Box>
           <Box
             id={"page-num-container"}
