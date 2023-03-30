@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const BarChart = () => {
+const BarChart = ({ data }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -13,28 +13,28 @@ const BarChart = () => {
 
   const drawBarChart = () => {
     // 2) 데이터 정의
-    const alphabet = Array(26)
-      .fill(0)
-      .map((_, i) => ({
-        letter: String.fromCharCode(65 + i),
-        frequency: [
-          0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02288, 0.02015,
-          0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406, 0.06749,
-          0.07507, 0.01929, 0.00095, 0.05987, 0.06327, 0.09056, 0.02758,
-          0.00978, 0.0236, 0.0015, 0.01974, 0.00074,
-        ][i],
-      }));
+    // const data = Array(26)
+    //   .fill(0)
+    //   .map((_, i) => ({
+    //     letter: String.fromCharCode(65 + i),
+    //     frequency: [
+    //       0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02288, 0.02015,
+    //       0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406, 0.06749,
+    //       0.07507, 0.01929, 0.00095, 0.05987, 0.06327, 0.09056, 0.02758,
+    //       0.00978, 0.0236, 0.0015, 0.01974, 0.00074,
+    //     ][i],
+    //   }));
 
     // 1) 차트 정의
-    const chart = BarChart(alphabet, {
+    const chart = BarChart(data, {
       x: (d) => d.letter,
       y: (d) => d.frequency,
       xDomain: d3.groupSort(
-        alphabet,
+        data,
         ([d]) => -d.frequency,
         (d) => d.letter
       ),
-      yFormat: "%",
+      yFormat: "",
       yLabel: "↑ Frequency",
       width: 640,
       height: 500,
@@ -72,6 +72,7 @@ const BarChart = () => {
 
     // Compute default domains, and unique the x-domain.
     if (xDomain === undefined) xDomain = X;
+    // if (yDomain === undefined) yDomain = [0, d3.max(Y)];
     if (yDomain === undefined) yDomain = [0, d3.max(Y)];
     xDomain = new d3.InternSet(xDomain);
 
@@ -174,7 +175,9 @@ const BarChart = () => {
 
     // Compute default domains, and unique the x-domain.
     if (xDomain === undefined) xDomain = X;
+    // y도메인 결정하기
     if (yDomain === undefined) yDomain = [0, d3.max(Y)];
+    // if (yDomain === undefined) yDomain = [0, 1];
     xDomain = new d3.InternSet(xDomain);
 
     // Omit any data not present in the x-domain.
