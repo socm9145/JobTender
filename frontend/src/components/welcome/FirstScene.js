@@ -33,9 +33,13 @@ const Describe = ({ title, fontsize }) => {
       ></Box>
 
       <Text
-        className={"txt"}
+        className={"firstscene"}
         color={"white"}
-        textShadow={"1px 1px 3px black"}
+        textShadow={"5px 5px 5px black"}
+        sx={{
+          WebkitTextStroke: "1px black",
+          textStroke: "1px black",
+        }}
         zIndex={"1"}
         fontSize={fontsize}
         fontWeight={"400"}
