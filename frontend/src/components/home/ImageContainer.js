@@ -101,25 +101,37 @@ const ImageContainer = () => {
                 className="slide"
                 id="b2"
                 marginRight={"30px"}
-                backgroundImage="url('/images/survey-image.jpg')"
+                backgroundImage={"https://picsum.photos/id/301/1600/800"}
+                backgroundSize={"cover"}
+                backgroundPosition={"center"}
+                backgroundRepeat={"no-repeat"}
               ></Box>
               <Box
                 className="slide"
                 id="b1"
                 marginRight={"30px"}
-                backgroundImage="url('/images/keywords-image.jpg')"
+                backgroundImage={"https://picsum.photos/seed/picsum/1600/800"}
+                backgroundSize={"cover"}
+                backgroundPosition={"center"}
+                backgroundRepeat={"no-repeat"}
               ></Box>
               <Box
                 className="slide"
                 id="b2"
                 marginRight={"30px"}
-                backgroundImage="url('/images/survey-image.jpg')"
+                backgroundImage={"https://picsum.photos/id/301/1600/800"}
+                backgroundSize={"cover"}
+                backgroundPosition={"center"}
+                backgroundRepeat={"no-repeat"}
               ></Box>
               <Box
                 className="slide"
                 id="b1"
                 marginRight={"30px"}
-                backgroundImage="url('/images/keywords-image.jpg')"
+                backgroundImage={"https://picsum.photos/seed/picsum/1600/800"}
+                backgroundSize={"cover"}
+                backgroundPosition={"center"}
+                backgroundRepeat={"no-repeat"}
               ></Box>
             </Box>
           </Box>

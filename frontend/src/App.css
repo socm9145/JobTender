@@ -54,3 +54,10 @@ body {
   font-family: "taebaek";
   src: url("../public/font/TAEBAEK\ milkyway.ttf");
 }
+
+.draggunable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

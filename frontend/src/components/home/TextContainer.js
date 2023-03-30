@@ -19,20 +19,20 @@ const TextContainer = () => {
   const onHandleMouseOver = () => {
     gsap.to(nextButton.current, {
       duration: 0.2,
-      backgroundColor: "#191919",
-      color: "#f7f6f1",
+      backgroundColor: "RGBA(255, 255, 255, 0.80)",
+      color: "black",
     });
   };
   const onHandleMouseOut = () => {
     gsap.to(nextButton.current, {
       duration: 0.2,
-      backgroundColor: "#f7f6f1",
-      color: "#191919",
+      backgroundColor: "transparent",
+      color: "RGBA(255, 255, 255, 0.80)",
     });
   };
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 1 });
+    const tl = gsap.timeline({ delay: 5 });
     tl.from("#selected-method", {
       duration: 1,
       y: "100%",
@@ -94,9 +94,15 @@ const TextContainer = () => {
       flexDirection={"column"}
       height={"100%"}
       padding={"40px 40px 40px 0"}
+      color={"white"}
     >
       <Box display={"flex"} flexDirection={"column"} overflow={"hidden"}>
-        <Box id={"selected-method-title"} fontSize={"0.9rem"} color={"#969696"}>
+        <Box
+          id={"selected-method-title"}
+          zIndex={"1"}
+          fontSize={"0.9rem"}
+          color={"whiteAlpha.800"}
+        >
           <Text>조사방법</Text>
         </Box>
         <Box
@@ -120,8 +126,9 @@ const TextContainer = () => {
           <Box display={"flex"} flexDirection={"column"} overflow={"hidden"}>
             <Box
               id={"expected-time-title"}
+              zIndex={"1"}
               fontSize={"0.9rem"}
-              color={"#969696"}
+              color={"whiteAlpha.800"}
             >
               소요시간
             </Box>
@@ -140,7 +147,12 @@ const TextContainer = () => {
             marginTop={"0.75em"}
             overflow={"hidden"}
           >
-            <Box id={"describe-title"} fontSize={"0.9rem"} color={"#969696"}>
+            <Box
+              id={"describe-title"}
+              zIndex={"1"}
+              fontSize={"0.9rem"}
+              color={"whiteAlpha.800"}
+            >
               설명
             </Box>
             <Box
@@ -172,13 +184,14 @@ const TextContainer = () => {
         >
           <Box
             ref={nextButton}
+            zIndex={"1"}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
             width={"45%"}
-            height={"100%"}
+            height={"130%"}
             lineHeight={"2em"}
-            border={"solid 1px #191919"}
+            border={"solid 1px white"}
             borderLeftRadius={"20px"}
             borderRightRadius={"20px"}
             cursor={"pointer"}
@@ -201,11 +214,11 @@ const TextContainer = () => {
             id={"page-num-container"}
             display={"flex"}
             justifyContent={"center"}
-            color={"#969696"}
+            color={"whiteAlpha.800"}
             overflow={"hidden"}
           >
             <Text id={"page-num"}>{selectedMethod ? "01" : "02"}</Text>
-            <Text>/02</Text>
+            <Text zIndex={"1"}>/02</Text>
           </Box>
         </Box>
       </Box>

@@ -50,10 +50,13 @@ const Login = () => {
       flexDirection={"column"}
       justifyContent={"center"}
       alignItems={"center"}
-      backgroundImage={"https://picsum.photos/1600/800"}
       color={"#191919"}
       width={"100vw"}
       height={"100vh"}
+      backgroundImage={"https://picsum.photos/1600/800"}
+      backgroundSize={"cover"}
+      backgroundPosition={"center"}
+      backgroundRepeat={"no-repeat"}
     >
       <Box
         display={"flex"}
