@@ -77,11 +77,12 @@ const Keyword = ({ keyword, id, LR }) => {
     <Box className={"text-container"} display={"flex"} flexDirection={"column"}>
       <Box display={"flex"} justifyContent={LR === "left" ? "end" : "start"}>
         <Text
+          className="hoverable"
           ref={text}
           paddingX={"0.5rem"}
           fontSize={"3.1rem"}
           fontFamily={"dodum"}
-          cursor={"pointer"}
+          // cursor={"pointer"}
           onClick={() => {
             if (
               clickedRank === null &&

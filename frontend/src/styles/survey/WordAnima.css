@@ -63,7 +63,7 @@ button {
   font-family: "Signika Negative", sans-serif;
   text-transform: uppercase;
   font-weight: 600;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 13px;
   line-height: 18px;
 }
