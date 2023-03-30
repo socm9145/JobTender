@@ -60,6 +60,13 @@ a {
   src: url("../public/font/TAEBAEK\ milkyway.ttf");
 }
 
+.draggunable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /* body {
   height: 100vh;
   background: #010101;
