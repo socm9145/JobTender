@@ -6,8 +6,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInputDTO {
-    long id;
+public class OauthUserInputDTO {
+    long oauthId;
     int age;
     String gender;
     String nickname;
