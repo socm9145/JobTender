@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { userinfo } from '../../api/mypageAxios';
+import { userhistory, userinfo, keyword } from '../../api/mypageAxios';
+import { setUserData } from '../../redux/user/userSlice'
+import { setHistory } from '../../redux/mypage/mypageSlice';
 
 import MyHistory from "../../components/mypage/History";
 import UserInfo from "../../components/mypage/UserInfo";
@@ -10,10 +12,41 @@ import { Box, Text, Divider } from "@chakra-ui/react";
 
 const Mypage = () => {
   const dispatch = useAppDispatch();
-
+  const userid = useAppSelector(state=>state.user.userId);
+  const userInfo = useAppSelector(state=>state.user.userData);
+  const his = useAppSelector(state=>state.mypage.history);
+  console.log(his);
+  // his.map((data) => {
+  //   const tmp = ["2023.03.27", []]
+  // })
   useEffect(()=>{
     async function getUserInfo(){
       await userinfo(
+        userid,
+        data => {
+          dispatch(setUserData(data.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+
+    async function getUserHistory(){
+      await userhistory(
+        userid,
+        data => {
+          console.log(data);
+          dispatch(setHistory(data.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+
+    async function getKeyword(){
+      await keyword(
         data => {
           console.log(data);
         },
@@ -22,34 +55,36 @@ const Mypage = () => {
         }
       )
     }
+    getKeyword();
     getUserInfo();
+    getUserHistory();
   },[])
   const historyData = [
-    [
-      "2023.03.27",
-      ["성장", "혁신", "창의"],
-      ["삼성전자", "카카오", "NAVER"],
-    ],
-    [
-      "2023.03.21",
-      ["성장", "창의", "도전"],
-      ["LG CNS", "넷마블", "크래프톤"],
-    ],
-    [
-      "2023.03.22",
-      ["가자", "취업", "힘내"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.23",
-      ["아자", "도전", "창의"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
+    // [
+    //   "2023.03.27",
+    //   ["성장", "혁신", "창의"],
+    //   ["삼성전자", "카카오", "NAVER"],
+    // ],
+    // [
+    //   "2023.03.21",
+    //   ["성장", "창의", "도전"],
+    //   ["LG CNS", "넷마블", "크래프톤"],
+    // ],
+    // [
+    //   "2023.03.22",
+    //   ["가자", "취업", "힘내"],
+    //   ["삼성전자", "삼성전자", "삼성전자"],
+    // ],
+    // [
+    //   "2023.03.23",
+    //   ["아자", "도전", "창의"],
+    //   ["삼성전자", "삼성전자", "삼성전자"],
+    // ],
+    // [
+    //   "2023.03.24",
+    //   ["혁신", "도전", "성장"],
+    //   ["삼성전자", "삼성전자", "삼성전자"],
+    // ],
   ];
   return (
     // 마이페이지
@@ -161,10 +196,10 @@ const Mypage = () => {
               </Box>
             </Box>
             {/* 회원정보 */}
-            <UserInfo title={"이름"} value={"김싸피"}></UserInfo>
+            <UserInfo title={"이름"} value={userInfo.name}></UserInfo>
             <UserInfo title={"이메일"} value={"test@test.com"}></UserInfo>
-            <UserInfo title={"성별"} value={"M"}></UserInfo>
-            <UserInfo title={"나이"} value={"20"}></UserInfo>
+            <UserInfo title={"성별"} value={userInfo.gender === 'male' ? 'M' : 'W'}></UserInfo>
+            <UserInfo title={"나이"} value={userInfo.age}></UserInfo>
             {/* <UserInfo title={"이력 수"} value={"12"}></UserInfo> */}
           </Box>
           <Box>
