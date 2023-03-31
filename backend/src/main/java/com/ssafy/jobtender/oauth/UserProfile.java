@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class UserProfile {
-    private String oauthId;
+    private long oauthId;
     private String gender;
     private int age;
 
