@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -42,8 +43,8 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
     }
 
     private User saveOrUpdate(UserProfile userProfile){
-        User user = userRepo.findByOauthId(userProfile.getOauthId()).get(0);
+        Optional<User> user = userRepo.findByOauthId(userProfile.getOauthId());
         // error
-        return userRepo.save(user);
+        return userRepo.save(user.get());
     }
 }
