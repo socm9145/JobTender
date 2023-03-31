@@ -36,4 +36,9 @@ public class ResultServiceImpl implements ResultService {
     public List<ResultCompanyOutDTO> readResultsCompanies() {
         return this.resultDAO.readResultsCompanies();
     }
+
+    @Override
+    public List<ReadResultOutDTO> readSurveyResultsByUserId(Long userId) {
+        return this.resultDAO.readSurveyResultsByUserId(userId);
+    }
 }

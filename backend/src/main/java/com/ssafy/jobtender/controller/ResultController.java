@@ -23,15 +23,18 @@ public class ResultController {
     private final CompanyService companyService;
     private final InputService inputService;
     private final UserService userService;
+    private final SurveyService surveyService;
 
     @Autowired
     public ResultController(ResultService resultService, SimilarCompanyService similarCompanyService,
-                            CompanyService companyService, InputService inputService, UserService userService){
+                            CompanyService companyService, InputService inputService, UserService userService,
+                            SurveyService surveyService){
         this.resultService = resultService;
         this.similarCompanyService = similarCompanyService;
         this.companyService = companyService;
         this.inputService = inputService;
         this.userService = userService;
+        this.surveyService = surveyService;
     }
     /**
      * [모달 관련 API]
@@ -112,5 +115,13 @@ public class ResultController {
         List<KeywordOutDTO> keywordOutDTOs = this.inputService.keywordRankingByAge(age);
 
         return ResponseEntity.status(HttpStatus.OK).body(keywordOutDTOs);
+    }
+    @ApiOperation(value = "설문지 확인 API (v) new",
+            notes = "모든 설문지 데이터를 불러온다.")
+    @GetMapping("/survey")
+    public ResponseEntity<List<SurveyOutDTO>> readSurveys(){
+        List<SurveyOutDTO> surveyOutDTOs = this.surveyService.readSurveys();
+
+        return ResponseEntity.status(HttpStatus.OK).body(surveyOutDTOs);
     }
 }

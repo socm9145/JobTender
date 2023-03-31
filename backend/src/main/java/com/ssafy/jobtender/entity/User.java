@@ -18,10 +18,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-    private String oauthId;
+    private long oauthId;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private int age;

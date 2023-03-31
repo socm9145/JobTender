@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface ResultDAO {
     long createResult(Long userId);
     List<ReadResultOutDTO> readResultsByUserId(Long userId);
+    List<ReadResultOutDTO> readSurveyResultsByUserId(Long userId);
     List<ResultCompanyOutDTO> readResultsCompanies();
     List<Result> keywordRanking();
 }

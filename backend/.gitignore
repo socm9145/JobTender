@@ -36,3 +36,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Secret Key ###
+src/main/java/com/ssafy/jobtender/jwt/SecretKey.java
+src/main/java/com/ssafy/jobtender/oauth/OauthSecretKey.java

@@ -10,14 +10,14 @@ import javax.persistence.*;
 public class CompanyMeasure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long companyMeasureId;
+    private long companyMeasureId;
     @Column(nullable = false)
-    String score;
+    private String score;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "extracted_keyword_id")
-    ExtractedKeyword extractedKeyword;
+    private ExtractedKeyword extractedKeyword;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
-    Company company;
+    private Company company;
 }
