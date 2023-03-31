@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @ToString
 @Table(name = "Results")
-@JsonIgnoreProperties({"companyScores", "inputs"})
+@JsonIgnoreProperties({"companyScores", "inputs", "surveyScores"})
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +29,6 @@ public class Result {
     private List<Input> inputs = new ArrayList<>();
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompanyScore> companyScores = new ArrayList<>();
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SurveyScore> surveyScores = new ArrayList<>();
 }

@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Companies")
+@JsonIgnoreProperties({"companyScores", "companyMeasures", "similarCompanies", "comparableSimilarCompanies", "surveyScores"})
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +44,8 @@ public class Company {
     private List<SimilarCompany> similarCompanies = new ArrayList<>();
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"company"})
-    private List<SimilarCompany> comparable_similarCompanies = new ArrayList<>();
-
+    private List<SimilarCompany> comparableSimilarCompanies = new ArrayList<>();
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"company"})
+    private List<SurveyScore> surveyScores = new ArrayList<>();
 }

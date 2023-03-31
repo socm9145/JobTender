@@ -12,17 +12,15 @@ import javax.persistence.*;
 public class KeywordMeasure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long keywordMeasureId;
+    private long keywordMeasureId;
     @Column(nullable = false)
-    String score;
+    private String score;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "extracted_keyword_id")
-    @JsonIgnore
-    ExtractedKeyword extractedKeyword;
+    private ExtractedKeyword extractedKeyword;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "keyword_id")
-    @JsonIgnoreProperties({"keyword"})
-    Keyword keyword;
+    private Keyword keyword;
 
 }

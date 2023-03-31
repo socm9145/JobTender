@@ -27,6 +27,12 @@ public class ResultDAOImpl implements ResultDAO {
     private EntityManager em;
     private final ResultRepo resultRepo;
     private final UserRepo userRepo;
+    //
+    private final QResult result = QResult.result;
+    private final QCompanyScore companyScore = QCompanyScore.companyScore;
+    private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
+    private final QCompany company = QCompany.company;
+    private final QCompanyRating companyRating = QCompanyRating.companyRating;
     @Autowired
     public ResultDAOImpl(ResultRepo resultRepo, UserRepo userRepo) {
         this.resultRepo = resultRepo;
@@ -54,11 +60,6 @@ public class ResultDAOImpl implements ResultDAO {
 
     @Override
     public List<ReadResultOutDTO> readResultsByUserId(Long userId) {
-        QResult result = QResult.result;
-        QCompanyScore companyScore = QCompanyScore.companyScore;
-        QCompany company = QCompany.company;
-        QCompanyRating companyRating = QCompanyRating.companyRating;
-
         List<ReadResultOutDTO> readResultOutDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(ReadResultOutDTO.class,
                         result.resultId, result.user.userId,
@@ -74,6 +75,28 @@ public class ResultDAOImpl implements ResultDAO {
                 .on(companyRating.company.companyId.eq(company.companyId))
                 .where(result.user.userId.eq(userId))
                 .where(companyScore.CompanyScoreRank.eq("H"))
+                .fetch();
+
+        return readResultOutDTOs;
+    }
+
+    @Override
+    public List<ReadResultOutDTO> readSurveyResultsByUserId(Long userId) {
+        List<ReadResultOutDTO> readResultOutDTOs = new JPAQuery<>(em)
+                .select(Projections.constructor(ReadResultOutDTO.class,
+                        result.resultId, result.user.userId,
+                        surveyScore.score,
+                        company.name, company.type, company.scale, company.salary, company.employeesNumber, company.address, company.yearFounded,
+                        companyRating.averageRating, companyRating.growthRating, companyRating.balanceRating, companyRating.salaryWelfareRating, companyRating.cultureRating, companyRating.managementRating))
+                .from(result)
+                .join(result.surveyScores, surveyScore)
+                .on(result.resultId.eq(surveyScore.result.resultId))
+                .join(surveyScore.company, company)
+                .on(surveyScore.company.companyId.eq(company.companyId))
+                .join(company.companyRating, companyRating)
+                .on(companyRating.company.companyId.eq(company.companyId))
+                .where(result.user.userId.eq(userId))
+                .where(surveyScore.surveyScoreRank.eq("H"))
                 .fetch();
 
         return readResultOutDTOs;

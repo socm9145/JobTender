@@ -15,18 +15,15 @@ import java.util.List;
 public class ExtractedKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long extractKeywordId;
+    private long extractKeywordId;
     @Column(nullable = false)
-    String name;
+    private String name;
     @Column(nullable = false)
-    String type;
+    private String type;
     // mapping
-
     @OneToMany(mappedBy = "extractedKeyword", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<KeywordMeasure> keywordMeasures = new ArrayList<>();
+    private List<KeywordMeasure> keywordMeasures = new ArrayList<>();
     @OneToMany(mappedBy = "extractedKeyword", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<CompanyMeasure> companyMeasures = new ArrayList<>();
+    private List<CompanyMeasure> companyMeasures = new ArrayList<>();
 
 }
