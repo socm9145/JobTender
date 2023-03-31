@@ -89,7 +89,7 @@ const WordSlide = () => {
   });
 
   const handleStarClick = (itemId, score) => {
-    setSelectedScores({ ...selectedScores, [itemId]: score - 2 });
+    setSelectedScores({ ...selectedScores, [itemId]: score });
   };
 
   const renderButtons = (itemId) => {
@@ -99,9 +99,7 @@ const WordSlide = () => {
     return Array.from({ length: 9 }, (_, i) => (
       <button
         key={i}
-        className={`score-button ${
-          i + 1 === selectedScore + 2 ? "selected" : ""
-        }`}
+        className={`score-button ${i + 1 === selectedScore ? "selected" : ""}`}
         onClick={() => handleStarClick(itemId, i + 1)}
       >
         {i + 1}
