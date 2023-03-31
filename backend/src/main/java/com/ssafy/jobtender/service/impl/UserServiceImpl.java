@@ -7,6 +7,7 @@ import com.ssafy.jobtender.dto.output.UserOutDTO;
 import com.ssafy.jobtender.entity.User;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.jwt.JwtTokenProvider;
+import com.ssafy.jobtender.oauth.OauthSecretKey;
 import com.ssafy.jobtender.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -110,7 +111,7 @@ public class UserServiceImpl implements UserService {
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
-        params.add("client_id", "1d00d14f1ffe2865a5b8a876c3de14da"); //key 따로 빼야합니다
+        params.add("client_id", OauthSecretKey.KAKAO_API_CLIENT_ID); //key 따로 빼야합니다
         params.add("redirect_uri", "http://localhost:3000/kakao");
         params.add("code", code);
 
