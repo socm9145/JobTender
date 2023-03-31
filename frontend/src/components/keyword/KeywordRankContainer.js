@@ -12,7 +12,7 @@ const KeywordRankContainer = () => {
   return (
     <Box
       display={"flex"}
-      justifyContent={"space-between"}
+      justifyContent={"space-evenly"}
       alignItems={"center"}
       width={"100%"}
       height={"100%"}

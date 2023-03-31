@@ -67,8 +67,8 @@ const Keyword = ({ keyword, id, LR }) => {
               : -animaDistance
             : "0px",
         ease: "sine.out",
-        backgroundColor: selectedKeyword.includes(id) ? "#191919" : null,
-        color: selectedKeyword.includes(id) ? "#f7f6f1" : null,
+        backgroundColor: selectedKeyword.includes(id) ? "white" : null,
+        color: selectedKeyword.includes(id) ? "black" : null,
       });
     });
   }, [clickedKeyword, selectedKeyword, clickedRank]);
@@ -78,6 +78,7 @@ const Keyword = ({ keyword, id, LR }) => {
       <Box display={"flex"} justifyContent={LR === "left" ? "end" : "start"}>
         <Text
           className="hoverable"
+          color={"white"}
           ref={text}
           paddingX={"0.5rem"}
           fontSize={"3.1rem"}
@@ -98,7 +99,7 @@ const Keyword = ({ keyword, id, LR }) => {
           {keyword}
         </Text>
       </Box>
-      <Box ref={line} borderTop={"solid 1px black"}></Box>
+      <Box ref={line} borderTop={"solid 1px white"}></Box>
     </Box>
   );
 };

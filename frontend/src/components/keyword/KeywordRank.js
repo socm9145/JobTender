@@ -16,6 +16,7 @@ gsap.registerPlugin(EasePack);
 
 const KeywordRank = ({ rank }) => {
   const line = useRef(null);
+  const addButtonBox = useRef(null);
   const addButton = useRef(null);
   const rankContainer = useRef(null);
   const lineContainer = useRef(null);
@@ -35,7 +36,7 @@ const KeywordRank = ({ rank }) => {
         x: "0",
         ease: "sine.out",
       });
-      gsap.to(addButton.current, {
+      gsap.to(addButtonBox.current, {
         duration: 0.5,
         rotate: 0,
         ease: "sine.out",
@@ -67,7 +68,7 @@ const KeywordRank = ({ rank }) => {
             : "0px",
         ease: "sine.out",
       });
-      gsap.to(addButton.current, {
+      gsap.to(addButtonBox.current, {
         duration: 0.5,
         rotate:
           clickedRank === rank || selectedKeyword[rank] !== null ? 135 : 0,
@@ -93,6 +94,7 @@ const KeywordRank = ({ rank }) => {
       flexDirection={"column"}
       justifyContent={"end"}
       overflow={"hidden"}
+      color={"white"}
     >
       <Box
         ref={lineContainer}
@@ -127,7 +129,6 @@ const KeywordRank = ({ rank }) => {
         alignItems={"end"}
       >
         <Box
-          ref={addButton}
           onClick={() => {
             if (selectedKeyword[rank] === null) {
               dispatch(setClickedKeyword(null));
@@ -139,17 +140,23 @@ const KeywordRank = ({ rank }) => {
           }}
           width={"2rem"}
         >
-          <Text
-            className="hoverable"
-            fontSize={"3rem"}
+          <Box
+            ref={addButtonBox}
             lineHeight={"1"}
             verticalAlign={"top"}
-            // cursor={"pointer"}
+            width={"fit-content"}
+            height={"fit-content"}
+            cursor={"pointer"}
           >
-            <SmallAddIcon boxSize={"10"} />
-          </Text>
+            <SmallAddIcon
+              ref={addButton}
+              className="hoverable"
+              zIndex={"-5"}
+              boxSize={"10"}
+            />
+          </Box>
         </Box>
-        <Box width={"100%"} borderTop={"solid 1px black"}></Box>
+        <Box width={"100%"} borderTop={"solid 1px white"}></Box>
       </Box>
     </Box>
   );
