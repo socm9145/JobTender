@@ -1,14 +1,21 @@
 package com.ssafy.jobtender.dao.impl;
 
+import com.querydsl.core.types.Path;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAUpdateClause;
 import com.ssafy.jobtender.dao.UserDAO;
 import com.ssafy.jobtender.dto.input.UpdateUserDTO;
 import com.ssafy.jobtender.dto.output.UserOutDTO;
+import com.ssafy.jobtender.entity.QUser;
 import com.ssafy.jobtender.entity.User;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +23,8 @@ import java.util.Optional;
 
 @Component
 public class UserDAOImpl implements UserDAO {
+    @PersistenceContext
+    private EntityManager em;
     private final UserRepo userRepo;
     @Autowired
     public UserDAOImpl(UserRepo userRepo) {
@@ -145,5 +154,51 @@ public class UserDAOImpl implements UserDAO {
             userOutDTOs.add(userOutDTO);
         }
         return userOutDTOs;
+    }
+
+    @Override
+    public User insertUser(User user) {
+        return userRepo.save(user);
+    }
+
+    @Override
+    public User readUserByOauthId(long oauthId) {
+        Optional<User> isUser = userRepo.findByOauthId(oauthId);
+        if(isUser.isEmpty()){
+            return null;
+        }else{
+            return isUser.get();
+        }
+    }
+
+    @Override
+    @Transactional
+    public void updateRefreshToken(long userId, String jwtRefreshToken) {
+        QUser user = QUser.user;
+        JPAUpdateClause updateClause = new JPAUpdateClause(em, user);
+        updateClause.set(user.refreshToken, jwtRefreshToken)
+                .where(user.userId.eq(userId))
+                .execute();
+    }
+
+    @Override
+    public String readRefreshTokenByUserId(long userId) {
+        QUser user = QUser.user;
+        String refreshToken = new JPAQuery<>(em)
+                .select(user.refreshToken)
+                .from(user)
+                .where(user.userId.eq(userId))
+                .fetchOne();
+        return refreshToken;
+    }
+
+    @Override
+    @Transactional
+    public void deleteRefreshTokenByUserId(long userId) {
+        QUser user = QUser.user;
+        JPAUpdateClause jpaUpdateClause = new JPAUpdateClause(em, user);
+        jpaUpdateClause.set(user.refreshToken, (String) null)
+                .where(user.userId.eq(userId))
+                .execute();
     }
 }
