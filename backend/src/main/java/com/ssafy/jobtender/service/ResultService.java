@@ -3,6 +3,7 @@ package com.ssafy.jobtender.service;
 import com.ssafy.jobtender.dto.output.KeywordOutDTO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
 import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
+import com.ssafy.jobtender.dto.output.ResultOutputDTO;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface ResultService {
     List<ResultCompanyOutDTO> readResultsCompanies();
 
     List<ReadResultOutDTO> readSurveyResultsByUserId(Long userId);
+
+    ResultOutputDTO insertResult(long userId);
 }

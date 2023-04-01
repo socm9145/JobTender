@@ -31,4 +31,6 @@ public class Result {
     private List<CompanyScore> companyScores = new ArrayList<>();
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SurveyScore> surveyScores = new ArrayList<>();
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SurveyResult> surveyResults = new ArrayList<>();
 }
