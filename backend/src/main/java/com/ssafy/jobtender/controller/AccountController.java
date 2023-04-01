@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class AccountController {
     public AccountController(UserService userService){
         this.userService = userService;
     }
-    
+
     /**
      * 카카오 로그인 및 엑세스 토큰 쿠키로 발급
      * */
@@ -70,22 +71,26 @@ public class AccountController {
         userService.updateRefreshToken(user.getUserId(), jwtRefreshToken);
 
         //Access Token 쿠키 생성
-        Cookie cookieForAccessToken = new Cookie("access_token", jwtAccessToken);
-        cookieForAccessToken.setPath("/");
-        cookieForAccessToken.setMaxAge((int)jwtTokenProvider.getACCESS_TOKEN_EXPIRATION_TIME());
-        cookieForAccessToken.setHttpOnly(true);
-        cookieForAccessToken.setSecure(true);
+        ResponseCookie cookieForAccessToken = ResponseCookie.from("access_token", jwtAccessToken)
+                .path("/")
+                .maxAge((int)jwtTokenProvider.getACCESS_TOKEN_EXPIRATION_TIME())
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("None")
+                .build();
 
         //refresh Token 쿠키 생성
-        Cookie cookieForRefreshToken = new Cookie("refresh_token", jwtRefreshToken);
-        cookieForRefreshToken.setPath("/");
-        cookieForRefreshToken.setMaxAge((int)jwtTokenProvider.getREFRESH_TOKEN_EXPIRATION_TIME());
-        cookieForRefreshToken.setHttpOnly(true);
-        cookieForRefreshToken.setSecure(true);
+        ResponseCookie cookieForRefreshToken = ResponseCookie.from("refresh_token", jwtRefreshToken)
+                .path("/")
+                .maxAge((int)jwtTokenProvider.getREFRESH_TOKEN_EXPIRATION_TIME())
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("None")
+                .build();
 
         //쿠키 주입
-        httpServletResponse.addCookie(cookieForAccessToken);
-        httpServletResponse.addCookie(cookieForRefreshToken);
+        httpServletResponse.addHeader("Set-Cookie", cookieForAccessToken.toString());
+        httpServletResponse.addHeader("Set-Cookie", cookieForRefreshToken.toString());
 
         return ResponseEntity.status(HttpStatus.OK).body("로그인되었습니다.");
     }
@@ -104,7 +109,7 @@ public class AccountController {
         final String accessToken = cookieForAccessToken.getValue();
         //토큰 유효성 검사
         final int VALIDATE_CODE = jwtTokenProvider.validateToken(accessToken);
-        
+
         if(VALIDATE_CODE == jwtTokenProvider.IS_VALID){ //액세스 토큰이 유효한 경우
             return ResponseEntity.status(HttpStatus.OK).body("인증에 성공하였습니다.");
         }else if(VALIDATE_CODE == jwtTokenProvider.IS_EXPIRED){ //액세스 토큰이 만료된 경우
@@ -116,16 +121,18 @@ public class AccountController {
             if(userId != null) {
                 //Jwt 액세스 토큰 생성
                 final String jwtAccessToken = jwtTokenProvider.createAccessToken(String.valueOf(userId));
-                
+
                 //액세스 토큰 쿠키 생성
-                Cookie newCookieForAccessToken = new Cookie("access_token", jwtAccessToken);
-                newCookieForAccessToken.setPath("/");
-                newCookieForAccessToken.setMaxAge((int) jwtTokenProvider.getACCESS_TOKEN_EXPIRATION_TIME());
-                newCookieForAccessToken.setHttpOnly(true);
-                newCookieForAccessToken.setSecure(true);
-                
+                ResponseCookie newCookieForAccessToken = ResponseCookie.from("access_token", jwtAccessToken)
+                        .path("/")
+                        .maxAge((int)jwtTokenProvider.getACCESS_TOKEN_EXPIRATION_TIME())
+                        .httpOnly(true)
+                        .secure(true)
+                        .sameSite("None")
+                        .build();
+
                 //쿠키 주입
-                httpServletResponse.addCookie(newCookieForAccessToken);
+                httpServletResponse.addHeader("Set-Cookie", cookieForAccessToken.toString());
                 return ResponseEntity.status(HttpStatus.OK).body("토큰이 재발급 되었습니다.");
             }else { //리프레시 토큰이 유효하지 않을 경우
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효한 토큰이 아닙니다.(R)");

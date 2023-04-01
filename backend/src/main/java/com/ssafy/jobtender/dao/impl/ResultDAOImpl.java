@@ -7,6 +7,7 @@ import com.ssafy.jobtender.dao.ResultDAO;
 import com.ssafy.jobtender.dto.output.KeywordOutDTO;
 import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
 import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
+import com.ssafy.jobtender.dto.output.ResultOutputDTO;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.repo.ResultRepo;
@@ -112,5 +113,28 @@ public class ResultDAOImpl implements ResultDAO {
         List<Result> results = this.resultRepo.findAll();
 
         return results;
+    }
+
+    @Override
+    public ResultOutputDTO insertResult(long userId) {
+        Result eResult = new Result();
+        AccessInfo accessInfo = new AccessInfo();
+
+        accessInfo.setCreateDate(new Date());
+        accessInfo.setUpdateDate(new Date());
+        accessInfo.setCreateId(userId);
+        accessInfo.setUpdateId(userId);
+
+        eResult.setAccessInfo(accessInfo);
+        eResult.setUser(this.userRepo.findById(userId).get());
+
+        this.resultRepo.save(eResult);
+
+        ResultOutputDTO resultOutputDTO = new ResultOutputDTO();
+
+        resultOutputDTO.setResultId(eResult.getResultId());
+        resultOutputDTO.setAccessInfo(accessInfo);
+
+        return resultOutputDTO;
     }
 }
