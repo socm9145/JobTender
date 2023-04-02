@@ -32,8 +32,9 @@ const Kakao = () => {
       await login(
         myCode,
         data => {
-          console.log(data.data);
+          console.log(data);
           dispatch(setUserId(data.data));
+          localStorage.setItem("isLogin", true);
           navigate("/home");
         },
         error => {

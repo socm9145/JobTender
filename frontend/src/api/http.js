@@ -5,7 +5,7 @@ import { reissue } from "./userAxios";
 // axios 객체 생성
 // localServer 통신
 function localServer() {
-  console.log(process.env.REACT_APP_SOCKET);
+  // console.log(process.env.REACT_APP_SOCKET);
   const axiosConfig = {
     // baseURL: 'https://jobtender.shop/api',
     baseURL: 'http://localhost:8000/',
