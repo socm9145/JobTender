@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { gsap } from "gsap";
 
 const MousePointer = () => {
@@ -23,7 +24,7 @@ const MousePointer = () => {
     });
 
     function onMouseMove(e) {
-      gsap.to(bigBall, 0.4, {
+      gsap.to(bigBall, 0.1, {
         x: e.clientX - 15,
         y: e.clientY - 15,
       });

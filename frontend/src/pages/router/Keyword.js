@@ -13,10 +13,6 @@ import { EasePack } from "gsap/EasePack";
 gsap.registerPlugin(EasePack);
 
 const Keyword = () => {
-  const horizontalLine1 = useRef(null);
-  const horizontalLine2 = useRef(null);
-  const verticalLine1 = useRef(null);
-  const verticalLine2 = useRef(null);
   const leftKeywords = useRef(null);
   const describe = useRef(null);
   const rightKeywords = useRef(null);
@@ -47,21 +43,6 @@ const Keyword = () => {
     (state) => state.keyword.selectedKeyword
   );
 
-  const onHandleMouseOver = () => {
-    gsap.to(submitButtonBox.current, {
-      duration: 0.2,
-      backgroundColor: "#191919",
-      color: "#f7f6f1",
-    });
-  };
-  const onHandleMouseOut = () => {
-    gsap.to(submitButtonBox.current, {
-      duration: 0.2,
-      backgroundColor: "#f7f6f1",
-      color: "#191919",
-    });
-  };
-
   useEffect(() => {
     if (!selectedKeyword.includes(null)) {
       gsap.to(submitButtonBox.current, {
@@ -86,7 +67,6 @@ const Keyword = () => {
       display={"flex"}
       flexDirection={"column"}
       justifyContent={"end"}
-      paddingBottom={"3vh"}
       backgroundImage={"https://picsum.photos/1600/800"}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
@@ -143,18 +123,23 @@ const Keyword = () => {
           >
             <KeywordRankContainer />
           </Box>
-          <Box width={"20%"} height={"50%"}>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"end"}
+            width={"20%"}
+            height={"100%"}
+          >
             <Box
               ref={submitButtonBox}
               className={"hoverable"}
-              height={"100%"}
-              marginLeft={"10%"}
+              height={"40%"}
+              width={"60%"}
+              marginLeft={"40%"}
               display={"flex"}
               justifyContent={"center"}
               alignItems={"center"}
               backgroundColor={"white"}
-              borderLeftRadius={"30px"}
-              opacity={"0"}
             >
               <Text className={"hoverable"} fontSize={"2em"}>
                 제출

@@ -116,11 +116,17 @@ const WordSlide = () => {
 
   console.log(selectedScores);
   return (
-    <div className="word-slide">
+    <Box className="word-slide">
+      <div class="bg-video">
+        <video class="bg-video-content" autoPlay muted loop>
+          <source src="images/candle.mp4" type="video/mp4" />
+        </video>
+      </div>
+
       <section className="timeline">
         <ul>{discoveries.map(renderListItem)}</ul>
       </section>
-    </div>
+    </Box>
   );
 };
 

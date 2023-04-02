@@ -1,7 +1,8 @@
 :root {
-  --primary-color: #fff;
+  /* --primary-color: #fff; */
+  --primary-color: rgba(255, 255, 255, 0.85);
   /* --background-color: linear-gradient(54deg, #9164ff, #8bfff4); */
-  --background-color: linear-gradient(54deg, #191919, #f7f6f1);
+  /* --background-color: linear-gradient(54deg, #000000, #000000); */
   /* --background-color: linear-gradient(54deg, #e5e5b4, #a89879); */
   --text-color: #3c3f64;
 }
@@ -13,10 +14,27 @@
   padding: 0;
   box-sizing: border-box;
 }
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.bg-video-content {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-size: cover;
+}
 
 .word-slide {
   font: normal 16px/1.5 "Titillium Web", sans-serif;
-  background: var(--background-color);
+  /* background: url("../../../public/images/candle.mp4"); */
+  /* background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
   color: var(--text-color);
 
   overflow-x: hidden;
@@ -37,15 +55,15 @@
 .timeline ul li {
   list-style-type: none;
   position: relative;
-  width: 6px;
+  width: 0px;
   margin: 0 auto;
   /* 네모 끼리 거리 조절 */
   padding-top: 120px;
-  background: #dcf9a1;
+  background: #ececec;
 }
 
 /*중간 마름모 */
-.timeline ul li::after {
+/* .timeline ul li::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -54,21 +72,21 @@
   width: 20px;
   height: 20px;
   z-index: 2;
-  background: #ffa545;
-}
+  background: #ffffff;
+} */
 
 /* 네모 디브 */
 .timeline ul li div {
   position: relative;
-  bottom: -20px;
+  /* bottom: -20px; */
   /* 네모 가로 길이 조절 */
   /* width: 400px; */
   width: 35vw;
   /* 네모 크기 조절 */
   padding: 40px;
   background: var(--primary-color);
-  box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
-  border-radius: 5px;
+  box-shadow: 5px 8px 8px 2px rgba(0, 0, 0, 0.2);
+  /* border-radius: 5px; */
   display: flex;
   align-items: center;
 }
@@ -76,7 +94,7 @@
 /* 순서 태그 */
 .timeline ul li div time {
   position: absolute;
-  background: #cdcccb;
+  background: #ffffff;
   width: 75px;
   height: 40px;
   top: -20px;
@@ -95,8 +113,10 @@
   justify-content: center;
   /* align-items: center; */
   /* flex-direction: row; */
+  border-radius: 5px;
   width: 95%;
   height: 100%;
+  background: #ffffff;
 }
 
 .timeline ul li div div p {
@@ -105,7 +125,7 @@
 
 .timeline ul li div .word {
   /* margin-right: 10px; */
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   padding: 30px;
 }
 
@@ -137,9 +157,9 @@
   opacity: 1;
 }
 
-/* .word {
+.word {
   width: 80%;
-} */
+}
 
 .score {
   /* width: 20px; */
@@ -197,11 +217,11 @@
 }
 
 .score-button:hover {
-  background-color: #f5af19;
+  background-color: #ffc13b;
   color: #fff;
 }
 
 .selected {
-  background-color: #f5af19;
+  background-color: #000000;
   color: #fff;
 }
