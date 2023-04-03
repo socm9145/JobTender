@@ -8,12 +8,16 @@
 ::-webkit-scrollbar-thumb {
   height: 20%;
   border-radius: 10px;
-  background-color: bisque;
+  background-color: rgb(255, 255, 255);
+  /* background-color: "transparent"; */
 }
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: rgba(33, 133, 133, 0.33);
+  background-color: rgba(0, 0, 0, 0.33);
+  /* background-color: rgb(0, 0, 0); */
+
+  /* background-color: "transparent"; */
 }
 
 .myfont1 {

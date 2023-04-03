@@ -66,12 +66,11 @@ const Result = () => {
     <Box
       id={"resultPage"}
       className={"resultPageContain"}
-      height={"100vh"}
       display={"flex"}
       flexDirection={"column"}
       justifyContent={"space-between"}
       paddingX={"22%"}
-      marginTop={"10%"}
+      marginTop={"48px"}
     >
       {/* 이름 */}
       <Box

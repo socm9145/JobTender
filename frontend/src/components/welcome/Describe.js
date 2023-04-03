@@ -1,15 +1,6 @@
-import { useEffect } from "react";
-
-import { Box, Image, Text } from "@chakra-ui/react";
-
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import { Box, Text } from "@chakra-ui/react";
 
 const Describe = ({ title, fontsize }) => {
-  // 왼쪽에서 나오는 컴포넌트인지 오른쪽에서 나오는 컴포넌트인지 판단하기 위해
-  // id의 홀짝으로 구분함
-
   return (
     <Box
       className={"section"}

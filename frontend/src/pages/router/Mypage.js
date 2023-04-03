@@ -5,16 +5,8 @@ import "../../styles/Mypage.css";
 
 const Mypage = () => {
   const historyData = [
-    [
-      "2023.03.27",
-      ["성장", "혁신", "창의"],
-      ["삼성전자", "카카오", "NAVER"],
-    ],
-    [
-      "2023.03.21",
-      ["성장", "창의", "도전"],
-      ["LG CNS", "넷마블", "크래프톤"],
-    ],
+    ["2023.03.27", ["성장", "혁신", "창의"], ["삼성전자", "카카오", "NAVER"]],
+    ["2023.03.21", ["성장", "창의", "도전"], ["LG CNS", "넷마블", "크래프톤"]],
     [
       "2023.03.22",
       ["가자", "취업", "힘내"],
@@ -30,35 +22,90 @@ const Mypage = () => {
       ["혁신", "도전", "성장"],
       ["삼성전자", "삼성전자", "삼성전자"],
     ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
+    [
+      "2023.03.24",
+      ["혁신", "도전", "성장"],
+      ["삼성전자", "삼성전자", "삼성전자"],
+    ],
   ];
   return (
     // 마이페이지
     // <Box  width={"100vw"}>
     <Box
       id={"a"}
-      paddingRight={"2.5em"}
-      paddingLeft={"2.5em"}
       display={"flex"}
+      justifyContent={"center"}
       height={"100vh"}
-      backgroundColor={"#f1efe9"}
+      // backgroundColor={"#f1efe9"}
       alignItems={"center"}
+      backgroundImage={"https://picsum.photos/1600/800"}
+      backgroundSize={"cover"}
+      backgroundPosition={"center"}
+      backgroundRepeat={"no-repeat"}
+      // paddingX={"20vw"}
     >
-      <Box width={"100%"} paddingTop={"2.5em"} paddingBottom={"2.5em"}>
+      <Box
+        maxWidth={"60vw"}
+        minWidth={"1440px"}
+        // width={"100%"}
+        height={"75vh"}
+        paddingTop={"3.5em"}
+        paddingBottom={"6.5em"}
+        backgroundColor={"rgba(255,255,255,0.9)"}
+        borderRadius={"20px"}
+
+        // opacity={"0.6"}
+      >
         {/* 마이페이지 콘텐츠 */}
-        <Divider
+        {/* <Divider
           width={"100%"}
           borderWidth={"0.12em"}
           borderColor={"black"}
           marginBottom={"4em"}
-        />
+        /> */}
+
         <Box
+          height={"100%"}
           position={"relative"}
           display={"flex"}
-          justifyContent={"flex-start"}
+          // justifyContent={"flex-start"}
           alignItems={"stretch"}
           flexDirection={"row"}
+          paddingRight={"2.5em"}
+          paddingLeft={"2.5em"}
         >
           {/* 유저 상세정보 */}
+
           <Box
             position={"sticky"}
             top={"4.1em"}
@@ -86,7 +133,7 @@ const Mypage = () => {
               >
                 <Text
                   lineHeight={"1"}
-                  fontSize={"2.65em"}
+                  fontSize={"2vw"}
                   textTransform={"uppercase"}
                   marginTop={"0"}
                   marginBottom={"0"}
@@ -106,7 +153,7 @@ const Mypage = () => {
               >
                 <Text
                   lineHeight={"1"}
-                  fontSize={"2.65em"}
+                  fontSize={"2vw"}
                   textTransform={"uppercase"}
                   marginTop={"0"}
                   marginBottom={"0"}
@@ -127,7 +174,7 @@ const Mypage = () => {
               >
                 <Text
                   lineHeight={"1"}
-                  fontSize={"2.65em"}
+                  fontSize={"2vw"}
                   textTransform={"uppercase"}
                   marginTop={"0"}
                   marginBottom={"0"}
@@ -163,11 +210,11 @@ const Mypage = () => {
             display={"flex"}
             // width={"41.875em"}
             width={"75%"}
-            // height={"100%"}
+            height={"100%"}
             paddingRight={"1.25em"}
             flexDirection={"column"}
-            height={"40em"}
-            overflowY={"auto"}
+            // height={"40em"}
+            // overflowY={"auto"}
           >
             <Box
               display={"flex"}
@@ -178,7 +225,7 @@ const Mypage = () => {
             >
               <Text
                 lineHeight={"1"}
-                fontSize={"2.65em"}
+                fontSize={"2vw"}
                 textTransform={"uppercase"}
                 marginTop={"0"}
                 marginBottom={"0"}
@@ -198,6 +245,7 @@ const Mypage = () => {
               flexDirection={"row"}
               flexWrap={"wrap"}
               justifyContent={"flex-start"}
+              overflowY={"auto"}
             >
               {historyData.map((history, index) => (
                 <MyHistory
@@ -209,12 +257,12 @@ const Mypage = () => {
             </Box>
           </Box>
         </Box>
-        <Divider
+        {/* <Divider
           width={"100%"}
           borderWidth={"0.12em"}
           borderColor={"black"}
           marginTop={"4em"}
-        />
+        /> */}
       </Box>
     </Box>
     //   </Box>

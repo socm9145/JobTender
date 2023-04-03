@@ -11,12 +11,23 @@ gsap.registerPlugin(EasePack);
 const KeywordRankContainer = () => {
   return (
     <Box
+      position={"relative"}
       display={"flex"}
-      justifyContent={"space-between"}
+      justifyContent={"space-evenly"}
       alignItems={"center"}
       width={"100%"}
       height={"100%"}
     >
+      <Box
+        width={"100%"}
+        height={"100%"}
+        position={"absolute"}
+        backgroundColor={"black"}
+        borderTopRadius={"40px"}
+        borderX={"solid 5px white"}
+        borderTop={"solid 5px white"}
+        opacity={"0.5"}
+      ></Box>
       <KeywordRank rank={0} />
       <KeywordRank rank={1} />
       <KeywordRank rank={2} />
