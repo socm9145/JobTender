@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReadResultSummaryOutDTO {
+public class ReadResultSummaryMapOutDTO {
     long resultId;
     Date date;
-    List<String> keywords;
-    List<String> companies;
+    Set<String> keyword;
+    Set<String> company;
 }
