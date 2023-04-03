@@ -1,11 +1,9 @@
 package com.ssafy.jobtender.service;
 
-import com.ssafy.jobtender.dto.output.KeywordOutDTO;
-import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
-import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
-import com.ssafy.jobtender.dto.output.ResultOutputDTO;
+import com.ssafy.jobtender.dto.output.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ResultService {
     long createResult(Long userId);
@@ -15,4 +13,6 @@ public interface ResultService {
     List<ReadResultOutDTO> readSurveyResultsByUserId(Long userId);
 
     ResultOutputDTO insertResult(long userId);
+
+    Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
 }

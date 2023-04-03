@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -108,6 +109,15 @@ public class UserController {
     public ResponseEntity<List<ReadResultOutDTO>> readResultsByUserId(@RequestParam("userId") Long userId){
         List<ReadResultOutDTO> readResultOutDTO = this.resultService.readResultsByUserId(userId);
         return ResponseEntity.status(HttpStatus.OK).body(readResultOutDTO);
+    }
+
+    @ApiOperation(
+            value = "분석 기록 요약 확인 API "
+            , notes = "유저의 이전 분석 기록을 반환한다. 이전 분석 기록 하나당 3개의 최적합 회사를 가져온다.")
+    @GetMapping("/history/summary")
+    public ResponseEntity<Map<Long, HistoryOutDTO>> readHistoriesByUserId(@RequestParam("userId") Long userId){
+        Map<Long, HistoryOutDTO> historyOutDTOMap = this.resultService.readHistoriesByUserId(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(historyOutDTOMap);
     }
     @ApiOperation(
             value = "설문 분석 기록 확인 API"

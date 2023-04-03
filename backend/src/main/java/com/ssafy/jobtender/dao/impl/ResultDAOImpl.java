@@ -4,10 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.jobtender.dao.ResultDAO;
-import com.ssafy.jobtender.dto.output.KeywordOutDTO;
-import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
-import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
-import com.ssafy.jobtender.dto.output.ResultOutputDTO;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.repo.ResultRepo;
@@ -18,9 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class ResultDAOImpl implements ResultDAO {
@@ -30,6 +25,8 @@ public class ResultDAOImpl implements ResultDAO {
     private final UserRepo userRepo;
     //
     private final QResult result = QResult.result;
+    private final QInput input = QInput.input;
+    private final QKeyword keyword = QKeyword.keyword;
     private final QCompanyScore companyScore = QCompanyScore.companyScore;
     private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
     private final QCompany company = QCompany.company;
@@ -136,5 +133,60 @@ public class ResultDAOImpl implements ResultDAO {
         resultOutputDTO.setAccessInfo(accessInfo);
 
         return resultOutputDTO;
+    }
+
+    @Override
+    public Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId) {
+        Map<Long, HistoryOutDTO> historyOutDTOMap = new HashMap<>();
+
+        List<Result> results = new JPAQuery<>(em)
+                .select(result)
+                .from(result)
+                .where(result.user.userId.eq(userId))
+                .fetch();
+
+        for(Result result : results){
+            historyOutDTOMap.put(result.getResultId(), new HistoryOutDTO());
+            historyOutDTOMap.get(result.getResultId()).setCreateDate(result.getAccessInfo().getCreateDate());
+            historyOutDTOMap.get(result.getResultId()).setKeywords(new ArrayList<>());
+            historyOutDTOMap.get(result.getResultId()).setCompanies(new ArrayList<>());
+        }
+
+        List<ResultKeywordOutDTO> keywords = new JPAQuery<>(em)
+                .select(Projections.constructor(ResultKeywordOutDTO.class,
+                    result.resultId, keyword.keywordId, keyword.keywordName))
+                .from(result)
+                .join(input)
+                .on(result.resultId.eq(input.result.resultId))
+                .join(keyword)
+                .on(input.keyword.keywordId.eq(keyword.keywordId))
+                .where(result.user.userId.eq(userId))
+                .fetch();
+
+        List<ResultCompanyOutDTO> companies = new JPAQuery<>(em)
+                .select(Projections.constructor(ResultCompanyOutDTO.class,
+                        result.resultId, company.companyId, company.name))
+                .from(result)
+                .join(companyScore)
+                .on(result.resultId.eq(companyScore.result.resultId))
+                .join(company)
+                .on(companyScore.company.companyId.eq(company.companyId))
+                .where(result.user.userId.eq(userId))
+                .where(companyScore.CompanyScoreRank.eq("H"))
+                .fetch();
+
+
+        for(ResultKeywordOutDTO resultKeywordOutDTO : keywords){
+            if(historyOutDTOMap.containsKey(resultKeywordOutDTO.getResultId())){
+                historyOutDTOMap.get(resultKeywordOutDTO.getResultId()).getKeywords().add(resultKeywordOutDTO);
+            }
+        }
+
+        for(ResultCompanyOutDTO resultCompanyOutDTO : companies){
+            if(historyOutDTOMap.containsKey(resultCompanyOutDTO.getResultId())){
+                historyOutDTOMap.get(resultCompanyOutDTO.getResultId()).getCompanies().add(resultCompanyOutDTO);
+            }
+        }
+        return historyOutDTOMap;
     }
 }
