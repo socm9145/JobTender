@@ -152,7 +152,7 @@ public class ResultDAOImpl implements ResultDAO {
         where R.user_id = 1;
          */
         List<ReadResultSummaryOutDTO> readResultSummaryOutDTOs = new ArrayList<>();
-        Map<Long, List<ReadResultSummaryInitOutDTO>> map = new HashMap<>();
+        Map<Long, ReadResultSummaryMapOutDTO> map = new HashMap<>();
 
         List<ReadResultSummaryInitOutDTO> readResultSummaryOutInitDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(ReadResultSummaryInitOutDTO.class,
@@ -169,17 +169,34 @@ public class ResultDAOImpl implements ResultDAO {
                 .where(result.user.userId.eq(userId))
                 .fetch();
 
-        for (ReadResultSummaryInitOutDTO readResultSummaryInitOutDTO: readResultSummaryOutInitDTOs){
-            if (!map.containsKey(readResultSummaryInitOutDTO.getResultId()))
-                map.put(readResultSummaryInitOutDTO.getResultId(), new ArrayList<>());
+        for (ReadResultSummaryInitOutDTO readResultSummaryInitOutDTO : readResultSummaryOutInitDTOs){
+            if (!map.containsKey(readResultSummaryInitOutDTO.getResultId())) {
 
-            map.get(readResultSummaryInitOutDTO).add(readResultSummaryInitOutDTO);
+                ReadResultSummaryMapOutDTO readResultSummaryMapOutDTO = new ReadResultSummaryMapOutDTO();
+
+                readResultSummaryMapOutDTO.setResultId(readResultSummaryInitOutDTO.getResultId());
+                readResultSummaryMapOutDTO.setDate(readResultSummaryInitOutDTO.getDate());
+
+                readResultSummaryMapOutDTO.setKeyword(new HashSet<>());
+                readResultSummaryMapOutDTO.setCompany(new HashSet<>());
+
+                map.put(readResultSummaryInitOutDTO.getResultId(), readResultSummaryMapOutDTO);
+            }
+
+            map.get(readResultSummaryInitOutDTO.getResultId()).getKeyword().add(readResultSummaryInitOutDTO.getKeyword());
+            map.get(readResultSummaryInitOutDTO.getResultId()).getCompany().add(readResultSummaryInitOutDTO.getCompany());
+            System.out.println("555");
         }
 
-        for (long key: map.keySet()){
+        for (Long key : map.keySet()){
             ReadResultSummaryOutDTO readResultSummaryOutDTO = new ReadResultSummaryOutDTO();
-            readResultSummaryOutDTO.setDate();
 
+            readResultSummaryOutDTO.setResultId(key);
+            readResultSummaryOutDTO.setDate(map.get(key).getDate());
+            readResultSummaryOutDTO.setKeywords(List.copyOf(map.get(key).getKeyword()));
+            readResultSummaryOutDTO.setCompanies(List.copyOf(map.get(key).getCompany()));
+
+            readResultSummaryOutDTOs.add(readResultSummaryOutDTO);
         }
 
         return readResultSummaryOutDTOs;
