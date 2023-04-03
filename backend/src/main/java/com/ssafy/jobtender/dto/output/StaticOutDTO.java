@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ResultCompanyOutDTO {
-    long resultId;
-    long companyId;
-    String companyName;
+@AllArgsConstructor
+public class StaticOutDTO {
+    float mean;
+    float std;
 }

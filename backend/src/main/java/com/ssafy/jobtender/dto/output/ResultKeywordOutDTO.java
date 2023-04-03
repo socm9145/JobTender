@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResultCompanyOutDTO {
+public class ResultKeywordOutDTO {
     long resultId;
-    long companyId;
-    String companyName;
+    long keywordId;
+    String keywordName;
 }

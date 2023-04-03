@@ -14,7 +14,9 @@ public class SurveyResult {
     String score;
     // mapping
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "result_id")
     Result result;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "survey_id")
     Survey survey;
 }

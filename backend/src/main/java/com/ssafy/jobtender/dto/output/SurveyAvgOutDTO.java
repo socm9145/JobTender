@@ -7,10 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ResultCompanyOutDTO {
+@AllArgsConstructor
+public class SurveyAvgOutDTO {
     long resultId;
-    long companyId;
-    String companyName;
+    long keywordId;
+    String average;
 }

@@ -1,7 +1,6 @@
 package com.ssafy.jobtender.controller;
 
 import com.ssafy.jobtender.dto.output.*;
-import com.ssafy.jobtender.entity.Input;
 import com.ssafy.jobtender.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +23,22 @@ public class ResultController {
     private final InputService inputService;
     private final UserService userService;
     private final SurveyService surveyService;
+    private final KeywordResearchService keywordResearchService;
+    private final SurveyResultService surveyResultService;
 
     @Autowired
     public ResultController(ResultService resultService, SimilarCompanyService similarCompanyService,
                             CompanyService companyService, InputService inputService, UserService userService,
-                            SurveyService surveyService){
+                            SurveyService surveyService, KeywordResearchService keywordResearchService,
+                            SurveyResultService surveyResultService){
         this.resultService = resultService;
         this.similarCompanyService = similarCompanyService;
         this.companyService = companyService;
         this.inputService = inputService;
         this.userService = userService;
         this.surveyService = surveyService;
+        this.keywordResearchService = keywordResearchService;
+        this.surveyResultService = surveyResultService;
     }
     /**
      * [모달 관련 API]
@@ -116,12 +120,32 @@ public class ResultController {
 
         return ResponseEntity.status(HttpStatus.OK).body(keywordOutDTOs);
     }
-    @ApiOperation(value = "설문지 확인 API (v) new",
+    @ApiOperation(value = "설문지 확인 API (v)",
             notes = "모든 설문지 데이터를 불러온다.")
     @GetMapping("/survey")
     public ResponseEntity<List<SurveyOutDTO>> readSurveys(){
         List<SurveyOutDTO> surveyOutDTOs = this.surveyService.readSurveys();
 
         return ResponseEntity.status(HttpStatus.OK).body(surveyOutDTOs);
+    }
+
+    @ApiOperation(value = "통계 자료 확인 API (new)",
+    notes = "keywordId, 성별을 기반으로 평균, 표준편차를 반환한다")
+    @GetMapping("/static")
+    public ResponseEntity<StaticOutDTO> readSurveyByKeywordIdAndGender(@RequestParam("keywordId") long keywordId,
+                                                                       @RequestParam("gender") String gender){
+        StaticOutDTO staticOutDTO = this.keywordResearchService.readSurveyByKeywordIdAndGender(keywordId, gender);
+
+        return ResponseEntity.status(HttpStatus.OK).body(staticOutDTO);
+    }
+
+    @ApiOperation(value = "설문 평점 반환 API (new)",
+            notes = "설문의 특정 키워드의 평균값을 반환한다.")
+    @GetMapping("/survey/average")
+    public ResponseEntity<SurveyAvgOutDTO> readAverageInSurvey(@RequestParam("resultId") long resultId,
+                                                               @RequestParam("keywordId") long keywordId){
+        SurveyAvgOutDTO staticOutDTO = this.surveyResultService.readAverageInSurvey(resultId, keywordId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(staticOutDTO);
     }
 }
