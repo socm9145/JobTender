@@ -1,0 +1,335 @@
+{
+  "name": "flare",
+  "children": [
+    {
+      "name": "안정",
+      "children": [
+        {
+          "name": "가속",
+          "value": 7
+        },
+        {
+          "name": "가슴",
+          "value": 7
+        },
+        {
+          "name": "가치관",
+          "value": 6
+        },
+        {
+          "name": "감동",
+          "value": 5
+        },
+        {
+          "name": "강조",
+          "value": 4
+        },
+        {
+          "name": "강화",
+          "value": 0
+        },
+        {
+          "name": "개개인",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "규범",
+      "children": [
+        {
+          "name": "가속",
+          "value": 5
+        },
+        {
+          "name": "가슴",
+          "value": 3
+        },
+        {
+          "name": "가치관",
+          "value": 2
+        },
+        {
+          "name": "감동",
+          "value": 1
+        },
+        {
+          "name": "강조",
+          "value": 0
+        },
+        {
+          "name": "강화",
+          "value": 3
+        },
+        {
+          "name": "개개인",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "전통",
+      "children": [
+        {
+          "name": "가속",
+          "value": 5
+        },
+        {
+          "name": "가슴",
+          "value": 4
+        },
+        {
+          "name": "가치관",
+          "value": 3
+        },
+        {
+          "name": "감동",
+          "value": 2
+        },
+        {
+          "name": "강조",
+          "value": 2
+        },
+        {
+          "name": "강화",
+          "value": 1
+        },
+        {
+          "name": "개개인",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "애정",
+      "children": [
+        {
+          "name": "가속",
+          "value": 7
+        },
+        {
+          "name": "가슴",
+          "value": 7
+        },
+        {
+          "name": "가치관",
+          "value": 7
+        },
+        {
+          "name": "감동",
+          "value": 6
+        },
+        {
+          "name": "강조",
+          "value": 5
+        },
+        {
+          "name": "강화",
+          "value": 0
+        },
+        {
+          "name": "개개인",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "박애",
+      "children": [
+        {
+          "name": "가속",
+          "value": 6
+        },
+        {
+          "name": "가슴",
+          "value": 5
+        },
+        {
+          "name": "가치관",
+          "value": 6
+        },
+        {
+          "name": "감동",
+          "value": 5
+        },
+        {
+          "name": "강조",
+          "value": 6
+        },
+        {
+          "name": "강화",
+          "value": 5
+        },
+        {
+          "name": "개개인",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "자율",
+      "children": [
+        {
+          "name": "가속",
+          "value": 7
+        },
+        {
+          "name": "가슴",
+          "value": 7
+        },
+        {
+          "name": "가치관",
+          "value": 7
+        },
+        {
+          "name": "감동",
+          "value": 7
+        },
+        {
+          "name": "강조",
+          "value": 7
+        },
+        {
+          "name": "강화",
+          "value": 7
+        },
+        {
+          "name": "개개인",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "재미",
+      "children": [
+        {
+          "name": "가속",
+          "value": 5
+        },
+        {
+          "name": "가슴",
+          "value": 2
+        },
+        {
+          "name": "가치관",
+          "value": 1
+        },
+        {
+          "name": "감동",
+          "value": 4
+        },
+        {
+          "name": "강조",
+          "value": 3
+        },
+        {
+          "name": "강화",
+          "value": 5
+        },
+        {
+          "name": "개개인",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "쾌락",
+      "children": [
+        {
+          "name": "가속",
+          "value": 2
+        },
+        {
+          "name": "가슴",
+          "value": 3
+        },
+        {
+          "name": "가치관",
+          "value": 6
+        },
+        {
+          "name": "감동",
+          "value": 5
+        },
+        {
+          "name": "강조",
+          "value": 4
+        },
+        {
+          "name": "강화",
+          "value": 3
+        },
+        {
+          "name": "개개인",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "성취",
+      "children": [
+        {
+          "name": "가속",
+          "value": 5
+        },
+        {
+          "name": "가슴",
+          "value": 5
+        },
+        {
+          "name": "가치관",
+          "value": 3
+        },
+        {
+          "name": "감동",
+          "value": 5
+        },
+        {
+          "name": "강조",
+          "value": 4
+        },
+        {
+          "name": "강화",
+          "value": 1
+        },
+        {
+          "name": "개개인",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "지위",
+      "children": [
+        {
+          "name": "가속",
+          "value": 6
+        },
+        {
+          "name": "가슴",
+          "value": 5
+        },
+        {
+          "name": "가치관",
+          "value": 4
+        },
+        {
+          "name": "감동",
+          "value": 6
+        },
+        {
+          "name": "강조",
+          "value": 5
+        },
+        {
+          "name": "강화",
+          "value": 4
+        },
+        {
+          "name": "개개인",
+          "value": 6
+        }
+      ]
+    }
+  ]
+}
