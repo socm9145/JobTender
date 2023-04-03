@@ -1,9 +1,11 @@
 package com.ssafy.jobtender.dao;
 
 import com.ssafy.jobtender.dto.output.*;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Result;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ResultDAO {
@@ -14,5 +16,5 @@ public interface ResultDAO {
     List<Result> keywordRanking();
     ResultOutputDTO insertResult(long userId);
 
-    List<ReadResultSummaryOutDTO> readResultSummaryByUserId(long userId);
+    Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
 }

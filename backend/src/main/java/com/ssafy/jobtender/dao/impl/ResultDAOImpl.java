@@ -4,7 +4,6 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.jobtender.dao.ResultDAO;
-import com.ssafy.jobtender.dto.input.ReadResultSummaryInitOutDTO;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.entity.common.AccessInfo;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.*;
+import java.util.*;
 
 @Component
 public class ResultDAOImpl implements ResultDAO {
@@ -26,6 +26,8 @@ public class ResultDAOImpl implements ResultDAO {
     private final UserRepo userRepo;
     //
     private final QResult result = QResult.result;
+    private final QInput input = QInput.input;
+    private final QKeyword keyword = QKeyword.keyword;
     private final QCompanyScore companyScore = QCompanyScore.companyScore;
     private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
     private final QCompany company = QCompany.company;
@@ -137,68 +139,57 @@ public class ResultDAOImpl implements ResultDAO {
     }
 
     @Override
-    public List<ReadResultSummaryOutDTO> readResultSummaryByUserId(long userId) {
-        /*
-        select R.result_id, K.keyword_name, C.name
-        from results R
-        join inputs I
-        on R.result_id = I.result_id
-        join keywords K
-        on I.keyword_id = K.keyword_id
-        join company_scores CS
-        on CS.result_id = R.result_id
-        join companies C
-        on CS.company_id = C.company_id
-        where R.user_id = 1;
-         */
-        List<ReadResultSummaryOutDTO> readResultSummaryOutDTOs = new ArrayList<>();
-        Map<Long, ReadResultSummaryMapOutDTO> map = new HashMap<>();
+    public Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId) {
+        Map<Long, HistoryOutDTO> historyOutDTOMap = new HashMap<>();
 
-        List<ReadResultSummaryInitOutDTO> readResultSummaryOutInitDTOs = new JPAQuery<>(em)
-                .select(Projections.constructor(ReadResultSummaryInitOutDTO.class,
-                        result.resultId, result.accessInfo.createDate, keyword.keywordName, company.name))
+        List<Result> results = new JPAQuery<>(em)
+                .select(result)
+                .from(result)
+                .where(result.user.userId.eq(userId))
+                .fetch();
+
+        for(Result result : results){
+            historyOutDTOMap.put(result.getResultId(), new HistoryOutDTO());
+            historyOutDTOMap.get(result.getResultId()).setCreateDate(result.getAccessInfo().getCreateDate());
+            historyOutDTOMap.get(result.getResultId()).setKeywords(new ArrayList<>());
+            historyOutDTOMap.get(result.getResultId()).setCompanies(new ArrayList<>());
+        }
+
+        List<ResultKeywordOutDTO> keywords = new JPAQuery<>(em)
+                .select(Projections.constructor(ResultKeywordOutDTO.class,
+                    result.resultId, keyword.keywordId, keyword.keywordName))
                 .from(result)
                 .join(input)
                 .on(result.resultId.eq(input.result.resultId))
                 .join(keyword)
                 .on(input.keyword.keywordId.eq(keyword.keywordId))
-                .join(companyScore)
-                .on(companyScore.result.resultId.eq(result.resultId))
-                .join(company)
-                .on(companyScore.company.companyId.eq(company.companyId))
                 .where(result.user.userId.eq(userId))
                 .fetch();
 
-        for (ReadResultSummaryInitOutDTO readResultSummaryInitOutDTO : readResultSummaryOutInitDTOs){
-            if (!map.containsKey(readResultSummaryInitOutDTO.getResultId())) {
+        List<ResultCompanyOutDTO> companies = new JPAQuery<>(em)
+                .select(Projections.constructor(ResultCompanyOutDTO.class,
+                        result.resultId, company.companyId, company.name))
+                .from(result)
+                .join(companyScore)
+                .on(result.resultId.eq(companyScore.result.resultId))
+                .join(company)
+                .on(companyScore.company.companyId.eq(company.companyId))
+                .where(result.user.userId.eq(userId))
+                .where(companyScore.CompanyScoreRank.eq("H"))
+                .fetch();
 
-                ReadResultSummaryMapOutDTO readResultSummaryMapOutDTO = new ReadResultSummaryMapOutDTO();
 
-                readResultSummaryMapOutDTO.setResultId(readResultSummaryInitOutDTO.getResultId());
-                readResultSummaryMapOutDTO.setDate(readResultSummaryInitOutDTO.getDate());
-
-                readResultSummaryMapOutDTO.setKeyword(new HashSet<>());
-                readResultSummaryMapOutDTO.setCompany(new HashSet<>());
-
-                map.put(readResultSummaryInitOutDTO.getResultId(), readResultSummaryMapOutDTO);
+        for(ResultKeywordOutDTO resultKeywordOutDTO : keywords){
+            if(historyOutDTOMap.containsKey(resultKeywordOutDTO.getResultId())){
+                historyOutDTOMap.get(resultKeywordOutDTO.getResultId()).getKeywords().add(resultKeywordOutDTO);
             }
-
-            map.get(readResultSummaryInitOutDTO.getResultId()).getKeyword().add(readResultSummaryInitOutDTO.getKeyword());
-            map.get(readResultSummaryInitOutDTO.getResultId()).getCompany().add(readResultSummaryInitOutDTO.getCompany());
-            System.out.println("555");
         }
 
-        for (Long key : map.keySet()){
-            ReadResultSummaryOutDTO readResultSummaryOutDTO = new ReadResultSummaryOutDTO();
-
-            readResultSummaryOutDTO.setResultId(key);
-            readResultSummaryOutDTO.setDate(map.get(key).getDate());
-            readResultSummaryOutDTO.setKeywords(List.copyOf(map.get(key).getKeyword()));
-            readResultSummaryOutDTO.setCompanies(List.copyOf(map.get(key).getCompany()));
-
-            readResultSummaryOutDTOs.add(readResultSummaryOutDTO);
+        for(ResultCompanyOutDTO resultCompanyOutDTO : companies){
+            if(historyOutDTOMap.containsKey(resultCompanyOutDTO.getResultId())){
+                historyOutDTOMap.get(resultCompanyOutDTO.getResultId()).getCompanies().add(resultCompanyOutDTO);
+            }
         }
-
-        return readResultSummaryOutDTOs;
+        return historyOutDTOMap;
     }
 }

@@ -1,6 +1,7 @@
 package com.ssafy.jobtender.service.impl;
 
 import com.ssafy.jobtender.dto.output.*;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Input;
 import com.ssafy.jobtender.entity.Result;
 import com.ssafy.jobtender.service.ResultService;
@@ -46,7 +47,7 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public List<ReadResultSummaryOutDTO> readResultSummaryByUserId(long userId) {
-        return this.resultDAO.readResultSummaryByUserId(userId);
+    public Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId) {
+        return this.resultDAO.readHistoriesByUserId(userId);
     }
 }
