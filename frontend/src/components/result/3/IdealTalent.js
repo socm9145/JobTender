@@ -7,8 +7,25 @@ const IdealTalent = () => {
   const chartContainer = useRef();
 
   return (
-    <Box ref={chartContainer} width={"100%"}>
-      <BarChart chartContainer={chartContainer} data={data} />
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      justifyContent={"space-between"}
+      width={"100%"}
+    >
+      {/* 차트 설명 */}
+      <Box> asdf</Box>
+      <Box
+        ref={chartContainer}
+        width={"100%"}
+        minWidth={"1050px"}
+        backgroundColor={"white"}
+        padding={"4%"}
+        boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
+      >
+        <BarChart chartContainer={chartContainer} data={data} />
+      </Box>
     </Box>
   );
 };

@@ -110,7 +110,7 @@ const BarChart4b = ({ data, chartContainer }) => {
         .attr("class", "background")
         .attr("fill", "none")
         .attr("pointer-events", "all")
-        .attr("width", width)
+        .attr("width", chartContainer.current.offsetWidth)
         .attr("height", height)
         .attr("cursor", "pointer")
         .on("click", (event, d) => up(svg, d));
