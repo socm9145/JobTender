@@ -18,10 +18,28 @@ const BarChart4b = ({ data }) => {
       .hierarchy(data)
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value)
-      .eachAfter(
-        (d) =>
-          (d.index = d.parent ? (d.parent.index = d.parent.index + 1 || 0) : 0)
-      );
+      .eachAfter((d) => {
+        console.log(d);
+        d.index = d.parent ? (d.parent.index = d.parent.index + 1 || 0) : 0;
+
+        // if (d.depth === 2) {
+        //   console.log("d3(d.value)");
+        //   console.log(d.value);
+        //   console.log("d3(d.value)");
+        //   d.value = d.value * 0.1;
+        //   console.log(d.value);
+        //   // return;
+        // }
+
+        if (!d.children) return;
+        // // d.value = d.value * 0.1;
+        // d.value = d3.mean(d.children, (child) => child.value);
+
+        if (d.children) {
+          d.value = d.value / d.children.length;
+        }
+        //
+      });
     root.each((d) => d.children && (max = Math.max(max, d.children.length)));
     const height = max * barStep + margin.top + margin.bottom;
 
@@ -38,7 +56,12 @@ const BarChart4b = ({ data }) => {
       g
         .attr("class", "x-axis")
         .attr("transform", `translate(0,${margin.top})`)
-        .call(d3.axisTop(x).ticks(width / 80, "s"))
+        .call(
+          d3
+            .axisTop(x)
+            .ticks(width / 80, "s")
+            .tickFormat((d) => d3.format(".1f")(d))
+        )
         .call((g) =>
           (g.selection ? g.selection() : g).select(".domain").remove()
         );
@@ -77,8 +100,10 @@ const BarChart4b = ({ data }) => {
     // ...
 
     function chart(svg) {
+      // 첫 화면 x축
       x.domain([0, root.value]);
-
+      // x.domain([0, 9]);
+      // x.domain([0, d3.max(root.children, (d) => d.value) || 9]);
       svg
         .append("rect")
         .attr("class", "background")
@@ -105,11 +130,27 @@ const BarChart4b = ({ data }) => {
         .style("font", "10px sans-serif");
 
       const bar = g
+        // 기존코드
+        // .selectAll("g")
+        // .data(d.children)
+        // .join("g")
+        // .attr("cursor", (d) => (!d.children ? null : "pointer"))
+        // .on("click", (event, d) => down(svg, d));
         .selectAll("g")
         .data(d.children)
         .join("g")
         .attr("cursor", (d) => (!d.children ? null : "pointer"))
-        .on("click", (event, d) => down(svg, d));
+        .on("click", (event, d) => {
+          // Divide the child node value by the number of children when clicked.
+          if (d.children && !d.data.clicked) {
+            d.children.forEach((child) => {
+              child.value = child.value / child.parent.children.length;
+            });
+            // Mark the node as clicked
+            d.data.clicked = true;
+          }
+          down(svg, d);
+        });
 
       bar
         .append("text")
@@ -128,6 +169,11 @@ const BarChart4b = ({ data }) => {
     }
     function down(svg, d) {
       if (!d.children || d3.active(svg.node())) return;
+
+      ///////@@@@@@@@@@@@@@@@@@@@@@@ 노드 값 자식수로 나누기
+      // d.children.forEach((child) => {
+      //   child.value = child.value / child.parent.children.length;
+      // });
 
       // Rebind the current node to the background.
       svg.select(".background").datum(d);
@@ -160,7 +206,10 @@ const BarChart4b = ({ data }) => {
         .attr("transform", stagger());
 
       // Update the x-scale domain.
-      x.domain([0, d3.max(d.children, (d) => d.value)]);
+      // x.domain([0, 9]);
+      // 클릭시 x축
+      // x.domain([0, d3.max(d.children, (d) => d.value)]);
+      x.domain(d.depth == 0 ? [0, 9] : [0, 1]);
 
       // Update the x-axis.
       svg.selectAll(".x-axis").transition(transition2).call(xAxis);
@@ -194,8 +243,9 @@ const BarChart4b = ({ data }) => {
       const exit = svg.selectAll(".enter").attr("class", "exit");
 
       // Update the x-scale domain.
-      x.domain([0, d3.max(d.parent.children, (d) => d.value)]);
-
+      x.domain([0, 9]);
+      // x.domain([0, d3.max(d.parent.children, (d) => d.value)]);
+      // x.domain([0, d3.max(root.children, (d) => d.value) || 9]);
       // Update the x-axis.
       svg.selectAll(".x-axis").transition(transition1).call(xAxis);
 
@@ -235,7 +285,7 @@ const BarChart4b = ({ data }) => {
       // When the entering parent rect is done, make it visible!
       enter
         .selectAll("rect")
-
+        // .attr("fill", (d) => color(!!d.children))
         .attr("fill", color(true))
         .attr("fill-opacity", (p) => (p === d ? 0 : null))
         .transition(transition2)

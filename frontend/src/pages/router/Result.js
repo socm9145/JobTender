@@ -95,17 +95,17 @@ const Result = () => {
         {/* 기업 추천 1,2,3위 */}
         <ResultPageResultData
           title="가치관에 따른 추천 기업 Top3"
-          componentName={"GraphValues"}
+          componentName={"RecommendedCorp"}
         ></ResultPageResultData>
         {/* 기업 키워드 */}
         <ResultPageResultData
           title="가치관에 따른 추천 기업 Top3"
-          componentName={"GraphValues"}
+          componentName={"CorpKeyword"}
         ></ResultPageResultData>
         {/* 관련 인재상 키워드 */}
         <ResultPageResultData
           title="가치관에 따른 추천 기업 Top3"
-          componentName={"GraphValues"}
+          componentName={"IdealTalent"}
         ></ResultPageResultData>
         {/* 설문 */}
         {/* 가치관 별 막대 그래프 */}
@@ -116,7 +116,7 @@ const Result = () => {
         {/* 나이대 별 가치관 */}
         <ResultPageResultData
           title="가치관에 따른 추천 기업 Top3"
-          componentName={"GraphValues"}
+          componentName={"AgeValues"}
         ></ResultPageResultData>
       </Box>
     </Box>
