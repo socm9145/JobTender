@@ -70,7 +70,7 @@ const Result = () => {
       flexDirection={"column"}
       justifyContent={"space-between"}
       paddingX={"22%"}
-      backgroundColor={"gray.200"}
+      backgroundColor={"orange.50"}
     >
       {/* 내용 컨테이너 */}
       <Box display={"flex"} flexDirection={"column"} marginTop={"48px"}>
