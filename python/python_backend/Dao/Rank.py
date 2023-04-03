@@ -60,7 +60,7 @@ class RankDao:
         for idx in extracted_keyword_id:
             temp = [keyword_id, idx]
             cur.execute(sql, temp)
-            # print(cur.fetchone()[0])
+            print(cur.fetchone()[0])
             result.append(float(cur.fetchone()[0]))
         return result
 
