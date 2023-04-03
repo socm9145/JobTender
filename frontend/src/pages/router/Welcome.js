@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FirstScene from "../../components/welcome/FirstScene";
 import Describe from "../../components/welcome/Describe";
 
-import { Box, Text, Button, Section } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

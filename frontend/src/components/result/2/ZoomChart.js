@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react";
 const ZoomChart = ({ data }) => {
   const ref = useRef();
   useEffect(() => {
-    const width = 932;
+    const width = 1000;
 
     // const height = 700; // 원하는 높이로 변경하세요
 
@@ -43,7 +43,7 @@ const ZoomChart = ({ data }) => {
       .select(ref.current)
       // .attr("width", width) // 이 라인을 추가하세요
       // .attr("height", height) // 이 라인을 추가하세요
-      .attr("viewBox", [0, 0, 1000, 1000])
+      .attr("viewBox", [0, 0, width, width])
       .style("font", "10px sans-serif");
 
     const g = svg

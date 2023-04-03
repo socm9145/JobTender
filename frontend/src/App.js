@@ -48,8 +48,8 @@ function App() {
             </svg>
           </div>
           <div className="cursor__ball cursor__ball--small">
-            <svg height="10" width="10">
-              <circle cx="5" cy="5" r="4" strokeWidth="0"></circle>
+            <svg height="15" width="15">
+              <circle cx="7.5" cy="7.5" r="6" strokeWidth="0"></circle>
             </svg>
           </div>
         </div>
