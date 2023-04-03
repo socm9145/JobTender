@@ -1,28 +1,54 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
+import { reissue } from "../api/userAxios"
 // 페이지 import
-import Navbar from "../components/Navbar";
 import Home from "./router/Home";
 import Keyword from "./router/Keyword";
 import Survey from "./router/Survey";
 import Mypage from "./router/Mypage";
-import LandingPage from "./router/LandingPage";
+import Result from "./router/Result";
+import Navbar from "../components/Navbar";
+import Welcome from "./router/Welcome";
+import Login from "./router/Login";
+import Kakao from "./router/Kakao";
+import PrivateRoute from "./PrivateRoute";
 
 const IncludeNavbar = () => {
+  const getIsLogin = () => {
+    return localStorage.getItem("isLogin");
+  }
   return (
-    <div>
+    // <div>
+    //   <Navbar />
+    //   <Box>
+    //     <Routes>
+    //       <Route path="/kakao" element={<Kakao />}></Route>
+    //       <Route path="/" element={<Welcome />}></Route>
+    //       <Route path="/login" element={<Login />}></Route>
+    //       <Route path="/keyword" element={<Keyword />}></Route>
+    //       <Route path="/survey" element={<Survey />}></Route>
+    //       <Route path="/result" element={<Result />}></Route>
+    //       <Route path="/mypage" element={<Mypage />}></Route>
+    //       <Route path="/home" element={<Home />}></Route>
+    //       {/* {
+    //         statusCode===200 ? <Route path="/main/*" element={<PrivatePage />}></Route> : <Route path="/*" element={<PublicPage />}></Route>
+    //       } */}
+    //     </Routes>
+    //   </Box>
+    // </div>
+    <Router>
       <Navbar />
-      <Box>
-        <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/keyword" element={<Keyword />}></Route>
-          <Route path="/survey" element={<Survey />}></Route>
-          <Route path="/mypage" element={<Mypage />}></Route>
-
-          <Route path="/*" element={<LandingPage />}></Route>
-        </Routes>
-      </Box>
-    </div>
+      <Routes>
+        <Route exact path="/" component={Welcome} />
+        <PrivateRoute path="/login" component={Login} isAuthenticated={getIsLogin()} />
+        <PrivateRoute path="/keyword" component={Keyword} isAuthenticated={getIsLogin()} />
+        <PrivateRoute path="/survey" component={Survey} isAuthenticated={getIsLogin()} />
+        <PrivateRoute path="/result" component={Result} isAuthenticated={getIsLogin()} />
+        <PrivateRoute path="/mypage" component={Mypage} isAuthenticated={getIsLogin()} />
+        <PrivateRoute path="/home" component={Home} isAuthenticated={getIsLogin()} />
+      </Routes>
+    </Router>
   );
 };
 
