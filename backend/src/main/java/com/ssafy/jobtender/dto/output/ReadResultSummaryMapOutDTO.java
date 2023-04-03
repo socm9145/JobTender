@@ -5,12 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+import java.util.Date;
+import java.util.Set;
+
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-public class ResultCompanyOutDTO {
+@AllArgsConstructor
+public class ReadResultSummaryMapOutDTO {
     long resultId;
-    long companyId;
-    String companyName;
+    Date date;
+    Set<String> keyword;
+    Set<String> company;
 }

@@ -92,13 +92,13 @@ public class AccountController {
         httpServletResponse.addHeader("Set-Cookie", cookieForAccessToken.toString());
         httpServletResponse.addHeader("Set-Cookie", cookieForRefreshToken.toString());
 
-        return ResponseEntity.status(HttpStatus.OK).body("로그인되었습니다.");
+        return ResponseEntity.status(HttpStatus.OK).body(user.getUserId());
     }
     /**
      * 액세스 토큰과 리프레시 토큰 유효성 검사
      * */
     @GetMapping("/reissue")
-    public ResponseEntity<String> reissue(@CookieValue(value = "access_token", required = false) Cookie cookieForAccessToken,
+    public ResponseEntity<?> reissue(@CookieValue(value = "access_token", required = false) Cookie cookieForAccessToken,
                                           @CookieValue(value = "refresh_token", required = false) Cookie cookieForRefreshToken,
                                           HttpServletResponse httpServletResponse){
         //Access Token 쿠키가 없는 경우
@@ -109,14 +109,15 @@ public class AccountController {
         final String accessToken = cookieForAccessToken.getValue();
         //토큰 유효성 검사
         final int VALIDATE_CODE = jwtTokenProvider.validateToken(accessToken);
-
+        Long userId = null;
         if(VALIDATE_CODE == jwtTokenProvider.IS_VALID){ //액세스 토큰이 유효한 경우
-            return ResponseEntity.status(HttpStatus.OK).body("인증에 성공하였습니다.");
+            userId = Long.parseLong(jwtTokenProvider.getClaimsFromToken(accessToken).getSubject());
+            return ResponseEntity.status(HttpStatus.OK).body(userId);
         }else if(VALIDATE_CODE == jwtTokenProvider.IS_EXPIRED){ //액세스 토큰이 만료된 경우
             //리프레시 토큰 값 추출
             final String refreshToken = cookieForRefreshToken.getValue();
             //리프레시 토큰 유효성 확인 (유효할 경우 userId return)
-            Long userId = userService.isValidRefreshToken(refreshToken);
+            userId = userService.isValidRefreshToken(refreshToken);
             //리프레시 토큰이 유효할 경우 재발급
             if(userId != null) {
                 //Jwt 액세스 토큰 생성
@@ -133,7 +134,7 @@ public class AccountController {
 
                 //쿠키 주입
                 httpServletResponse.addHeader("Set-Cookie", cookieForAccessToken.toString());
-                return ResponseEntity.status(HttpStatus.OK).body("토큰이 재발급 되었습니다.");
+                return ResponseEntity.status(HttpStatus.OK).body(userId);
             }else { //리프레시 토큰이 유효하지 않을 경우
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효한 토큰이 아닙니다.(R)");
             }
