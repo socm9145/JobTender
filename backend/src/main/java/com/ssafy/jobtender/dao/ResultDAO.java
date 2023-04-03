@@ -1,6 +1,7 @@
 package com.ssafy.jobtender.dao;
 
 import com.ssafy.jobtender.dto.output.*;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Result;
 
 import java.util.List;

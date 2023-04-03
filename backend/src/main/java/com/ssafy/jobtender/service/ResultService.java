@@ -1,6 +1,7 @@
 package com.ssafy.jobtender.service;
 
 import com.ssafy.jobtender.dto.output.*;
+import com.ssafy.jobtender.dto.output.*;
 
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,7 @@
 package com.ssafy.jobtender.service.impl;
 
 import com.ssafy.jobtender.dto.output.*;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Input;
 import com.ssafy.jobtender.entity.Result;
 import com.ssafy.jobtender.service.ResultService;
