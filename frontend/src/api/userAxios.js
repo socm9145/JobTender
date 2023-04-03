@@ -3,7 +3,6 @@ import { localServer } from "./http"
 const api = localServer();
 
 async function login(code, success, fail){
-    console.log(code);
     await api.get('/account/auth/kakao/callback?code=' + code).then(success).catch(fail);
 }
 
