@@ -23,7 +23,9 @@ const Navbar = () => {
       color={"white"}
     >
       <Box className={"homeFont"} fontSize={"2em"}>
-        <Link to="/home">JOBTENDER</Link>
+        {
+          localStorage.getItem("isLogin") ? <Link to="/home">JOBTENDER</Link> : <Link to="/">JOBTENDER</Link>
+        }
       </Box>
       {/* 로그인 상태관리를 통해서 mypage버튼 활성화 비활성화 */}
       {location.pathname === "/mypage" ? null : (

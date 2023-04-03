@@ -4,6 +4,7 @@ const initialState = {
   clickedKeyword: null,
   clickedRank: null,
   selectedKeyword: [null, null, null],
+  keyword: {},
   wordList: [
     "안정",
     "질서",
