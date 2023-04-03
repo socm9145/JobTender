@@ -109,6 +109,14 @@ public class UserController {
         List<ReadResultOutDTO> readResultOutDTO = this.resultService.readResultsByUserId(userId);
         return ResponseEntity.status(HttpStatus.OK).body(readResultOutDTO);
     }
+
+    @ApiOperation(value = "분석 기록 확인 요약 API (new)",
+    notes = "유저의 이전 분석 기록을 요약하여 반환한다.")
+    @GetMapping("/history/summary")
+    public ResponseEntity<List<ReadResultSummaryOutDTO>> readResultSummaryByUserId(@RequestParam("userId") long userId){
+        List<ReadResultSummaryOutDTO> readResultSummaryOutDTOs = this.resultService.readResultSummaryByUserId(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(readResultSummaryOutDTOs);
+    }
     @ApiOperation(
             value = "설문 분석 기록 확인 API"
             , notes = "유저의 이전 설문 분석 기록을 반환한다. 이전 분석 기록 하나당 3개의 최적합 회사를 가져온다.")

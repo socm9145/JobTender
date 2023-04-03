@@ -4,10 +4,8 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.jobtender.dao.ResultDAO;
-import com.ssafy.jobtender.dto.output.KeywordOutDTO;
-import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
-import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
-import com.ssafy.jobtender.dto.output.ResultOutputDTO;
+import com.ssafy.jobtender.dto.input.ReadResultSummaryInitOutDTO;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.entity.common.AccessInfo;
 import com.ssafy.jobtender.repo.ResultRepo;
@@ -18,9 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class ResultDAOImpl implements ResultDAO {
@@ -34,6 +30,8 @@ public class ResultDAOImpl implements ResultDAO {
     private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
     private final QCompany company = QCompany.company;
     private final QCompanyRating companyRating = QCompanyRating.companyRating;
+    private final QKeyword keyword = QKeyword.keyword;
+    private final QInput input = QInput.input;
     @Autowired
     public ResultDAOImpl(ResultRepo resultRepo, UserRepo userRepo) {
         this.resultRepo = resultRepo;
@@ -136,5 +134,54 @@ public class ResultDAOImpl implements ResultDAO {
         resultOutputDTO.setAccessInfo(accessInfo);
 
         return resultOutputDTO;
+    }
+
+    @Override
+    public List<ReadResultSummaryOutDTO> readResultSummaryByUserId(long userId) {
+        /*
+        select R.result_id, K.keyword_name, C.name
+        from results R
+        join inputs I
+        on R.result_id = I.result_id
+        join keywords K
+        on I.keyword_id = K.keyword_id
+        join company_scores CS
+        on CS.result_id = R.result_id
+        join companies C
+        on CS.company_id = C.company_id
+        where R.user_id = 1;
+         */
+        List<ReadResultSummaryOutDTO> readResultSummaryOutDTOs = new ArrayList<>();
+        Map<Long, List<ReadResultSummaryInitOutDTO>> map = new HashMap<>();
+
+        List<ReadResultSummaryInitOutDTO> readResultSummaryOutInitDTOs = new JPAQuery<>(em)
+                .select(Projections.constructor(ReadResultSummaryInitOutDTO.class,
+                        result.resultId, result.accessInfo.createDate, keyword.keywordName, company.name))
+                .from(result)
+                .join(input)
+                .on(result.resultId.eq(input.result.resultId))
+                .join(keyword)
+                .on(input.keyword.keywordId.eq(keyword.keywordId))
+                .join(companyScore)
+                .on(companyScore.result.resultId.eq(result.resultId))
+                .join(company)
+                .on(companyScore.company.companyId.eq(company.companyId))
+                .where(result.user.userId.eq(userId))
+                .fetch();
+
+        for (ReadResultSummaryInitOutDTO readResultSummaryInitOutDTO: readResultSummaryOutInitDTOs){
+            if (!map.containsKey(readResultSummaryInitOutDTO.getResultId()))
+                map.put(readResultSummaryInitOutDTO.getResultId(), new ArrayList<>());
+
+            map.get(readResultSummaryInitOutDTO).add(readResultSummaryInitOutDTO);
+        }
+
+        for (long key: map.keySet()){
+            ReadResultSummaryOutDTO readResultSummaryOutDTO = new ReadResultSummaryOutDTO();
+            readResultSummaryOutDTO.setDate();
+
+        }
+
+        return readResultSummaryOutDTOs;
     }
 }

@@ -1,9 +1,6 @@
 package com.ssafy.jobtender.dao;
 
-import com.ssafy.jobtender.dto.output.KeywordOutDTO;
-import com.ssafy.jobtender.dto.output.ReadResultOutDTO;
-import com.ssafy.jobtender.dto.output.ResultCompanyOutDTO;
-import com.ssafy.jobtender.dto.output.ResultOutputDTO;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Result;
 
 import java.util.List;
@@ -16,4 +13,6 @@ public interface ResultDAO {
     List<ResultCompanyOutDTO> readResultsCompanies();
     List<Result> keywordRanking();
     ResultOutputDTO insertResult(long userId);
+
+    List<ReadResultSummaryOutDTO> readResultSummaryByUserId(long userId);
 }
