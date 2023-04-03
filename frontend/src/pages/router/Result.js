@@ -93,31 +93,16 @@ const Result = () => {
       <Box height={"85%"} display={"flex"} flexDirection={"column"}>
         {/* 키워드 + 설문 */}
         {/* 기업 추천 1,2,3위 */}
-        <ResultPageResultData
-          title="가치관에 따른 추천 기업 Top3"
-          componentName={"RecommendedCorp"}
-        ></ResultPageResultData>
+        <ResultPageResultData title="가치관에 따른 추천 기업 Top3" componentName={"RecommendedCorp"}></ResultPageResultData>
         {/* 기업 키워드 */}
-        <ResultPageResultData
-          title="가치관에 따른 추천 기업 Top3"
-          componentName={"CorpKeyword"}
-        ></ResultPageResultData>
+        <ResultPageResultData title="기업이 주요하게 보는 가치관" componentName={"CorpKeyword"}></ResultPageResultData>
         {/* 관련 인재상 키워드 */}
-        <ResultPageResultData
-          title="가치관에 따른 추천 기업 Top3"
-          componentName={"IdealTalent"}
-        ></ResultPageResultData>
+        <ResultPageResultData title="내 가치관과 관련있는 인재상 키워드" componentName={"IdealTalent"}></ResultPageResultData>
         {/* 설문 */}
         {/* 가치관 별 막대 그래프 */}
-        <ResultPageResultData
-          title="가치관에 따른 추천 기업 Top3"
-          componentName={"GraphValues"}
-        ></ResultPageResultData>
+        <ResultPageResultData title="가치관 별 막대 그래프" componentName={"GraphValues"}></ResultPageResultData>
         {/* 나이대 별 가치관 */}
-        <ResultPageResultData
-          title="가치관에 따른 추천 기업 Top3"
-          componentName={"AgeValues"}
-        ></ResultPageResultData>
+        <ResultPageResultData title="나이대 별 가치관" componentName={"AgeValues"}></ResultPageResultData>
       </Box>
     </Box>
   );
