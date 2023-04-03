@@ -44,7 +44,7 @@ const ZoomChart = ({ data }) => {
       // .attr("width", width) // 이 라인을 추가하세요
       // .attr("height", height) // 이 라인을 추가하세요
       .attr("viewBox", [0, 0, width, width])
-      .style("font", "10px sans-serif");
+      .style("font", "1.5vw sans-serif");
 
     const g = svg
       .append("g")
@@ -168,7 +168,7 @@ const ZoomChart = ({ data }) => {
 
   return (
     <Box display={"flex"} justifyContent={"center"}>
-      <svg ref={ref} width={"900px"} height={"900px"}></svg>
+      <svg ref={ref} width={"75%"} height={"100%"}></svg>
     </Box>
   );
 };

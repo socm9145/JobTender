@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
+
+import { Box } from "@chakra-ui/react";
 import * as d3 from "d3";
 
-const BarChart = ({ data }) => {
+const BarChart = ({ data, chartContainer }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -36,9 +38,10 @@ const BarChart = ({ data }) => {
       ),
       yFormat: "",
       yLabel: "↑ Frequency",
-      width: 640,
+      width: chartContainer.current.offsetWidth,
       height: 500,
-      color: "steelblue",
+      color: d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 10)),
+      // color: "steelblue",
     });
 
     return chart;
@@ -64,6 +67,7 @@ const BarChart = ({ data }) => {
       yFormat, // a format specifier string for the y-axis
       yLabel, // a label for the y-axis
       color = "currentColor", // bar fill color
+      // color = "currentColor", // bar fill color
     } = {}
   ) {
     // Compute values.
@@ -100,6 +104,7 @@ const BarChart = ({ data }) => {
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height])
+
       .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
     svg
@@ -107,6 +112,7 @@ const BarChart = ({ data }) => {
       .attr("transform", `translate(${marginLeft},0)`)
       .call(yAxis)
       .call((g) => g.select(".domain").remove())
+
       .call((g) =>
         g
           .selectAll(".tick line")
@@ -205,7 +211,6 @@ const BarChart = ({ data }) => {
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height])
       .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
-
     svg
       .append("g")
       .attr("transform", `translate(${marginLeft},0)`)
@@ -238,7 +243,6 @@ const BarChart = ({ data }) => {
       .attr("y", (i) => yScale(Y[i]))
       .attr("height", (i) => yScale(0) - yScale(Y[i]))
       .attr("width", xScale.bandwidth());
-
     if (title) bar.append("title").text(title);
 
     svg
@@ -249,7 +253,7 @@ const BarChart = ({ data }) => {
     return svg.node();
   }
 
-  return <div ref={chartRef}></div>;
+  return <Box ref={chartRef}></Box>;
 };
 
 export default BarChart;
