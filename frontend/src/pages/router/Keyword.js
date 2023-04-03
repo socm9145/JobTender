@@ -5,7 +5,11 @@ import RightKeywordsContainer from "../../components/keyword/RightKeywordsContai
 import DescribeContainer from "../../components/keyword/DescribeContainer";
 import KeywordRankContainer from "../../components/keyword/KeywordRankContainer";
 
+import { postKeyword } from "../../api/keywordAxios";
+import { keyword } from "../../api/mypageAxios";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setWordList } from "../../redux/keyword/keywordSlice";
 import { Box, Text } from "@chakra-ui/react";
 
 import { gsap } from "gsap";
@@ -13,35 +17,73 @@ import { EasePack } from "gsap/EasePack";
 gsap.registerPlugin(EasePack);
 
 const Keyword = () => {
+  const dispatch = useAppDispatch();
   const leftKeywords = useRef(null);
   const describe = useRef(null);
   const rightKeywords = useRef(null);
   const rankContainer = useRef(null);
   const submitButtonBox = useRef(null);
 
+  const selectedKeyword = useAppSelector(
+    (state) => state.keyword.selectedKeyword
+  );
+  const userid = useAppSelector((state) => state.user.userId);
+
+  async function sendKeyword() {
+    const keywords = {
+      keywordId1: selectedKeyword[0],
+      keywordId2: selectedKeyword[1],
+      keywordId3: selectedKeyword[2],
+    };
+    await postKeyword(
+      userid,
+      keywords,
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  const wordList = useAppSelector((state) => state.keyword.wordList);
+  const keywordName = [];
+  const keywordId = [];
+
+  wordList.map((data) => {
+    keywordName.push(data.keywordName);
+    keywordId.push(data.keywordId);
+  });
+
   useLayoutEffect(() => {
     const tl = gsap.timeline();
     tl.to(submitButtonBox.current, {
       duration: 0,
-      opacity: 1,
       x: "100%",
-      ease: "sine.out",
     }).from(
       rankContainer.current,
       {
         duration: 1,
         opacity: 0,
-        x: "-5vw",
+        y: "100%",
         ease: "sine.out",
       },
       1.7
     );
-  }, []);
 
-  const wordList = useAppSelector((state) => state.keyword.wordList);
-  const selectedKeyword = useAppSelector(
-    (state) => state.keyword.selectedKeyword
-  );
+    async function getKeyword() {
+      await keyword(
+        (data) => {
+          dispatch(setWordList(data.data));
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    getKeyword();
+  }, []);
 
   useEffect(() => {
     if (!selectedKeyword.includes(null)) {
@@ -87,7 +129,10 @@ const Keyword = () => {
             overflow={"hidden"}
           >
             <Box ref={leftKeywords} width={"25vw"}>
-              <LeftKeywordsContainer keywords={wordList.slice(0, 5)} />
+              <LeftKeywordsContainer
+                keywordName={keywordName.slice(0, 5)}
+                keywordId={keywordId.slice(0, 5)}
+              />
             </Box>
 
             <Box
@@ -101,7 +146,10 @@ const Keyword = () => {
             </Box>
 
             <Box ref={rightKeywords} width={"25vw"}>
-              <RightKeywordsContainer keywords={wordList.slice(5, 10)} />
+              <RightKeywordsContainer
+                keywordName={keywordName.slice(5, 11)}
+                keywordId={keywordId.slice(5, 11)}
+              />
             </Box>
           </Box>
         </Box>
@@ -141,7 +189,11 @@ const Keyword = () => {
               alignItems={"center"}
               backgroundColor={"white"}
             >
-              <Text className={"hoverable"} fontSize={"2em"}>
+              <Text
+                className={"hoverable"}
+                fontSize={"2em"}
+                onClick={sendKeyword}
+              >
                 제출
               </Text>
             </Box>
