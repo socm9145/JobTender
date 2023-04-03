@@ -16,10 +16,12 @@ gsap.registerPlugin(EasePack);
 
 const KeywordRank = ({ rank }) => {
   const line = useRef(null);
+  const addButtonBox = useRef(null);
   const addButton = useRef(null);
   const rankContainer = useRef(null);
   const lineContainer = useRef(null);
   const inKeyword = useRef(null);
+  const rankNumberContainer = useRef(null);
 
   const dispatch = useAppDispatch();
   const wordList = useAppSelector((state) => state.keyword.wordList);
@@ -35,9 +37,15 @@ const KeywordRank = ({ rank }) => {
         x: "0",
         ease: "sine.out",
       });
-      gsap.to(addButton.current, {
+      gsap.to(addButtonBox.current, {
         duration: 0.5,
         rotate: 0,
+        ease: "sine.out",
+      });
+      gsap.to(rankNumberContainer.current, {
+        duration: 0.5,
+        backgroundColor: "transparent",
+        color: "white",
         ease: "sine.out",
       });
       dispatch(setClickedRank(null));
@@ -67,10 +75,22 @@ const KeywordRank = ({ rank }) => {
             : "0px",
         ease: "sine.out",
       });
-      gsap.to(addButton.current, {
+      gsap.to(addButtonBox.current, {
         duration: 0.5,
         rotate:
           clickedRank === rank || selectedKeyword[rank] !== null ? 135 : 0,
+        ease: "sine.out",
+      });
+      gsap.to(rankNumberContainer.current, {
+        duration: 0.5,
+        backgroundColor:
+          clickedRank === rank || selectedKeyword[rank] !== null
+            ? "white"
+            : "transparent",
+        color:
+          clickedRank === rank || selectedKeyword[rank] !== null
+            ? "black"
+            : "white",
         ease: "sine.out",
       });
     });
@@ -93,16 +113,18 @@ const KeywordRank = ({ rank }) => {
       flexDirection={"column"}
       justifyContent={"end"}
       overflow={"hidden"}
+      color={"white"}
     >
       <Box
         ref={lineContainer}
         width={"100%"}
         display={"flex"}
-        alignItems={"end"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
       >
-        <Box>
-          <Text fontSize={"3rem"} lineHeight={"1"}>
-            {rank + 1}.
+        <Box ref={rankNumberContainer} paddingX={"0.6rem"}>
+          <Text fontSize={"3rem"} lineHeight={"1.2"}>
+            {rank + 1}
           </Text>
         </Box>
         <Box
@@ -110,24 +132,16 @@ const KeywordRank = ({ rank }) => {
           width={"100%"}
           flexGrow={"1"}
           textAlign={"center"}
-          fontSize={"2.5rem"}
+          fontSize={"2.8rem"}
           fontFamily={"dodum"}
-          paddingRight={"2rem"}
+          paddingBottom={"3px"}
         >
           <Text ref={inKeyword}>{wordList[selectedKeyword[rank]]}</Text>
         </Box>
-      </Box>
-      <Box
-        ref={line}
-        position={"absolute"}
-        right={"60%"}
-        width={"100%"}
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"end"}
-      >
         <Box
-          ref={addButton}
+          className={"KeywordButton"}
+          width={"3rem"}
+          paddingTop={"3px"}
           onClick={() => {
             if (selectedKeyword[rank] === null) {
               dispatch(setClickedKeyword(null));
@@ -137,20 +151,22 @@ const KeywordRank = ({ rank }) => {
               dispatchSelectedKeyword();
             }
           }}
-          width={"2rem"}
         >
-          <Text
-            className="hoverable"
-            fontSize={"3rem"}
-            lineHeight={"1"}
-            verticalAlign={"top"}
-            // cursor={"pointer"}
-          >
-            <SmallAddIcon boxSize={"10"} />
-          </Text>
+          <Box ref={addButtonBox}>
+            <SmallAddIcon
+              width={"fit-content"}
+              height={"fit-content"}
+              backgroundColor={"white"}
+              color={"black"}
+              borderRadius={"50px"}
+              ref={addButton}
+              className="hoverable"
+              boxSize={"9"}
+            />
+          </Box>
         </Box>
-        <Box width={"100%"} borderTop={"solid 1px black"}></Box>
       </Box>
+      <Box width={"100%"} borderTop={"solid 1px white"}></Box>
     </Box>
   );
 };

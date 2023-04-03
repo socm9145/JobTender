@@ -1,24 +1,6 @@
 import { Box } from "@chakra-ui/react";
 
-import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
-import { EasePack } from "gsap/EasePack";
-import { useEffect, useRef } from "react";
-gsap.registerPlugin(TextPlugin);
-gsap.registerPlugin(EasePack);
-
 const WiseSaying = ({ wiseSayingRef }) => {
-  // useEffect(() => {
-  //   gsap.to(wise_1, {
-  //     duration: 1,
-  //     text: {
-  //       value: "Your new text",
-  //       newClass: "class2",
-  //       delimiter: " ",
-  //     },
-  //   });
-  // }, []);
-
   return (
     <Box
       height={"100%"}

@@ -67,8 +67,9 @@ const Keyword = ({ keyword, id, LR }) => {
               : -animaDistance
             : "0px",
         ease: "sine.out",
-        backgroundColor: selectedKeyword.includes(id) ? "#191919" : null,
-        color: selectedKeyword.includes(id) ? "#f7f6f1" : null,
+        backgroundColor: selectedKeyword.includes(id) ? "white" : null,
+        color: selectedKeyword.includes(id) ? "black" : null,
+        textShadow: selectedKeyword.includes(id) ? "none" : "black 0 8px 8px",
       });
     });
   }, [clickedKeyword, selectedKeyword, clickedRank]);
@@ -77,12 +78,13 @@ const Keyword = ({ keyword, id, LR }) => {
     <Box className={"text-container"} display={"flex"} flexDirection={"column"}>
       <Box display={"flex"} justifyContent={LR === "left" ? "end" : "start"}>
         <Text
-          className="hoverable"
+          className="KeywordButton hoverable"
+          color={"white"}
           ref={text}
           paddingX={"0.5rem"}
           fontSize={"3.1rem"}
           fontFamily={"dodum"}
-          // cursor={"pointer"}
+          // textShadow={"black 0 8px 8px"}
           onClick={() => {
             if (
               clickedRank === null &&
@@ -98,7 +100,7 @@ const Keyword = ({ keyword, id, LR }) => {
           {keyword}
         </Text>
       </Box>
-      <Box ref={line} borderTop={"solid 1px black"}></Box>
+      <Box ref={line} borderTop={"solid 1px white"}></Box>
     </Box>
   );
 };
