@@ -7,7 +7,7 @@ async function userinfo(userId, success, fail){
 }
 
 async function userhistory(userId, success, fail){
-    await api.get('/user/history?userId=' + userId).then(success).catch(fail);
+    await api.get('/user/history/summary?userId=' + 1).then(success).catch(fail);
 }
 
 async function keyword(success, fail){
