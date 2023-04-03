@@ -6,16 +6,16 @@ const initialState = {
   selectedKeyword: [null, null, null],
   keyword: {},
   wordList: [
-    "안정",
-    "질서",
-    "관습",
-    "공헌",
-    "박애",
-    "자율",
-    "도전",
-    "재미",
-    "성취",
-    "권력",
+    // {"keywordId":1,"keywordName":"안정"},
+    // "질서",
+    // "관습",
+    // "공헌",
+    // "박애",
+    // "자율",
+    // "도전",
+    // "재미",
+    // "성취",
+    // "권력",
   ],
 };
 
@@ -44,10 +44,17 @@ export const keywordSlice = createSlice({
       };
       state.selectedKeyword[rank] = keyword();
     },
+    setWordList: (state, action) => {
+      state.wordList = action.payload;
+    },
   },
 });
 
-export const { setClickedKeyword, setClickedRank, setSelectedKeyword } =
-  keywordSlice.actions;
+export const {
+  setClickedKeyword,
+  setClickedRank,
+  setSelectedKeyword,
+  setWordList,
+} = keywordSlice.actions;
 // export const selectState = (state) => state.counter;
 export default keywordSlice.reducer;

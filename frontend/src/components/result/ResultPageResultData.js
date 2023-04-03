@@ -8,7 +8,7 @@ import AgeValues from "../../components/result/5/AgeValues";
 
 const ResultPageResultData = (props) => {
   return (
-    <Box marginBottom={"20%"}>
+    <Box marginBottom={"20%"} width={"100%"}>
       <Text fontFamily={"taebaek"} fontWeight={"bold"} marginBottom={"3%"}>
         ‣ {props.title}
       </Text>

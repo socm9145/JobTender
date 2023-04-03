@@ -1,16 +1,18 @@
 import React, { useRef, useEffect } from "react";
+
+import { Box } from "@chakra-ui/react";
 import * as d3 from "d3";
 
-const BarChart4b = ({ data }) => {
+const BarChart4b = ({ data, chartContainer }) => {
   const ref = useRef();
 
   useEffect(() => {
     if (!data) return;
 
-    const margin = { top: 30, right: 30, bottom: 0, left: 100 };
-    const width = 960;
-    const barStep = 27;
-    const barPadding = 3 / barStep;
+    const margin = { top: 30, right: 30, bottom: 0, left: 75 };
+    const width = chartContainer.current.offsetWidth;
+    const barStep = 40;
+    const barPadding = 5 / barStep;
     const duration = 750;
 
     let max = 1;
@@ -19,7 +21,6 @@ const BarChart4b = ({ data }) => {
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value)
       .eachAfter((d) => {
-        console.log(d);
         d.index = d.parent ? (d.parent.index = d.parent.index + 1 || 0) : 0;
 
         // if (d.depth === 2) {
@@ -127,7 +128,7 @@ const BarChart4b = ({ data }) => {
         .attr("class", "enter")
         .attr("transform", `translate(0,${margin.top + barStep * barPadding})`)
         .attr("text-anchor", "end")
-        .style("font", "10px sans-serif");
+        .style("font", "0.9vw sans-serif");
 
       const bar = g
         // 기존코드
@@ -304,7 +305,7 @@ const BarChart4b = ({ data }) => {
     chart(svg);
   }, [data]);
 
-  return <div ref={ref}></div>;
+  return <Box ref={ref}></Box>;
 };
 
 export default BarChart4b;

@@ -19,6 +19,7 @@ const Describe = ({ title, content }) => {
     (state) => state.keyword.clickedKeyword
   );
   const clickedRank = useAppSelector((state) => state.keyword.clickedRank);
+  const wordList = useAppSelector((state) => state.keyword.wordList);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [mouseX, setMouseX] = useState(0);
@@ -80,13 +81,13 @@ const Describe = ({ title, content }) => {
       alignItems={"center"}
     >
       <Box
+        ref={cardRef}
         width={"85%"}
         height={"80%"}
         className="card-wrap"
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        ref={cardRef}
       >
         <Box className={"card"} style={cardStyle}>
           <Box
