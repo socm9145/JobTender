@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     history: [],
+    reHistory: [],
 };
 
 export const mypageSlice = createSlice({
@@ -11,9 +12,15 @@ export const mypageSlice = createSlice({
     setHistory: (state, action) => {
       state.history = action.payload;
     },
+    setReHistory: (state, action) => {
+      state.reHistory.push(action.payload);
+    },
+    initHistory: (state) => {
+      state.reHistory = [];
+    }
   },
 });
 
-export const { setHistory } = mypageSlice.actions;
+export const { setHistory, setReHistory, initHistory } = mypageSlice.actions;
 // export const selectState = (state) => state.counter;
 export default mypageSlice.reducer;

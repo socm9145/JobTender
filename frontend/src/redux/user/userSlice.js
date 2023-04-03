@@ -6,7 +6,7 @@ const initialState = {
     name: "",
     age: "",
     gender: "",
-    email: "",
+    createDate: "",
   },
 };
 
@@ -16,11 +16,13 @@ export const keywordSlice = createSlice({
   reducers: {
     setUserData: (state, action) => {
       const data = action.payload;
-      console.log(data);
       state.userData.name = data.name;
       state.userData.age = data.age;
       state.userData.gender = data.gender;
-      state.userData.email = data.email;
+      let date = data.accessInfo.createDate.split("T")[0];
+      date = date.replaceAll("-", ".");
+      console.log(date);
+      state.userData.createDate = date;
     },
     setUserId: (state, action) => {
       state.userId = action.payload;

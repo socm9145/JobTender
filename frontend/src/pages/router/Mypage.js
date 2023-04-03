@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { userhistory, userinfo, keyword } from '../../api/mypageAxios';
+import { userhistory, userinfo } from '../../api/mypageAxios';
 import { setUserData } from '../../redux/user/userSlice'
-import { setHistory } from '../../redux/mypage/mypageSlice';
+import { setHistory, setReHistory, initHistory } from '../../redux/mypage/mypageSlice';
 
 import MyHistory from "../../components/mypage/History";
 import UserInfo from "../../components/mypage/UserInfo";
@@ -14,16 +14,37 @@ const Mypage = () => {
   const dispatch = useAppDispatch();
   const userid = useAppSelector(state=>state.user.userId);
   const userInfo = useAppSelector(state=>state.user.userData);
-  const his = useAppSelector(state=>state.mypage.history);
-  console.log(his);
-  // his.map((data) => {
-  //   const tmp = ["2023.03.27", []]
-  // })
+  const historyData = useAppSelector(state=>state.mypage.reHistory);
+
+  function historyFuntion(data){
+    dispatch(initHistory());
+    const keys = Object.keys(data);
+    for(const key of keys){
+      const no = key;
+      let date = data[key].createDate.split("T")[0];
+      date = date.replaceAll("-", ".");
+      const tmp = data[key];
+      let words = []
+      let companies = []
+      if(tmp.keywords.length !== 0){
+        words = [tmp.keywords[0].keywordName, tmp.keywords[1].keywordName, tmp.keywords[2].keywordName];
+      }else{
+        continue
+      }
+      if(tmp.companies.length !== 0){
+        companies = [tmp.companies[0].companyName, tmp.companies[1].companyName, tmp.companies[2].companyName];
+      }else{
+        continue
+      }
+      dispatch(setReHistory([no, date, words, companies]))
+    }
+  }
   useEffect(()=>{
     async function getUserInfo(){
       await userinfo(
         userid,
         data => {
+          console.log(data.data)
           dispatch(setUserData(data.data));
         },
         error => {
@@ -36,8 +57,8 @@ const Mypage = () => {
       await userhistory(
         userid,
         data => {
-          console.log(data);
           dispatch(setHistory(data.data));
+          historyFuntion(data.data);
         },
         error => {
           console.log(error);
@@ -45,89 +66,20 @@ const Mypage = () => {
       )
     }
 
-    async function getKeyword(){
-      await keyword(
-        data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        }
-      )
-    }
-    getKeyword();
     getUserInfo();
     getUserHistory();
   },[])
-  const historyData = [
-    ["2023.03.27", ["성장", "혁신", "창의"], ["삼성전자", "카카오", "NAVER"]],
-    ["2023.03.21", ["성장", "창의", "도전"], ["LG CNS", "넷마블", "크래프톤"]],
-    [
-      "2023.03.22",
-      ["가자", "취업", "힘내"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.23",
-      ["아자", "도전", "창의"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-    [
-      "2023.03.24",
-      ["혁신", "도전", "성장"],
-      ["삼성전자", "삼성전자", "삼성전자"],
-    ],
-  ];
   return (
-    // 마이페이지
-    // <Box  width={"100vw"}>
     <Box
       id={"a"}
       display={"flex"}
       justifyContent={"center"}
       height={"100vh"}
-      // backgroundColor={"#f1efe9"}
       alignItems={"center"}
       backgroundImage={"https://picsum.photos/1600/800"}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
       backgroundRepeat={"no-repeat"}
-      // paddingX={"20vw"}
     >
       <Box
         maxWidth={"60vw"}
@@ -244,10 +196,9 @@ const Mypage = () => {
             </Box>
             {/* 회원정보 */}
             <UserInfo title={"이름"} value={userInfo.name}></UserInfo>
-            <UserInfo title={"이메일"} value={"test@test.com"}></UserInfo>
             <UserInfo title={"성별"} value={userInfo.gender === 'male' ? 'M' : 'W'}></UserInfo>
             <UserInfo title={"나이"} value={userInfo.age}></UserInfo>
-            {/* <UserInfo title={"이력 수"} value={"12"}></UserInfo> */}
+            <UserInfo title={"가입일"} value={userInfo.createDate}></UserInfo>
           </Box>
           <Box>
             <Divider
@@ -304,23 +255,17 @@ const Mypage = () => {
             >
               {historyData.map((history, index) => (
                 <MyHistory
-                  date={history[0]}
-                  keyWords={history[1]}
-                  companies={history[2]}
+                  id={history[0]}
+                  date={history[1]}
+                  keyWords={history[2]}
+                  companies={history[3]}
                 ></MyHistory>
               ))}
             </Box>
           </Box>
         </Box>
-        {/* <Divider
-          width={"100%"}
-          borderWidth={"0.12em"}
-          borderColor={"black"}
-          marginTop={"4em"}
-        /> */}
       </Box>
     </Box>
-    //   </Box>
   );
 };
 
