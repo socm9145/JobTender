@@ -182,7 +182,7 @@ const WordSlide = () => {
           </span>
         )}
       </div>
-    </div>
+    </Box>
   );
 };
 
