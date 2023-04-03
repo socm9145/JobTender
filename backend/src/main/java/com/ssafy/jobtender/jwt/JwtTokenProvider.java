@@ -9,8 +9,8 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
     private final String SECRET_KEY = SecretKey.JWT_SECRET_KEY;
-//    private final long ACCESS_TOKEN_EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
-    private final long ACCESS_TOKEN_EXPIRATION_TIME = 1000 * 5; // 5 seconds for debug
+//    private final long ACCESS_TOKEN_EXPIRATION_TIME = 1000 * 60 * 60 * 6000; // 1 hour
+    private final long ACCESS_TOKEN_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 7; // 5 seconds for debug
     private final long REFRESH_TOKEN_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 7; // 1 week
 //    private final long REFRESH_TOKEN_EXPIRATION_TIME = 1000 * 10; // 10 seconds for debug
     public final int IS_VALID = 0;
