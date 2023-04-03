@@ -32,8 +32,6 @@ public class ResultDAOImpl implements ResultDAO {
     private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
     private final QCompany company = QCompany.company;
     private final QCompanyRating companyRating = QCompanyRating.companyRating;
-    private final QKeyword keyword = QKeyword.keyword;
-    private final QInput input = QInput.input;
     @Autowired
     public ResultDAOImpl(ResultRepo resultRepo, UserRepo userRepo) {
         this.resultRepo = resultRepo;
