@@ -1,53 +1,68 @@
-import * as d3 from "d3";
+import React, { useState } from "react";
+
+import * as math from "mathjs";
+
 import GroupedBarChart from "./GroupedBarChart";
+import dataSets from "./barData.json";
+
 const AgeValues = () => {
-  const ages = [
-    "<10",
-    "10-19",
-    "20-29",
-    "30-39",
-    "40-49",
-    "50-59",
-    "60-69",
-    "70-79",
-    "≥80",
-  ];
+  const [chartData, setChartData] = useState(dataSets[0]);
+  const averageData = dataSets[10];
 
-  const stateages = [
-    { state: "AL", age: "<10", population: 598478 },
-    { state: "AL", age: "10-19", population: 638789 },
-    { state: "AL", age: "20-29", population: 661666 },
-    { state: "AL", age: "30-39", population: 603013 },
-    { state: "AL", age: "40-49", population: 625599 },
-    { state: "AL", age: "50-59", population: 673864 },
-    { state: "AL", age: "60-69", population: 548376 },
-    { state: "AL", age: "70-79", population: 316598 },
-    { state: "AL", age: "≥80", population: 174781 },
-  ];
-
-  const chartProps = {
-    data: stateages,
-    x: (d) => d.state,
-    y: (d) => d.population / 1e6,
-    z: (d) => d.age,
-    xDomain: d3
-      .groupSort(
-        stateages,
-        (D) => d3.sum(D, (d) => -d.population),
-        (d) => d.state
-      )
-      .slice(0, 6),
-    yLabel: "↑ Population (millions)",
-    zDomain: ages,
-    colors: d3.schemeSpectral[ages.length],
-    width: 640,
-    height: 500,
+  const [result, setResult] = useState(0);
+  const [upDownCheck, setUpDownCheck] = useState("");
+  const changeData = (index) => {
+    setChartData(dataSets[index]);
   };
+
+  let a = "adfsdf";
+  const phozun = (i) => {
+    const mean = averageData[i].mean;
+    const std_dev = averageData[i].std_dev;
+    const score = averageData[i].score;
+    const z_score = (score - mean) / std_dev;
+
+    // 정규분포에서 유저 스코어의 위치 계산
+    const cdf_value = (1 + math.erf(z_score / Math.sqrt(2))) / 2;
+
+    // 퍼센타일 계산
+    const percentile = cdf_value * 100;
+    console.log(percentile);
+    // 상위 50퍼 안이면 상위로 표시. 아니면 하위로 표시
+    if (percentile >= 50) {
+      // const result = 100 - percentile;
+      setResult((100 - percentile).toFixed(2));
+      setUpDownCheck("상위");
+      console.log(`상위 ${result}% 입니다`);
+    } else {
+      console.log(`하위 ${percentile}% 입니다`);
+      setResult(percentile.toFixed(2));
+      setUpDownCheck("하위");
+    }
+  };
+
+  console.log(chartData);
   return (
     <div>
+      <GroupedBarChart data={chartData} />
       <div>
-        <h1>Grouped Bar Chart - Population by Age</h1>
-        {/* <GroupedBarChart {...chartProps} /> */}
+        {Array.from({ length: 10 }, (_, i) => (
+          <div>
+            <button
+              key={i}
+              onClick={() => {
+                changeData(i);
+                phozun(i);
+              }}
+            >
+              {i + 1}번
+            </button>
+          </div>
+        ))}
+        <p>
+          {upDownCheck}
+          {result} % 입니다.
+        </p>
       </div>
     </div>
   );
