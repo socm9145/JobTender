@@ -10,15 +10,15 @@ gsap.registerPlugin(EasePack);
 const DescribeContainer = () => {
   const keywordDiscribe = [
     "안정 설명",
-    "질서 설명",
-    "관습 설명",
-    "공헌 설명",
+    "규범 설명",
+    "전통 설명",
+    "애정 설명",
     "박애 설명",
     "자율 설명",
-    "도전 설명",
     "재미 설명",
+    "쾌락 설명",
     "성취 설명",
-    "권력 설명",
+    "지위 설명",
   ];
   const wordList = useAppSelector((state) => state.keyword.wordList);
   const clickedRank = useAppSelector((state) => state.keyword.clickedRank);
@@ -54,8 +54,8 @@ const DescribeContainer = () => {
           )
         ) : (
           <Describe
-            title={wordList[clickedKeyword]}
-            content={keywordDiscribe[clickedKeyword]}
+            title={wordList[clickedKeyword - 1].keywordName}
+            content={keywordDiscribe[clickedKeyword - 1]}
           />
         )
       ) : (

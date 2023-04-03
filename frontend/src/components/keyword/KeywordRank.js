@@ -136,7 +136,11 @@ const KeywordRank = ({ rank }) => {
           fontFamily={"dodum"}
           paddingBottom={"3px"}
         >
-          <Text ref={inKeyword}>{wordList[selectedKeyword[rank]]}</Text>
+          <Text ref={inKeyword}>
+            {selectedKeyword[rank] !== null
+              ? wordList[selectedKeyword[rank] - 1].keywordName
+              : null}
+          </Text>
         </Box>
         <Box
           className={"KeywordButton"}
