@@ -5,6 +5,7 @@ import homeReducer from "./home/homeSlice";
 import keywordReducer from "./keyword/keywordSlice";
 import userReducer from "./user/userSlice";
 import mypageReducer from "./mypage/mypageSlice";
+import surveyReducer from "./survey/surveySlice";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     keyword: keywordReducer,
     user: userReducer,
     mypage: mypageReducer,
+    survey: surveyReducer,
   },
 });
 
