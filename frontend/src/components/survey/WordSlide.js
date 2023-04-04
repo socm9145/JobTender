@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/survey/WordSlide.css";
+import { submitSurvey, makeResult } from "../../api/surveyAxios";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setWordList, setResultId } from "../../redux/survey/surveySlice";
 
 import { Box, Text } from "@chakra-ui/react";
 
 const WordSlide = () => {
   const [selectedScores, setSelectedScores] = useState({});
+  const dispatch = useAppDispatch();
 
   // 선택 여부로 마름모 색변환
   const isItemSelected = (itemNo) => selectedScores[itemNo] !== undefined;
 
+  const makeResultWordSlide = async () => {
+    await makeResult(
+      8,
+      response => {
+        // useAppSelector(setResultId(response.data));
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   useEffect(() => {
+    console.log(123);
     var items = document.querySelectorAll(".timeline li");
 
     function isElementInViewport(el) {
@@ -52,33 +70,29 @@ const WordSlide = () => {
     window.addEventListener("scroll", callbackFunc);
 
     // callbackFunc();
+
+    const getWords = async () => {
+      await submitSurvey(
+        response => {
+          console.log(response);
+          dispatch(setWordList(response.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+
+    getWords();
+    console.log(321);
   }, []);
 
-  const words = [
-    "김",
-    "사랑 사랑 사랑",
-    "친구",
-    "가족",
-    "행복",
-    "공부",
-    "먹다",
-    "마시다",
-    "웃다",
-    "책",
-    "여행",
-    "바다",
-    "산",
-    "음악",
-    "춤",
-    "놀이",
-    "휴식",
-    "자연",
-    "도시",
-    "미래",
-    "꿈",
-  ];
+  
+  const words = useAppSelector(state=>state.survey.wordList);
+  const len = words.length;
+  
 
-  const discoveries = Array.from({ length: 20 }, (_, i) => {
+  const discoveries = Array.from({ length: len }, (_, i) => {
     const itemRef = React.createRef();
     return {
       no: i + 1,
@@ -142,15 +156,14 @@ const WordSlide = () => {
     }
   };
 
-  console.log(selectedScores);
 
   const allButtonsClicked =
     Object.keys(selectedScores).length === discoveries.length;
 
   return (
     <Box className="word-slide">
-      <div class="bg-video">
-        <video class="bg-video-content" autoPlay muted loop>
+      <div className="bg-video">
+        <video className="bg-video-content" autoPlay muted loop>
           <source src="images/candle.mp4" type="video/mp4" />
         </video>
       </div>
@@ -159,12 +172,13 @@ const WordSlide = () => {
         <ul>{discoveries.map(renderListItem)}</ul>
       </section>
       <div className="submit-button-container">
-        <button
+        <Box
           className={`submit-button ${allButtonsClicked ? "active" : ""}`}
           disabled={!allButtonsClicked}
+          onClick={()=>makeResultWordSlide()}
         >
           Submit
-        </button>
+        </Box>
         {!allButtonsClicked && (
           <span className="tooltip">
             {discoveries
