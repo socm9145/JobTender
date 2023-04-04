@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.jobtender.dao.ResultDAO;
+import com.ssafy.jobtender.dto.input.KeywordRankInputDTO;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.entity.common.AccessInfo;
@@ -28,6 +29,8 @@ public class ResultDAOImpl implements ResultDAO {
     private final QResult result = QResult.result;
     private final QInput input = QInput.input;
     private final QKeyword keyword = QKeyword.keyword;
+    private final QKeywordMeasure keywordMeasure = QKeywordMeasure.keywordMeasure;
+    private final QExtractedKeyword extractedKeyword = QExtractedKeyword.extractedKeyword;
     private final QCompanyScore companyScore = QCompanyScore.companyScore;
     private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
     private final QCompany company = QCompany.company;
@@ -240,5 +243,21 @@ public class ResultDAOImpl implements ResultDAO {
             chart4OutDTOs.add(new Chart4OutDTO(key, map.get(key)));
 
         return chart4OutDTOs;
+    }
+
+    @Override
+    public List<KeywordRankOutDTO> readKeywordRank(long keywordId) {
+        List<KeywordRankOutDTO> keywordRankOutDTOList = new JPAQuery<>(em)
+                .select(Projections.constructor(KeywordRankOutDTO.class,
+                        extractedKeyword.name, keywordMeasure.score))
+                .from(keywordMeasure)
+                .join(extractedKeyword)
+                .on(keywordMeasure.extractedKeyword.extractKeywordId.eq(extractedKeyword.extractKeywordId))
+                .join(keyword)
+                .on(keywordMeasure.keyword.keywordId.eq(keyword.keywordId))
+                .where(keyword.keywordId.eq(keywordId))
+                .orderBy(extractedKeyword.extractKeywordId.asc())
+                .fetch();
+        return keywordRankOutDTOList;
     }
 }
