@@ -2,6 +2,7 @@ package com.ssafy.jobtender.service.impl;
 
 import com.ssafy.jobtender.dao.CompanyDAO;
 import com.ssafy.jobtender.dao.InputDAO;
+import com.ssafy.jobtender.dto.output.Chart2OutDTO;
 import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
 import com.ssafy.jobtender.dto.output.KeywordRandomCompanyOutDto;
 import com.ssafy.jobtender.service.CompanyService;
@@ -68,5 +69,10 @@ public class CompanyServiceImpl implements CompanyService {
             }
         });
         return keywordRandomCompanyOutDtoListMap;
+    }
+
+    @Override
+    public Chart2OutDTO readC2ByCompanyId(long companyId) {
+        return companyDAO.readC2ByCompanyId(companyId);
     }
 }

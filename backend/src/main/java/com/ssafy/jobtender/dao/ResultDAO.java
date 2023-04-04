@@ -1,5 +1,6 @@
 package com.ssafy.jobtender.dao;
 
+import com.ssafy.jobtender.dto.input.KeywordRankInputDTO;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.Result;
@@ -17,4 +18,7 @@ public interface ResultDAO {
     ResultOutputDTO insertResult(long userId);
 
     Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
+
+    List<Chart4OutDTO> readC4ByResultId(long resultId);
+    List<KeywordRankOutDTO> readKeywordRank(long keywordId);
 }
