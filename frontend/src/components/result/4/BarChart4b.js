@@ -11,7 +11,7 @@ const BarChart4b = ({ data, chartContainer }) => {
 
     const margin = { top: 30, right: 30, bottom: 0, left: 75 };
     const width = chartContainer.current.offsetWidth;
-    const barStep = 40;
+    const barStep = 60;
     const barPadding = 5 / barStep;
     const duration = 750;
 
@@ -110,7 +110,7 @@ const BarChart4b = ({ data, chartContainer }) => {
         .attr("class", "background")
         .attr("fill", "none")
         .attr("pointer-events", "all")
-        .attr("width", width)
+        .attr("width", chartContainer.current.offsetWidth)
         .attr("height", height)
         .attr("cursor", "pointer")
         .on("click", (event, d) => up(svg, d));
