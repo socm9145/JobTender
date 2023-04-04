@@ -19,5 +19,6 @@ public interface ResultDAO {
 
     Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
 
+    List<Chart4OutDTO> readC4ByResultId(long resultId);
     List<KeywordRankOutDTO> readKeywordRank(long keywordId);
 }

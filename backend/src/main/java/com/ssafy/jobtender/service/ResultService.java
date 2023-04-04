@@ -18,5 +18,6 @@ public interface ResultService {
 
     Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
 
+    List<Chart4OutDTO> readC4ByResultId(long resultId);
     List<KeywordRankDoubleOutDTO> readKeywordRank(KeywordRankInputDTO keywordRankInputDTO);
 }

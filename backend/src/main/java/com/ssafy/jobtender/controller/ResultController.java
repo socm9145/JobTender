@@ -147,10 +147,25 @@ public class ResultController {
         return ResponseEntity.status(HttpStatus.OK).body(staticOutDTO);
     }
 
+    @ApiOperation(value = "Chart 2 데이터 반환 API", notes = "Chart 2 데이터 반환 API")
+    @GetMapping("/survey/c2")
+    public ResponseEntity<Chart2OutDTO> readC2ByCompanyId(@RequestParam("companyId") long companyId){
+        Chart2OutDTO chart2OutDTO = this.companyService.readC2ByCompanyId(companyId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(chart2OutDTO);
+    }
+
+    @ApiOperation(value = "Chart 4 데이터 반환 API", notes = "Chart 4 데이터 반환 API")
+    @GetMapping("/survey/c4")
+    public ResponseEntity<List<Chart4OutDTO>> readC4ByResultId(@RequestParam("resultId") long resultId){
+        List<Chart4OutDTO> chart4OutDTOs = this.resultService.readC4ByResultId(resultId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(chart4OutDTOs);
+    }
+    
     @PostMapping("/keyword/rank")
     public ResponseEntity<List<KeywordRankDoubleOutDTO>> readKeywordRank(@RequestBody KeywordRankInputDTO keywordRankInputDTO){
         List<KeywordRankDoubleOutDTO> keywordRankDoubleOutDTOList =resultService.readKeywordRank(keywordRankInputDTO);
         return ResponseEntity.status(HttpStatus.OK).body(keywordRankDoubleOutDTOList);
     }
-
 }

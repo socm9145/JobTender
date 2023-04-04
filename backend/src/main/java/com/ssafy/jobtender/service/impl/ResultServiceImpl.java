@@ -53,6 +53,11 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
+    public List<Chart4OutDTO> readC4ByResultId(long resultId) {
+        return this.resultDAO.readC4ByResultId(resultId);
+    }
+
+    @Override
     public List<KeywordRankDoubleOutDTO> readKeywordRank(KeywordRankInputDTO keywordRankInputDTO) {
         long[] keywords = keywordRankInputDTO.getKeywords();
         int keywordLength = keywords.length;

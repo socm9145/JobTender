@@ -16,4 +16,9 @@ public class KeywordResearchServiceImpl implements KeywordResearchService {
     public StaticOutDTO readSurveyByKeywordIdAndGender(long keywordId, String gender) {
         return this.keywordResearchDAO.readSurveyByKeywordIdAndGender(keywordId, gender);
     }
+
+    @Override
+    public StaticOutDTO readSurveyByKeywordId(long keywordId) {
+        return this.keywordResearchDAO.readSurveyByKeywordId(keywordId);
+    }
 }
