@@ -138,7 +138,9 @@ public class ResultDAOImpl implements ResultDAO {
 
     @Override
     public Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId) {
-        Map<Long, HistoryOutDTO> historyOutDTOMap = new HashMap<>();
+        SortedMap<Long, HistoryOutDTO> historyOutDTOMap = new TreeMap<>(((resultId1, resultId2) -> {
+            return -Long.compare(resultId1, resultId2);
+        }));
 
         List<Result> results = new JPAQuery<>(em)
                 .select(result)
@@ -188,6 +190,7 @@ public class ResultDAOImpl implements ResultDAO {
                 historyOutDTOMap.get(resultCompanyOutDTO.getResultId()).getCompanies().add(resultCompanyOutDTO);
             }
         }
+
         return historyOutDTOMap;
     }
 }

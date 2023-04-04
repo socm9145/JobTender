@@ -60,6 +60,11 @@ public class AccountController {
             String gender = null;
             if(kakaoAccountJsonObject.getString("gender") != null){
                 gender = kakaoAccountJsonObject.getString("gender"); //성별
+                if(gender.equals("male")){
+                    gender = "M";
+                }else{
+                    gender = "F";
+                }
             }
 
             JSONObject nicknameJsonObject = kakaoAccountJsonObject.getJSONObject("profile");
