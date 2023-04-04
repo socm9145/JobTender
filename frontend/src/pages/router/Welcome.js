@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import FirstScene from "../../components/welcome/FirstScene";
 import Describe from "../../components/welcome/Describe";
 
@@ -23,7 +22,10 @@ const Welcome = () => {
       section.firstscene = section.querySelector(".firstscene");
 
       // Give the backgrounds some random images
-      section.bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
+      section.bg.style.backgroundImage = `url(${
+        process.env.PUBLIC_URL
+      }/images/welcome/welcome_${i + 1}.jpg)`;
+      // section.bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
 
       // the first image (i === 0) should be handled differently because it should start at the very top.
       // use function-based values in order to keep things responsive
@@ -68,27 +70,14 @@ const Welcome = () => {
 
   return (
     <Box overflow="hidden">
-      {/* 임시 로그인 페이지 이동 버튼 */}
-      <Box
-        zIndex={4}
-        width={"100vw"}
-        display={"flex"}
-        justifyContent={"center"}
-        position={"fixed"}
-        top={"0"}
-      >
-        <Button
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          로그인페이지로
-        </Button>
-      </Box>
-
       <Box />
       {/* 설명 컴포넌트 */}
-      <FirstScene className={"section"} title={"JOBTENDER"} fontsize={"10em"} />
+      <FirstScene
+        className={"section"}
+        title={"JOBTENDER"}
+        fontsize={"10em"}
+        backgroundImage={'url("../../../public/images/welcome/welcome_1.jpg")'}
+      />
       <Describe
         className={"section"}
         title={"Simple parallax Boxs"}
