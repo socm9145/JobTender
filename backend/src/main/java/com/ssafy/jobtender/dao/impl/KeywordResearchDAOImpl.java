@@ -37,4 +37,9 @@ public class KeywordResearchDAOImpl implements KeywordResearchDAO {
 
         return staticOutDTO;
     }
+
+    @Override
+    public StaticOutDTO readSurveyByKeywordId(long keywordId) {
+        return null;
+    }
 }
