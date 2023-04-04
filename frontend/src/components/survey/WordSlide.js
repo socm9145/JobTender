@@ -16,15 +16,15 @@ const WordSlide = () => {
   const makeResultWordSlide = async () => {
     await makeResult(
       8,
-      response => {
+      (response) => {
         // useAppSelector(setResultId(response.data));
         console.log(response);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
-  }
+    );
+  };
 
   useEffect(() => {
     console.log(123);
@@ -73,24 +73,22 @@ const WordSlide = () => {
 
     const getWords = async () => {
       await submitSurvey(
-        response => {
+        (response) => {
           console.log(response);
           dispatch(setWordList(response.data));
         },
-        error => {
+        (error) => {
           console.log(error);
         }
-      )
-    }
+      );
+    };
 
     getWords();
     console.log(321);
   }, []);
 
-  
-  const words = useAppSelector(state=>state.survey.wordList);
+  const words = useAppSelector((state) => state.survey.wordList);
   const len = words.length;
-  
 
   const discoveries = Array.from({ length: len }, (_, i) => {
     const itemRef = React.createRef();
@@ -156,7 +154,6 @@ const WordSlide = () => {
     }
   };
 
-
   const allButtonsClicked =
     Object.keys(selectedScores).length === discoveries.length;
 
@@ -175,7 +172,7 @@ const WordSlide = () => {
         <Box
           className={`submit-button ${allButtonsClicked ? "active" : ""}`}
           disabled={!allButtonsClicked}
-          onClick={()=>makeResultWordSlide()}
+          onClick={() => makeResultWordSlide()}
         >
           Submit
         </Box>
