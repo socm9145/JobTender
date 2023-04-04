@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import axios from "axios";
 import * as math from "mathjs";
 
@@ -10,6 +11,8 @@ import { localServer } from "../../../api/http";
 const api = localServer();
 
 const AgeValues = () => {
+  const chartContainer = useRef(null);
+
   // 차트데이터
   const dummyData = [
     { letter: "남", frequency: 0 },
@@ -78,11 +81,11 @@ const AgeValues = () => {
     // 상위 50퍼 안이면 상위로 표시. 아니면 하위로 표시
     if (percentile >= 50) {
       // const result = 100 - percentile;
-      setResultF((100 - percentile).toFixed(2));
-      setUpDownCheckF("여성 데이터 기준 상위");
+      setResultF(`상위 ${(100 - percentile).toFixed(2)}`);
+      setUpDownCheckF("여성 데이터 기준");
     } else {
-      setResultF(percentile.toFixed(2));
-      setUpDownCheckF("여성 데이터 기준 하위");
+      setResultF(`하위 ${percentile.toFixed(2)}`);
+      setUpDownCheckF("여성 데이터 기준");
     }
   };
   const standardM = (i, std, mean, score) => {
@@ -96,11 +99,11 @@ const AgeValues = () => {
     // 상위 50퍼 안이면 상위로 표시. 아니면 하위로 표시
     if (percentile >= 50) {
       // const result = 100 - percentile;
-      setResultM((100 - percentile).toFixed(2));
-      setUpDownCheckM("남성 데이터 기준 상위");
+      setResultM(`상위 ${(100 - percentile).toFixed(2)}`);
+      setUpDownCheckM("남성 데이터 기준");
     } else {
-      setResultM(percentile.toFixed(2));
-      setUpDownCheckM("남성 데이터 기준 하위");
+      setResultM(`하위 ${percentile.toFixed(2)}`);
+      setUpDownCheckM("남성 데이터 기준");
     }
   };
 
@@ -110,31 +113,88 @@ const AgeValues = () => {
   console.log(resultF);
 
   return (
-    <div>
-      <GroupedBarChart data={chartData} />
-      <div>
-        {Array.from({ length: 10 }, (_, i) => (
-          <div>
-            <button
-              key={i}
-              onClick={() => {
-                changeData(i);
-                standardF(i, femaleStd, femaleMean, myAverage);
-                standardM(i, maleStd, maleMean, myAverage);
-              }}
-            >
-              {i + 1}번
-            </button>
-          </div>
-        ))}
-        <p>
+    // <Box
+    //   position={"relative"}
+    //   display={"flex"}
+    //   flexDirection={"column"}
+    //   alignItems={"center"}
+    //   justifyContent={"center"}
+    //   width={"100%"}
+    // >
+    <Box
+      zIndex={"1"}
+      position={"absolute"}
+      top={"10%"}
+      right={"1vw"}
+      width={"90%"}
+      height={"70vh"}
+      padding={"2vw 3vw 0 3vw"}
+      backgroundColor={"rgba(255,255,255,0.9)"}
+      borderRadius={"30px"}
+      boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
+      display="flex"
+      flexDirection={"column"}
+    >
+      <Box display="flex">
+        <Box width={"66%"}>
+          <GroupedBarChart data={chartData} />
+        </Box>
+        <Box
+          flexGrow={1}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          margin={"1vw 0 1vw 2vw"}
+        >
+          <Grid
+            width={"100%"}
+            height={"100%"}
+            templateRows="repeat(5, 1fr)"
+            templateColumns="repeat(2, 1fr)"
+            gap={4}
+          >
+            {Array.from({ length: 10 }, (_, i) => (
+              <Box
+                border={"solid 1px black"}
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                key={i}
+                onClick={() => {
+                  changeData(i);
+                  standardF(i, femaleStd, femaleMean, myAverage);
+                  standardM(i, maleStd, maleMean, myAverage);
+                }}
+              >
+                {i + 1}번
+              </Box>
+            ))}
+          </Grid>
+        </Box>
+      </Box>
+
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-evenly"}
+        fontSize={"2vw"}
+        fontFamily={"dodum"}
+        height={"100%"}
+        textAlign={"center"}
+      >
+        <Text>
           {upDownCheckF}
+          <br />
           {resultF} % 입니다.
+        </Text>
+        <Text>
           {upDownCheckM}
+          <br />
           {resultM} % 입니다.
-        </p>
-      </div>
-    </div>
+        </Text>
+      </Box>
+    </Box>
+    // </Box>
   );
 };
 
