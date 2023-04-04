@@ -159,9 +159,9 @@ public class ResultController {
 
     @ApiOperation(value = "Chart 4 데이터 반환 API", notes = "Chart 4 데이터 반환 API")
     @GetMapping("/survey/c4")
-    public ResponseEntity<List<Chart4OutDTO>> readC4ByResultId(@RequestParam("resultId") long resultId){
+    public ResponseEntity<Chart4WrapOutDTO> readC4ByResultId(@RequestParam("resultId") long resultId){
         List<Chart4OutDTO> chart4OutDTOs = this.resultService.readC4ByResultId(resultId);
-
-        return ResponseEntity.status(HttpStatus.OK).body(chart4OutDTOs);
+        Chart4WrapOutDTO chart4WrapOutDTO = new Chart4WrapOutDTO("flare", chart4OutDTOs);
+        return ResponseEntity.status(HttpStatus.OK).body(chart4WrapOutDTO);
     }
 }

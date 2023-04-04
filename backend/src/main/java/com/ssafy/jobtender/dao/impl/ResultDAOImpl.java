@@ -231,7 +231,7 @@ public class ResultDAOImpl implements ResultDAO {
                 map.put(chart4InitOutDTO.getKeywordName(), new ArrayList<>());
 
             map.get(chart4InitOutDTO.getKeywordName()).add(new Chart4ChildOutDTO(chart4InitOutDTO.getQuestion(),
-                                                                                chart4InitOutDTO.getScore()));
+                                                                                Integer.parseInt(chart4InitOutDTO.getScore())));
         }
 
         List<Chart4OutDTO> chart4OutDTOs = new ArrayList<>();
