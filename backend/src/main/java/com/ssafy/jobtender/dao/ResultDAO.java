@@ -17,4 +17,6 @@ public interface ResultDAO {
     ResultOutputDTO insertResult(long userId);
 
     Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
+
+    List<Chart4OutDTO> readC4ByResultId(long resultId);
 }

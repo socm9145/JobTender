@@ -50,4 +50,9 @@ public class ResultServiceImpl implements ResultService {
     public Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId) {
         return this.resultDAO.readHistoriesByUserId(userId);
     }
+
+    @Override
+    public List<Chart4OutDTO> readC4ByResultId(long resultId) {
+        return this.resultDAO.readC4ByResultId(resultId);
+    }
 }

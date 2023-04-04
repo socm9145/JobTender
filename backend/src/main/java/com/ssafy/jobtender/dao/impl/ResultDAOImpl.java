@@ -32,6 +32,8 @@ public class ResultDAOImpl implements ResultDAO {
     private final QSurveyScore surveyScore = QSurveyScore.surveyScore;
     private final QCompany company = QCompany.company;
     private final QCompanyRating companyRating = QCompanyRating.companyRating;
+    private final QSurvey survey = QSurvey.survey;
+    private final QSurveyResult surveyResult = QSurveyResult.surveyResult;
     @Autowired
     public ResultDAOImpl(ResultRepo resultRepo, UserRepo userRepo) {
         this.resultRepo = resultRepo;
@@ -61,7 +63,7 @@ public class ResultDAOImpl implements ResultDAO {
     public List<ReadResultOutDTO> readResultsByUserId(Long userId) {
         List<ReadResultOutDTO> readResultOutDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(ReadResultOutDTO.class,
-                        result.resultId, result.user.userId,
+                        result.resultId, result.user.userId, company.companyId,
                         companyScore.score,
                         company.name, company.type, company.scale, company.salary, company.employeesNumber, company.address, company.yearFounded,
                         companyRating.averageRating, companyRating.growthRating, companyRating.balanceRating, companyRating.salaryWelfareRating, companyRating.cultureRating, companyRating.managementRating))
@@ -189,5 +191,51 @@ public class ResultDAOImpl implements ResultDAO {
             }
         }
         return historyOutDTOMap;
+    }
+
+    @Override
+    public List<Chart4OutDTO> readC4ByResultId(long resultId) {
+        /*
+        select K.keyword_id, K.keyword_name, S.survey_id, S.question, SR.score
+        from results R
+        join survey_results SR
+        on R.result_id = SR.result_id
+        join surveys S
+        on SR.survey_id = S.survey_id
+        join keywords K
+        on K.keyword_id = S.keyword_id
+        where R.result_id = 35;
+         */
+
+        List<Chart4InitOutDTO> chart4InitOutDTOs = new JPAQuery<>(em)
+                .select(Projections.constructor(Chart4InitOutDTO.class, keyword.keywordId, keyword.keywordName,
+                        survey.surveyId, survey.question, surveyResult.score))
+                .from(result)
+                .join(surveyResult)
+                .on(result.resultId.eq(surveyResult.result.resultId))
+                .join(survey)
+                .on(surveyResult.survey.surveyId.eq(survey.surveyId))
+                .join(keyword)
+                .on(keyword.keywordId.eq(survey.keyword.keywordId))
+                .where(result.resultId.eq(resultId))
+                .fetch();
+
+
+        Map<String, List<Chart4ChildOutDTO>> map = new HashMap<>();
+
+        for (Chart4InitOutDTO chart4InitOutDTO: chart4InitOutDTOs){
+            if (!map.containsKey(chart4InitOutDTO.getKeywordName()))
+                map.put(chart4InitOutDTO.getKeywordName(), new ArrayList<>());
+
+            map.get(chart4InitOutDTO.getKeywordName()).add(new Chart4ChildOutDTO(chart4InitOutDTO.getQuestion(),
+                                                                                chart4InitOutDTO.getScore()));
+        }
+
+        List<Chart4OutDTO> chart4OutDTOs = new ArrayList<>();
+
+        for (String key : map.keySet())
+            chart4OutDTOs.add(new Chart4OutDTO(key, map.get(key)));
+
+        return chart4OutDTOs;
     }
 }
