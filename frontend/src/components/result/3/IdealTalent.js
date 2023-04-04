@@ -8,20 +8,26 @@ const IdealTalent = () => {
 
   return (
     <Box
+      id={"bbb"}
+      position={"relative"}
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
-      justifyContent={"space-between"}
+      justifyContent={"center"}
       width={"100%"}
     >
-      {/* 차트 설명 */}
-      <Box> asdf</Box>
       <Box
         ref={chartContainer}
+        position={"absolute"}
+        bottom={"5%"}
+        left={"1vw"}
         width={"100%"}
+        height={"70%"}
         minWidth={"1050px"}
-        backgroundColor={"white"}
-        padding={"4%"}
+        padding={"5%"}
+        paddingBottom={"10%"}
+        backgroundColor={"rgba(255,255,255,0.9)"}
+        borderRadius={"30px"}
         boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
       >
         <BarChart chartContainer={chartContainer} data={data} />

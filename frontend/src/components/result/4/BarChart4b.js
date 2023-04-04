@@ -11,7 +11,7 @@ const BarChart4b = ({ data, chartContainer }) => {
 
     const margin = { top: 30, right: 30, bottom: 0, left: 75 };
     const width = chartContainer.current.offsetWidth;
-    const barStep = 40;
+    const barStep = 60;
     const barPadding = 5 / barStep;
     const duration = 750;
 

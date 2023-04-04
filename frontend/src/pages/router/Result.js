@@ -80,23 +80,11 @@ const Result = () => {
 
   return (
     <Box>
-      {/* <Box
-        ref={(el) => (sectionsRef.current[0] = el)}
-        id="landing-page"
-        className="result-panel hero-story hero hero1"
-      >
-        <Box className="full-col width-100">
-          <h1>Landing Screen</h1>
-        </Box>
-      </Box> */}
-
       <Box
-        position={"relative"}
         ref={(el) => (sectionsRef.current[1] = el)}
-        id="rooms"
+        position={"relative"}
         className="result-panel hero-story hero second-hero hero2"
-        // backgroundColor={"blackAlpha.300"}
-        backgroundImage={"https://picsum.photos/1600/800"}
+        backgroundImage={"https://picsum.photos/1600/800?random=1"}
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
@@ -107,22 +95,20 @@ const Result = () => {
             l’esperienza di vita di chi la abita curando ogni dettaglio come
             irripetibile e offrendo soluzioni
           </Text>
-          <Text fontSize={"5.7vw"} fontFamily={"dodum"}>
+          <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
             기업의 가치관
           </Text>
         </Box>
 
-        <Box className="left-col width-33" width={"25vw"}></Box>
         <Box
           className="right-col width-66 delayed"
           width={"67%"}
           height={"100%"}
+          marginLeft={"30vw"}
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
-          // backgroundColor={"white"}
           backgroundColor={"rgba(255,255,255,0.8)"}
-          // backgroundColor={"orange.50"}
           borderRadius={"450%"}
         >
           <ResultPageResultData
@@ -130,35 +116,103 @@ const Result = () => {
             componentName={"CorpKeyword"}
           ></ResultPageResultData>
         </Box>
-        <Box width={"8vw"}></Box>
       </Box>
 
       <Box
         ref={(el) => (sectionsRef.current[2] = el)}
-        id="you"
+        position={"relative"}
         className="result-panel hero-story hero second-hero hero3"
+        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundSize={"cover"}
+        backgroundPosition={"center"}
+        backgroundRepeat={"no-repeat"}
       >
-        <Box className="left-col width-33 delayed">
-          <h2>Contenu gauche pour proche de vous</h2>
+        <Box
+          zIndex={"1"}
+          position={"absolute"}
+          top={"7%"}
+          right={"5%"}
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"end"}
+        >
+          <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
+            나의 키워드
+          </Text>
+          <Text
+            paddingLeft={"2.5%"}
+            fontSize={"1vw"}
+            width={"25vw"}
+            textAlign={"end"}
+          >
+            L’obiettivo di HARC è rendere la casa un luogo che migliora
+            l’esperienza di vita di chi la abita curando ogni dettaglio come
+            irripetibile e offrendo soluzioni
+          </Text>
         </Box>
-        <Box className="middle-col width-33">
-          <h2>Proche de vous</h2>
-        </Box>
-        <Box className="right-col width-33 delayed">
-          <h2>Contenu droite pour proche de vous</h2>
+
+        <Box
+          className="right-col width-66 delayed"
+          width={"67%"}
+          height={"100%"}
+          marginLeft={"3vw"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          // backgroundColor={"rgba(255,255,255,0.8)"}
+        >
+          <ResultPageResultData
+            title="내 가치관과 관련있는 인재상 키워드"
+            componentName={"IdealTalent"}
+          ></ResultPageResultData>
         </Box>
       </Box>
 
       <Box
         ref={(el) => (sectionsRef.current[3] = el)}
-        id="near"
         className="result-panel hero-story hero second-hero hero4"
+        position={"relative"}
+        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundSize={"cover"}
+        backgroundPosition={"center"}
+        backgroundRepeat={"no-repeat"}
       >
-        <Box className="left-col width-66 delayed">
-          <h2>Contenu pour proche de tout</h2>
+        <Box
+          zIndex={"1"}
+          position={"absolute"}
+          bottom={"10%"}
+          right={"5%"}
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"end"}
+        >
+          <Text
+            paddingLeft={"2.5%"}
+            fontSize={"1vw"}
+            width={"25vw"}
+            textAlign={"end"}
+          >
+            L’obiettivo di HARC è rendere la casa un luogo che migliora
+            l’esperienza di vita di chi la abita curando ogni dettaglio come
+            irripetibile e offrendo soluzioni
+          </Text>
+          <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
+            나의 가치관
+          </Text>
         </Box>
-        <Box className="right-col width-33">
-          <h2>Proche de tout</h2>
+        <Box
+          className="right-col width-33 delayed"
+          width={"67%"}
+          height={"100%"}
+          marginLeft={"3vw"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <ResultPageResultData
+            title="가치관 별 막대 그래프"
+            componentName={"GraphValues"}
+          ></ResultPageResultData>
         </Box>
       </Box>
 

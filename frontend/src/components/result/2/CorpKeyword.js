@@ -7,7 +7,6 @@ import { Box } from "@chakra-ui/react";
 const CorpKeyword = () => {
   return (
     <Box
-      id={"aa"}
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
