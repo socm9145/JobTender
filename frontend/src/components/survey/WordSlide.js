@@ -16,81 +16,76 @@ const WordSlide = () => {
   const makeResultWordSlide = async () => {
     await makeResult(
       8,
-      response => {
+      (response) => {
         // useAppSelector(setResultId(response.data));
         console.log(response);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
-  }
+    );
+  };
 
   useEffect(() => {
-    console.log(123);
-    var items = document.querySelectorAll(".timeline li");
-
-    function isElementInViewport(el) {
-      var rect = el.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
-
-    function callbackFunc() {
-      for (var i = 0; i < items.length; i++) {
-        if (isElementInViewport(items[i])) {
-          if (!items[i].classList.contains("in-view")) {
-            items[i].classList.add("in-view");
-          }
-        } else if (items[i].classList.contains("in-view")) {
-          items[i].classList.remove("in-view");
-        }
-      }
-    }
-    // //
-    function initialCheck() {
-      for (var i = 0; i < items.length; i++) {
-        if (isElementInViewport(items[i])) {
-          if (!items[i].classList.contains("in-view")) {
-            items[i].classList.add("in-view");
-          }
-        }
-      }
-    }
-
-    initialCheck();
-    //
-    window.addEventListener("load", callbackFunc);
-    window.addEventListener("scroll", callbackFunc);
-
-    // callbackFunc();
-
     const getWords = async () => {
       await submitSurvey(
-        response => {
+        (response) => {
           console.log(response);
           dispatch(setWordList(response.data));
         },
-        error => {
+        (error) => {
           console.log(error);
         }
-      )
-    }
+      );
+      var items = document.querySelectorAll(".timeline li");
+
+      function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+      function callbackFunc() {
+        for (var i = 0; i < items.length; i++) {
+          if (isElementInViewport(items[i])) {
+            if (!items[i].classList.contains("in-view")) {
+              items[i].classList.add("in-view");
+            }
+          } else if (items[i].classList.contains("in-view")) {
+            items[i].classList.remove("in-view");
+          }
+        }
+      }
+      // //
+      function initialCheck() {
+        for (var i = 0; i < items.length; i++) {
+          if (isElementInViewport(items[i])) {
+            if (!items[i].classList.contains("in-view")) {
+              items[i].classList.add("in-view");
+            }
+          }
+        }
+      }
+
+      initialCheck();
+      //
+      window.addEventListener("load", callbackFunc);
+      window.addEventListener("scroll", callbackFunc);
+
+      // callbackFunc();
+    };
 
     getWords();
-    console.log(321);
   }, []);
 
-  
-  const words = useAppSelector(state=>state.survey.wordList);
+  const words = useAppSelector((state) => state.survey.wordList);
   const len = words.length;
-  
 
   const discoveries = Array.from({ length: len }, (_, i) => {
     const itemRef = React.createRef();
@@ -156,7 +151,6 @@ const WordSlide = () => {
     }
   };
 
-
   const allButtonsClicked =
     Object.keys(selectedScores).length === discoveries.length;
 
@@ -175,7 +169,7 @@ const WordSlide = () => {
         <Box
           className={`submit-button ${allButtonsClicked ? "active" : ""}`}
           disabled={!allButtonsClicked}
-          onClick={()=>makeResultWordSlide()}
+          onClick={() => makeResultWordSlide()}
         >
           Submit
         </Box>
