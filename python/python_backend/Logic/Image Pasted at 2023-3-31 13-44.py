@@ -1,6 +1,9 @@
+from Dao import Rank as rDao
 # DB에서 받아야함. 받는 데이터 형식 딕셔너리. {survey_id : score, survey_id : score}
 ########
-survey_data = {1: 9, 2: 4, 3: 1}
+cur = rDao.RankDao()
+survey_data = cur.get_survey_data(35)
+# survey_data = {1: 9, 2: 4, 3: 1}
 #########
 # 1. 안정
 safety = survey_data[7] + survey_data[8] + survey_data[13] + survey_data[15] + survey_data[22] \

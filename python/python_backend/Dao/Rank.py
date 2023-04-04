@@ -50,18 +50,19 @@ class RankDao:
             result.append(data[0])
         return result
 
+    # 이부분 최적화 하면 좋겠는데..
     def get_sub_main_sim_score(self, keyword_id, extracted_keyword_id):
         sql = '''
         select score from keyword_measures where keyword_id=%s and extracted_keyword_id=%s
         '''
         cur = self.conn.cursor()
         result = list()
-        # print(extracted_keyword_id)
         for idx in extracted_keyword_id:
             temp = [keyword_id, idx]
             cur.execute(sql, temp)
-            print(cur.fetchone()[0])
-            result.append(float(cur.fetchone()[0]))
+            # print(cur.execute(sql))
+            # print(cur.fetchone()[0])
+            result.append(cur.fetchone()[0])
         return result
 
     def get_companies_id(self):
@@ -75,6 +76,27 @@ class RankDao:
             result[data[0]] = data[1]
         return result
 
+    def get_tfidf_sim_data(self, company_id):
+        sql = '''
+        SELECT
+            cm.company_id, cm.score as tf_idf_score, km.score as similarity_score
+        FROM
+          company_measures cm
+          JOIN keyword_measures km ON cm.extracted_keyword_id = km.extracted_keyword_id
+        WHERE
+            cm.score != 0.0 AND keyword_id = %s
+        ORDER BY cm.company_id
+        '''
+        cur = self.conn.cursor()
+        result = dict()
+        cur.execute(sql, company_id)
+        for data in cur.fetchall():
+            if data[0] in result.keys():
+                result[data[0]].append(float(data[1]) * float(data[2]))
+            else:
+                result[data[0]] = [float(data[1]) * float(data[2])]
+        return result
+
     def get_companies_tfidf_sub_main(self, company_id, extracted_keyword_id):
         sql = '''
         select score from company_measures where company_id=%s and extracted_keyword_id=%s
@@ -85,12 +107,42 @@ class RankDao:
             temp = [company_id, idx]
             cur.execute(sql, temp)
             for data in cur.fetchall():
+                # print(data)
                 result.append(float(data[0]))
+        return result
+
+    def get_keyword_data(self, result_id):
+        sql = '''
+        select keyword_id from inputs where result_id = %s order by keyword_rank
+        '''
+        cur = self.conn.cursor()
+        result = list()
+        cur.execute(sql, result_id)
+        for data in cur.fetchall():
+            result.append(data[0])
+        return result
+    def get_survey_data(self, result_id):
+        sql = '''
+        select survey_id, score from survey_results where result_id=%s order by survey_id
+        '''
+        cur = self.conn.cursor()
+        result = dict()
+        cur.execute(sql, result_id)
+        for data in cur.fetchall():
+            result[data[0]] = int(data[1])
         return result
 
     def insert_score(self, data):
         sql = '''
         INSERT INTO `company_scores` (result_id, company_id, score, company_score_rank) VALUES (%s, %s, %s, %s);
+        '''
+        cur = self.conn.cursor()
+        cur.execute(sql, data)
+        self.conn.commit()
+
+    def insert_survey_score(self, data):
+        sql = '''
+        INSERT INTO `survey_scores` (survey_score_rank, score, company_id, result_id) VALUES (%s, %s, %s, %s)
         '''
         cur = self.conn.cursor()
         cur.execute(sql, data)
