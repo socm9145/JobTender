@@ -1,5 +1,5 @@
 from Dao import Rank as rDao
-
+# from python_backend.Dao import Rank as rDao
 
 class SurveyLogic:
     def __init__(self, result_id):

@@ -121,6 +121,7 @@ class RankDao:
         for data in cur.fetchall():
             result.append(data[0])
         return result
+
     def get_survey_data(self, result_id):
         sql = '''
         select survey_id, score from survey_results where result_id=%s order by survey_id

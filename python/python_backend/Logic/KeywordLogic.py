@@ -1,13 +1,14 @@
 from Dao import Rank as rDao
+# from python_backend.Dao import Rank as rDao
 
 
 class KeywordLogic:
-    def __init__(self, result_id, user_keyword_idx):
+    def __init__(self, result_id):
         self.cur = rDao.RankDao()
         self.result_id = result_id
         self.user_keyword = self.cur.get_keyword_data(result_id)
         print(self.user_keyword)
-        self.user_keyword_idx = [key - 1 for key in user_keyword_idx]  # 유저의 가치관 키워드를 받는다 3 / 10 (DB에서 가져오는 값)
+        self.user_keyword_idx = [key - 1 for key in self.user_keyword]  # 유저의 가치관 키워드를 받는다 3 / 10 (DB에서 가져오는 값)
         self.weight = [0.4, 0.3, 0.2]
         self.input_weight_pair = dict()
         for i in range(len(self.weight)):
@@ -134,7 +135,7 @@ class KeywordLogic:
 
 
 if __name__ == '__main__':
-    a = KeywordLogic(32, [1, 2, 3])
+    a = KeywordLogic(2)
     # a= Rank()
     # print(a.get_main_tfidf_array())
     print(a.value_company_sims())

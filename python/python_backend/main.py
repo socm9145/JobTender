@@ -6,10 +6,9 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/result/keyword/<result_id>/<keyword1>/<keyword2>/<keyword3>', methods=['GET'])
-def keyword(result_id, keyword1, keyword2, keyword3):
-    keyword = [int(keyword1), int(keyword2), int(keyword3)]
-    data = kLogic.KeywordLogic(result_id, keyword)
+@app.route('/result/keyword/<result_id>', methods=['GET'])
+def keyword(result_id):
+    data = kLogic.KeywordLogic(result_id)
     return jsonify(data.value_company_sims()), 200
 
 
