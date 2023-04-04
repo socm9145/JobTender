@@ -88,6 +88,7 @@ const Result = () => {
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
+        height={"100vh"}
       >
         <Box zIndex={"1"} position={"absolute"} bottom={"10%"} left={"5%"}>
           <Text paddingLeft={"2.5%"} fontSize={"1vw"} width={"25vw"}>
@@ -126,6 +127,7 @@ const Result = () => {
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
+        height={"100vh"}
       >
         <Box
           zIndex={"1"}
@@ -176,6 +178,7 @@ const Result = () => {
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
+        height={"100vh"}
       >
         <Box
           zIndex={"1"}
@@ -219,8 +222,39 @@ const Result = () => {
       <Box
         ref={(el) => (sectionsRef.current[4] = el)}
         className="result-panel hero-story hero second-hero hero5"
+        position={"relative"}
+        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundSize={"cover"}
+        backgroundPosition={"center"}
+        backgroundRepeat={"no-repeat"}
+        height={"100vh"}
       >
-        <h2>Contenu du footer</h2>
+        <Box zIndex={"1"} position={"absolute"} bottom={"10%"} left={"5%"}>
+          <Text paddingLeft={"2.5%"} fontSize={"1vw"} width={"25vw"}>
+            L’obiettivo di HARC è rendere la casa un luogo che migliora
+            l’esperienza di vita di chi la abita curando ogni dettaglio come
+            irripetibile e offrendo soluzioni
+          </Text>
+          <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
+            나의 위치
+          </Text>
+        </Box>
+        <Box
+          className="right-col width-33 delayed"
+          position={"absolute"}
+          right={"1vw"}
+          width={"67%"}
+          height={"100%"}
+          marginLeft={"3vw"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <ResultPageResultData
+            title="나이대 별 가치관"
+            componentName={"AgeValues"}
+          ></ResultPageResultData>
+        </Box>
       </Box>
     </Box>
   );
