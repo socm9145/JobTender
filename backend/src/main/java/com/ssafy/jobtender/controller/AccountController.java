@@ -53,8 +53,19 @@ public class AccountController {
         //신규 회원인 경우 회원 가입 후 조회
         if(user == null){
             JSONObject kakaoAccountJsonObject = jsonObject.getJSONObject("kakao_account");
-            int age = Integer.parseInt(kakaoAccountJsonObject.getString("age_range").split("~")[0]); //나이대
-            String gender = kakaoAccountJsonObject.getString("gender"); //성별
+            int age = 0;
+            if(kakaoAccountJsonObject.getString("age_range") != null){
+                age = Integer.parseInt(kakaoAccountJsonObject.getString("age_range").split("~")[0]); //나이대
+            }
+            String gender = null;
+            if(kakaoAccountJsonObject.getString("gender") != null){
+                gender = kakaoAccountJsonObject.getString("gender"); //성별
+                if(gender.equals("male")){
+                    gender = "M";
+                }else{
+                    gender = "F";
+                }
+            }
 
             JSONObject nicknameJsonObject = kakaoAccountJsonObject.getJSONObject("profile");
             String nickname = nicknameJsonObject.getString("nickname"); //닉네임
