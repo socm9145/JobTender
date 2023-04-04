@@ -1,5 +1,6 @@
 package com.ssafy.jobtender.service;
 
+import com.ssafy.jobtender.dto.input.KeywordRankInputDTO;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.dto.output.*;
 
@@ -16,4 +17,6 @@ public interface ResultService {
     ResultOutputDTO insertResult(long userId);
 
     Map<Long, HistoryOutDTO> readHistoriesByUserId(Long userId);
+
+    List<KeywordRankDoubleOutDTO> readKeywordRank(KeywordRankInputDTO keywordRankInputDTO);
 }
