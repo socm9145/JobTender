@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { userhistory, userinfo } from '../../api/mypageAxios';
-import { setUserData, setUserId } from '../../redux/user/userSlice'
-import { setHistory, setReHistory, initHistory } from '../../redux/mypage/mypageSlice';
+import { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { userhistory, userinfo } from "../../api/mypageAxios";
+import { setUserData, setUserId } from "../../redux/user/userSlice";
+import {
+  setHistory,
+  setReHistory,
+  initHistory,
+} from "../../redux/mypage/mypageSlice";
 
 import MyHistory from "../../components/mypage/History";
 import UserInfo from "../../components/mypage/UserInfo";
@@ -12,63 +16,73 @@ import { Box, Text, Divider } from "@chakra-ui/react";
 
 const Mypage = () => {
   const dispatch = useAppDispatch();
-  const userid = useAppSelector(state=>state.user.userId);
-  const userInfo = useAppSelector(state=>state.user.userData);
-  const historyData = useAppSelector(state=>state.mypage.reHistory);
+  const storeUserid = useAppSelector((state) => state.user.userId);
+  const userInfo = useAppSelector((state) => state.user.userData);
+  const historyData = useAppSelector((state) => state.mypage.reHistory);
 
-  function historyFuntion(data){
+  function historyFuntion(data) {
     dispatch(initHistory());
     const keys = Object.keys(data);
-    for(const key of keys){
+    for (const key of keys) {
       const no = key;
       let date = data[key].createDate.split("T")[0];
       date = date.replaceAll("-", ".");
       const tmp = data[key];
-      let words = []
-      let companie = []
-      if(tmp.keywords.length !== 0){
-        words = [tmp.keywords[0].keywordName, tmp.keywords[1].keywordName, tmp.keywords[2].keywordName];
-      }else{
-        continue
+      let words = [];
+      let companie = [];
+      if (tmp.keywords.length !== 0) {
+        words = [
+          tmp.keywords[0].keywordName,
+          tmp.keywords[1].keywordName,
+          tmp.keywords[2].keywordName,
+        ];
+      } else {
+        continue;
       }
-      if(tmp.companies.length !== 0){
-        companie = [tmp.companies[0].companyName, tmp.companies[1].companyName, tmp.companies[2].companyName];
-      }else{
-        continue
+      if (tmp.companies.length !== 0) {
+        companie = [
+          tmp.companies[0].companyName,
+          tmp.companies[1].companyName,
+          tmp.companies[2].companyName,
+        ];
+      } else {
+        continue;
       }
-      dispatch(setReHistory([no, date, words, companie]))
+      dispatch(setReHistory([no, date, words, companie]));
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
+    const userid = storeUserid || sessionStorage.getItem("userId");
     dispatch(setUserId(sessionStorage.getItem("userId")));
-    async function getUserInfo(){
+    async function getUserInfo() {
       await userinfo(
         userid,
-        data => {
+        (data) => {
           dispatch(setUserData(data.data));
         },
-        error => {
+        (error) => {
           console.log(error);
         }
-      )
+      );
     }
 
-    async function getUserHistory(){
+    async function getUserHistory() {
       await userhistory(
         userid,
-        data => {
+        (data) => {
+          console.log(data);
           dispatch(setHistory(data.data));
           historyFuntion(data.data);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
-      )
+      );
     }
 
     getUserInfo();
     getUserHistory();
-  },[])
+  }, []);
   return (
     <Box
       id={"a"}
@@ -196,7 +210,10 @@ const Mypage = () => {
             </Box>
             {/* 회원정보 */}
             <UserInfo title={"이름"} value={userInfo.name}></UserInfo>
-            <UserInfo title={"성별"} value={userInfo.gender.toUpperCase()}></UserInfo>
+            <UserInfo
+              title={"성별"}
+              value={userInfo.gender.toUpperCase()}
+            ></UserInfo>
             <UserInfo title={"나이"} value={userInfo.age}></UserInfo>
             <UserInfo title={"가입일"} value={userInfo.createDate}></UserInfo>
           </Box>

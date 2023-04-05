@@ -5,6 +5,7 @@ import * as d3 from "d3";
 import { Box } from "@chakra-ui/react";
 
 const ZoomChart = ({ data }) => {
+  console.log(data);
   const ref = useRef();
   useEffect(() => {
     const width = 1000;

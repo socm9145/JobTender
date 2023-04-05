@@ -33,32 +33,32 @@ const Keyword = () => {
   const userid = useAppSelector((state) => state.user.userId);
 
   // 유저가 키워드를 선택하고 제출을 하면 시작하는 함수
-  async function sendKeyword() {
-    const keywords = {
-      keywordId1: selectedKeyword[0],
-      keywordId2: selectedKeyword[1],
-      keywordId3: selectedKeyword[2],
-    };
-    await postKeyword(
-      userid,
-      keywords,
-      (data) => {
-        dispatch(setResultId(data.data[0].resultId));
-        postKeywordPython(
-          data.data[0].resultId,
-          (response) => {
-            dispatch(setKeywordSurveyResult(response.data));
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  // async function sendKeyword() {
+  //   const keywords = {
+  //     keywordId1: selectedKeyword[0],
+  //     keywordId2: selectedKeyword[1],
+  //     keywordId3: selectedKeyword[2],
+  //   };
+  //   await postKeyword(
+  //     userid,
+  //     keywords,
+  //     (data) => {
+  //       dispatch(setResultId(data.data[0].resultId));
+  //       postKeywordPython(
+  //         data.data[0].resultId,
+  //         (response) => {
+  //           dispatch(setKeywordSurveyResult(response.data));
+  //         },
+  //         (error) => {
+  //           console.log(error);
+  //         }
+  //       );
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   const wordList = useAppSelector((state) => state.keyword.wordList);
   const keywordName = [];
@@ -206,7 +206,7 @@ const Keyword = () => {
               <Text
                 className={"hoverable"}
                 fontSize={"2em"}
-                onClick={sendKeyword}
+                onClick={() => navigate("/loading")}
               >
                 제출
               </Text>

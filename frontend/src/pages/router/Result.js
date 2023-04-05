@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef } from "react";
 
 import ResultPageResultData from "../../components/result/ResultPageResultData";
 
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+
 import "../../styles/result/Result.css";
 
 import { Box, Text } from "@chakra-ui/react";
@@ -14,6 +16,7 @@ gsap.registerPlugin(ScrollToPlugin);
 
 const Result = () => {
   const sectionsRef = useRef([]);
+  const chart4 = useAppSelector((state) => state.result.chart4);
   useLayoutEffect(() => {
     // const sections = document.querySelectorAll(".result-panel");
 
@@ -169,94 +172,98 @@ const Result = () => {
           ></ResultPageResultData>
         </Box>
       </Box>
-
-      <Box
-        ref={(el) => (sectionsRef.current[3] = el)}
-        className="result-panel hero-story hero second-hero hero4"
-        position={"relative"}
-        backgroundImage={"https://picsum.photos/1600/800?random=1"}
-        backgroundSize={"cover"}
-        backgroundPosition={"center"}
-        backgroundRepeat={"no-repeat"}
-        height={"100vh"}
-      >
+      {Object.keys(chart4).length !== 0 ? (
         <Box
-          zIndex={"1"}
-          position={"absolute"}
-          bottom={"10%"}
-          right={"5%"}
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"end"}
+          ref={(el) => (sectionsRef.current[3] = el)}
+          className="result-panel hero-story hero second-hero hero4"
+          position={"relative"}
+          backgroundImage={"https://picsum.photos/1600/800?random=1"}
+          backgroundSize={"cover"}
+          backgroundPosition={"center"}
+          backgroundRepeat={"no-repeat"}
+          height={"100vh"}
         >
-          <Text
-            paddingLeft={"2.5%"}
-            fontSize={"1vw"}
-            width={"25vw"}
-            textAlign={"end"}
+          <Box
+            zIndex={"1"}
+            position={"absolute"}
+            bottom={"10%"}
+            right={"5%"}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"end"}
           >
-            L’obiettivo di HARC è rendere la casa un luogo che migliora
-            l’esperienza di vita di chi la abita curando ogni dettaglio come
-            irripetibile e offrendo soluzioni
-          </Text>
-          <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
-            나의 가치관
-          </Text>
+            <Text
+              paddingLeft={"2.5%"}
+              fontSize={"1vw"}
+              width={"25vw"}
+              textAlign={"end"}
+            >
+              L’obiettivo di HARC è rendere la casa un luogo che migliora
+              l’esperienza di vita di chi la abita curando ogni dettaglio come
+              irripetibile e offrendo soluzioni
+            </Text>
+            <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
+              나의 가치관
+            </Text>
+          </Box>
+          <Box
+            className="right-col width-33 delayed"
+            width={"67%"}
+            height={"100%"}
+            marginLeft={"3vw"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <ResultPageResultData
+              title="가치관 별 막대 그래프"
+              componentName={"GraphValues"}
+            ></ResultPageResultData>
+          </Box>
         </Box>
-        <Box
-          className="right-col width-33 delayed"
-          width={"67%"}
-          height={"100%"}
-          marginLeft={"3vw"}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <ResultPageResultData
-            title="가치관 별 막대 그래프"
-            componentName={"GraphValues"}
-          ></ResultPageResultData>
-        </Box>
-      </Box>
+      ) : null}
 
-      <Box
-        ref={(el) => (sectionsRef.current[4] = el)}
-        className="result-panel hero-story hero second-hero hero5"
-        position={"relative"}
-        backgroundImage={"https://picsum.photos/1600/800?random=1"}
-        backgroundSize={"cover"}
-        backgroundPosition={"center"}
-        backgroundRepeat={"no-repeat"}
-        height={"100vh"}
-      >
-        <Box zIndex={"1"} position={"absolute"} bottom={"10%"} left={"5%"}>
-          <Text paddingLeft={"2.5%"} fontSize={"1vw"} width={"25vw"}>
-            L’obiettivo di HARC è rendere la casa un luogo che migliora
-            l’esperienza di vita di chi la abita curando ogni dettaglio come
-            irripetibile e offrendo soluzioni
-          </Text>
-          <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
-            나의 위치
-          </Text>
-        </Box>
+      {Object.keys(chart4).length !== 0 ? (
         <Box
-          className="right-col width-33 delayed"
-          position={"absolute"}
-          right={"1vw"}
-          width={"67%"}
-          height={"100%"}
-          marginLeft={"3vw"}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
+          ref={(el) => (sectionsRef.current[4] = el)}
+          className="result-panel hero-story hero second-hero hero5"
+          position={"relative"}
+          backgroundImage={"https://picsum.photos/1600/800?random=1"}
+          backgroundSize={"cover"}
+          backgroundPosition={"center"}
+          backgroundRepeat={"no-repeat"}
+          height={"100vh"}
         >
-          <ResultPageResultData
-            title="나이대 별 가치관"
-            componentName={"AgeValues"}
-          ></ResultPageResultData>
+          <Box zIndex={"1"} position={"absolute"} bottom={"10%"} left={"5%"}>
+            <Text paddingLeft={"2.5%"} fontSize={"1vw"} width={"25vw"}>
+              L’obiettivo di HARC è rendere la casa un luogo che migliora
+              l’esperienza di vita di chi la abita curando ogni dettaglio come
+              irripetibile e offrendo soluzioni
+            </Text>
+            <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
+              나의 위치
+            </Text>
+          </Box>
+          <Box
+            className="right-col width-33 delayed"
+            position={"absolute"}
+            right={"1vw"}
+            width={"67%"}
+            height={"100%"}
+            marginLeft={"3vw"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <ResultPageResultData
+              title="나이대 별 가치관"
+              componentName={"AgeValues"}
+            ></ResultPageResultData>
+          </Box>
         </Box>
-      </Box>
+      ) : null}
     </Box>
+    // Object.keys(chart4).length !== 0 ?
   );
 };
 export default Result;
