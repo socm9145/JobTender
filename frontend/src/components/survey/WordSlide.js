@@ -27,50 +27,6 @@ const WordSlide = () => {
   };
 
   useEffect(() => {
-    console.log(123);
-    var items = document.querySelectorAll(".timeline li");
-
-    function isElementInViewport(el) {
-      var rect = el.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
-
-    function callbackFunc() {
-      for (var i = 0; i < items.length; i++) {
-        if (isElementInViewport(items[i])) {
-          if (!items[i].classList.contains("in-view")) {
-            items[i].classList.add("in-view");
-          }
-        } else if (items[i].classList.contains("in-view")) {
-          items[i].classList.remove("in-view");
-        }
-      }
-    }
-    // //
-    function initialCheck() {
-      for (var i = 0; i < items.length; i++) {
-        if (isElementInViewport(items[i])) {
-          if (!items[i].classList.contains("in-view")) {
-            items[i].classList.add("in-view");
-          }
-        }
-      }
-    }
-
-    initialCheck();
-    //
-    window.addEventListener("load", callbackFunc);
-    window.addEventListener("scroll", callbackFunc);
-
-    // callbackFunc();
-
     const getWords = async () => {
       await submitSurvey(
         (response) => {
@@ -81,10 +37,51 @@ const WordSlide = () => {
           console.log(error);
         }
       );
+      var items = document.querySelectorAll(".timeline li");
+
+      function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+      function callbackFunc() {
+        for (var i = 0; i < items.length; i++) {
+          if (isElementInViewport(items[i])) {
+            if (!items[i].classList.contains("in-view")) {
+              items[i].classList.add("in-view");
+            }
+          } else if (items[i].classList.contains("in-view")) {
+            items[i].classList.remove("in-view");
+          }
+        }
+      }
+      // //
+      function initialCheck() {
+        for (var i = 0; i < items.length; i++) {
+          if (isElementInViewport(items[i])) {
+            if (!items[i].classList.contains("in-view")) {
+              items[i].classList.add("in-view");
+            }
+          }
+        }
+      }
+
+      initialCheck();
+      //
+      window.addEventListener("load", callbackFunc);
+      window.addEventListener("scroll", callbackFunc);
+
+      // callbackFunc();
     };
 
     getWords();
-    console.log(321);
   }, []);
 
   const words = useAppSelector((state) => state.survey.wordList);
