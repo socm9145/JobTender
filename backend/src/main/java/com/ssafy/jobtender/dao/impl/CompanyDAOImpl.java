@@ -100,6 +100,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 .where(company.companyId.eq(companyId))
                 .where(companyMeasure.score.castToNum(Float.class).gt(0))
                 .orderBy(companyMeasure.score.castToNum(Float.class).desc())
+                .limit(4)
                 .fetch();
 
         if (chart2InitOutDTOs.size() == 0)
