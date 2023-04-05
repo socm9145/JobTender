@@ -16,7 +16,7 @@ import java.util.*;
 public class ResultServiceImpl implements ResultService {
     private final ResultDAO resultDAO;
     private final double[] weight = {0.4, 0.3, 0.2};
-    private final int MAX_INDEX_FOR_KEYWORD_RANK = 10;
+    private final int MAX_INDEX_FOR_KEYWORD_RANK = 5;
 
     @Autowired
     public ResultServiceImpl(ResultDAO resultDAO){
@@ -76,12 +76,26 @@ public class ResultServiceImpl implements ResultService {
         }
         List<KeywordRankDoubleOutDTO> keywordRankDoubleOutDTOList = new LinkedList<>();
         for(int i=0;i<keywordRankOutDTOLists[0].size();i++){
-            keywordRankDoubleOutDTOList.add(new KeywordRankDoubleOutDTO(keywordRankOutDTOLists[0].get(i).getLetter(), Math.round(frequencies[i] * 100)/100.0));
+            keywordRankDoubleOutDTOList.add(new KeywordRankDoubleOutDTO(keywordRankOutDTOLists[0].get(i).getLetter(), frequencies[i]));
         }
         keywordRankDoubleOutDTOList.sort((keywordRankDoubleOutDTO1,keywordRankDoubleOutDTO2)->{
             return Double.compare(keywordRankDoubleOutDTO2.getFrequency(), keywordRankDoubleOutDTO1.getFrequency());
         });
 
-        return keywordRankDoubleOutDTOList.subList(0, MAX_INDEX_FOR_KEYWORD_RANK);
+        List<KeywordRankDoubleOutDTO> keywordRankDoubleOutDTOTopBottomList = new LinkedList<>();
+        keywordRankDoubleOutDTOTopBottomList.addAll(keywordRankDoubleOutDTOList.subList(0, MAX_INDEX_FOR_KEYWORD_RANK));
+        int listSize = keywordRankDoubleOutDTOList.size();
+        keywordRankDoubleOutDTOTopBottomList.addAll(keywordRankDoubleOutDTOList.subList(listSize-MAX_INDEX_FOR_KEYWORD_RANK, listSize));
+
+        listSize = keywordRankDoubleOutDTOTopBottomList.size();
+        double minFrequency = keywordRankDoubleOutDTOTopBottomList.get(listSize-1).getFrequency();
+        if(minFrequency < 0){
+            for(int i=0;i<listSize;i++){
+                double frequency = keywordRankDoubleOutDTOTopBottomList.get(i).getFrequency();
+                keywordRankDoubleOutDTOTopBottomList.get(i).setFrequency(Math.round((frequency - minFrequency + 1) * 100)/100.0);
+            }
+        }
+
+        return keywordRankDoubleOutDTOTopBottomList;
     }
 }
