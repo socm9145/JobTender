@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Chart4ChildOutDTO {
-    String question;
-    String value;
+    String name;
+    int value;
 }
