@@ -32,20 +32,38 @@ function localServer() {
     return config;
   });
 
-  // instance.interceptors.response.use(
-  //   (res) => res,
-  //   async (error) => {
-  //     const { config, response: { status } } = error;
+  instance.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+      const { config, response: { status } } = error;
 
-  //     if (status === 401){
-  //       return Promise.reject(error);
-  //     }
-
-  //     return axios(config);
-  //   }
-  // );
+      if (status === 401){
+        sessionStorage.removeItem("isLogin");
+      }
+    }
+  );
 
   return instance;
 }
 
-export { localServer };
+function loginServer() {
+  const axiosConfig = {
+    baseURL: 'http://localhost:8000/',
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  }
+  return axios.create(axiosConfig);
+}
+
+function pythonServer() {
+  const axiosConfig = {
+    baseURL: 'http://localhost:8001/',
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  }
+  return axios.create(axiosConfig);
+}
+
+export { localServer, pythonServer, loginServer };

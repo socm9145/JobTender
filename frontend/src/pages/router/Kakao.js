@@ -19,7 +19,6 @@ const Kakao = () => {
 
   // 위의 URLSeacrchParams 사용해서 코드 가져오는거속도느리고 비효율적인것 같아 아래로 교체.
   const myCode = location.search.slice(6);
-  console.log(myCode);
 
   // 주소창 파라미터 지우는 코드인데 반응이 느려서 쓸모 있나 싶음.
   // window.history.replaceState({}, null, location.pathname);
@@ -32,9 +31,8 @@ const Kakao = () => {
       await login(
         myCode,
         data => {
-          console.log(data);
           dispatch(setUserId(data.data));
-          localStorage.setItem("isLogin", true);
+          sessionStorage.setItem("isLogin", true);
           navigate("/home");
         },
         error => {
