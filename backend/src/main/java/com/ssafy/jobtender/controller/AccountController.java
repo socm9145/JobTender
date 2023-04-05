@@ -54,11 +54,11 @@ public class AccountController {
         if(user == null){
             JSONObject kakaoAccountJsonObject = jsonObject.getJSONObject("kakao_account");
             int age = 0;
-            if(kakaoAccountJsonObject.getString("age_range") != null){
+            if(kakaoAccountJsonObject.has("age_range")){
                 age = Integer.parseInt(kakaoAccountJsonObject.getString("age_range").split("~")[0]); //나이대
             }
             String gender = null;
-            if(kakaoAccountJsonObject.getString("gender") != null){
+            if(kakaoAccountJsonObject.has("gender")){
                 gender = kakaoAccountJsonObject.getString("gender"); //성별
                 if(gender.equals("male")){
                     gender = "M";

@@ -87,7 +87,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         where C.company_id = 1 and CM.score > 0;
          */
         Chart2OutDTO chart2OutDTO = new Chart2OutDTO();
-        chart2OutDTO.setChart2ChildOutDTOs(new ArrayList<>());
+        chart2OutDTO.setChildren(new ArrayList<>());
 
         List<Chart2InitOutDTO> chart2InitOutDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(Chart2InitOutDTO.class,
@@ -105,13 +105,13 @@ public class CompanyDAOImpl implements CompanyDAO {
         if (chart2InitOutDTOs.size() == 0)
             return null;
 
-        chart2OutDTO.setCompanyId(chart2InitOutDTOs.get(0).getCompanyId());
-        chart2OutDTO.setCompanyName(chart2InitOutDTOs.get(0).getCompanyName());
+
+        chart2OutDTO.setName(chart2InitOutDTOs.get(0).getCompanyName());
 
         float sum = 0;
 
         for (Chart2InitOutDTO chart2InitOutDTO : chart2InitOutDTOs){
-            chart2OutDTO.getChart2ChildOutDTOs().add(new Chart2ChildOutDTO(chart2InitOutDTO.getName(),
+            chart2OutDTO.getChildren().add(new Chart2ChildOutDTO(chart2InitOutDTO.getName(),
                     chart2InitOutDTO.getValue()));
 
             sum += Float.parseFloat(chart2InitOutDTO.getValue());
@@ -119,7 +119,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 
         System.out.println("SUM + " + sum);
 
-        for (Chart2ChildOutDTO chart2ChildOutDTO : chart2OutDTO.getChart2ChildOutDTOs())
+        for (Chart2ChildOutDTO chart2ChildOutDTO : chart2OutDTO.getChildren())
             chart2ChildOutDTO.setValue(Float.toString(Float.parseFloat(chart2ChildOutDTO.getValue()) / sum));
 
         return chart2OutDTO;
