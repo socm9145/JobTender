@@ -22,9 +22,7 @@ public class User {
     @Column(nullable = false)
     private String name;
     private String email;
-    @Column(nullable = false)
     private int age;
-    @Column(nullable = false)
     private String gender;
     @Column(nullable = false)
     private String provider;
