@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
     const getIsLogin = () => {
-        return localStorage.getItem("isLogin");
+        return sessionStorage.getItem("isLogin");
     }
     const location = useLocation();
 
