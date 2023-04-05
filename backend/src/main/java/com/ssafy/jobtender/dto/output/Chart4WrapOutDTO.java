@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Chart4OutDTO {
+public class Chart4WrapOutDTO {
     String name;
-    List<Chart4ChildOutDTO> children;
+    List<Chart4OutDTO> children;
 }

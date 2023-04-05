@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Chart2OutDTO {
-    long companyId;
-    String companyName;
-    List<Chart2ChildOutDTO> chart2ChildOutDTOs;
+    String name;
+    List<Chart2ChildOutDTO> children;
 }
