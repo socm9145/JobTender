@@ -19,7 +19,7 @@ const BarChart4b = ({ data, chartContainer }) => {
     const root = d3
       .hierarchy(data)
       .sum((d) => d.value)
-      .sort((a, b) => b.value - a.value)
+      // .sort((a, b) => b.value - a.value)
       .eachAfter((d) => {
         d.index = d.parent ? (d.parent.index = d.parent.index + 1 || 0) : 0;
 
@@ -40,7 +40,8 @@ const BarChart4b = ({ data, chartContainer }) => {
           d.value = d.value / d.children.length;
         }
         //
-      });
+      })
+      .sort((a, b) => b.value - a.value);
     root.each((d) => d.children && (max = Math.max(max, d.children.length)));
     const height = max * barStep + margin.top + margin.bottom;
 
@@ -148,7 +149,9 @@ const BarChart4b = ({ data, chartContainer }) => {
               child.value = child.value / child.parent.children.length;
             });
             // Mark the node as clicked
+            console.log(d.data.clicked);
             d.data.clicked = true;
+            console.log(d.data.clicked);
           }
           down(svg, d);
         });

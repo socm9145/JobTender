@@ -1,10 +1,15 @@
 import { useRef } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+
 import BarChart4b from "./BarChart4b";
 import data from "./barChart4bData.json";
 
 import { Box } from "@chakra-ui/react";
 const GraphValues = () => {
   const chartContainer = useRef();
+
+  const chart4 = useAppSelector((state) => state.result.chart4);
   return (
     <Box
       position={"relative"}
@@ -30,7 +35,7 @@ const GraphValues = () => {
         borderRadius={"30px"}
         boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
       >
-        <BarChart4b chartContainer={chartContainer} data={data} />
+        <BarChart4b chartContainer={chartContainer} data={chart4} />
       </Box>
     </Box>
   );

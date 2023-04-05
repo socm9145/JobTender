@@ -13,6 +13,18 @@ const initialState = {
   chart3: [],
   chart4: {},
   chart5: {},
+  wordList: [
+    { keywordId: 1, keywordName: "안정" },
+    { keywordId: 2, keywordName: "규범" },
+    { keywordId: 3, keywordName: "전통" },
+    { keywordId: 4, keywordName: "애정" },
+    { keywordId: 5, keywordName: "박애" },
+    { keywordId: 6, keywordName: "자율" },
+    { keywordId: 7, keywordName: "재미" },
+    { keywordId: 8, keywordName: "쾌락" },
+    { keywordId: 9, keywordName: "성취" },
+    { keywordId: 10, keywordName: "지위" },
+  ],
 };
 
 export const resultSlice = createSlice({

@@ -12,7 +12,12 @@ import {
 } from "../../api/surveyAxios";
 
 import { postKeyword, postKeywordPython } from "../../api/keywordAxios";
-import { chart2, chart3 } from "../../api/resultAxios";
+import {
+  chart2,
+  chart3Survey,
+  chart4Survey,
+  chart5Survey,
+} from "../../api/resultAxios";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { resolvePath, useNavigate } from "react-router-dom";
@@ -24,6 +29,7 @@ import {
   setChart2_2,
   setChart2_3,
   setChart3,
+  setChart4,
 } from "../../redux/result/resultSlice";
 
 import "../../styles/loading/Loading.css";
@@ -93,8 +99,59 @@ const LoadingSurvey = () => {
             (a) => {
               postSurvey(
                 response.data.resultId,
-                (response) => {
-                  dispatch(setKeywordSurveyResult(response.data));
+                (res) => {
+                  dispatch(setKeywordSurveyResult(res.data));
+                  const top3CompanyId = () => {
+                    const tmp = [];
+                    for (let key in res.data.top) {
+                      tmp.push(key);
+                    }
+                    return tmp;
+                  };
+
+                  let idx = 1;
+                  top3CompanyId().forEach((companyId) => {
+                    console.log(companyId);
+                    chart2(
+                      companyId,
+                      (response) => {
+                        console.log(response.data);
+                        if (idx === 1) {
+                          dispatch(setChart2_1(response.data));
+                        } else if (idx === 2) {
+                          dispatch(setChart2_2(response.data));
+                        } else if (idx === 3) {
+                          dispatch(setChart2_3(response.data));
+                        }
+                        idx++;
+                      },
+                      (err) => {
+                        console.log(err);
+                      }
+                    );
+                  });
+
+                  chart3Survey(
+                    reformSurveyData(response.data.resultId),
+                    (response) => {
+                      console.log(response);
+                      dispatch(setChart3(response.data));
+                      setIsAnalysed(true);
+                    },
+                    (err) => {
+                      console.log(err);
+                    }
+                  );
+                  // 차트 4
+                  chart4Survey(
+                    response.data.resultId,
+                    (res) => {
+                      dispatch(setChart4(res.data));
+                    },
+                    (err) => {
+                      console.log(err);
+                    }
+                  );
                 },
                 (error) => {
                   console.log(error);
@@ -121,28 +178,28 @@ const LoadingSurvey = () => {
     }
   }, [chart2Tmp]);
 
-  useEffect(() => {
-    if (surveys.length !== 0) {
-      saveChooseSurvey(
-        surveys,
-        (a) => {
-          postSurvey(
-            resultId,
-            (response) => {
-              dispatch(setKeywordSurveyResult(response.data));
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-          console.log(a);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-  }, [surveys]);
+  // useEffect(() => {
+  //   if (surveys.length !== 0) {
+  //     saveChooseSurvey(
+  //       surveys,
+  //       (a) => {
+  //         postSurvey(
+  //           resultId,
+  //           (response) => {
+  //             dispatch(setKeywordSurveyResult(response.data));
+  //           },
+  //           (error) => {
+  //             console.log(error);
+  //           }
+  //         );
+  //         console.log(a);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  // }, [surveys]);
 
   return (
     <Box
