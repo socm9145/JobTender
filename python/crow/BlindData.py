@@ -66,7 +66,7 @@ class BlindData:
 
     def find_company(self, companyName):
         sql_find_company = '''
-            SELECT company_id FROM Companies WHERE name = %s
+            SELECT company_id FROM companies WHERE name = %s
             '''
         result = -1
         try:
@@ -80,10 +80,12 @@ class BlindData:
 
     def insert_companies(self, data):
         sql = '''
-              INSERT INTO `Companies` (name, type, scale, employees_number, address, year_founded, salary)
+              INSERT INTO `companies` (name, type, scale, employees_number, address, year_founded, salary)
               VALUES (%(name)s, %(type)s, %(scale)s, %(employees)s, %(addr)s, %(year)s, %(salary)s);
               '''
+        print(data)
         try:
+            pass
             self.cur.execute(sql, data)
             self.conn.commit()
         except Exception:
@@ -91,11 +93,13 @@ class BlindData:
 
     def insert_rank(self, data):
         sql = '''
-              INSERT INTO `Company_Ratings` (company_id, average_rating, growth_rating, balance_rating, 
+              INSERT INTO `company_ratings` (company_id, average_rating, growth_rating, balance_rating, 
               salary_welfare_rating, culture_rating, management_rating)
               VALUES (%(company_id)s, %(total)s, %(growth)s, %(balance)s, %(salary_welfare)s, %(culture)s, %(management)s);
               '''
+        print(data)
         try:
+            pass
             self.cur.execute(sql, data)
             self.conn.commit()
         except Exception:
@@ -103,10 +107,12 @@ class BlindData:
 
     def update_companies(self, data):
         sql = '''
-         UPDATE `Companies` SET employees_number = %(employees)s, address = %(addr)s,
-         salary = %(salary)s WHERE name = %(name)s;
+         UPDATE `companies` SET employees_number = %(employees)s, address = %(addr)s,
+         salary = %(salary)s, type = %(type)s, scale = %(scale)s, year_founded = %(year)s  WHERE name = %(name)s;
         '''
+        print(data)
         try:
+            pass
             self.cur.execute(sql, data)
             self.conn.commit()
         except Exception:
@@ -114,11 +120,13 @@ class BlindData:
 
     def update_rank(self, data):
         sql = '''
-        UPDATE `Company_Ratings` SET average_rating = %(total)s, growth_rating = %(growth)s, balance_rating = %(balance)s,
+        UPDATE `company_ratings` SET average_rating = %(total)s, growth_rating = %(growth)s, balance_rating = %(balance)s,
         salary_welfare_rating = %(salary_welfare)s, culture_rating = %(culture)s, management_rating = %(management)s
         WHERE company_id = %(company_id)s;
         '''
+        print(data)
         try:
+            pass
             self.cur.execute(sql, data)
             self.conn.commit()
         except Exception:
@@ -139,7 +147,10 @@ if __name__ == "__main__":
     for name in lines:
         name = name.replace("\n", "")
 
-        info = b.get_company_info(name)
+        try:
+            info = b.get_company_info(name)
+        except Exception:
+            continue
 
         basic = {'name': info['name'], 'type': info['basic']['type'], 'scale': '대기업',
                  'employees': info['basic']['employees'],
