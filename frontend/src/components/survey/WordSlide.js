@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/survey/WordSlide.css";
-import { submitSurvey, makeResult } from "../../api/surveyAxios";
+import { submitSurvey, makeResult, postSurvey, saveChooseSurvey } from "../../api/surveyAxios";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setWordList, setResultId } from "../../redux/survey/surveySlice";
+import { setKeywordSurveyResult } from "../../redux/result/resultSlice";
 
 import { Box, Text } from "@chakra-ui/react";
 
@@ -12,12 +13,50 @@ const WordSlide = () => {
 
   // 선택 여부로 마름모 색변환
   const isItemSelected = (itemNo) => selectedScores[itemNo] !== undefined;
+  const userid = useAppSelector(state => state.user.userId);
+
+  function reformSurveyData(resultId){
+    let list = [];
+    console.log(222);
+    console.log(selectedScores);
+    for (let index = 1; index <= selectedScores.length; index++) {
+      console.log(123);
+      let data = {
+        resultId: resultId,
+        surveyId: index,
+        score: selectedScores.index
+      }
+      console.log(data);
+      list.push(data);
+    }
+    console.log(list);
+    return JSON.stringify(list);
+  }
 
   const makeResultWordSlide = async () => {
     await makeResult(
-      8,
+      userid,
       (response) => {
-        // useAppSelector(setResultId(response.data));
+        dispatch(setResultId(response.data.resultId));
+        saveChooseSurvey(
+          reformSurveyData(response.data.resultId),
+          (a) => {
+            postSurvey(
+              response.data.resultId,
+              (data) => {
+                console.log(data);
+                dispatch(setKeywordSurveyResult(data.data));
+              },
+              (error) => {
+                console.log(error);
+              }
+            )
+            console.log(a);
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
         console.log(response);
       },
       (error) => {

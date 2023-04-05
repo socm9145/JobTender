@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
 import { userhistory, userinfo } from '../../api/mypageAxios';
-import { setUserData } from '../../redux/user/userSlice'
+import { setUserData, setUserId } from '../../redux/user/userSlice'
 import { setHistory, setReHistory, initHistory } from '../../redux/mypage/mypageSlice';
 
 import MyHistory from "../../components/mypage/History";
@@ -25,26 +25,26 @@ const Mypage = () => {
       date = date.replaceAll("-", ".");
       const tmp = data[key];
       let words = []
-      let companies = []
+      let companie = []
       if(tmp.keywords.length !== 0){
         words = [tmp.keywords[0].keywordName, tmp.keywords[1].keywordName, tmp.keywords[2].keywordName];
       }else{
         continue
       }
       if(tmp.companies.length !== 0){
-        companies = [tmp.companies[0].companyName, tmp.companies[1].companyName, tmp.companies[2].companyName];
+        companie = [tmp.companies[0].companyName, tmp.companies[1].companyName, tmp.companies[2].companyName];
       }else{
         continue
       }
-      dispatch(setReHistory([no, date, words, companies]))
+      dispatch(setReHistory([no, date, words, companie]))
     }
   }
   useEffect(()=>{
+    dispatch(setUserId(sessionStorage.getItem("userId")));
     async function getUserInfo(){
       await userinfo(
         userid,
         data => {
-          console.log(data.data)
           dispatch(setUserData(data.data));
         },
         error => {
@@ -196,7 +196,7 @@ const Mypage = () => {
             </Box>
             {/* 회원정보 */}
             <UserInfo title={"이름"} value={userInfo.name}></UserInfo>
-            <UserInfo title={"성별"} value={userInfo.gender === 'male' ? 'M' : 'W'}></UserInfo>
+            <UserInfo title={"성별"} value={userInfo.gender.toUpperCase()}></UserInfo>
             <UserInfo title={"나이"} value={userInfo.age}></UserInfo>
             <UserInfo title={"가입일"} value={userInfo.createDate}></UserInfo>
           </Box>
@@ -253,7 +253,7 @@ const Mypage = () => {
               justifyContent={"flex-start"}
               overflowY={"auto"}
             >
-              {historyData.map((history, index) => (
+              {historyData.map((history) => (
                 <MyHistory
                   id={history[0]}
                   date={history[1]}

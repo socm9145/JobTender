@@ -9,6 +9,7 @@ import { postKeyword, postKeywordPython } from "../../api/keywordAxios";
 import { keyword } from "../../api/mypageAxios";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useNavigate } from "react-router-dom";
 import { setWordList, setResultId } from "../../redux/keyword/keywordSlice";
 import { setKeywordSurveyResult } from "../../redux/result/resultSlice";
 import { Box, Text } from "@chakra-ui/react";
@@ -19,6 +20,7 @@ gsap.registerPlugin(EasePack);
 
 const Keyword = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const leftKeywords = useRef(null);
   const describe = useRef(null);
   const rightKeywords = useRef(null);
@@ -38,7 +40,7 @@ const Keyword = () => {
       keywordId3: selectedKeyword[2],
     };
     await postKeyword(
-      8,
+      userid,
       keywords,
       (data) => {
         dispatch(setResultId(data.data[0].resultId));

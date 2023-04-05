@@ -1,6 +1,16 @@
 import axios from "axios";
 
-import { reissue } from "./userAxios";
+const getCookie = async () => {
+  try{
+    const { data } = await axios.get(
+      "http://localhost:8000/account/reissue", {withCredentials:true}
+    );
+    sessionStorage.setItem("userId", data);
+    console.log(data);
+  } catch (e) {
+    alert("다시시도 부탁드려용~!")
+  }
+}
 
 // axios 객체 생성
 // localServer 통신
@@ -20,6 +30,7 @@ function localServer() {
 
     config.withCredentials = true;
 
+    await getCookie();
     // try{
     //   const { data } = await reissue();
     //   if(data.status === 200){
@@ -38,6 +49,7 @@ function localServer() {
       const { config, response: { status } } = error;
 
       if (status === 401){
+        sessionStorage.removeItem("userId");
         sessionStorage.removeItem("isLogin");
       }
     }
