@@ -12,6 +12,7 @@ public class ReadResultOutDTO {
     // result
     long resultId;
     long userId;
+    long companyId;
     // company scores
     String score;
     // companies

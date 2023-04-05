@@ -1,82 +1,49 @@
 import axios from "axios";
 
+import { reissue } from "./userAxios";
+
 // axios 객체 생성
 // localServer 통신
 function localServer() {
+  // console.log(process.env.REACT_APP_SOCKET);
   const axiosConfig = {
-    baseURL: process.env.REACT_APP_SOCKET+"/api",
+    // baseURL: 'https://jobtender.shop/api',
+    baseURL: 'http://localhost:8000/',
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
   }
   const instance = axios.create(axiosConfig);
 
-  instance.interceptors.request.use((config) => {
+  instance.interceptors.request.use(async (config) => {
     if (!config.headers) return config;
 
-    let token = null;
+    config.withCredentials = true;
 
-    // console.log(config.url);
+    // try{
+    //   const { data } = await reissue();
+    //   if(data.status === 200){
+    //     return axios(config);
+    //   }
+    // } catch (error){
+    //   console.log(error);
+    // }
 
-    if (config.url === "/reissue") {
-      token = sessionStorage.getItem('refresh-token');
-    } else {
-      token = sessionStorage.getItem('access-token');
-    }
-    // console.log(config);
-    if (token !== null) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    // console.log(config);
     return config;
   });
 
-  const getRefreshToken = async () => {
-    try {
-      const refreshToken = sessionStorage.getItem('refresh-token');
-      const accessToken = sessionStorage.getItem('access-token');
+  // instance.interceptors.response.use(
+  //   (res) => res,
+  //   async (error) => {
+  //     const { config, response: { status } } = error;
 
-      const { data } = await axios.post(
-        "https://ssafychat.shop/api/reissue",
-        {
-          refreshToken: refreshToken,
-          accessToken: accessToken,
-        }
-      );
-      sessionStorage.setItem('access-token', data.accessToken);
-      console.log(sessionStorage.getItem('access-token'));
+  //     if (status === 401){
+  //       return Promise.reject(error);
+  //     }
 
-      if (refreshToken !== null) {
-        sessionStorage.setItem('refresh-token', refreshToken);
-      }
-
-      return data.accessToken;
-    } catch (e) {
-      sessionStorage.removeItem('access-token');
-      sessionStorage.removeItem('refresh-token');
-      alert("다시 로그인 해주세요. 권한이 없습니다.")
-    }
-  }
-
-  instance.interceptors.response.use(
-    (res) => res,
-    async (error) => {
-      const { config, response: { status } } = error;
-
-      if (status !== 401){
-        return Promise.reject(error);
-      }
-
-      // config.sent = true;
-      const accessToken = await getRefreshToken();
-
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
-
-      return axios(config);
-    }
-  );
+  //     return axios(config);
+  //   }
+  // );
 
   return instance;
 }

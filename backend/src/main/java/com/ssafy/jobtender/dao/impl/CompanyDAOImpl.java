@@ -3,14 +3,14 @@ package com.ssafy.jobtender.dao.impl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.ssafy.jobtender.dao.CompanyDAO;
-import com.ssafy.jobtender.dto.output.CompanyRatingOutDTO;
-import com.ssafy.jobtender.dto.output.KeywordRandomCompanyOutDto;
+import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.entity.*;
 import com.ssafy.jobtender.repo.CompanyRepo;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -18,6 +18,14 @@ public class CompanyDAOImpl implements CompanyDAO {
     private final CompanyRepo companyRepo;
     @PersistenceContext
     private EntityManager em;
+    private final QResult result = QResult.result;
+    private final QInput input = QInput.input;
+    private final QKeywordMeasure keywordMeasure = QKeywordMeasure.keywordMeasure;
+    private final QCompanyMeasure companyMeasure = QCompanyMeasure.companyMeasure;
+    private final QCompany company = QCompany.company;
+    private final QKeyword keyword = QKeyword.keyword;
+    private final QCompanyRating companyRating = QCompanyRating.companyRating;
+    private final QExtractedKeyword extractedKeyword = QExtractedKeyword.extractedKeyword;
 
     public CompanyDAOImpl(CompanyRepo companyRepo) {
         this.companyRepo = companyRepo;
@@ -25,9 +33,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     public CompanyRatingOutDTO readCompanies(long companyId) {
-        QCompany company = QCompany.company;
-        QCompanyRating companyRating = QCompanyRating.companyRating;
-
         List<CompanyRatingOutDTO> companyRatingOutDTOs = new JPAQuery<>(em)
                 .select(Projections.constructor(CompanyRatingOutDTO.class,
                         company.name, company.type, company.scale, company.salary, company.employeesNumber,
@@ -49,13 +54,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     public List<KeywordRandomCompanyOutDto> readKeywordCompaniesByResultId(long resultId) {
-        QResult result = QResult.result;
-        QInput input = QInput.input;
-        QKeywordMeasure keywordMeasure = QKeywordMeasure.keywordMeasure;
-        QCompanyMeasure companyMeasure = QCompanyMeasure.companyMeasure;
-        QCompany company = QCompany.company;
-        QKeyword keyword = QKeyword.keyword;
-
         List<KeywordRandomCompanyOutDto> keywordRandomCompanyOutDtoList = new JPAQuery<>(em)
                 .select(Projections.constructor(KeywordRandomCompanyOutDto.class,
                         result.resultId, company.companyId, keyword.keywordId, company.name, keyword.keywordName)).distinct()
@@ -76,18 +74,54 @@ public class CompanyDAOImpl implements CompanyDAO {
 
         return keywordRandomCompanyOutDtoList;
     }
-}
 
-/*
-List<CompanyRatingOutDTO> companyRatingOutDTOs = new JPAQuery<>(em)
-                .select(Projections.constructor(CompanyRatingOutDTO.class,
-                        company.name, company.type, company.scale, company.salary, company.employeesNumber,
-                        company.address, company.yearFounded, company.companyId,
-                        companyRating.companyRatingId, companyRating.averageRating, companyRating.growthRating,
-                        companyRating.balanceRating, companyRating.salaryWelfareRating,
-                        companyRating.cultureRating, companyRating.managementRating))
+    @Override
+    public Chart2OutDTO readC2ByCompanyId(long companyId) {
+        /*
+        select C.company_id, C.name, EK.name, CM.score
+        from companies C
+        join company_measures CM
+        on C.company_id = CM.company_id
+        join extracted_keywords EK
+        on CM.extracted_keyword_id = EK.extract_keyword_id
+        where C.company_id = 1 and CM.score > 0;
+         */
+        Chart2OutDTO chart2OutDTO = new Chart2OutDTO();
+        chart2OutDTO.setChildren(new ArrayList<>());
+
+        List<Chart2InitOutDTO> chart2InitOutDTOs = new JPAQuery<>(em)
+                .select(Projections.constructor(Chart2InitOutDTO.class,
+                        company.companyId, company.name, extractedKeyword.name, companyMeasure.score))
                 .from(company)
-                .join(company.companyRating, companyRating)
-                .on(company.companyId.eq(companyRating.company.companyId))
+                .join(companyMeasure)
+                .on(company.companyId.eq(companyMeasure.company.companyId))
+                .join(extractedKeyword)
+                .on(companyMeasure.extractedKeyword.extractKeywordId.eq(extractedKeyword.extractKeywordId))
+                .where(company.companyId.eq(companyId))
+                .where(companyMeasure.score.castToNum(Float.class).gt(0))
+                .orderBy(companyMeasure.score.castToNum(Float.class).desc())
                 .fetch();
- */
+
+        if (chart2InitOutDTOs.size() == 0)
+            return null;
+
+
+        chart2OutDTO.setName(chart2InitOutDTOs.get(0).getCompanyName());
+
+        float sum = 0;
+
+        for (Chart2InitOutDTO chart2InitOutDTO : chart2InitOutDTOs){
+            chart2OutDTO.getChildren().add(new Chart2ChildOutDTO(chart2InitOutDTO.getName(),
+                    chart2InitOutDTO.getValue()));
+
+            sum += Float.parseFloat(chart2InitOutDTO.getValue());
+        }
+
+        System.out.println("SUM + " + sum);
+
+        for (Chart2ChildOutDTO chart2ChildOutDTO : chart2OutDTO.getChildren())
+            chart2ChildOutDTO.setValue(Float.toString(Float.parseFloat(chart2ChildOutDTO.getValue()) / sum));
+
+        return chart2OutDTO;
+    }
+}
