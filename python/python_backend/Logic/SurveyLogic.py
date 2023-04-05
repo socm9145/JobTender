@@ -70,8 +70,8 @@ class SurveyLogic:
         result = dict(sorted(all_value_company_sim.items(), key=lambda x: x[1], reverse=True))
         self.top_3 = self.top_nth(result)
         self.bottom_3 = self.bottom_nth(result)
-        # self.insert_top_bottom_score('H')
-        # self.insert_top_bottom_score('T')
+        self.insert_top_bottom_score('H')
+        self.insert_top_bottom_score('T')
         return {'top': self.top_3, 'bottom': self.bottom_3}
 
     def top_nth(self, top_nth):

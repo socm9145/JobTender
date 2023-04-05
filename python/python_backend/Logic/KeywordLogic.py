@@ -82,6 +82,8 @@ class KeywordLogic:
         result = dict(sorted(all_value_company_sim.items(), key=lambda x: x[1], reverse=True))
         self.top_3 = self.top_nth(result)
         self.bottom_3 = self.bottom_nth(result)
+        self.insert_top_score('H')
+        self.insert_top_score('T')
         return {'top': self.top_3, 'bottom': self.bottom_3}
 
     # 최상위 nth 기업 id와 함께 출력.
@@ -123,14 +125,14 @@ class KeywordLogic:
     #     # print(len(result))
     #     return result
     #
-    def insert_top_score(self, type, result_id, dic):
+    def insert_top_score(self, type):
         if type == 'H':
-            for key in dic.keys():
-                data = [result_id, key, dic[key], 'H']
+            for key in self.top_3.keys():
+                data = [self.result_id, key, self.top_3[key], 'H']
                 self.cur.insert_score(data)
         elif type == 'T':
-            for key in dic.keys():
-                data = [result_id, key, dic[key], 'T']
+            for key in self.bottom_3.keys():
+                data = [self.result_id, key, self.bottom_3[key], 'T']
                 self.cur.insert_score(data)
 
 
