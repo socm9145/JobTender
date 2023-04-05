@@ -1,6 +1,7 @@
 package com.ssafy.jobtender.service;
 
 import com.ssafy.jobtender.dto.input.KeywordRankInputDTO;
+import com.ssafy.jobtender.dto.input.SurveyRankInputDTO;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.dto.output.*;
 
@@ -20,4 +21,6 @@ public interface ResultService {
 
     List<Chart4OutDTO> readC4ByResultId(long resultId);
     List<KeywordRankDoubleOutDTO> readKeywordRank(KeywordRankInputDTO keywordRankInputDTO);
+
+    List<KeywordRankDoubleOutDTO> readSurveyRank(List<SurveyRankInputDTO> surveyRankInputDTOList);
 }

@@ -1,6 +1,7 @@
 package com.ssafy.jobtender.controller;
 
 import com.ssafy.jobtender.dto.input.KeywordRankInputDTO;
+import com.ssafy.jobtender.dto.input.SurveyRankInputDTO;
 import com.ssafy.jobtender.dto.output.*;
 import com.ssafy.jobtender.service.*;
 import io.swagger.annotations.ApiOperation;
@@ -153,6 +154,13 @@ public class ResultController {
         Chart2OutDTO chart2OutDTO = this.companyService.readC2ByCompanyId(companyId);
 
         return ResponseEntity.status(HttpStatus.OK).body(chart2OutDTO);
+    }
+
+    @ApiOperation(value = "Chart 3 설문조사 데이터 반환 API", notes = "Chart 3 설문조사 데이터 반환 API")
+    @PostMapping("/survey/c3")
+    public ResponseEntity<List<KeywordRankDoubleOutDTO>> readC3BySurvey(@RequestBody List<SurveyRankInputDTO> surveyRankInputDTOList){
+        List<KeywordRankDoubleOutDTO> keywordRankDoubleOutDTOList = resultService.readSurveyRank(surveyRankInputDTOList);
+        return ResponseEntity.status(HttpStatus.OK).body(keywordRankDoubleOutDTOList);
     }
 
     @ApiOperation(value = "Chart 4 데이터 반환 API", notes = "Chart 4 데이터 반환 API")
