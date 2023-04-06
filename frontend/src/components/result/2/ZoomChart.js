@@ -5,6 +5,7 @@ import * as d3 from "d3";
 import { Box } from "@chakra-ui/react";
 
 const ZoomChart = ({ data }) => {
+  console.log(data);
   const ref = useRef();
   useEffect(() => {
     const width = 1000;
@@ -167,8 +168,13 @@ const ZoomChart = ({ data }) => {
   }, []);
 
   return (
-    <Box display={"flex"} justifyContent={"center"}>
-      <svg ref={ref} width={"75%"} height={"100%"}></svg>
+    <Box
+      display={"flex"}
+      justifyContent={"center"}
+      height={"100%"}
+      width={"100%"}
+    >
+      <svg ref={ref}></svg>
     </Box>
   );
 };
