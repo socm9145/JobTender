@@ -1,6 +1,16 @@
 import axios from "axios";
 
-import { reissue } from "./userAxios";
+const getCookie = async () => {
+  try{
+    const { data } = await axios.get(
+      "http://localhost:8000/account/reissue", {withCredentials:true}
+    );
+    sessionStorage.setItem("userId", data);
+    console.log(data);
+  } catch (e) {
+    alert("다시시도 부탁드려용~!")
+  }
+}
 
 // axios 객체 생성
 // localServer 통신
@@ -20,6 +30,7 @@ function localServer() {
 
     config.withCredentials = true;
 
+    await getCookie();
     // try{
     //   const { data } = await reissue();
     //   if(data.status === 200){
@@ -32,20 +43,39 @@ function localServer() {
     return config;
   });
 
-  // instance.interceptors.response.use(
-  //   (res) => res,
-  //   async (error) => {
-  //     const { config, response: { status } } = error;
+  instance.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+      const { config, response: { status } } = error;
 
-  //     if (status === 401){
-  //       return Promise.reject(error);
-  //     }
-
-  //     return axios(config);
-  //   }
-  // );
+      if (status === 401){
+        sessionStorage.removeItem("userId");
+        sessionStorage.removeItem("isLogin");
+      }
+    }
+  );
 
   return instance;
 }
 
-export { localServer };
+function loginServer() {
+  const axiosConfig = {
+    baseURL: 'http://localhost:8000/',
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  }
+  return axios.create(axiosConfig);
+}
+
+function pythonServer() {
+  const axiosConfig = {
+    baseURL: 'http://localhost:8001/',
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  }
+  return axios.create(axiosConfig);
+}
+
+export { localServer, pythonServer, loginServer };

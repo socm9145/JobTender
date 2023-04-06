@@ -6,6 +6,7 @@ const Describe = ({ title, fontsize }) => {
       className={"section"}
       position={"relative"}
       height={"100vh"}
+      width={"100vw"}
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
@@ -22,17 +23,34 @@ const Describe = ({ title, fontsize }) => {
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
       ></Box>
-
-      <Text
-        className={"txt"}
-        color={"white"}
-        textShadow={"1px 1px 3px black"}
-        zIndex={"1"}
-        fontSize={fontsize}
-        fontWeight={"400"}
+      <Box
+        width={"55%"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        alignItems={"center"}
       >
-        {title}
-      </Text>
+        <Text
+          className={"txt"}
+          color={"white"}
+          textShadow={"1px 1px 3px black"}
+          zIndex={"1"}
+          fontSize={fontsize}
+          fontWeight={"400"}
+        >
+          {title[0]}
+        </Text>
+        <Text
+          className={"txt"}
+          color={"white"}
+          textShadow={"1px 1px 3px black"}
+          zIndex={"1"}
+          fontSize={fontsize}
+          fontWeight={"400"}
+        >
+          {title[1]}
+        </Text>
+      </Box>
     </Box>
   );
 };

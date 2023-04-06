@@ -39,7 +39,7 @@ const BarChart = ({ data, chartContainer }) => {
       yFormat: "",
       yLabel: "↑ Frequency",
       width: chartContainer.current.offsetWidth,
-      height: 500,
+      height: chartContainer.current.offsetHeight * 0.95,
       color: d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 10)),
       // color: "steelblue",
     });
@@ -253,7 +253,7 @@ const BarChart = ({ data, chartContainer }) => {
     return svg.node();
   }
 
-  return <Box ref={chartRef}></Box>;
+  return <Box ref={chartRef} width={"full"} height={"full"}></Box>;
 };
 
 export default BarChart;

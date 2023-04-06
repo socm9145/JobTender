@@ -95,12 +95,12 @@ const Describe = ({ title, content }) => {
             style={{ ...cardBgTransform, ...cardBgImage }}
           ></Box>
           <Box
+            width={"90%"}
             position={"absolute"}
             left={"4%"}
             top={"15%"}
             className="card-info"
             color={"white"}
-            width={"100%"}
           >
             <Box className="header" paddingLeft={"4%"}>
               <Text

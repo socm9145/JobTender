@@ -4,6 +4,7 @@ const initialState = {
   clickedKeyword: null,
   clickedRank: null,
   selectedKeyword: [null, null, null],
+  resultId: null,
   keyword: {},
   wordList: [
     // {"keywordId":1,"keywordName":"안정"},
@@ -47,6 +48,9 @@ export const keywordSlice = createSlice({
     setWordList: (state, action) => {
       state.wordList = action.payload;
     },
+    setResultId: (state, action) => {
+      state.resultId = action.payload;
+    },
   },
 });
 
@@ -55,6 +59,7 @@ export const {
   setClickedRank,
   setSelectedKeyword,
   setWordList,
+  setResultId,
 } = keywordSlice.actions;
 // export const selectState = (state) => state.counter;
 export default keywordSlice.reducer;

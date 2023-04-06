@@ -113,7 +113,7 @@ const TextContainer = () => {
           marginTop={"0.2em"}
           letterSpacing={"0.15em"}
         >
-          {selectedMethod ? <Text>키워드</Text> : <Text>설문조사</Text>}
+          {selectedMethod ? <Text>키워드</Text> : <Text>가치관</Text>}
         </Box>
       </Box>
       <Box
@@ -163,13 +163,14 @@ const TextContainer = () => {
             >
               {selectedMethod ? (
                 <Text>
-                  핵심 키워드를 선택하는 방법으로 보다 빠르게 결과를 확인할 수
-                  있습니다.
+                  나에게 중요한 세 개의 가치관을 선택해서 나와 맞는 기업을 쉽고
+                  빠르게 확인할 수 있습니다.
                 </Text>
               ) : (
+                // 57개를 선택해야 하는 수고로움에 대한 사전 설명 필요하지 않나
                 <Text>
-                  여러 키워드에 관한 점수를 할당하는 방법으로 보다 정확한 결과를
-                  확인할 수 있습니다.
+                  가치관 검사를 통해 자신의 가치관을 보다 정확히 이해하고, 보다
+                  정밀한 기업 추천을 받을 수 있습니다.
                 </Text>
               )}
             </Box>

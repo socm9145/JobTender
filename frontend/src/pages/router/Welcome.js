@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import FirstScene from "../../components/welcome/FirstScene";
 import Describe from "../../components/welcome/Describe";
 
@@ -19,11 +18,14 @@ const Welcome = () => {
 
     gsap.utils.toArray(".section").forEach((section, i) => {
       section.bg = section.querySelector(".bg");
-      section.txt = section.querySelector(".txt");
+      section.txt = section.querySelectorAll(".txt");
       section.firstscene = section.querySelector(".firstscene");
 
       // Give the backgrounds some random images
-      section.bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
+      section.bg.style.backgroundImage = `url(${
+        process.env.PUBLIC_URL
+      }/images/welcome/welcome_${i + 1}.jpg)`;
+      // section.bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
 
       // the first image (i === 0) should be handled differently because it should start at the very top.
       // use function-based values in order to keep things responsive
@@ -68,28 +70,39 @@ const Welcome = () => {
 
   return (
     <Box overflow="hidden">
-      {/* 임시 로그인 페이지 이동 버튼 */}
-      <Box
-        zIndex={4}
-        width={"100vw"}
-        display={"flex"}
-        justifyContent={"center"}
-        position={"fixed"}
-        top={"0"}
-      >
-        <Button
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          로그인페이지로
-        </Button>
-      </Box>
-
       <Box />
       {/* 설명 컴포넌트 */}
-      <FirstScene className={"section"} title={"JOBTENDER"} fontsize={"10em"} />
+      <FirstScene
+        className={"section"}
+        title={"JOBTENDER"}
+        fontsize={"10em"}
+        backgroundImage={'url("../../../public/images/welcome/welcome_1.jpg")'}
+      />
       <Describe
+        className={"section"}
+        title={[
+          "내 인생의 반 이상을 보내는 직장",
+          "직장은 우리에게 무엇이어야 할까요?",
+        ]}
+        fontsize={"2.5vw"}
+      />
+      <Describe
+        className={"section"}
+        title={[
+          "단순히 돈을 버는 수단이 아닌,",
+          "나의 가치를 이룰 수 있는 곳이라면 어떨까요?",
+        ]}
+        fontsize={"2.5vw"}
+      />
+      <Describe
+        className={"section"}
+        title={[
+          "당신의 가치관과 자아를 실현할 무대",
+          "Jobtender에서 찾아보세요",
+        ]}
+        fontsize={"2.5vw"}
+      />
+      {/* <Describe
         className={"section"}
         title={"Simple parallax Boxs"}
         fontsize={"3em"}
@@ -98,22 +111,7 @@ const Welcome = () => {
         className={"section"}
         title={"Simple parallax Boxs"}
         fontsize={"3em"}
-      />
-      <Describe
-        className={"section"}
-        title={"Simple parallax Boxs"}
-        fontsize={"3em"}
-      />
-      <Describe
-        className={"section"}
-        title={"Simple parallax Boxs"}
-        fontsize={"3em"}
-      />
-      <Describe
-        className={"section"}
-        title={"Simple parallax Boxs"}
-        fontsize={"3em"}
-      />
+      /> */}
     </Box>
   );
 };
