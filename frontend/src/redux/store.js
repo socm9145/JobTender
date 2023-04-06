@@ -7,6 +7,7 @@ import userReducer from "./user/userSlice";
 import mypageReducer from "./mypage/mypageSlice";
 import surveyReducer from "./survey/surveySlice";
 import resultReducer from "./result/resultSlice";
+import chart5Reducer from "./result/chart5Slice";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     mypage: mypageReducer,
     survey: surveyReducer,
     result: resultReducer,
+    chart5: chart5Reducer,
   },
 });
 

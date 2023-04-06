@@ -1,31 +1,101 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/survey/WordSlide.css";
-import { submitSurvey, makeResult, postSurvey, saveChooseSurvey } from "../../api/surveyAxios";
+import {
+  submitSurvey,
+  makeResult,
+  postSurvey,
+  saveChooseSurvey,
+} from "../../api/surveyAxios";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setWordList, setResultId } from "../../redux/survey/surveySlice";
+import {
+  setWordList,
+  setResultId,
+  setSelectedScoresRaw,
+  setSelectedScoresRedux,
+} from "../../redux/survey/surveySlice";
 import { setKeywordSurveyResult } from "../../redux/result/resultSlice";
-
+import { useNavigate } from "react-router-dom";
 import { Box, Text } from "@chakra-ui/react";
-
+// {1: 7, 2: 8, 3: 5, 4: 7, 5: 9, 6: 7, 7: 6, 8: 7, 9: 6, 10: 9, 11: 6, 12: 5, 13: 6, 14: 7, 15: 9, 16: 9, 17: 7, 18: 2, 19: 9, 20: 9, 21: 8, 22: 7, 23: 7, 24: 9, 25: 6, 26: 9, 27: 5, 28: 9, 29: 9, 30: 8, 31: 9, 32: 4, 33: 2, 34: 3, 35: 7, 36: 7, 37: 5, 38: 8, 39: 8, 40: 6, 41: 7, 42: 6, 43: 9, 44: 9, 45: 9, 46: 8, 47: 4, 48: 9, 49: 9, 50: 7, 51: 6, 52: 9, 53: 9, 54: 9, 55: 2, 56: 5, 57: 2}
 const WordSlide = () => {
-  const [selectedScores, setSelectedScores] = useState({});
+  const navigate = useNavigate();
+  const [selectedScores, setSelectedScores] = useState({
+    1: 7,
+    2: 8,
+    3: 5,
+    4: 7,
+    5: 9,
+    6: 7,
+    7: 6,
+    8: 7,
+    9: 6,
+    10: 9,
+    11: 6,
+    12: 5,
+    13: 6,
+    14: 7,
+    15: 9,
+    16: 9,
+    17: 7,
+    18: 2,
+    19: 9,
+    20: 9,
+    21: 8,
+    22: 7,
+    23: 7,
+    24: 9,
+    25: 6,
+    26: 9,
+    27: 5,
+    28: 9,
+    29: 9,
+    30: 8,
+    31: 9,
+    32: 4,
+    33: 2,
+    34: 3,
+    35: 7,
+    36: 7,
+    37: 5,
+    38: 8,
+    39: 8,
+    40: 6,
+    41: 7,
+    42: 6,
+    43: 9,
+    44: 9,
+    45: 9,
+    46: 8,
+    47: 4,
+    48: 9,
+    49: 9,
+    50: 7,
+    51: 6,
+    52: 9,
+    53: 9,
+    54: 9,
+    55: 2,
+    56: 5,
+    57: 2,
+  });
+
   const dispatch = useAppDispatch();
 
   // 선택 여부로 마름모 색변환
   const isItemSelected = (itemNo) => selectedScores[itemNo] !== undefined;
-  const userid = useAppSelector(state => state.user.userId);
+  const userid = useAppSelector((state) => state.user.userId);
 
-  function reformSurveyData(resultId){
+  function reformSurveyData(resultId) {
     let list = [];
     console.log(222);
     console.log(selectedScores);
-    for (let index = 1; index <= selectedScores.length; index++) {
+    for (let key in selectedScores) {
       console.log(123);
       let data = {
         resultId: resultId,
-        surveyId: index,
-        score: selectedScores.index
-      }
+        surveyId: key,
+        score: selectedScores[key],
+      };
       console.log(data);
       list.push(data);
     }
@@ -50,13 +120,13 @@ const WordSlide = () => {
               (error) => {
                 console.log(error);
               }
-            )
+            );
             console.log(a);
           },
           (error) => {
             console.log(error);
           }
-        )
+        );
         console.log(response);
       },
       (error) => {
@@ -122,6 +192,8 @@ const WordSlide = () => {
 
     getWords();
   }, []);
+
+  useEffect(() => {}, []);
 
   const words = useAppSelector((state) => state.survey.wordList);
   const len = words.length;
@@ -208,7 +280,11 @@ const WordSlide = () => {
         <Box
           className={`submit-button ${allButtonsClicked ? "active" : ""}`}
           disabled={!allButtonsClicked}
-          onClick={() => makeResultWordSlide()}
+          onClick={() => {
+            // console.log(reformSurveyData(selectedScores));
+            dispatch(setSelectedScoresRaw(selectedScores));
+            navigate("/loadingsurvey");
+          }}
         >
           Submit
         </Box>

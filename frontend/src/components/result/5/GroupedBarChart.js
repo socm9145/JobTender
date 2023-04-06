@@ -1,9 +1,19 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const GroupedBarChart = ({ data }) => {
-  const chartRef = useRef(null);
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 
+// const GroupedBarChart = ({ data }) => {
+const GroupedBarChart = () => {
+  const chartRef = useRef(null);
+  const maleMean = useAppSelector((state) => state.chart5.maleMean);
+  const femaleMean = useAppSelector((state) => state.chart5.femaleMean);
+  const myAverage = useAppSelector((state) => state.chart5.myAverage);
+  const data = [
+    { letter: "남", frequency: maleMean },
+    { letter: "여", frequency: femaleMean },
+    { letter: "나", frequency: myAverage },
+  ];
   useEffect(() => {
     if (chartRef.current) {
       drawBarChart();

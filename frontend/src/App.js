@@ -13,6 +13,7 @@ import Welcome from "./pages/router/Welcome";
 import Login from "./pages/router/Login";
 import Kakao from "./pages/router/Kakao";
 import Loading from "./pages/router/Loading";
+import LoadingSurvey from "./pages/router/LodingSurvey";
 import PrivateRoute from "./pages/PrivateRoute";
 
 //마우스 포인터
@@ -57,6 +58,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/loading" element={<Loading />} />
+          <Route exact path="/loadingsurvey" element={<LoadingSurvey />} />
           <Route exact path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/kakao" element={<Kakao />} />

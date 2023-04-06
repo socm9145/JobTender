@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userId: "",
+  userId: null,
   userData: {
     name: "",
     age: "",
@@ -26,7 +26,7 @@ export const keywordSlice = createSlice({
     },
     setUserId: (state, action) => {
       state.userId = action.payload;
-    }
+    },
   },
 });
 
