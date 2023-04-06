@@ -2,10 +2,13 @@ import { useRef } from "react";
 import BarChart from "./BarChart";
 import data from "./barData.json";
 
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+
 import { Box } from "@chakra-ui/react";
 const IdealTalent = () => {
   const chartContainer = useRef();
-
+  const chart3 = useAppSelector((state) => state.result.chart3);
+  console.log(chart3);
   return (
     <Box
       id={"bbb"}
@@ -30,7 +33,7 @@ const IdealTalent = () => {
         borderRadius={"30px"}
         boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
       >
-        <BarChart chartContainer={chartContainer} data={data} />
+        <BarChart chartContainer={chartContainer} data={chart3} />
       </Box>
     </Box>
   );

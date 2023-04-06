@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Grid, Text } from "@chakra-ui/react";
 import axios from "axios";
 import * as math from "mathjs";
@@ -6,71 +6,115 @@ import * as math from "mathjs";
 import GroupedBarChart from "./GroupedBarChart";
 import dataSets from "./barData.json";
 
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import { localServer } from "../../../api/http";
+import {
+  setChartData,
+  setMaleMean,
+  setMaleStd,
+  setFemaleMean,
+  setFemaleStd,
+  setMyAverage,
+  setResultF,
+  setResultM,
+  setUpDownCheckF,
+  setUpDownCheckM,
+  setClickedIdx,
+} from "../../../redux/result/chart5Slice";
 
 const api = localServer();
 
 const AgeValues = () => {
+  const dispatch = useAppDispatch();
   const chartContainer = useRef(null);
-
+  const wordList = useAppSelector((state) => state.result.wordList);
+  const chartData = useAppSelector((state) => state.chart5.chartData);
+  const upDownCheckF = useAppSelector((state) => state.chart5.upDownCheckF);
+  const upDownCheckM = useAppSelector((state) => state.chart5.upDownCheckM);
+  const resultF = useAppSelector((state) => state.chart5.resultF);
+  const resultM = useAppSelector((state) => state.chart5.resultM);
+  const maleMean = useAppSelector((state) => state.chart5.maleMean);
+  const maleStd = useAppSelector((state) => state.chart5.maleStd);
+  const femaleMean = useAppSelector((state) => state.chart5.femaleMean);
+  const femaleStd = useAppSelector((state) => state.chart5.femaleStd);
+  const myAverage = useAppSelector((state) => state.chart5.myAverage);
+  const clickedIdx = useAppSelector((state) => state.chart5.clickedIdx);
   // 차트데이터
-  const dummyData = [
-    { letter: "남", frequency: 0 },
-    { letter: "여", frequency: 0 },
-    { letter: "나", frequency: 0 },
-  ];
-  const [chartData, setChartData] = useState(dummyData);
-  const [upDownCheckF, setUpDownCheckF] = useState("");
-  const [upDownCheckM, setUpDownCheckM] = useState("");
-  const [resultF, setResultF] = useState(0);
-  const [resultM, setResultM] = useState(0);
 
-  const [maleMean, setMaleMean] = useState(0);
-  const [maleStd, setMaleStd] = useState(0);
-  const [femaleMean, setFemaleMean] = useState(0);
-  const [femaleStd, setFemaleStd] = useState(0);
-  const [myAverage, setMyAverage] = useState(5);
+  //
+  // const dummyData = [
+  //   { letter: "남", frequency: 0 },
+  //   { letter: "여", frequency: 0 },
+  //   { letter: "나", frequency: 0 },
+  // ];
+  // const [chartData, setChartData] = useState(dummyData);
 
-  const changeData = (index) => {
+  // const [upDownCheckF, setUpDownCheckF] = useState("");
+  // const [upDownCheckM, setUpDownCheckM] = useState("");
+  // const [resultF, setResultF] = useState(0);
+  // const [resultM, setResultM] = useState(0);
+
+  // const [maleMean, setMaleMean] = useState(0);
+  // const [maleStd, setMaleStd] = useState(0);
+  // const [femaleMean, setFemaleMean] = useState(0);
+  // const [femaleStd, setFemaleStd] = useState(0);
+  // const [myAverage, setMyAverage] = useState(5);
+
+  const resultId = useAppSelector((state) => state.survey.resultId);
+  const changeData = async (index) => {
     // 남자 데이터 받아오기
-    api
+    await api
       .get(`/result/static?keywordId=${index}&gender=M`)
       .then(function (response) {
         // console.log(response.data);
         // console.log(response.data.mean);
-        setMaleMean(response.data.mean);
-        setMaleStd(response.data.std);
+        dispatch(setMaleMean(response.data.mean));
+        dispatch(setMaleStd(response.data.std));
       });
     // 여자 데이터 받아오기.
-    api
+    await api
       .get(`/result/static?keywordId=${index}&gender=F`)
       .then(function (response) {
         // console.log(response.data);
         // console.log(response.data.mean);
-        setFemaleMean(response.data.mean);
-        setFemaleStd(response.data.std);
+        dispatch(setFemaleMean(response.data.mean));
+        dispatch(setFemaleStd(response.data.std));
       });
 
     // 내 값 받아오기
-    api
+    await api
       .get(
         // `/result/survey/average?resultId=${리절트아이디}&keyworldId=${index}`
-        `/result/survey/average?resultId=1&keyworldId=${index}`
+        `/result/survey/average?resultId=${resultId}&keywordId=${index}`
       )
       .then(function (response) {
-        setMyAverage(parseInt(response.data.average));
+        dispatch(setMyAverage(parseInt(response.data.average)));
       });
 
+    // const newData = [
+    //   { letter: "남", frequency: maleMean },
+    //   { letter: "여", frequency: femaleMean },
+    //   { letter: "나", frequency: myAverage },
+    // ];
+    // setChartData(newData);
+    // dispatch(setChartData(newData));
+  };
+
+  useEffect(() => {
     const newData = [
       { letter: "남", frequency: maleMean },
       { letter: "여", frequency: femaleMean },
       { letter: "나", frequency: myAverage },
     ];
+    dispatch(setChartData(newData));
+  }, [maleMean, femaleMean, myAverage]);
 
-    setChartData(newData);
-  };
+  useEffect(() => {
+    standardF(femaleStd, femaleMean, myAverage);
+    standardM(maleStd, maleMean, myAverage);
+  }, [myAverage]);
 
-  const standardF = (i, std, mean, score) => {
+  const standardF = async (std, mean, score) => {
     const z_score = (score - mean) / std;
 
     // 정규분포에서 유저 스코어의 위치 계산
@@ -81,14 +125,14 @@ const AgeValues = () => {
     // 상위 50퍼 안이면 상위로 표시. 아니면 하위로 표시
     if (percentile >= 50) {
       // const result = 100 - percentile;
-      setResultF(`상위 ${(100 - percentile).toFixed(2)}`);
-      setUpDownCheckF("여성 데이터 기준");
+      dispatch(setResultF(`상위 ${(100 - percentile).toFixed(2)}`));
+      dispatch(setUpDownCheckF("여성 데이터 기준"));
     } else {
-      setResultF(`하위 ${percentile.toFixed(2)}`);
-      setUpDownCheckF("여성 데이터 기준");
+      dispatch(setResultF(`하위 ${percentile.toFixed(2)}`));
+      dispatch(setUpDownCheckF("여성 데이터 기준"));
     }
   };
-  const standardM = (i, std, mean, score) => {
+  const standardM = async (std, mean, score) => {
     const z_score = (score - mean) / std;
     console.log(std, mean, score);
     // 정규분포에서 유저 스코어의 위치 계산
@@ -99,11 +143,11 @@ const AgeValues = () => {
     // 상위 50퍼 안이면 상위로 표시. 아니면 하위로 표시
     if (percentile >= 50) {
       // const result = 100 - percentile;
-      setResultM(`상위 ${(100 - percentile).toFixed(2)}`);
-      setUpDownCheckM("남성 데이터 기준");
+      dispatch(setResultM(`상위 ${(100 - percentile).toFixed(2)}`));
+      dispatch(setUpDownCheckM("남성 데이터 기준"));
     } else {
-      setResultM(`하위 ${percentile.toFixed(2)}`);
-      setUpDownCheckM("남성 데이터 기준");
+      dispatch(setResultM(`하위 ${percentile.toFixed(2)}`));
+      dispatch(setUpDownCheckM("남성 데이터 기준"));
     }
   };
 
@@ -137,7 +181,8 @@ const AgeValues = () => {
     >
       <Box display="flex">
         <Box width={"66%"}>
-          <GroupedBarChart data={chartData} />
+          {/* <GroupedBarChart data={chartData} /> */}
+          <GroupedBarChart />
         </Box>
         <Box
           flexGrow={1}
@@ -155,44 +200,61 @@ const AgeValues = () => {
           >
             {Array.from({ length: 10 }, (_, i) => (
               <Box
+                className={"hoverable"}
                 border={"solid 1px black"}
                 display={"flex"}
                 justifyContent={"center"}
                 alignItems={"center"}
                 key={i}
-                onClick={() => {
-                  changeData(i);
-                  standardF(i, femaleStd, femaleMean, myAverage);
-                  standardM(i, maleStd, maleMean, myAverage);
-                }}
+                onClick={
+                  clickedIdx === i
+                    ? () => {}
+                    : async () => {
+                        await changeData(i + 1);
+                        dispatch(setClickedIdx(i));
+                      }
+                }
               >
-                {i + 1}번
+                {wordList[i].keywordName}
               </Box>
             ))}
           </Grid>
         </Box>
       </Box>
-
-      <Box
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"space-evenly"}
-        fontSize={"2vw"}
-        fontFamily={"dodum"}
-        height={"100%"}
-        textAlign={"center"}
-      >
-        <Text>
-          {upDownCheckF}
-          <br />
-          {resultF} % 입니다.
-        </Text>
-        <Text>
-          {upDownCheckM}
-          <br />
-          {resultM} % 입니다.
-        </Text>
-      </Box>
+      {myAverage !== 0 ? (
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"space-evenly"}
+          fontSize={"2vw"}
+          fontFamily={"dodum"}
+          height={"100%"}
+          textAlign={"center"}
+        >
+          <Text>
+            {upDownCheckF}
+            <br />
+            {resultF} % 입니다.
+          </Text>
+          <Text>
+            {upDownCheckM}
+            <br />
+            {resultM} % 입니다.
+          </Text>
+        </Box>
+      ) : (
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          fontSize={"3vw"}
+          fontFamily={"dodum"}
+          height={"100%"}
+          textAlign={"center"}
+        >
+          <Text>가치관 버튼을 클릭해주세요.</Text>
+        </Box>
+      )}
     </Box>
     // </Box>
   );

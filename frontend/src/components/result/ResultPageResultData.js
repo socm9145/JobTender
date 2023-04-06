@@ -1,5 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+
 import RecommendedCorp from "../../components/result/1/RecommendedCorp";
 import CorpKeyword from "../../components/result/2/CorpKeyword";
 import IdealTalent from "../../components/result/3/IdealTalent";
@@ -7,6 +9,7 @@ import GraphValues from "../../components/result/4/GraphValues";
 import AgeValues from "../../components/result/5/AgeValues";
 
 const ResultPageResultData = ({ componentName }) => {
+  const chart4 = useAppSelector((state) => state.result.chart4);
   {
     /* <Text
         fontFamily={"taebaek"}
@@ -26,16 +29,16 @@ const ResultPageResultData = ({ componentName }) => {
     >
       {(() => {
         switch (componentName) {
-          case "AgeValues":
-            return <AgeValues />;
-          case "CorpKeyword":
-            return <CorpKeyword />;
-          case "GraphValues":
-            return <GraphValues />;
-          case "IdealTalent":
-            return <IdealTalent />;
           case "RecommendedCorp":
             return <RecommendedCorp />;
+          case "CorpKeyword":
+            return <CorpKeyword />;
+          case "IdealTalent":
+            return <IdealTalent />;
+          case "GraphValues":
+            return <GraphValues />;
+          case "AgeValues":
+            return <AgeValues />;
           default:
             return null;
         }
