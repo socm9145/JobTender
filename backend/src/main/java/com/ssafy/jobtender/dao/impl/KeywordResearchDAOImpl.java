@@ -29,6 +29,8 @@ public class KeywordResearchDAOImpl implements KeywordResearchDAO {
                 .from(keywordResearch)
                 .join(keyword)
                 .on(keyword.keywordId.eq(keywordResearch.keyword.keywordId))
+                .where(keyword.keywordId.eq(keywordId))
+                .where(keywordResearch.gender.eq(gender))
                 .fetch();
 
 
