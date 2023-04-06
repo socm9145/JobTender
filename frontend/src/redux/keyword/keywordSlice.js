@@ -18,6 +18,8 @@ const initialState = {
     // "성취",
     // "권력",
   ],
+  keywordName: [],
+  keywordId: [],
 };
 
 export const keywordSlice = createSlice({
@@ -46,11 +48,27 @@ export const keywordSlice = createSlice({
       state.selectedKeyword[rank] = keyword();
     },
     setWordList: (state, action) => {
+      const tmp = action.payload;
+      // eslint-disable-next-line array-callback-return
+      tmp.map((data)=>{
+        state.keywordName.push(data.keywordName);
+        state.keywordId.push(data.keywordId);
+      })
       state.wordList = action.payload;
     },
     setResultId: (state, action) => {
       state.resultId = action.payload;
     },
+    setInit: (state) => {
+      state.clickedKeyword = null;
+      state.clickedRank = null;
+      state.selectedKeyword = [null, null, null];
+      state.resultId = null;
+      state.keyword = {};
+      state.wordList = [];
+      state.keywordName = [];
+      state.keywordId = [];
+    }
   },
 });
 
@@ -60,6 +78,7 @@ export const {
   setSelectedKeyword,
   setWordList,
   setResultId,
+  setInit,
 } = keywordSlice.actions;
 // export const selectState = (state) => state.counter;
 export default keywordSlice.reducer;

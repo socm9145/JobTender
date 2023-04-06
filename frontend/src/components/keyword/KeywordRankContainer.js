@@ -1,8 +1,6 @@
-import { useLayoutEffect, useRef, useState } from "react";
-
 import KeywordRank from "./KeywordRank";
 
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import { gsap } from "gsap";
 import { EasePack } from "gsap/EasePack";
