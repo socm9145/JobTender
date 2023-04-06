@@ -30,4 +30,8 @@ async function chart5Survey(data1, data2, success, fail) {
     .catch(fail);
 }
 
-export { chart2, chart3, chart3Survey, chart4Survey, chart5Survey };
+async function getCompanyInfo(companyId, success, fail){
+  await api.get("/result/company/info?companyId=" + companyId).then(success).catch(fail);
+}
+
+export { chart2, chart3, chart3Survey, chart4Survey, chart5Survey, getCompanyInfo };

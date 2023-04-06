@@ -1,8 +1,13 @@
 import "../../../styles/result/RecommendCorp3.css";
-// import "../../../../public/companyLogo/컬리.png";
+import { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
 import { Box, Image, Text } from "@chakra-ui/react";
 
 const RecommendedCorp = () => {
+  // const company1 = useAppSelector((state) => state.result.chart2_1.name);
+  const company1 = "찌오컴퍼니";
+  const compnay2 = useAppSelector((state) => state.result.chart2_2.name);
+  const company3 = useAppSelector((state) => state.result.chart2_3.name);
   return (
     <Box
       className={"hero-section"}
@@ -26,7 +31,7 @@ const RecommendedCorp = () => {
             <Image
               width={"70%"}
               borderRadius={"20px"}
-              src="/companyLogo/컬리.png"
+              src={"/companyLogo/찌오.png"}
             />
           </Box>
           <Box
@@ -43,7 +48,7 @@ const RecommendedCorp = () => {
               className="reco-card__heading"
               width={"100%"}
             >
-              컬리
+             찌오컴퍼니
             </Text>
             <Text className="reco-card__category">1</Text>
           </Box>
@@ -59,7 +64,7 @@ const RecommendedCorp = () => {
             <Image
               width={"70%"}
               borderRadius={"20px"}
-              src="/companyLogo/넷마블.png"
+              src={"/companyLogo/"+compnay2+".png"}
             />
           </Box>
           <Box
@@ -76,7 +81,7 @@ const RecommendedCorp = () => {
               className="reco-card__heading"
               width={"100%"}
             >
-              넷마블
+              {compnay2}
             </Text>
             <Text className="reco-card__category">2</Text>
           </Box>
@@ -92,7 +97,7 @@ const RecommendedCorp = () => {
             <Image
               width={"70%"}
               borderRadius={"20px"}
-              src="/companyLogo/삼성전기.png"
+              src={"/companyLogo/"+company3+".png"}
             />
           </Box>
           <Box
@@ -109,7 +114,7 @@ const RecommendedCorp = () => {
               className="reco-card__heading"
               width={"100%"}
             >
-              삼성전기
+              {company3}
             </Text>
             <Text className="reco-card__category">3</Text>
           </Box>
