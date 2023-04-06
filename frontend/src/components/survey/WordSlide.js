@@ -20,9 +20,6 @@ import { Box, Text } from "@chakra-ui/react";
 const WordSlide = () => {
   const navigate = useNavigate();
   const [selectedScores, setSelectedScores] = useState({
-    1: 7,
-    2: 8,
-    3: 5,
     4: 7,
     5: 9,
     6: 7,
@@ -239,7 +236,15 @@ const WordSlide = () => {
         <Box width={""} className="word-wrapper">
           <time>{item.no}</time>
 
-          <Box width={""} className="word">
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            width={""}
+            className="word"
+            fontFamily={"dodum"}
+            fontSize={"1.9vw"}
+          >
             {/* <h1>Word</h1> */}
             <p>{item.word}</p>
           </Box>
@@ -276,35 +281,66 @@ const WordSlide = () => {
       <section className="timeline">
         <ul>{discoveries.map(renderListItem)}</ul>
       </section>
-      <div className="submit-button-container">
-        <Box
-          className={`submit-button ${allButtonsClicked ? "active" : ""}`}
-          disabled={!allButtonsClicked}
-          onClick={() => {
-            // console.log(reformSurveyData(selectedScores));
-            dispatch(setSelectedScoresRaw(selectedScores));
-            navigate("/loadingsurvey");
-          }}
-        >
-          Submit
-        </Box>
-        {!allButtonsClicked && (
-          <span className="tooltip">
-            {discoveries
-              .filter((item) => selectedScores[item.no] === undefined)
-              .map((item) => (
-                <span
-                  key={item.no}
-                  className="tooltip-number"
-                  onClick={() => scrollToItem(item.no)}
+
+      <Box
+        width={"100vw"}
+        height={"100vh"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        {Object.keys(selectedScores).length === 57 ? (
+          <Box
+            mt={"40%"}
+            fontFamily={"dodum"}
+            className={`submit-button ${allButtonsClicked ? "active" : ""}`}
+            disabled={!allButtonsClicked}
+            onClick={() => {
+              // console.log(reformSurveyData(selectedScores));
+              dispatch(setSelectedScoresRaw(selectedScores));
+              navigate("/loadingsurvey");
+            }}
+          >
+            제출
+          </Box>
+        ) : (
+          <Box
+            fontSize={"4vw"}
+            fontFamily={"dodum"}
+            color={"white"}
+            display={"flex"}
+            flexDir={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            width={"100vw"}
+            height={"100vh"}
+            pt={"40%"}
+          >
+            <Box mb={"3%"}>아래 키워드를 선택해 주세요</Box>
+            <Box>
+              {!allButtonsClicked && (
+                <Box
+                  className="tooltip"
+                  display={"flex"}
+                  justifyContent={"space-between"}
                 >
-                  {item.no}
-                </span>
-              ))}
-            not clicked
-          </span>
+                  {discoveries
+                    .filter((item) => selectedScores[item.no] === undefined)
+                    .map((item) => (
+                      <span
+                        key={item.no}
+                        className="tooltip-number"
+                        onClick={() => scrollToItem(item.no)}
+                      >
+                        {item.no}
+                      </span>
+                    ))}
+                </Box>
+              )}
+            </Box>
+          </Box>
         )}
-      </div>
+      </Box>
     </Box>
   );
 };
