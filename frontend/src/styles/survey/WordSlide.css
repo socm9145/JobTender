@@ -40,7 +40,6 @@
   overflow-x: hidden;
 
   /* 맨밑 여백 */
-  padding-bottom: 500px;
 }
 
 .word-wrapper {
@@ -101,8 +100,8 @@
   /* border-radius: 5px; */
   display: flex;
   align-items: center;
-  /* background: rgba(122, 52, 255, 0.6); */
-  background: #dcc9ef;
+  background: rgba(199, 199, 199, 0.6);
+  /* background: #bdbdbd; */
 }
 
 /* 순서 태그 */
@@ -117,6 +116,8 @@
   justify-content: center;
   align-items: center;
   letter-spacing: 2px;
+  font-size: 1.4vw;
+  font-weight: 400;
 }
 
 /* 박스 안 내용물 */
@@ -137,12 +138,12 @@
 
 .timeline ul li div div p {
   text-align: center;
+  /* font-size: 1.5vw; */
 }
 
 .timeline ul li div .word {
   /* margin-right: 10px; */
   margin: 0 20px 20px 20px;
-  padding: 30px;
 }
 
 .timeline ul li:nth-of-type(odd) > div {
@@ -223,7 +224,7 @@
 
 .score-button {
   background-color: #ffffff;
-  border: 1px solid #0022ff;
+  border: 1px solid #000000;
   color: #000000;
   border-radius: 3px;
   padding: 0px 5px;
@@ -237,12 +238,12 @@
 }
 
 .score-button:hover {
-  background-color: #ffc13b;
-  color: #fff;
+  background-color: #ffe1a1;
+  color: #000000;
 }
 
 .selected {
-  background-color: #d363e7;
+  background-color: rgb(231, 177, 0);
   color: #fff;
 }
 
@@ -257,39 +258,44 @@
 
 .submit-button {
   background-color: #cccccc;
-  border: 2px solid #999999;
+  /* border: 2px solid #999999; */
   color: #ffffff;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   transition: all 0.3s;
-  font-size: 1.5rem;
+  font-size: 5vw;
   margin-bottom: 10px;
-  box-shadow: 0px 1px 0px #fefefe;
+  /* box-shadow: 0px 1px 0px #fefefe; */
 }
 
 .submit-button.active {
-  background-color: #d363e7;
-  border-color: #d363e7;
-  color: #fff;
+  background-color: #ffc690;
+  /* border-color: #d363e7; */
+  color: #252525;
 }
 
 .tooltip {
   font-size: 1.1rem;
-  background-color: #ff0000;
-  color: #ffffff;
+  width: fit-content;
+  height: fit-content;
+  background-color: #ffffff;
+  color: #000000;
   border-radius: 5px;
   padding: 5px 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .tooltip-number {
+  /* width: fit-content;
+  height: fit-content; */
   cursor: pointer;
-  margin-left: 5px;
-  margin-right: 5px;
-  text-decoration: underline;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+  /* text-decoration: underline; */
+  font-size: 3vw;
 }
 
 .tooltip-number:hover {
-  color: #ffdd00;
+  color: rgb(231, 177, 0);
 }
