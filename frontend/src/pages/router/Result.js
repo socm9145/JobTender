@@ -84,6 +84,40 @@ const Result = () => {
   return (
     <Box>
       <Box
+        ref={(el) => (sectionsRef.current[0] = el)}
+        position={"relative"}
+        className="result-panel hero-story hero second-hero hero2"
+        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundSize={"cover"}
+        backgroundPosition={"center"}
+        backgroundRepeat={"no-repeat"}
+        height={"100vh"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"end"}
+      >
+        <Box
+          width={"80vw"}
+          height={"80%"}
+          position={"absolute"}
+          top={"10%"}
+          left={"5%"}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"space-between"}
+        >
+          <Text height={"20%"} fontSize={"6.5vw"} fontFamily={"dodum"}>
+            Jobtender의 제안
+          </Text>
+        </Box>
+        <Box height={"25%"}>
+          <ResultPageResultData
+            componentName={"RecommendedCorp"}
+          ></ResultPageResultData>
+        </Box>
+      </Box>
+
+      <Box
         ref={(el) => (sectionsRef.current[1] = el)}
         position={"relative"}
         className="result-panel hero-story hero second-hero hero2"
@@ -116,7 +150,6 @@ const Result = () => {
           borderRadius={"450%"}
         >
           <ResultPageResultData
-            title="기업이 주요하게 보는 가치관"
             componentName={"CorpKeyword"}
           ></ResultPageResultData>
         </Box>
@@ -167,7 +200,6 @@ const Result = () => {
           // backgroundColor={"rgba(255,255,255,0.8)"}
         >
           <ResultPageResultData
-            title="내 가치관과 관련있는 인재상 키워드"
             componentName={"IdealTalent"}
           ></ResultPageResultData>
         </Box>
@@ -216,7 +248,6 @@ const Result = () => {
             alignItems={"center"}
           >
             <ResultPageResultData
-              title="가치관 별 막대 그래프"
               componentName={"GraphValues"}
             ></ResultPageResultData>
           </Box>
@@ -256,7 +287,6 @@ const Result = () => {
             alignItems={"center"}
           >
             <ResultPageResultData
-              title="나이대 별 가치관"
               componentName={"AgeValues"}
             ></ResultPageResultData>
           </Box>
