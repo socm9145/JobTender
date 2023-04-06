@@ -37,7 +37,7 @@ const BarChart = ({ data, chartContainer }) => {
         (d) => d.letter
       ),
       yFormat: "",
-      yLabel: "↑ Frequency",
+      yLabel: "↑ 중요도",
       width: chartContainer.current.offsetWidth,
       height: chartContainer.current.offsetHeight * 0.95,
       color: d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 10)),
