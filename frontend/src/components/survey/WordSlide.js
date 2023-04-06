@@ -20,9 +20,6 @@ import { Box, Text } from "@chakra-ui/react";
 const WordSlide = () => {
   const navigate = useNavigate();
   const [selectedScores, setSelectedScores] = useState({
-    1: 7,
-    2: 8,
-    3: 5,
     4: 7,
     5: 9,
     6: 7,

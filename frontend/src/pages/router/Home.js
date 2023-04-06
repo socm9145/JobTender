@@ -4,6 +4,9 @@ import TextContainer from "../../components/home/TextContainer";
 import ImageContainer from "../../components/home/ImageContainer";
 import WiseSaying from "../../components/home/WiseSaying";
 
+import { useAppDispatch } from "../../hooks/hooks";
+import { setInit } from "../../redux/keyword/keywordSlice";
+
 import { Box } from "@chakra-ui/react";
 
 import { gsap } from "gsap";
@@ -12,10 +15,12 @@ import { EasePack } from "gsap/EasePack";
 gsap.registerPlugin(EasePack);
 gsap.registerPlugin(TextPlugin);
 const Home = () => {
+  const dispatch = useAppDispatch();
   const wiseSayingRef = useRef([]);
   const blackBox = useRef(null);
 
   useEffect(() => {
+    dispatch(setInit());
     const tl = gsap.timeline({ delay: 1 });
     gsap.from(wiseSayingRef.current[0], {
       delay: 3,
