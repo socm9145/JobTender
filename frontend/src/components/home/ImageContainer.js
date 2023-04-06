@@ -32,7 +32,6 @@ const ImageContainer = () => {
         shiftSlide(-1);
         dispatch(setselectedMethod());
       } else if (dragPos === 0) {
-        console.log(selectedMethod);
         if (selectedMethod) {
           navigate("/keyword");
         } else {

@@ -149,10 +149,8 @@ const BarChart4b = ({ data, chartContainer }) => {
               child.value = child.value / child.parent.children.length;
             });
             // Mark the node as clicked
-            console.log(d.data);
-            console.log(d.data.clicked);
+
             d.data.clicked = true;
-            console.log(d.data.clicked);
           }
           down(svg, d);
         });

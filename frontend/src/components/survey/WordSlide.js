@@ -84,19 +84,14 @@ const WordSlide = () => {
 
   function reformSurveyData(resultId) {
     let list = [];
-    console.log(222);
-    console.log(selectedScores);
     for (let key in selectedScores) {
-      console.log(123);
       let data = {
         resultId: resultId,
         surveyId: key,
         score: selectedScores[key],
       };
-      console.log(data);
       list.push(data);
     }
-    console.log(list);
     return JSON.stringify(list);
   }
 
@@ -111,14 +106,12 @@ const WordSlide = () => {
             postSurvey(
               response.data.resultId,
               (data) => {
-                console.log(data);
                 dispatch(setKeywordSurveyResult(data.data));
               },
               (error) => {
                 console.log(error);
               }
             );
-            console.log(a);
           },
           (error) => {
             console.log(error);

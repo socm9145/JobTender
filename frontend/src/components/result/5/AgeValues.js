@@ -40,7 +40,6 @@ const AgeValues = () => {
   const resultId = useAppSelector((state) => state.survey.resultId);
 
   const onHandleMouseOver = (e) => {
-    console.log(e);
     gsap.to(e.target, {
       duration: 0.2,
       backgroundColor: "#3C4048",
@@ -58,7 +57,6 @@ const AgeValues = () => {
   };
 
   useEffect(() => {
-    console.log(valueButton.current[clickedIdx]);
     gsap.to(valueButton.current[clickedIdx], {
       backgroundColor: "#3C4048",
       borderColor: "#3C4048",
