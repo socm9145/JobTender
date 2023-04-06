@@ -10,6 +10,7 @@ const GraphValues = () => {
   const chartContainer = useRef();
 
   const chart4 = useAppSelector((state) => state.result.chart4);
+
   return (
     <Box
       position={"relative"}
@@ -35,7 +36,10 @@ const GraphValues = () => {
         borderRadius={"30px"}
         boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
       >
-        <BarChart4b chartContainer={chartContainer} data={chart4} />
+        <BarChart4b
+          chartContainer={chartContainer}
+          data={JSON.parse(JSON.stringify(chart4))}
+        />
       </Box>
     </Box>
   );

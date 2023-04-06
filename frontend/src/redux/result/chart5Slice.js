@@ -6,16 +6,19 @@ const initialState = {
     { letter: "여", frequency: 0 },
     { letter: "나", frequency: 0 },
   ],
+  //
   upDownCheckF: "",
   upDownCheckM: "",
   resultF: 0,
   resultM: 0,
+  //
   maleMean: 0,
   maleStd: 0,
   femaleMean: 0,
   femaleStd: 0,
   //안될 시 5로 변경
   myAverage: 0,
+  clickedIdx: null,
 };
 
 export const chart5Slice = createSlice({
@@ -52,6 +55,9 @@ export const chart5Slice = createSlice({
     setUpDownCheckM: (state, action) => {
       state.upDownCheckM = action.payload;
     },
+    setClickedIdx: (state, action) => {
+      state.clickedIdx = action.payload;
+    },
   },
 });
 
@@ -66,6 +72,7 @@ export const {
   setResultM,
   setUpDownCheckF,
   setUpDownCheckM,
+  setClickedIdx,
 } = chart5Slice.actions;
 // export const selectState = (state) => state.counter;
 export default chart5Slice.reducer;

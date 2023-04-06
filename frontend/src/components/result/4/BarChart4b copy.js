@@ -214,7 +214,7 @@ const BarChart4b = ({ data, chartContainer }) => {
       // x.domain([0, 9]);
       // 클릭시 x축
       // x.domain([0, d3.max(d.children, (d) => d.value)]);
-      x.domain(d.depth == 0 ? [0, 9] : [0, d3.max(d.children, (d) => d.value)]);
+      x.domain(d.depth == 0 ? [0, 9] : [0, 5]);
 
       // Update the x-axis.
       svg.selectAll(".x-axis").transition(transition2).call(xAxis);
