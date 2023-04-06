@@ -4,8 +4,7 @@ import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
 import { Box, Image, Text } from "@chakra-ui/react";
 
 const RecommendedCorp = () => {
-  // const company1 = useAppSelector((state) => state.result.chart2_1.name);
-  const company1 = "찌오컴퍼니";
+  const company1 = useAppSelector((state) => state.result.chart2_1.name);
   const compnay2 = useAppSelector((state) => state.result.chart2_2.name);
   const company3 = useAppSelector((state) => state.result.chart2_3.name);
   return (
@@ -31,7 +30,7 @@ const RecommendedCorp = () => {
             <Image
               width={"70%"}
               borderRadius={"20px"}
-              src={"/companyLogo/찌오.png"}
+              src={"/companyLogo/"+company1+".png"}
             />
           </Box>
           <Box
@@ -48,7 +47,7 @@ const RecommendedCorp = () => {
               className="reco-card__heading"
               width={"100%"}
             >
-             찌오컴퍼니
+             {company1}
             </Text>
             <Text className="reco-card__category">1</Text>
           </Box>
