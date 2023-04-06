@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import { Box, Text } from "@chakra-ui/react";
 import { SmallAddIcon } from "@chakra-ui/icons";
