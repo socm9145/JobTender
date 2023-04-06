@@ -87,7 +87,7 @@ const Result = () => {
         ref={(el) => (sectionsRef.current[0] = el)}
         position={"relative"}
         className="result-panel hero-story hero second-hero hero2"
-        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundImage={"./images/result/result_1.jpg"}
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
@@ -103,11 +103,14 @@ const Result = () => {
           top={"10%"}
           left={"5%"}
           display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"space-between"}
         >
-          <Text height={"20%"} fontSize={"6.5vw"} fontFamily={"dodum"}>
-            Jobtender의 제안
+          <Text
+            height={"20%"}
+            fontSize={"6.5vw"}
+            fontFamily={"dodum"}
+            textShadow={"1px 1px 3px black"}
+          >
+            JOBTENDER의 제안
           </Text>
         </Box>
         <Box height={"25%"}>
@@ -121,17 +124,21 @@ const Result = () => {
         ref={(el) => (sectionsRef.current[1] = el)}
         position={"relative"}
         className="result-panel hero-story hero second-hero hero2"
-        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundImage={"./images/result/result_2.jpg"}
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
         height={"100vh"}
+        paddingY={"5em"}
+        paddingX={"5em"}
+        display={"flex"}
+        justifyContent={"end"}
+        alignItems={"center"}
       >
         <Box zIndex={"1"} position={"absolute"} bottom={"10%"} left={"5%"}>
           <Text paddingLeft={"2.5%"} fontSize={"1vw"} width={"25vw"}>
-            L’obiettivo di HARC è rendere la casa un luogo che migliora
-            l’esperienza di vita di chi la abita curando ogni dettaglio come
-            irripetibile e offrendo soluzioni
+            기업의 주요 인재상 키워드와 그 중요도가 <br />
+            넓이로 표현되어 있습니다.
           </Text>
           <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
             기업의 가치관
@@ -140,14 +147,18 @@ const Result = () => {
 
         <Box
           className="right-col width-66 delayed"
-          width={"67%"}
-          height={"100%"}
-          marginLeft={"30vw"}
+          width={"60vw"}
+          height={"60vw"}
+          maxHeight={"90vh"}
+          maxWidth={"90vh"}
+          // marginLeft={"30vw"}
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
           backgroundColor={"rgba(255,255,255,0.8)"}
           borderRadius={"450%"}
+          boxShadow={"5px 5px 5px 5px rgba(0,0,0,0.3)"}
+          // marginRight={"5%"}
         >
           <ResultPageResultData
             componentName={"CorpKeyword"}
@@ -159,7 +170,7 @@ const Result = () => {
         ref={(el) => (sectionsRef.current[2] = el)}
         position={"relative"}
         className="result-panel hero-story hero second-hero hero3"
-        backgroundImage={"https://picsum.photos/1600/800?random=1"}
+        backgroundImage={"./images/result/result_3.jpg"}
         backgroundSize={"cover"}
         backgroundPosition={"center"}
         backgroundRepeat={"no-repeat"}
@@ -183,9 +194,9 @@ const Result = () => {
             width={"25vw"}
             textAlign={"end"}
           >
-            L’obiettivo di HARC è rendere la casa un luogo che migliora
-            l’esperienza di vita di chi la abita curando ogni dettaglio come
-            irripetibile e offrendo soluzioni
+            가치관을 기반으로 분석한 <br />
+            나와 가까운 키워드 5개 & 먼 키워드 5개 입니다
+            <br /> 인재상을 볼 때와 자기소개서에 참고하세요!
           </Text>
         </Box>
 
@@ -209,7 +220,7 @@ const Result = () => {
           ref={(el) => (sectionsRef.current[3] = el)}
           className="result-panel hero-story hero second-hero hero4"
           position={"relative"}
-          backgroundImage={"https://picsum.photos/1600/800?random=1"}
+          backgroundImage={"./images/result/result_4.jpg"}
           backgroundSize={"cover"}
           backgroundPosition={"center"}
           backgroundRepeat={"no-repeat"}
@@ -225,14 +236,15 @@ const Result = () => {
             alignItems={"end"}
           >
             <Text
-              paddingLeft={"2.5%"}
+              paddingRight={"2.5%"}
               fontSize={"1vw"}
               width={"25vw"}
               textAlign={"end"}
             >
-              L’obiettivo di HARC è rendere la casa un luogo che migliora
-              l’esperienza di vita di chi la abita curando ogni dettaglio come
-              irripetibile e offrendo soluzioni
+              10개의 가치관 각각의 중요도입니다
+              <br />
+              막대그래프를 클릭하면 <br />
+              세부 가치들을 확인할 수 있습니다.
             </Text>
             <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
               나의 가치관
@@ -259,7 +271,7 @@ const Result = () => {
           ref={(el) => (sectionsRef.current[4] = el)}
           className="result-panel hero-story hero second-hero hero5"
           position={"relative"}
-          backgroundImage={"https://picsum.photos/1600/800?random=1"}
+          backgroundImage={"./images/result/result_5.jpg"}
           backgroundSize={"cover"}
           backgroundPosition={"center"}
           backgroundRepeat={"no-repeat"}
@@ -267,9 +279,9 @@ const Result = () => {
         >
           <Box zIndex={"1"} position={"absolute"} bottom={"10%"} left={"5%"}>
             <Text paddingLeft={"2.5%"} fontSize={"1vw"} width={"25vw"}>
-              L’obiettivo di HARC è rendere la casa un luogo che migliora
-              l’esperienza di vita di chi la abita curando ogni dettaglio come
-              irripetibile e offrendo soluzioni
+              20대 대학생들의 가치관을 기준으로 <br />
+              자신이 어떤 가치를 더 중요히 여기는지 <br />
+              확인할 수 있습니다.
             </Text>
             <Text fontSize={"6.5vw"} fontFamily={"dodum"}>
               나의 위치

@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
-const Describe = ({ title, fontsize }) => {
+const Describe = ({ title, fontsize, align }) => {
   return (
     <Box
       className={"section"}
@@ -28,12 +28,13 @@ const Describe = ({ title, fontsize }) => {
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"center"}
-        alignItems={"center"}
+        alignItems={align}
+        fontFamily={"happy"}
       >
         <Text
           className={"txt"}
           color={"white"}
-          textShadow={"1px 1px 3px black"}
+          textShadow={"5px 5px 3px black"}
           zIndex={"1"}
           fontSize={fontsize}
           fontWeight={"400"}
@@ -43,7 +44,7 @@ const Describe = ({ title, fontsize }) => {
         <Text
           className={"txt"}
           color={"white"}
-          textShadow={"1px 1px 3px black"}
+          textShadow={"5px 5px 3px black"}
           zIndex={"1"}
           fontSize={fontsize}
           fontWeight={"400"}

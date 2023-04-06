@@ -66,7 +66,7 @@ const Keyword = () => {
       );
     }
     getKeyword();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -93,7 +93,8 @@ const Keyword = () => {
       display={"flex"}
       flexDirection={"column"}
       justifyContent={"end"}
-      backgroundImage={"https://picsum.photos/1600/800"}
+      backgroundImage={'url("./images/keyword/keyword.jpg")'}
+      // backgroundImage={"https://picsum.photos/1600/800"}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
       backgroundRepeat={"no-repeat"}

@@ -283,15 +283,17 @@ const WordSlide = () => {
       </section>
 
       <Box
+        position={"relative"}
         width={"100vw"}
         height={"100vh"}
         display={"flex"}
         justifyContent={"center"}
-        alignItems={"center"}
+        alignItems={"end"}
       >
         {Object.keys(selectedScores).length === 57 ? (
           <Box
-            mt={"40%"}
+            position={"absolute"}
+            bottom={"7vh"}
             fontFamily={"dodum"}
             className={`submit-button ${allButtonsClicked ? "active" : ""}`}
             disabled={!allButtonsClicked}
@@ -305,7 +307,9 @@ const WordSlide = () => {
           </Box>
         ) : (
           <Box
-            fontSize={"4vw"}
+            position={"absolute"}
+            bottom={"7vh"}
+            fontSize={"2.5vw"}
             fontFamily={"dodum"}
             color={"white"}
             display={"flex"}
@@ -313,10 +317,8 @@ const WordSlide = () => {
             justifyContent={"center"}
             alignItems={"center"}
             width={"100vw"}
-            height={"100vh"}
-            pt={"40%"}
           >
-            <Box mb={"3%"}>아래 키워드를 선택해 주세요</Box>
+            <Box mb={"1.5vw"}>아래 키워드를 선택해 주세요</Box>
             <Box>
               {!allButtonsClicked && (
                 <Box

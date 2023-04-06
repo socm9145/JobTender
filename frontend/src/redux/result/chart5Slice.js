@@ -7,8 +7,8 @@ const initialState = {
     { letter: "나", frequency: 0 },
   ],
   //
-  upDownCheckF: "",
-  upDownCheckM: "",
+  // upDownCheckF: "남성 데이터 기준",
+  // upDownCheckM: "여성 데이터 기준",
   resultF: 0,
   resultM: 0,
   //
@@ -49,12 +49,12 @@ export const chart5Slice = createSlice({
     setResultM: (state, action) => {
       state.resultM = action.payload;
     },
-    setUpDownCheckF: (state, action) => {
-      state.upDownCheckF = action.payload;
-    },
-    setUpDownCheckM: (state, action) => {
-      state.upDownCheckM = action.payload;
-    },
+    // setUpDownCheckF: (state, action) => {
+    //   state.upDownCheckF = action.payload;
+    // },
+    // setUpDownCheckM: (state, action) => {
+    //   state.upDownCheckM = action.payload;
+    // },
     setClickedIdx: (state, action) => {
       state.clickedIdx = action.payload;
     },
@@ -70,8 +70,8 @@ export const {
   setMyAverage,
   setResultF,
   setResultM,
-  setUpDownCheckF,
-  setUpDownCheckM,
+  // setUpDownCheckF,
+  // setUpDownCheckM,
   setClickedIdx,
 } = chart5Slice.actions;
 // export const selectState = (state) => state.counter;

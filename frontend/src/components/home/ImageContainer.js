@@ -1,5 +1,4 @@
 import "../../styles/ImageContainer.css";
-
 import React, { useEffect, useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
@@ -106,7 +105,7 @@ const ImageContainer = () => {
                 className="slide hoverable"
                 id="b2"
                 marginRight={"30px"}
-                backgroundImage={"https://picsum.photos/id/301/1600/800"}
+                backgroundImage={'url("./images/home/survey_example.jpg")'}
                 backgroundSize={"cover"}
                 backgroundPosition={"center"}
                 backgroundRepeat={"no-repeat"}
@@ -115,7 +114,7 @@ const ImageContainer = () => {
                 className="slide hoverable"
                 id="b1"
                 marginRight={"30px"}
-                backgroundImage={"https://picsum.photos/seed/picsum/1600/800"}
+                backgroundImage={'url("./images/home/keyword_example.jpg")'}
                 backgroundSize={"cover"}
                 backgroundPosition={"center"}
                 backgroundRepeat={"no-repeat"}
@@ -124,7 +123,7 @@ const ImageContainer = () => {
                 className="slide hoverable"
                 id="b2"
                 marginRight={"30px"}
-                backgroundImage={"https://picsum.photos/id/301/1600/800"}
+                backgroundImage={'url("./images/home/survey_example.jpg")'}
                 backgroundSize={"cover"}
                 backgroundPosition={"center"}
                 backgroundRepeat={"no-repeat"}
@@ -133,7 +132,7 @@ const ImageContainer = () => {
                 className="slide hoverable"
                 id="b1"
                 marginRight={"30px"}
-                backgroundImage={"https://picsum.photos/seed/picsum/1600/800"}
+                backgroundImage={'url("./images/home/keyword_example.jpg")'}
                 backgroundSize={"cover"}
                 backgroundPosition={"center"}
                 backgroundRepeat={"no-repeat"}

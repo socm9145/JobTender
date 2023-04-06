@@ -45,7 +45,7 @@ const ZoomChart = ({ data }) => {
       // .attr("width", width) // 이 라인을 추가하세요
       // .attr("height", height) // 이 라인을 추가하세요
       .attr("viewBox", [0, 0, width, width])
-      .style("font", "1.5vw sans-serif");
+      .style("font", "0.9vw sans-serif");
 
     const g = svg
       .append("g")
