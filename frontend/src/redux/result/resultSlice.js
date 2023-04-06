@@ -6,6 +6,7 @@ const initialState = {
   top3: null,
   bottom3: null,
   top3CompanyId: [],
+  top3CompanyName: [],
   chart2: {},
   chart2_1: {},
   chart2_2: {},
@@ -50,6 +51,9 @@ export const resultSlice = createSlice({
         state.top3CompanyId.push(key);
       }
     },
+    setTop3CompanyName: (state, action) => {
+      state.top3CompanyName.push(action.payload);
+    },
 
     setChart2: (state, action) => {
       state.chart2 = action.payload;
@@ -80,6 +84,7 @@ export const {
   setReHistory,
   initHistory,
   setKeywordSurveyResult,
+  setTop3CompanyName,
   setChart2,
   setChart2_1,
   setChart2_2,
