@@ -82,8 +82,8 @@ const Loading = () => {
               };
 
               let idx = 1;
-              top3CompanyId().forEach((companyId) => {
-                chart2(
+              top3CompanyId().forEach(async (companyId) => {
+                await chart2(
                   companyId,
                   (response) => {
                     if (idx === 1) {

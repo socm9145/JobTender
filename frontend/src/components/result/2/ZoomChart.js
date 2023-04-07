@@ -69,8 +69,9 @@ const ZoomChart = ({ data }) => {
 
     path
       .filter((d) => d.children)
-      .style("cursor", "pointer")
-      .style(".class", "hoverable")
+      // .style("cursor", "pointer")
+      // .style(".class", "hoverable")
+      .classed("hoverable", true)
 
       .on("click", clicked);
 
@@ -168,6 +169,7 @@ const ZoomChart = ({ data }) => {
 
   return (
     <Box
+      className={"hoverable"}
       display={"flex"}
       justifyContent={"center"}
       height={"100%"}

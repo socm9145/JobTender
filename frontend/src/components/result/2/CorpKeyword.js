@@ -32,7 +32,13 @@ const CorpKeyword = () => {
         height={"100%"}
       >
         {/* 차트 설명 */}
-        <Box display={"flex"} width={"100%"} height={"100%"} padding={"5%"}>
+        <Box
+          display={"flex"}
+          width={"100%"}
+          height={"100%"}
+          padding={"5%"}
+          className={"hoverable"}
+        >
           <ZoomChart data={chart2} />
         </Box>
       </Box>

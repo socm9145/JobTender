@@ -209,7 +209,9 @@ const WordSlide = () => {
     return Array.from({ length: 9 }, (_, i) => (
       <button
         key={i}
-        className={`score-button ${i + 1 === selectedScore ? "selected" : ""}`}
+        className={`score-button hoverable ${
+          i + 1 === selectedScore ? "selected" : ""
+        }`}
         onClick={() => handleStarClick(itemId, i + 1)}
       >
         {i + 1}
@@ -271,7 +273,7 @@ const WordSlide = () => {
         </video>
       </div>
 
-      <section className="timeline">
+      <section className="timeline ">
         <ul>{discoveries.map(renderListItem)}</ul>
       </section>
 
@@ -288,7 +290,10 @@ const WordSlide = () => {
             position={"absolute"}
             bottom={"7vh"}
             fontFamily={"dodum"}
-            className={`submit-button ${allButtonsClicked ? "active" : ""}`}
+            cursor={"none"}
+            className={`submit-button hoverable ${
+              allButtonsClicked ? "active" : ""
+            }`}
             disabled={!allButtonsClicked}
             onClick={() => {
               // console.log(reformSurveyData(selectedScores));
@@ -324,7 +329,8 @@ const WordSlide = () => {
                     .map((item) => (
                       <span
                         key={item.no}
-                        className="tooltip-number"
+                        className="tooltip-number hoverable"
+                        cursor={"none"}
                         onClick={() => scrollToItem(item.no)}
                       >
                         {item.no}
