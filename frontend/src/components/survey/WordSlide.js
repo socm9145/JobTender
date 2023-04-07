@@ -117,7 +117,6 @@ const WordSlide = () => {
             console.log(error);
           }
         );
-        console.log(response);
       },
       (error) => {
         console.log(error);
@@ -129,7 +128,6 @@ const WordSlide = () => {
     const getWords = async () => {
       await submitSurvey(
         (response) => {
-          console.log(response);
           dispatch(setWordList(response.data));
         },
         (error) => {
