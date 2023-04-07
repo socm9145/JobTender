@@ -343,13 +343,12 @@ CI/CD : 김태현
 
 ## 프로젝트 산출물
 
-- [기능 명세서](./DOCS/Functional Specification)
 - [아키텍처](./DOCS/architecture)
-- [와이어프레임](./DOCS/wireFrame)
-- [API](./DOCS/API)
-- [ERD](./DOCS/ERD)
+- [와이어프레임](./DOCS/wireframe)
+- [API](./DOCS/api)
+- [ERD](./DOCS/erd)
 
 ## 프로젝트 결과물
 
 - [포팅메뉴얼](./exec)
-- [최종발표자료](./DOCS/presentation)
+- [최종발표자료](./DOCS/presentation/jobtender_presentation.pdf)
