@@ -150,7 +150,17 @@ Frontend에서
 const REST_API_KEY = "REST API 키";
 ```
 
-### 5. docker-compose 실행
+### 5. mysql.env 파일 설정
+데이터베이스 생성 후 데이터 베이스 연결을 위한 설정 작성
+/database/mysql.env 
+```
+MYSQL_DATABASE=
+MYSQL_ROOT_PASSWORD=
+MYSQL_USER=
+MYSQL_PASSWORD=
+```
+
+### 6. docker-compose 실행
 
 다음 명령어를 입력합니다.
 
