@@ -8,11 +8,10 @@ class KeywordLogic:
         self.result_id = result_id
         self.user_keyword = self.cur.get_keyword_data(result_id)
         print(self.user_keyword)
-        self.user_keyword_idx = [key - 1 for key in self.user_keyword]  # 유저의 가치관 키워드를 받는다 3 / 10 (DB에서 가져오는 값)
         self.weight = [0.4, 0.3, 0.2]
         self.input_weight_pair = dict()
         for i in range(len(self.weight)):
-            self.input_weight_pair[self.user_keyword_idx[i]] = self.weight[i]
+            self.input_weight_pair[self.user_keyword[i]] = self.weight[i]
         self.company_id_name = self.cur.get_companies_id()
         # 받은 가치관 키워드와 메인, 서브 키워드간의 연관도 매트릭스를 받는다. 2차원 배열로.
         # 0: 사회공헌, 1: 자율성, 2: 성장, 3: 안정성
@@ -69,8 +68,8 @@ class KeywordLogic:
     def value_company_sims(self):
         all_value_company_sim = dict()
 
-        for user_keyword in self.user_keyword_idx:
-            idx = 0
+        idx = 0
+        for user_keyword in self.user_keyword:
             tfidf_sim = self.cur.get_tfidf_sim_data(user_keyword)
             for company_id in tfidf_sim.keys():
                 if company_id not in all_value_company_sim.keys():

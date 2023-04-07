@@ -57,8 +57,8 @@ class SurveyLogic:
 
     def value_company_sims(self):
         all_value_company_sim = dict()
+        idx = 0
         for keyword_id in self.survey_data.keys():
-            idx = 0
             tfidf_sim = self.cur.get_tfidf_sim_data(keyword_id)
             for company_id in tfidf_sim.keys():
                 if company_id not in all_value_company_sim.keys():
