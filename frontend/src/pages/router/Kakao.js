@@ -47,37 +47,72 @@ const Kakao = () => {
   return (
     // 로그인 하는동안 이질감이 없도록 Login 페이지와 같은 화면 으로 구현
     <Box
-      backgroundColor={"#f1efe9"}
-      color={"#191919"}
-      width={"100%"}
-      height="100vh"
+    display={"flex"}
+    flexDirection={"column"}
+    justifyContent={"center"}
+    alignItems={"center"}
+    color={"#191919"}
+    width={"100vw"}
+    height={"100vh"}
+    backgroundImage={"https://picsum.photos/1600/800"}
+    backgroundSize={"cover"}
+    backgroundPosition={"center"}
+    backgroundRepeat={"no-repeat"}
+  >
+    <Box
+      display={"flex"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      paddingY={"1.5rem"}
+      height={"80vh"}
+      width={"100vw"}
+      overflowY={"hidden"}
     >
-      <Box display={"flex"} justifyContent={"center"} width={"50vw"}>
-        <Box display={"flex"} height={"100vh"} alignItems={"center"}>
-          <Box>
-            <Box
-              display={"flex"}
-              justifyContent={"center"}
-              textAlign={"center"}
-              fontSize={"4xl"}
-              paddingX={"1rem"}
-              paddingBottom={"1rem"}
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        height={"100%"}
+        alignItems={"center"}
+        paddingLeft={"5vw"}
+      >
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          width={"35vw"}
+          paddingX={"1.5rem"}
+        >
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            textAlign={"center"}
+            fontSize={"3vw"}
+            overflow={"hidden"}
+          >
+            <Text
+              id={"login-message"}
+              color={"white"}
+              textShadow={"1px 1px 3px black"}
+              fontWeight={"semibold"}
             >
-              <Text
-                fontWeight={"semibold"}
-                width={"90%"}
-                borderBottom={"solid 2px #191919"}
-              >
-                Login to JobTender
-              </Text>
-            </Box>
-            <Box>
-              <KakaoButton buttonWidth={"80%"} />
-            </Box>
+              Login to JobTender
+            </Text>
+          </Box>
+          <Box
+            id={"horizontal-line"}
+            height={"0"}
+            width={"87%"}
+            borderTop={"solid 1px white"}
+            boxShadow={"1px 1px 3px black"}
+          ></Box>
+          <Box id={"kakao-button"} marginTop={"4%"}>
+            <KakaoButton buttonWidth={"65%"} />
           </Box>
         </Box>
       </Box>
     </Box>
+  </Box>
   );
 };
 
