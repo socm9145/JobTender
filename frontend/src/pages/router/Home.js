@@ -6,6 +6,7 @@ import WiseSaying from "../../components/home/WiseSaying";
 
 import { useAppDispatch } from "../../hooks/hooks";
 import { setInit } from "../../redux/keyword/keywordSlice";
+import { setInitChart } from "../../redux/result/resultSlice";
 
 import { Box } from "@chakra-ui/react";
 
@@ -21,6 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(setInit());
+    dispatch(setInitChart());
     const tl = gsap.timeline({ delay: 1 });
     gsap.from(wiseSayingRef.current[0], {
       delay: 3,

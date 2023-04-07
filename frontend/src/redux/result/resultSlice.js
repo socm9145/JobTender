@@ -76,6 +76,13 @@ export const resultSlice = createSlice({
     setChart5: (state, action) => {
       state.chart5 = action.payload;
     },
+    setInitChart: (state) => {
+      state.chart2 = {};
+      state.chart2_1 = {};
+      state.chart2_2 = {};
+      state.chart2_3 = {};
+      state.chart3 = [];
+    }
   },
 });
 
@@ -92,6 +99,7 @@ export const {
   setChart3,
   setChart4,
   setChart5,
+  setInitChart,
 } = resultSlice.actions;
 // export const selectState = (state) => state.counter;
 export default resultSlice.reducer;
