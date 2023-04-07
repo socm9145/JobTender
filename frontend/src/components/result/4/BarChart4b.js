@@ -9,7 +9,7 @@ const BarChart4b = ({ data, chartContainer }) => {
   useEffect(() => {
     if (!data) return;
 
-    const margin = { top: 30, right: 30, bottom: 0, left: 75 };
+    const margin = { top: 30, right: 30, bottom: 0, left: 90 };
     const width = chartContainer.current.offsetWidth;
     const barStep = 60;
     const barPadding = 5 / barStep;
@@ -129,7 +129,7 @@ const BarChart4b = ({ data, chartContainer }) => {
         .attr("class", "enter")
         .attr("transform", `translate(0,${margin.top + barStep * barPadding})`)
         .attr("text-anchor", "end")
-        .style("font", "0.9vw sans-serif");
+        .style("font", "0.9em sans-serif");
 
       const bar = g
         // 기존코드
