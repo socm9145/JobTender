@@ -113,7 +113,7 @@ const BarChart4b = ({ data, chartContainer }) => {
         .attr("pointer-events", "all")
         .attr("width", chartContainer.current.offsetWidth)
         .attr("height", height)
-        .attr("cursor", "pointer")
+        // .attr("cursor", "pointer")
         .on("click", (event, d) => up(svg, d));
 
       svg.append("g").call(xAxis);
@@ -141,7 +141,7 @@ const BarChart4b = ({ data, chartContainer }) => {
         .selectAll("g")
         .data(d.children)
         .join("g")
-        .attr("cursor", (d) => (!d.children ? null : "pointer"))
+        // .attr("cursor", (d) => (!d.children ? null : "pointer"))
         .on("click", (event, d) => {
           // Divide the child node value by the number of children when clicked.
           if (d.children && !d.data.clicked) {
@@ -149,10 +149,8 @@ const BarChart4b = ({ data, chartContainer }) => {
               child.value = child.value / child.parent.children.length;
             });
             // Mark the node as clicked
-            console.log(d.data);
-            console.log(d.data.clicked);
+
             d.data.clicked = true;
-            console.log(d.data.clicked);
           }
           down(svg, d);
         });
@@ -232,7 +230,8 @@ const BarChart4b = ({ data, chartContainer }) => {
         .attr("fill-opacity", 1)
         .transition(transition2)
         // .attr("fill", (d) => color(!!d.children))
-        .attr("width", (d) => x(d.value) - x(0));
+        .attr("width", (d) => x(d.value) - x(0))
+        .attr("class", "hoverable");
     }
     function up(svg, d) {
       if (!d.parent || !svg.selectAll(".exit").empty()) return;
@@ -280,7 +279,6 @@ const BarChart4b = ({ data, chartContainer }) => {
       enter
         .selectAll("g")
         .attr("transform", (d, i) => `translate(0,${barStep * i})`);
-
       // Transition entering bars to fade in over the full duration.
       enter.transition(transition2).attr("fill-opacity", 1);
 

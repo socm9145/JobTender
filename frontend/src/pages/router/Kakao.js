@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate, router } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setUserId } from "../../redux/user/userSlice"
+import { setUserId } from "../../redux/user/userSlice";
 
 import KakaoButton from "../../components/login/KakaoButton";
 
 import { Box, Text } from "@chakra-ui/react";
 
-import { login } from '../../api/userAxios'
+import { login } from "../../api/userAxios";
 
 const Kakao = () => {
   const dispatch = useAppDispatch();
@@ -27,23 +27,22 @@ const Kakao = () => {
 
   useEffect(() => {
     // 인가 코드로 액세스 토큰 받기.
-    async function letLogin(){
+    async function letLogin() {
       await login(
         myCode,
-        data => {
+        (data) => {
           dispatch(setUserId(data.data));
           sessionStorage.setItem("isLogin", true);
           navigate("/home");
         },
-        error => {
+        (error) => {
           console.log(error);
-          console.log("로그인 에러");
           navigate(-1);
         }
-      )
+      );
     }
     letLogin();
-  },[]);
+  }, []);
 
   return (
     // 로그인 하는동안 이질감이 없도록 Login 페이지와 같은 화면 으로 구현

@@ -55,7 +55,9 @@ const Describe = ({ title, content }) => {
   };
   const cardBgImage = {
     // backgroundImage: `url("https://picsum.photos/1600/800")`,
-    backgroundImage: `url("https://images.unsplash.com/photo-1479644025832-60dabb8be2a1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=")`,
+    backgroundImage: clickedKeyword
+      ? `url("./images/keyword/keywords/${title}.jpg")`
+      : `url("https://images.unsplash.com/photo-1479644025832-60dabb8be2a1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=")`,
   };
 
   const handleMouseMove = (e) => {

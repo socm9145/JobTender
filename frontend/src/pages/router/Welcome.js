@@ -22,10 +22,13 @@ const Welcome = () => {
       section.firstscene = section.querySelector(".firstscene");
 
       // Give the backgrounds some random images
+
       section.bg.style.backgroundImage = `url(${
         process.env.PUBLIC_URL
       }/images/welcome/welcome_${i + 1}.jpg)`;
+
       // section.bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
+      // section.bg.style.backgroundImage = `url(https://fastly.picsum.photos/id/261/2200/1650.jpg?hmac=8-ACepeACUIRCDq4P3iGwuh2xlKDDpWkyLGOz-sTQB4)`;
 
       // the first image (i === 0) should be handled differently because it should start at the very top.
       // use function-based values in order to keep things responsive
@@ -85,6 +88,7 @@ const Welcome = () => {
           "직장은 우리에게 무엇이어야 할까요?",
         ]}
         fontsize={"2.5vw"}
+        align={"start"}
       />
       <Describe
         className={"section"}
@@ -93,6 +97,7 @@ const Welcome = () => {
           "나의 가치를 이룰 수 있는 곳이라면 어떨까요?",
         ]}
         fontsize={"2.5vw"}
+        align={"end"}
       />
       <Describe
         className={"section"}
@@ -101,6 +106,7 @@ const Welcome = () => {
           "Jobtender에서 찾아보세요",
         ]}
         fontsize={"2.5vw"}
+        align={"center"}
       />
       {/* <Describe
         className={"section"}

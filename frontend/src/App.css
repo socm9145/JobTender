@@ -64,6 +64,10 @@ body {
   font-family: "sunsin";
   src: url("../public/font/sunsinB.ttf");
 }
+@font-face {
+  font-family: "happy";
+  src: url("../public/font/happy.ttf");
+}
 
 /* v */
 @font-face {

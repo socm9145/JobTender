@@ -5,6 +5,8 @@ import RightKeywordsContainer from "../../components/keyword/RightKeywordsContai
 import DescribeContainer from "../../components/keyword/DescribeContainer";
 import KeywordRankContainer from "../../components/keyword/KeywordRankContainer";
 
+import LoadingAnima from "../../components/loading/LoadingAnima";
+
 import {
   makeResult,
   postSurvey,
@@ -39,8 +41,7 @@ const LoadingSurvey = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isAnalysed, setIsAnalysed] = useState(false);
-  const [canvasWidth, setCanvasWidth] = useState("0");
-  const [canvasHeight, setCanvasHeight] = useState("0");
+
   const [chart2Tmp, setChart2Tmp] = useState([]);
 
   const selectedKeyword = useAppSelector(
@@ -70,19 +71,14 @@ const LoadingSurvey = () => {
 
   function reformSurveyData(resultId) {
     let list = [];
-    console.log(222);
-    console.log(selectedScores);
     for (let key in selectedScores) {
-      console.log(123);
       let data = {
         resultId: resultId,
         surveyId: key,
         score: selectedScores[key],
       };
-      console.log(data);
       list.push(data);
     }
-    console.log(list);
     return JSON.stringify(list);
   }
 
@@ -92,7 +88,6 @@ const LoadingSurvey = () => {
       await makeResult(
         userid,
         (response) => {
-          console.log(response.data.resultId);
           dispatch(setResultId(response.data.resultId));
           saveChooseSurvey(
             reformSurveyData(response.data.resultId),
@@ -111,11 +106,9 @@ const LoadingSurvey = () => {
 
                   let idx = 1;
                   top3CompanyId().forEach((companyId) => {
-                    console.log(companyId);
                     chart2(
                       companyId,
                       (response) => {
-                        console.log(response.data);
                         if (idx === 1) {
                           dispatch(setChart2_1(response.data));
                         } else if (idx === 2) {
@@ -134,7 +127,6 @@ const LoadingSurvey = () => {
                   chart3Survey(
                     reformSurveyData(response.data.resultId),
                     (response) => {
-                      console.log(response);
                       dispatch(setChart3(response.data));
                       setIsAnalysed(true);
                     },
@@ -157,7 +149,6 @@ const LoadingSurvey = () => {
                   console.log(error);
                 }
               );
-              console.log(a);
             },
             (error) => {
               console.log(error);
@@ -209,7 +200,7 @@ const LoadingSurvey = () => {
       height="100vh"
       overflow={"hidden"}
     >
-      {/* <canvas width={canvasWidth} height={canvasHeight} id="fishtank" /> */}
+      <LoadingAnima />
       <Box
         // 분석 상태에 따라서 커서 크기 조절
         className={isAnalysed ? "hoverable" : "none"}
