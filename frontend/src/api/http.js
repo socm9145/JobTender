@@ -3,6 +3,7 @@ import axios from "axios";
 const getCookie = async () => {
   try {
     const { data } = await axios.get("https://jobtender.shop/api/account/reissue", {
+    // const { data } = await axios.get("http://localhost:8000/account/reissue", {
       withCredentials: true,
     });
     sessionStorage.setItem("userId", data);
@@ -63,6 +64,7 @@ function localServer() {
 function loginServer() {
   const axiosConfig = {
     baseURL: "https://jobtender.shop/api/",
+    // baseURL: "http://localhost:8000/",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
@@ -73,6 +75,7 @@ function loginServer() {
 function pythonServer() {
   const axiosConfig = {
     baseURL: "https://jobtender.shop/api/v2/",
+    // baseURL: "http://localhost:8001/",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
