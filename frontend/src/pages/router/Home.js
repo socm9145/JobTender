@@ -96,7 +96,8 @@ const Home = () => {
     <Box
       className={"draggunable"}
       height={"100vh"}
-      backgroundImage={"https://picsum.photos/1600/800"}
+      // backgroundImage={"https://picsum.photos/1600/800"}
+      backgroundImage={'url("./images/home/home.jpg")'}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
       backgroundRepeat={"no-repeat"}

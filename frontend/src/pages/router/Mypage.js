@@ -70,7 +70,6 @@ const Mypage = () => {
       await userhistory(
         userid,
         (data) => {
-          console.log(data);
           dispatch(setHistory(data.data));
           historyFuntion(data.data);
         },

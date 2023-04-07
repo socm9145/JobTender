@@ -8,7 +8,6 @@ import { Box } from "@chakra-ui/react";
 const IdealTalent = () => {
   const chartContainer = useRef();
   const chart3 = useAppSelector((state) => state.result.chart3);
-  console.log(chart3);
   return (
     <Box
       id={"bbb"}

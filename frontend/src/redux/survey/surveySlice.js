@@ -18,7 +18,6 @@ export const surveySlice = createSlice({
       for (let index = 0; index < tmp.length; index++) {
         state.wordList.push(tmp[index].question);
       }
-      console.log(state.wordList);
     },
 
     setResultId: (state, action) => {
