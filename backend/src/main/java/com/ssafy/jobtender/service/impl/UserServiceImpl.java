@@ -108,11 +108,10 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<String> requestKakaoWithCode(String code) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", OauthSecretKey.KAKAO_API_CLIENT_ID); //key 따로 빼야합니다
-        params.add("redirect_uri", "http://localhost:3000/kakao");
+        params.add("redirect_uri", "https://jobtender.shop/kakao");
         params.add("code", code);
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
