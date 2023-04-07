@@ -1,0 +1,7 @@
+version: '3'
+services:
+  crow:
+    build: ./crow
+    container_name: python_crow
+    volumes:
+      - ./crow:/crow
