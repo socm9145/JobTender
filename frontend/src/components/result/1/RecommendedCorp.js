@@ -1,11 +1,17 @@
 import "../../../styles/result/RecommendCorp3.css";
 import { useAppSelector } from "../../../hooks/hooks";
 import { Box, Image, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 const RecommendedCorp = () => {
   const company1 = useAppSelector((state) => state.result.chart2_1.name);
   const company2 = useAppSelector((state) => state.result.chart2_2.name);
   const company3 = useAppSelector((state) => state.result.chart2_3.name);
+
+  useEffect(()=>{
+    
+  },[company1, company2, company3])
+
   return (
     <Box
       className={"hero-section"}
