@@ -46,7 +46,7 @@ services:
     environment:
       - TZ=Asia/Seoul
     volumes:
-      - ./frontend/build:/frontend/build
+      - ./frontend:/frontend
   
   backend_spring:
     container_name: backend_spring
@@ -67,10 +67,13 @@ services:
     container_name: backend_flask
     environment:
       - TZ=Asia/Seoul
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
     build: ./python/python_backend
     ports:
       - "8001:8001"
+    volumes:
+    - ./python/python_backend:/backend_flask
     depends_on:
       - mysqldb
     restart: unless-stopped
-    
