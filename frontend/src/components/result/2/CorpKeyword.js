@@ -14,7 +14,6 @@ const CorpKeyword = () => {
   const chart2_1 = useAppSelector((state) => state.result.chart2_1);
   const chart2_2 = useAppSelector((state) => state.result.chart2_2);
   const chart2_3 = useAppSelector((state) => state.result.chart2_3);
-  console.log(chart2_1, chart2_2, chart2_3);
   useEffect(() => {
     const data = {
       name: "chart2",
@@ -33,7 +32,13 @@ const CorpKeyword = () => {
         height={"100%"}
       >
         {/* 차트 설명 */}
-        <Box display={"flex"} width={"100%"} height={"100%"} padding={"5%"}>
+        <Box
+          display={"flex"}
+          width={"100%"}
+          height={"100%"}
+          padding={"5%"}
+          className={"hoverable"}
+        >
           <ZoomChart data={chart2} />
         </Box>
       </Box>

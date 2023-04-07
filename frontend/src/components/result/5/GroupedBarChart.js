@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
+
+import { Box } from "@chakra-ui/react";
 import * as d3 from "d3";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { useAppSelector } from "../../../hooks/hooks";
 
 // const GroupedBarChart = ({ data }) => {
-const GroupedBarChart = () => {
+const GroupedBarChart = ({ chartContainer }) => {
   const chartRef = useRef(null);
   const maleMean = useAppSelector((state) => state.chart5.maleMean);
   const femaleMean = useAppSelector((state) => state.chart5.femaleMean);
@@ -21,6 +23,9 @@ const GroupedBarChart = () => {
   }, [data]);
 
   const drawBarChart = () => {
+    const chartContainerWidth = chartContainer.current
+      ? chartContainer.current.offsetWidth
+      : 640;
     // 기존 SVG 요소 삭제
     if (chartRef.current.childNodes.length > 0) {
       chartRef.current.removeChild(chartRef.current.childNodes[0]);
@@ -29,9 +34,9 @@ const GroupedBarChart = () => {
     const color = (i) => {
       const d = data[i];
       if (!d) return "gray";
-      if (d.letter == "남") return "steelblue";
-      if (d.letter == "여") return "pink";
-      return "green"; // "나"에 대한 색상
+      if (d.letter == "남") return "#3F497F";
+      if (d.letter == "여") return "#F7C04A";
+      return "#539165"; // "나"에 대한 색상
     };
 
     const chart = BarChart(data, {
@@ -42,7 +47,8 @@ const GroupedBarChart = () => {
       yFormat: "",
       yLabel: "가치관 점수",
       xLabel: "분류",
-      width: 640,
+      // width: 640,
+      width: chartContainerWidth,
       height: 500,
       color,
     });
@@ -147,7 +153,7 @@ const GroupedBarChart = () => {
     return svg.node();
   }
 
-  return <div ref={chartRef}></div>;
+  return <Box width={"100%"} ref={chartRef}></Box>;
 };
 
 export default GroupedBarChart;

@@ -12,8 +12,6 @@ const Result = () => {
     const numSvgElements = svgElements.length;
     let numProcessed = 0;
 
-    console.log(svgElements);
-
     svgElements.forEach((data, index) => {
       const svgString = new XMLSerializer().serializeToString(data);
 
@@ -42,7 +40,6 @@ const Result = () => {
           data.clientHeight
         );
         numProcessed++;
-        console.log(imgData);
 
         if (numProcessed === numSvgElements) {
           pdf.save("결과.pdf");
