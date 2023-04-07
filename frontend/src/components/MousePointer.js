@@ -47,7 +47,6 @@ const MousePointer = () => {
     }
 
     return () => {
-      console.log("return");
       document.body.removeEventListener("mousemove", onMouseMove);
       document.body.removeEventListener("mouseover", onMouseHover);
       document.body.removeEventListener("mouseout", onMouseHoverOut);

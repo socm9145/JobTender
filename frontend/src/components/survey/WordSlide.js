@@ -84,19 +84,14 @@ const WordSlide = () => {
 
   function reformSurveyData(resultId) {
     let list = [];
-    console.log(222);
-    console.log(selectedScores);
     for (let key in selectedScores) {
-      console.log(123);
       let data = {
         resultId: resultId,
         surveyId: key,
         score: selectedScores[key],
       };
-      console.log(data);
       list.push(data);
     }
-    console.log(list);
     return JSON.stringify(list);
   }
 
@@ -111,14 +106,12 @@ const WordSlide = () => {
             postSurvey(
               response.data.resultId,
               (data) => {
-                console.log(data);
                 dispatch(setKeywordSurveyResult(data.data));
               },
               (error) => {
                 console.log(error);
               }
             );
-            console.log(a);
           },
           (error) => {
             console.log(error);
@@ -216,7 +209,9 @@ const WordSlide = () => {
     return Array.from({ length: 9 }, (_, i) => (
       <button
         key={i}
-        className={`score-button ${i + 1 === selectedScore ? "selected" : ""}`}
+        className={`score-button hoverable ${
+          i + 1 === selectedScore ? "selected" : ""
+        }`}
         onClick={() => handleStarClick(itemId, i + 1)}
       >
         {i + 1}
@@ -278,22 +273,27 @@ const WordSlide = () => {
         </video>
       </div>
 
-      <section className="timeline">
+      <section className="timeline ">
         <ul>{discoveries.map(renderListItem)}</ul>
       </section>
 
       <Box
+        position={"relative"}
         width={"100vw"}
         height={"100vh"}
         display={"flex"}
         justifyContent={"center"}
-        alignItems={"center"}
+        alignItems={"end"}
       >
         {Object.keys(selectedScores).length === 57 ? (
           <Box
-            mt={"40%"}
+            position={"absolute"}
+            bottom={"7vh"}
             fontFamily={"dodum"}
-            className={`submit-button ${allButtonsClicked ? "active" : ""}`}
+            cursor={"none"}
+            className={`submit-button hoverable ${
+              allButtonsClicked ? "active" : ""
+            }`}
             disabled={!allButtonsClicked}
             onClick={() => {
               // console.log(reformSurveyData(selectedScores));
@@ -305,7 +305,9 @@ const WordSlide = () => {
           </Box>
         ) : (
           <Box
-            fontSize={"4vw"}
+            position={"absolute"}
+            bottom={"7vh"}
+            fontSize={"2.5vw"}
             fontFamily={"dodum"}
             color={"white"}
             display={"flex"}
@@ -313,10 +315,8 @@ const WordSlide = () => {
             justifyContent={"center"}
             alignItems={"center"}
             width={"100vw"}
-            height={"100vh"}
-            pt={"40%"}
           >
-            <Box mb={"3%"}>아래 키워드를 선택해 주세요</Box>
+            <Box mb={"1.5vw"}>아래 키워드를 선택해 주세요</Box>
             <Box>
               {!allButtonsClicked && (
                 <Box
@@ -329,7 +329,8 @@ const WordSlide = () => {
                     .map((item) => (
                       <span
                         key={item.no}
-                        className="tooltip-number"
+                        className="tooltip-number hoverable"
+                        cursor={"none"}
                         onClick={() => scrollToItem(item.no)}
                       >
                         {item.no}

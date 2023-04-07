@@ -4,8 +4,7 @@ import { useEffect } from "react";
 
 const Navbar = () => {
   const location = useLocation();
-  useEffect(() => {
-  }, [location]);
+  useEffect(() => {}, [location]);
   if (location.pathname !== "/login" || location.pathname !== "/loading") {
     return (
       <Box
@@ -22,21 +21,43 @@ const Navbar = () => {
         // backgroundColor={"#f1efe9"}
         color={"white"}
       >
-        <Box className={"homeFont"} fontSize={"2em"}>
-          {
-            sessionStorage.getItem("isLogin") ? <Link to="/home">JOBTENDER</Link> : <Link to="/">JOBTENDER</Link>
-          }
+        <Box
+          className={"homeFont hoverable"}
+          fontSize={"2em"}
+          textShadow={"1px 1px 3px black"}
+        >
+          {sessionStorage.getItem("isLogin") ? (
+            <Link className={" hoverable"} to="/home">
+              JOBTENDER
+            </Link>
+          ) : (
+            <Link className={" hoverable"} to="/">
+              JOBTENDER
+            </Link>
+          )}
         </Box>
         {/* 로그인 상태관리를 통해서 mypage버튼 활성화 비활성화 */}
         {location.pathname === "/mypage" ? null : (
-          <Box className={"homeFont"} fontSize={"1.5em"}>
-            {sessionStorage.getItem("isLogin") ? <Link to="/mypage">mypage</Link> : <Link to="/login">Login</Link>}
+          <Box
+            className={"homeFont hoverable"}
+            fontSize={"1.5em"}
+            textShadow={"1px 1px 3px black"}
+          >
+            {sessionStorage.getItem("isLogin") ? (
+              <Link className={" hoverable"} to="/mypage">
+                mypage
+              </Link>
+            ) : (
+              <Link className={" hoverable"} to="/login">
+                Login
+              </Link>
+            )}
           </Box>
         )}
       </Box>
     );
   } else {
-    <></>
+    <></>;
   }
 };
 

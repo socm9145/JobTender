@@ -210,7 +210,7 @@ const TextContainer = () => {
               }
             }}
           >
-            <Box className="hoverable">
+            <Box className="hoverable" display={"flex"} alignItems={"center"}>
               {/* <Text className="hoverable"> -> </Text> */}
               <ArrowForwardIcon zIndex={-2} className="hoverable" boxSize={6} />
             </Box>

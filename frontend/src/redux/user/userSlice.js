@@ -21,7 +21,6 @@ export const keywordSlice = createSlice({
       state.userData.gender = data.gender;
       let date = data.accessInfo.createDate.split("T")[0];
       date = date.replaceAll("-", ".");
-      console.log(date);
       state.userData.createDate = date;
     },
     setUserId: (state, action) => {
