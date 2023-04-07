@@ -74,11 +74,24 @@ const Loading = () => {
             (response) => {
               dispatch(setKeywordSurveyResult(response.data));
               const top3CompanyId = () => {
-                const tmp = [];
-                for (let key in response.data.top) {
-                  tmp.push(key);
+                console.log(response.data.top);
+
+                let sorted = Object.entries(response.data.top).sort(
+                  (a, b) => b[1] - a[1]
+                );
+                var topthree = [];
+
+                for (let element of sorted) {
+                  topthree.push(element[0]);
+                  console.log(element[0] + ": " + element[1]);
                 }
-                return tmp;
+
+                console.log(topthree);
+                // const tmp = [];
+                // for (let key in response.data.top) {
+                //   tmp.push(key);
+                // }
+                return topthree;
               };
 
               let idx = 1;
