@@ -1,0 +1,25 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: jobtender
+    url: jdbc:mysql://3.38.211.113:3306/jobtender?autoReconnect=true
+    password: jobtender
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  profiles:
+    include: oauth
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+server:
+  port: '8000'

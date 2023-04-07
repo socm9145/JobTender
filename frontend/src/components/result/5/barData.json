@@ -1,0 +1,154 @@
+[
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 5
+    },
+    {
+      "letter": "나",
+      "frequency": 9
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 5
+    },
+    {
+      "letter": "나",
+      "frequency": 9
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 2
+    },
+    {
+      "letter": "여",
+      "frequency": 1
+    },
+    {
+      "letter": "나",
+      "frequency": 3
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    {
+      "letter": "남",
+      "frequency": 6
+    },
+    {
+      "letter": "여",
+      "frequency": 9
+    },
+    {
+      "letter": "나",
+      "frequency": 1
+    }
+  ],
+  [
+    { "mean": 70, "std_dev": 10, "score": 50 },
+    { "mean": 50, "std_dev": 8, "score": 80 },
+    { "mean": 70, "std_dev": 7, "score": 80 },
+    { "mean": 60, "std_dev": 6, "score": 40 },
+    { "mean": 20, "std_dev": 5, "score": 30 },
+    { "mean": 10, "std_dev": 20, "score": 40 },
+    { "mean": 65, "std_dev": 33, "score": 80 },
+    { "mean": 23, "std_dev": 80, "score": 80 },
+    { "mean": 70, "std_dev": 1, "score": 80 },
+    { "mean": 56, "std_dev": 60, "score": 80 }
+  ]
+]
