@@ -1,5 +1,5 @@
 # JobTender
-![잡텐더](/uploads/dd77a7d958170477fc0065c63c0d51bc/잡텐더.png)
+![잡텐더](./DOCS/잡텐더.png)
 ---
 
 ## JobTender 바로가기 : [https://jobtender.shop](https://jobtender.shop/)
